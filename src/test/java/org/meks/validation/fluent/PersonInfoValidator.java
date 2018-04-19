@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.meks.validation.fluent.Account.AccountBuilder.anAccount;
-import static org.meks.validation.fluent.DateValidationHelpers.isDateAfter;
+import static org.meks.validation.fluent.DateValidations.isDateAfter;
 import static org.meks.validation.fluent.StringValidations.hasLength;
 import static org.meks.validation.fluent.StringValidations.isDate;
 import static org.meks.validation.fluent.StringValidations.isInList;
@@ -24,7 +24,10 @@ import static org.meks.validation.fluent.list.ListValidations.hasMinSize;
 import static org.meks.validation.fluent.list.ListValidations.isNotEmpty;
 import static org.meks.validation.fluent.list.ListValidations.onProperty;
 
-public class PersonInfoValidator {
+/**
+ * An example how a validator can be implemented for a complex object.
+ */
+class PersonInfoValidator {
 
     private static final DateTimeFormatter DEFAULT_DATE_FORMAT = DateTimeFormatter.BASIC_ISO_DATE;
 
@@ -38,7 +41,7 @@ public class PersonInfoValidator {
     private Validation<String> bankCodeValidation;
     private Validation<List<Bank>> bankCodeSlowValidation;
 
-    public PersonInfoValidator() {
+    PersonInfoValidator() {
         setupValidationConfig();
     }
 
@@ -83,11 +86,6 @@ public class PersonInfoValidator {
     private List<Account> getAccountsOfPersonOfSlowService() {
         ArrayList<Account> accounts = new ArrayList<>();
         Collections.addAll(accounts, anAccount().withActive(true).build());
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         return accounts;
     }
 }
