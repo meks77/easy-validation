@@ -11,6 +11,7 @@ import static org.meks.validation.fluent.result.ErrorDescriptionBuilder.withMess
 /**
  * This class contains validations for dates.
  */
+@SuppressWarnings("WeakerAccess")
 public class DateValidations {
 
     private DateValidations() {

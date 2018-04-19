@@ -51,7 +51,7 @@ class PersonInfoValidator {
         postalCodeSlowValidation = isInList(this::getValidPostalCodes, "3");
         birthDayStringValidation = isNotBlank("4").and(isDate(DEFAULT_DATE_FORMAT, "4"));
         birthDayDateValidation = isDateAfter(LocalDateTime.of(1940, 1, 1, 0, 0, 0), "5");
-        accountNrStringValidation = isNotBlank("6").and(isNumeric("6")).and(StringValidations.containsNotOlny("0"));
+        accountNrStringValidation = isNotBlank("6").and(isNumeric("6")).and(StringValidations.containsNotOnly("0"));
         accountSlowValidation = forType(Account.class, hasMinSize(1)).and(hasMaxSize(5))
                 .and(onProperty(Account::isActive, containsOnly(true)))
                 .and(onProperty(Account::isOnBadList, containsOnly(false)));
@@ -76,7 +76,7 @@ class PersonInfoValidator {
 
         postalCodeSlowValidation.test(personInfo::getPostalCode).throwIfInvalid("postalCode");
         accountSlowValidation.test(this::getAccountsOfPersonOfSlowService).throwIfInvalid("account");
-        bankCodeSlowValidation.test(this::getBankCodeOfPersonOfSlowService).throwIfInvalid("bankcode");
+        bankCodeSlowValidation.test(this::getBankCodeOfPersonOfSlowService).throwIfInvalid("bankCode");
     }
 
     private List<Bank> getBankCodeOfPersonOfSlowService() {

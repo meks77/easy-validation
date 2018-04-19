@@ -8,12 +8,12 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-class ListPropertValidationImpl<T, E> implements Validation<List<T>> {
+class ListPropertyValidationImpl<T, E> implements Validation<List<T>> {
 
     private final Function<T, E> propertyGetter;
     private final Validation<List<E>> validation;
 
-    private ListPropertValidationImpl(Function<T, E> propertyGetter, Validation<List<E>> validation) {
+    private ListPropertyValidationImpl(Function<T, E> propertyGetter, Validation<List<E>> validation) {
         this.propertyGetter = propertyGetter;
         this.validation = validation;
     }
@@ -24,7 +24,7 @@ class ListPropertValidationImpl<T, E> implements Validation<List<T>> {
     }
 
     static <X, Y> Validation<List<X>> onProperty(Function<X, Y> propertyGetter, Validation<List<Y>> validation) {
-        return new ListPropertValidationImpl<>(propertyGetter, validation);
+        return new ListPropertyValidationImpl<>(propertyGetter, validation);
     }
 
 }

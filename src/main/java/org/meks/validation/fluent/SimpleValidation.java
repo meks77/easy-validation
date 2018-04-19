@@ -8,11 +8,11 @@ import java.util.function.Supplier;
 
 class SimpleValidation<K> implements Validation<K> {
 
-    protected final Predicate<K> predicate;
-    protected final ErrorDescription onErrorMessage;
+    private final Predicate<K> predicate;
+    private final ErrorDescription onErrorMessage;
 
     static <K> SimpleValidation<K> from(Predicate<K> predicate, ErrorDescription onErrorMessage) {
-        return new SimpleValidation<K>(predicate, onErrorMessage);
+        return new SimpleValidation<>(predicate, onErrorMessage);
     }
 
     private SimpleValidation(Predicate<K> predicate, ErrorDescription onErrorMessage) {

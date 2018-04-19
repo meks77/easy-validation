@@ -7,23 +7,30 @@ import org.meks.validation.fluent.result.ErrorDescription;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import static java.lang.String.format;
 import static org.meks.validation.fluent.result.ErrorDescriptionBuilder.withCode;
 import static org.meks.validation.fluent.result.ErrorDescriptionBuilder.withMessage;
 
+@SuppressWarnings("WeakerAccess")
 public class StringValidations {
+
+    private StringValidations() {
+
+    }
+
     public static Validation<String> notNull() {
-        return SimpleValidation.from((s) -> s != null, withMessage("must not be null."));
+        return SimpleValidation.from(Objects::nonNull, withMessage("must not be null."));
     }
 
     public static Validation<String> lengthIsMoreThan(int size){
-        return SimpleValidation.from((s) -> s.length() > size, withMessage(format("must have more than %s chars.", size)));
+        return SimpleValidation.from(s -> s.length() > size, withMessage(format("must have more than %s chars.", size)));
     }
 
     public static Validation<String> lengthIsLessThan(int size){
-        return SimpleValidation.from((s) -> s.length() < size, withMessage(format("must have less than %s chars.", size)));
+        return SimpleValidation.from(s -> s.length() < size, withMessage(format("must have less than %s chars.", size)));
     }
 
     public static Validation<String> lengthIsBetween(int minSize, int maxSize){
@@ -35,7 +42,7 @@ public class StringValidations {
     }
 
     public static Validation<String> contains(String c){
-        return SimpleValidation.from((s) -> s.contains(c), withMessage(format("must contain %s", c)));
+        return SimpleValidation.from(s -> s.contains(c), withMessage(format("must contain %s", c)));
     }
 
     public static Validation<String> isNotBlank() {
@@ -91,13 +98,13 @@ public class StringValidations {
         return SimpleValidation.from(StringUtils::isNumeric, errorDescription);
     }
 
-    public static Validation<String> containsNotOlny(String containedValue, String errorCoce) {
-        return containsNotOnly(containedValue, withCode(format("value mustsn't contain only %s", containedValue),
-                errorCoce));
+    public static Validation<String> containsNotOnly(String containedValue, String errorCode) {
+        return containsNotOnly(containedValue, withCode(format("value mustn't contain only %s", containedValue),
+                errorCode));
     }
 
-    public static Validation<String> containsNotOlny(String containedValue) {
-        return containsNotOnly(containedValue, withMessage(format("value mustsn't contain only %s", containedValue)));
+    public static Validation<String> containsNotOnly(String containedValue) {
+        return containsNotOnly(containedValue, withMessage(format("value mustn't contain only %s", containedValue)));
     }
 
     private static Validation<String> containsNotOnly(String containedValue, ErrorDescription errorDescription) {

@@ -11,12 +11,11 @@ import java.util.List;
 import static org.meks.validation.fluent.DeserializedPersonInfoBuilder.aDeserializedPersonInfo;
 import static org.meks.validation.fluent.StringValidations.isInList;
 import static org.meks.validation.fluent.StringValidations.isNotBlank;
-import static org.meks.validation.fluent.ValueValidationBuilder.forValue;
 
 public class ValidationTest {
 
     @Rule
-    public ExpectedException expectedException = ExpectedException.none();
+    public final ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void test() throws ValidationException {
@@ -27,11 +26,6 @@ public class ValidationTest {
 
     private String[] getValidValues() {
         return new String[] {"a", "b", "c"};
-    }
-
-    private List<ValueValidation<String>> getValidations() {
-        return Collections.singletonList(
-                forValue(this::getValidatedValue).withValidation(isNotBlank("MV1032")).getValidation());
     }
 
     private String getValidatedValue() {

@@ -2,7 +2,7 @@ package org.meks.validation.fluent.result;
 
 public class ValidationException extends Exception {
 
-    private String valueDescription;
+    private final String valueDescription;
     private final ErrorDescription errorDescription;
 
     ValidationException(String valueDescription, ErrorDescription errorDescription) {

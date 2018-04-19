@@ -9,7 +9,7 @@ import static java.lang.String.format;
 import static org.meks.validation.fluent.result.ErrorDescriptionBuilder.withMessage;
 
 /**
- * This class provides validations for lists. The methods allways create new validation instances.
+ * This class provides validations for lists. The methods always create new validation instances.
  */
 public class ListValidations {
 
@@ -18,7 +18,7 @@ public class ListValidations {
     }
 
     /**
-     * validates that a list contains only entires which match to the provided arg.
+     * validates that a list contains only entries which match to the provided arg.
      * @param containedValue   the only value which is allowed in the list
      * @param <T>   the type of the list
      * @return  new instance of list validation
@@ -94,7 +94,7 @@ public class ListValidations {
 
     /**
      * validates that a list has an expected maximum size.
-     * @param size  the exptected maximum size
+     * @param size  the expected maximum size
      * @param <T>   type of the list
      * @return  new instance of list validation
      */
@@ -112,7 +112,7 @@ public class ListValidations {
      * @return  new instance of a list validation
      */
     public static <T, E> Validation<List<T>> onProperty(Function<T, E> function, Validation<List<E>> validation) {
-        return ListPropertValidationImpl.onProperty(function, validation);
+        return ListPropertyValidationImpl.onProperty(function, validation);
     }
 
     /**

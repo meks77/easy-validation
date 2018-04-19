@@ -1,9 +1,9 @@
 # easy-validation
-Very easy way to validate simple and complex objets by using an fluent interface.
+Very easy way to validate simple and complex objects by using an fluent interface.
 
 
 ## Goals
-- simple resuable API for validation (use of the fluent interface)
+- simple reusable API for validation (use of the fluent interface)
 - extensible by custom validations without the need of forking this repo
 - prefer java control structure against complex configuration, what gives quite more flexibility e.g. for caching of objects which needs to be fetched from somewhere
 - validators should be usable in dependency-injection environments
@@ -16,18 +16,18 @@ Very easy way to validate simple and complex objets by using an fluent interface
 Because I need different validation for the same object type, depending on the business workflow
 ### [dOOv](https://github.com/lesfurets/dOOv)
 I thought its too complex to use. I would like to use it easier without that someone is overwhelmed by how to use it.
-### [neormind fuent validator](https://github.com/neoremind/fluent-validator)
+### [neormind fluent validator](https://github.com/neoremind/fluent-validator)
 * I was afraid of the chinese documentation of the api.
 * I wanted to have more control 
   * at which step a validation is executed  
   * if a validation is executed
   
-I didn't like to have a fluent interface for the setting up the validation, while I can't use it because I have a restriction if a validation should be executed.
+I did not like to have a fluent interface for the setting up the validation, while I can't use it because I have a restriction if a validation should be executed.
 
 ## State
-Currently this project is under developtment in alpha phase. 
+Currently this project is under development in alpha phase. 
 So many things are open. First I just developed the interface usage. 
-Till now the api was to heavy change while I was strugling with generics when using the fluent interface.
+Till now the api was to heavy change while I was fighting with problems with generics when using the fluent interface.
 
 The next steps will be:
 * cleanup of the code
@@ -36,7 +36,7 @@ The next steps will be:
 * add the possibility to either user error codes or not
 * add the possibility to user custom error messages for the validations
 * maybe add an api to setup if the validation should't stop at the first error. That's very complex because of
-  * dependencies between validation steps(eg. if validation x fails valiation y and z shouldn't be executed)
+  * dependencies between validation steps(eg. if validation x fails validation y and z must not be executed)
   * and I am sure because of the things I have currently not in my mind 
 * maybe extending maven structure by modules for core, validation without error code, validation with error codes and one for examples
 * adding common validation steps
