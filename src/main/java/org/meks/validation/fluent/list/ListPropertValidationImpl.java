@@ -1,6 +1,5 @@
 package org.meks.validation.fluent.list;
 
-import com.sun.istack.internal.NotNull;
 import org.meks.validation.fluent.Validation;
 import org.meks.validation.fluent.result.ValidationResult;
 
@@ -14,7 +13,7 @@ class ListPropertValidationImpl<T, E> implements Validation<List<T>> {
     private final Function<T, E> propertyGetter;
     private final Validation<List<E>> validation;
 
-    private ListPropertValidationImpl(@NotNull Function<T, E> propertyGetter, Validation<List<E>> validation) {
+    private ListPropertValidationImpl(Function<T, E> propertyGetter, Validation<List<E>> validation) {
         this.propertyGetter = propertyGetter;
         this.validation = validation;
     }
@@ -25,7 +24,7 @@ class ListPropertValidationImpl<T, E> implements Validation<List<T>> {
     }
 
     static <X, Y> Validation<List<X>> onProperty(Function<X, Y> propertyGetter, Validation<List<Y>> validation) {
-        return new ListPropertValidationImpl<X, Y>(propertyGetter, validation);
+        return new ListPropertValidationImpl<>(propertyGetter, validation);
     }
 
 }
