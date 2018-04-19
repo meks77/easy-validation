@@ -1,4 +1,4 @@
-#easy-validation
+# easy-validation
 Very easy way to validate simple and complex objets by using an fluent interface.
 
 
@@ -11,12 +11,12 @@ Very easy way to validate simple and complex objets by using an fluent interface
 - setup validation once, execute it many times for different objects
 - possibility to fail fast on error
 
-##Why not using
+## Why not using
 ### javax Bean validation
 Because I need different validation for the same object type, depending on the business workflow
 ### [dOOv](https://github.com/lesfurets/dOOv)
 I thought its too complex to use. I would like to use it easier without that someone is overwhelmed by how to use it.
-###[neormind fuent validator](https://github.com/neoremind/fluent-validator)
+### [neormind fuent validator](https://github.com/neoremind/fluent-validator)
 * I was afraid of the chinese documentation of the api.
 * I wanted to have more control 
   * at which step a validation is executed  
@@ -24,7 +24,7 @@ I thought its too complex to use. I would like to use it easier without that som
   
 I didn't like to have a fluent interface for the setting up the validation, while I can't use it because I have a restriction if a validation should be executed.
 
-##State
+## State
 Currently this project is under developtment in alpha phase. 
 So many things are open. First I just developed the interface usage. 
 Till now the api was to heavy change while I was strugling with generics when using the fluent interface.
