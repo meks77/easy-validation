@@ -5,9 +5,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.meks.validation.fluent.result.ValidationException;
 
-import java.util.Collections;
-import java.util.List;
-
 import static org.meks.validation.fluent.DeserializedPersonInfoBuilder.aDeserializedPersonInfo;
 import static org.meks.validation.fluent.StringValidations.isInList;
 import static org.meks.validation.fluent.StringValidations.isNotBlank;
