@@ -12,51 +12,51 @@ public class DeserializedPersonInfo {
     private String country;
     private String personalNumber;
 
-    public String getFirstName() {
+    String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    void setName(String name) {
         this.name = name;
     }
 
-    public String getPostalCode() {
+    String getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(String postalCode) {
+    void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
-    public String getBirthDate() {
+    String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
-    public String getAccount() {
+    String getAccount() {
         return account;
     }
 
-    public void setAccount(String account) {
+    void setAccount(String account) {
         this.account = account;
     }
 
-    public String getBankCode() {
+    String getBankCode() {
         return bankCode;
     }
 
-    public void setBankCode(String bankCode) {
+    void setBankCode(String bankCode) {
         this.bankCode = bankCode;
     }
 
@@ -64,7 +64,7 @@ public class DeserializedPersonInfo {
         return country;
     }
 
-    public void setCountry(String country) {
+    void setCountry(String country) {
         this.country = country;
     }
 
@@ -72,7 +72,7 @@ public class DeserializedPersonInfo {
         return personalNumber;
     }
 
-    public void setPersonalNumber(String personalNumber) {
+    void setPersonalNumber(String personalNumber) {
         this.personalNumber = personalNumber;
     }
 

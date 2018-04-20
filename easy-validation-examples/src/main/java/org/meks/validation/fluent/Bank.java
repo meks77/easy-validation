@@ -1,27 +1,18 @@
 package org.meks.validation.fluent;
 
-public class Bank {
+class Bank {
 
     private String code;
 
     private boolean active;
 
-    public String getCode() {
+    String getCode() {
         return code;
-    }
-
-    private void setCode(String code) {
-        this.code = code;
     }
 
     boolean isActive() {
         return active;
     }
-
-    private void setActive(boolean active) {
-        this.active = active;
-    }
-
 
     public static final class BankBuilder {
         private String code;
@@ -46,8 +37,8 @@ public class Bank {
 
         public Bank build() {
             Bank bank = new Bank();
-            bank.setCode(code);
-            bank.setActive(active);
+            bank.code = code;
+            bank.active = active;
             return bank;
         }
     }

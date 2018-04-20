@@ -1,16 +1,16 @@
 package org.meks.validation.fluent;
 
-public class Account {
+class Account {
 
     private boolean active;
 
     private boolean onBadList;
 
-    public boolean isActive() {
+    boolean isActive() {
         return active;
     }
 
-    public boolean isOnBadList() {
+    boolean isOnBadList() {
         return onBadList;
     }
 
@@ -21,11 +21,11 @@ public class Account {
         private AccountBuilder() {
         }
 
-        public static AccountBuilder anAccount() {
+        static AccountBuilder anAccount() {
             return new AccountBuilder();
         }
 
-        public AccountBuilder withActive(boolean active) {
+        AccountBuilder withActive(boolean active) {
             this.active = active;
             return this;
         }
@@ -35,7 +35,7 @@ public class Account {
             return this;
         }
 
-        public Account build() {
+        Account build() {
             Account account = new Account();
             account.active = this.active;
             account.onBadList = this.onBadList;

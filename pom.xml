@@ -5,25 +5,26 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.meks.validation</groupId>
-    <artifactId>easy-validation</artifactId>
+    <artifactId>easy-validation-parent</artifactId>
     <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.7</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>easy-validation</module>
+        <module>easy-validation-examples</module>
+    </modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.meks.validation</groupId>
+                <artifactId>easy-validation</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
