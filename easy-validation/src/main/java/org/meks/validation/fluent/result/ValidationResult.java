@@ -19,6 +19,10 @@ public class ValidationResult {
         return null;
     }
 
+    public String getErrorMessage() {
+        return errorDescription.getErrorMessage();
+    }
+
     public boolean isValid() {
         return valid;
     }
