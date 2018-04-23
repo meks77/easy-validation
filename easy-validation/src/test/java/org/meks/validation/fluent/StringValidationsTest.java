@@ -12,86 +12,92 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class StringValidationsTest {
 
+    private static final String FIVE_LETTER_WORD = "apple";
+    private static final String FOUR_LETTER_WORD = "bath";
+    private static final String THREE_LETTER_WORD = "age";
+    private static final String SIX_LETTER_WORD = "aspect";
+    private static final String SEVEN_LETTER_WORD = "arrival";
+
     @Test
-    public void givenStringLength5WhenlengthIsMoreThan4ThenResultIsValid() {
-        assertThat(StringValidations.lengthIsMoreThan(4).test(() -> "asdfg").isValid()).isTrue();
+    public void givenStringLength5WhenLengthIsMoreThan4ThenResultIsValid() {
+        assertThat(StringValidations.lengthIsMoreThan(4).test(() -> FIVE_LETTER_WORD).isValid()).isTrue();
     }
 
     @Test
-    public void givenStringLength4WhenlengthIsMoreThan4ThenResultIsError() {
-        ValidationResult result = StringValidations.lengthIsMoreThan(4).test(() -> "asdf");
+    public void givenStringLength4WhenLengthIsMoreThan4ThenResultIsError() {
+        ValidationResult result = StringValidations.lengthIsMoreThan(4).test(() -> FOUR_LETTER_WORD);
         assertErrorResult(result, "must have more than 4 chars");
     }
 
     @Test
-    public void givenStringLength3WhenlengthIsLessThan4ThenResultIsValid() {
-        assertThat(StringValidations.lengthIsLessThan(4).test(() -> "asd").isValid()).isTrue();
+    public void givenStringLength3WhenLengthIsLessThan4ThenResultIsValid() {
+        assertThat(StringValidations.lengthIsLessThan(4).test(() -> THREE_LETTER_WORD).isValid()).isTrue();
     }
 
     @Test
-    public void givenStringLength4WhenlengthIsLessThan4ThenResultIsError() {
-        ValidationResult result = StringValidations.lengthIsLessThan(4).test(() -> "asdf");
+    public void givenStringLength4WhenLengthIsLessThan4ThenResultIsError() {
+        ValidationResult result = StringValidations.lengthIsLessThan(4).test(() -> FOUR_LETTER_WORD);
         assertErrorResult(result, "must have less than 4 chars");
     }
 
     @Test
-    public void givenStringLength4WhenlengthIsBetween4And6ThenResultIsValid() {
-        assertThat(StringValidations.lengthIsBetween(4,  6).test(() -> "asdf").isValid()).isTrue();
+    public void givenStringLength4WhenLengthIsBetween4And6ThenResultIsValid() {
+        assertThat(StringValidations.lengthIsBetween(4,  6).test(() -> FOUR_LETTER_WORD).isValid()).isTrue();
     }
 
     @Test
-    public void givenStringLength5WhenlengthIsBetween4And6ThenResultIsValid() {
-        assertThat(StringValidations.lengthIsBetween(4,  6).test(() -> "asdfa").isValid()).isTrue();
+    public void givenStringLength5WhenLengthIsBetween4And6ThenResultIsValid() {
+        assertThat(StringValidations.lengthIsBetween(4,  6).test(() -> FIVE_LETTER_WORD).isValid()).isTrue();
     }
 
     @Test
-    public void givenStringLength6WhenlengthIsBetween4And6ThenResultIsValid() {
-        assertThat(StringValidations.lengthIsBetween(4,  6).test(() -> "asdfas").isValid()).isTrue();
+    public void givenStringLength6WhenLengthIsBetween4And6ThenResultIsValid() {
+        assertThat(StringValidations.lengthIsBetween(4,  6).test(() -> SIX_LETTER_WORD).isValid()).isTrue();
     }
 
     @Test
-    public void givenStringLength3WhenlengthIsBetween4And6ThenResultIsError() {
-        ValidationResult result = StringValidations.lengthIsBetween(4, 6).test(() -> "asd");
+    public void givenStringLength3WhenLengthIsBetween4And6ThenResultIsError() {
+        ValidationResult result = StringValidations.lengthIsBetween(4, 6).test(() -> THREE_LETTER_WORD);
         assertErrorResult(result, "must have more than 3 chars");
     }
 
     @Test
-    public void givenStringLength7WhenlengthIsBetween4And6ThenResultIsError() {
-        ValidationResult test = StringValidations.lengthIsBetween(4, 6).test(() -> "asdfasd");
+    public void givenStringLength7WhenLengthIsBetween4And6ThenResultIsError() {
+        ValidationResult test = StringValidations.lengthIsBetween(4, 6).test(() -> SEVEN_LETTER_WORD);
         assertErrorResult(test, "must have less than 7 chars");
     }
 
     @Test
     public void givenStringLength4WhenHasLength4ThenResultIsValid() {
-        assertThat(StringValidations.hasLength(4).test(() -> "asdf").isValid()).isTrue();
+        assertThat(StringValidations.hasLength(4).test(() -> FOUR_LETTER_WORD).isValid()).isTrue();
     }
 
     @Test
     public void givenStringLength3WhenHasLength4ThenResultIsError() {
-        ValidationResult result = StringValidations.hasLength(4).test(() -> "asd");
+        ValidationResult result = StringValidations.hasLength(4).test(() -> THREE_LETTER_WORD);
         assertErrorResult(result, "length must be 4 chars");
     }
 
     @Test
     public void givenStringLength5WhenHasLength4ThenResultIsError() {
-        ValidationResult result = StringValidations.hasLength(4).test(() -> "asdfa");
+        ValidationResult result = StringValidations.hasLength(4).test(() -> FIVE_LETTER_WORD);
         assertErrorResult(result, "length must be 4 chars");
     }
 
     @Test
     public void givenStringContainsAWhenContainsAThenResultIsValid() {
-        assertThat(StringValidations.contains("a").test(() -> "asdfa").isValid()).isTrue();
+        assertThat(StringValidations.contains("a").test(() -> FIVE_LETTER_WORD).isValid()).isTrue();
     }
 
     @Test
     public void givenStringContainNosAWhenContainsAThenResultIsError() {
-        ValidationResult result = StringValidations.contains("a").test(() -> "bsdfb");
+        ValidationResult result = StringValidations.contains("a").test(() -> "believe");
         assertErrorResult(result, "must contain a");
     }
 
     @Test
     public void givenNotEmptyStringWhenIsNotBlankThenResultIsValid() {
-        assertThat(StringValidations.isNotBlank().test(() -> "a").isValid()).isTrue();
+        assertThat(StringValidations.isNotBlank().test(() -> FOUR_LETTER_WORD).isValid()).isTrue();
     }
 
     @Test
@@ -101,7 +107,7 @@ public class StringValidationsTest {
     }
 
     @Test
-    public void givenLinebreaksStringWhenIsNotBlankThenResultIsError() {
+    public void givenLineBreaksStringWhenIsNotBlankThenResultIsError() {
         ValidationResult result = StringValidations.isNotBlank().test(() -> "\n\n");
         assertErrorResult(result, "mustn't be blank");
     }
@@ -184,7 +190,7 @@ public class StringValidationsTest {
     @Test
     public void givenAlphanumericStringWhenIsDateThenResultIsError() {
         ValidationResult result = StringValidations.isDate(DateTimeFormatter.ofPattern("yyyyMMdd")).test(() ->
-                "asdfasdf");
+                "invalid");
         assertErrorResult(result, "must match to date format Value(YearOfEra,4,19,EXCEEDS_PAD)Value(MonthOfYear,2)Value(DayOfMonth,2)");
     }
 
@@ -207,12 +213,12 @@ public class StringValidationsTest {
 
     @Test
     public void givenStringContainsNotOnlyMyWhenContainsNotOnlyThenResultIsOk() {
-        assertThat(StringValidations.containsNotOnly("my").test(() -> "myway").isValid()).isTrue();
+        assertThat(StringValidations.containsNotOnly("my").test(() -> "myWay").isValid()).isTrue();
     }
 
     @Test
     public void givenStringContainsOnlyMyWhenContainsNotOnlyThenResultIsError() {
-        ValidationResult result = StringValidations.containsNotOnly("my").test(() -> "mymymy");
+        ValidationResult result = StringValidations.containsNotOnly("my").test(() -> "myMyMy");
         assertErrorResult(result, "value mustn't contain only my");
     }
 

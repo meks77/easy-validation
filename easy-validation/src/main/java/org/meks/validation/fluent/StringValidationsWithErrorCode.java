@@ -10,6 +10,7 @@ import java.util.function.Supplier;
 import static java.lang.String.format;
 import static org.meks.validation.fluent.result.ErrorDescriptionBuilder.withCode;
 
+@SuppressWarnings("WeakerAccess")
 public class StringValidationsWithErrorCode {
 
     private StringValidationsWithErrorCode() {

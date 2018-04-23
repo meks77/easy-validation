@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import static org.meks.validation.fluent.result.ErrorDescriptionBuilder.withMessage;
 
+@SuppressWarnings("WeakerAccess")
 public class ObjectValidations {
 
     private ObjectValidations() {

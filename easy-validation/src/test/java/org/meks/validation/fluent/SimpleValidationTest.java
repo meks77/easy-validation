@@ -16,7 +16,7 @@ public class SimpleValidationTest {
     private static final String VALIDATED_VALUE = "myString";
 
     @Test
-    public void givenPredicateWhenWithThenIsAvailabeInValidation() throws Exception {
+    public void givenPredicateWhenWithThenIsAvailableInValidation() throws Exception {
         @SuppressWarnings("unchecked")
         Predicate<Object> expectedPredicate = Mockito.mock(Predicate.class);
         SimpleValidation<Object> validation = SimpleValidation.from(expectedPredicate, ErrorDescriptionBuilder.withMessage("xxx"));
@@ -24,7 +24,7 @@ public class SimpleValidationTest {
     }
 
     @Test
-    public void givenErrorDescriptionWhenWithThenIsAvailabeInValidation() throws Exception {
+    public void givenErrorDescriptionWhenWithThenIsAvailableInValidation() throws Exception {
         ErrorDescription expectedErrorDescription = ErrorDescriptionBuilder.withMessage("xxx");
         @SuppressWarnings("unchecked")
         SimpleValidation<Object> validation = SimpleValidation.from(Mockito.mock(Predicate.class), expectedErrorDescription);

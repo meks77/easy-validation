@@ -14,13 +14,13 @@ import static org.meks.validation.fluent.DateValidations.isDateAfter;
 public class DateValidationsTest {
 
     @Test
-    public void givenSmallerDateWhenisDateAfterReturnsError() {
+    public void givenSmallerDateWhenIsDateAfterReturnsError() {
         ValidationResult result = isDateAfter(now().plus(2, SECONDS)).test(LocalDateTime::now);
         assertThat(result.isValid()).as("valid").isFalse();
     }
 
     @Test
-    public void givenEqualDateWhenisDateAfterReturnsError() {
+    public void givenEqualDateWhenIsDateAfterReturnsError() {
         LocalDateTime validatedDate = of(2017, 5, 8, 7, 12, 14);
         LocalDateTime comparedDate = of(2017, 5, 8, 7, 12, 14);
         assertThat(validatedDate).isNotSameAs(comparedDate);
@@ -29,13 +29,13 @@ public class DateValidationsTest {
     }
 
     @Test
-    public void givenGreaterDateWhenisDateAfterReturnsOk() {
+    public void givenGreaterDateWhenIsDateAfterReturnsOk() {
         ValidationResult result = isDateAfter(now().minus(1, SECONDS)).test(LocalDateTime::now);
         assertThat(result.isValid()).as("valid").isTrue();
     }
 
     @Test
-    public void givenErrorCodeWhenIsDateAfterRetursErrorCode() {
+    public void givenErrorCodeWhenIsDateAfterReturnsErrorCode() {
         String expectedErrorCode = "myErrorCode";
         ValidationResult result = isDateAfter(now().plus(2, SECONDS), expectedErrorCode).test(LocalDateTime::now);
         assertThat(result.getErrorCode()).isEqualTo(expectedErrorCode);
