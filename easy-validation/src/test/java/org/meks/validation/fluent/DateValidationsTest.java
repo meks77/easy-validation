@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import static java.time.LocalDateTime.now;
 import static java.time.LocalDateTime.of;
 import static java.time.temporal.ChronoUnit.SECONDS;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 import static org.meks.validation.fluent.DateValidations.isDateAfter;
 
 public class DateValidationsTest {

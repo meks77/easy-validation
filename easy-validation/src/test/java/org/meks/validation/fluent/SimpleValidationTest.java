@@ -9,7 +9,7 @@ import org.mockito.Mockito;
 
 import java.util.function.Predicate;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 public class SimpleValidationTest {
 

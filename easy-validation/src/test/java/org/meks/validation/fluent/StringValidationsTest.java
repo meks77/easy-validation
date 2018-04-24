@@ -8,7 +8,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.meks.validation.fluent.TestUtils.assertErrorResult;
+import static org.meks.validation.fluent.TestUtils.assertValidResult;
+
 
 public class StringValidationsTest {
 
@@ -17,10 +19,12 @@ public class StringValidationsTest {
     private static final String THREE_LETTER_WORD = "age";
     private static final String SIX_LETTER_WORD = "aspect";
     private static final String SEVEN_LETTER_WORD = "arrival";
+    private static final String ERROR_IS_DATE = "must match to date format Value(YearOfEra,4,19,EXCEEDS_PAD)Value" +
+            "(MonthOfYear,2)Value(DayOfMonth,2)";
 
     @Test
     public void givenStringLength5WhenLengthIsMoreThan4ThenResultIsValid() {
-        assertThat(StringValidations.lengthIsMoreThan(4).test(() -> FIVE_LETTER_WORD).isValid()).isTrue();
+        assertValidResult(StringValidations.lengthIsMoreThan(4).test(() -> FIVE_LETTER_WORD));
     }
 
     @Test
@@ -31,7 +35,7 @@ public class StringValidationsTest {
 
     @Test
     public void givenStringLength3WhenLengthIsLessThan4ThenResultIsValid() {
-        assertThat(StringValidations.lengthIsLessThan(4).test(() -> THREE_LETTER_WORD).isValid()).isTrue();
+        assertValidResult(StringValidations.lengthIsLessThan(4).test(() -> THREE_LETTER_WORD));
     }
 
     @Test
@@ -42,17 +46,17 @@ public class StringValidationsTest {
 
     @Test
     public void givenStringLength4WhenLengthIsBetween4And6ThenResultIsValid() {
-        assertThat(StringValidations.lengthIsBetween(4,  6).test(() -> FOUR_LETTER_WORD).isValid()).isTrue();
+        assertValidResult(StringValidations.lengthIsBetween(4,  6).test(() -> FOUR_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength5WhenLengthIsBetween4And6ThenResultIsValid() {
-        assertThat(StringValidations.lengthIsBetween(4,  6).test(() -> FIVE_LETTER_WORD).isValid()).isTrue();
+        assertValidResult(StringValidations.lengthIsBetween(4,  6).test(() -> FIVE_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength6WhenLengthIsBetween4And6ThenResultIsValid() {
-        assertThat(StringValidations.lengthIsBetween(4,  6).test(() -> SIX_LETTER_WORD).isValid()).isTrue();
+        assertValidResult(StringValidations.lengthIsBetween(4,  6).test(() -> SIX_LETTER_WORD));
     }
 
     @Test
@@ -69,7 +73,7 @@ public class StringValidationsTest {
 
     @Test
     public void givenStringLength4WhenHasLength4ThenResultIsValid() {
-        assertThat(StringValidations.hasLength(4).test(() -> FOUR_LETTER_WORD).isValid()).isTrue();
+        assertValidResult(StringValidations.hasLength(4).test(() -> FOUR_LETTER_WORD));
     }
 
     @Test
@@ -86,7 +90,7 @@ public class StringValidationsTest {
 
     @Test
     public void givenStringContainsAWhenContainsAThenResultIsValid() {
-        assertThat(StringValidations.contains("a").test(() -> FIVE_LETTER_WORD).isValid()).isTrue();
+        assertValidResult(StringValidations.contains("a").test(() -> FIVE_LETTER_WORD));
     }
 
     @Test
@@ -97,7 +101,7 @@ public class StringValidationsTest {
 
     @Test
     public void givenNotEmptyStringWhenIsNotBlankThenResultIsValid() {
-        assertThat(StringValidations.isNotBlank().test(() -> FOUR_LETTER_WORD).isValid()).isTrue();
+        assertValidResult(StringValidations.isNotBlank().test(() -> FOUR_LETTER_WORD));
     }
 
     @Test
@@ -132,7 +136,7 @@ public class StringValidationsTest {
 
     @Test
     public void givenStringContainedInArrayWhenIsInListThenResultIsValid() {
-        assertThat(StringValidations.isInArray(() -> new String[] {"a", "b", "c"}).test(() -> "b").isValid()).isTrue();
+        assertValidResult(StringValidations.isInArray(() -> new String[] {"a", "b", "c"}).test(() -> "b"));
     }
 
     @Test
@@ -144,7 +148,7 @@ public class StringValidationsTest {
     @Test
     public void givenStringContainedInListWhenIsInListThenResultIsValid() {
         Set<String> listOfValues = new HashSet<>(Arrays.asList("a", "b", "c"));
-        assertThat(StringValidations.isInList(() -> listOfValues).test(() -> "b").isValid()).isTrue();
+        assertValidResult(StringValidations.isInList(() -> listOfValues).test(() -> "b"));
     }
 
     @Test
@@ -156,53 +160,53 @@ public class StringValidationsTest {
 
     @Test
     public void givenValidDateStringWhenIsDateThenResultIsValid() {
-        assertThat(StringValidations.isDate(DateTimeFormatter.ofPattern("yyyyMMdd")).test(() -> "19900102").isValid()).isTrue();
+        assertValidResult(StringValidations.isDate(DateTimeFormatter.ofPattern("yyyyMMdd")).test(() -> "19900102"));
     }
 
     @Test
     public void givenDateStringWitDay0WhenIsDateThenResultIsError() {
         ValidationResult result = StringValidations.isDate(DateTimeFormatter.ofPattern("yyyyMMdd")).test(() ->
                 "19900100");
-        assertErrorResult(result, "must match to date format Value(YearOfEra,4,19,EXCEEDS_PAD)Value(MonthOfYear,2)Value(DayOfMonth,2)");
+        assertErrorResult(result, ERROR_IS_DATE);
     }
 
     @Test
     public void givenDateStringWitMonth0WhenIsDateThenResultIsError() {
         ValidationResult result = StringValidations.isDate(DateTimeFormatter.ofPattern("yyyyMMdd")).test(() ->
                 "19900001");
-        assertErrorResult(result, "must match to date format Value(YearOfEra,4,19,EXCEEDS_PAD)Value(MonthOfYear,2)Value(DayOfMonth,2)");
+        assertErrorResult(result, ERROR_IS_DATE);
     }
 
     @Test
     public void givenDateStringWitDay32WhenIsDateThenResultIsError() {
         ValidationResult result = StringValidations.isDate(DateTimeFormatter.ofPattern("yyyyMMdd")).test(() ->
                 "19900132");
-        assertErrorResult(result, "must match to date format Value(YearOfEra,4,19,EXCEEDS_PAD)Value(MonthOfYear,2)Value(DayOfMonth,2)");
+        assertErrorResult(result, ERROR_IS_DATE);
     }
 
     @Test
     public void givenDateWithWrongFormatWhenIsDateThenResultIsError() {
         ValidationResult result = StringValidations.isDate(DateTimeFormatter.ofPattern("yyyyMMdd")).test(() ->
                 "1990-10-32");
-        assertErrorResult(result, "must match to date format Value(YearOfEra,4,19,EXCEEDS_PAD)Value(MonthOfYear,2)Value(DayOfMonth,2)");
+        assertErrorResult(result, ERROR_IS_DATE);
     }
 
     @Test
     public void givenAlphanumericStringWhenIsDateThenResultIsError() {
         ValidationResult result = StringValidations.isDate(DateTimeFormatter.ofPattern("yyyyMMdd")).test(() ->
                 "invalid");
-        assertErrorResult(result, "must match to date format Value(YearOfEra,4,19,EXCEEDS_PAD)Value(MonthOfYear,2)Value(DayOfMonth,2)");
+        assertErrorResult(result, ERROR_IS_DATE);
     }
 
     @Test
     public void givenNumericStringWhenIsNumericThenResultIsValid() {
-        assertThat(StringValidations.isNumeric().test(() -> "12345").isValid()).isTrue();
+        assertValidResult(StringValidations.isNumeric().test(() -> "12345"));
     }
 
     @Test
     public void givenHugeNumericStringWhenIsNumericThenResultIsValid() {
         String hugeNumericString = "12345678901234567890123456789012345678901234567890123456789012345678901234567890";
-        assertThat(StringValidations.isNumeric().test(() -> hugeNumericString).isValid()).isTrue();
+        assertValidResult(StringValidations.isNumeric().test(() -> hugeNumericString));
     }
 
     @Test
@@ -213,17 +217,13 @@ public class StringValidationsTest {
 
     @Test
     public void givenStringContainsNotOnlyMyWhenContainsNotOnlyThenResultIsOk() {
-        assertThat(StringValidations.containsNotOnly("my").test(() -> "myWay").isValid()).isTrue();
+        assertValidResult(StringValidations.containsNotOnly("my").test(() -> "myWay"));
     }
 
     @Test
     public void givenStringContainsOnlyMyWhenContainsNotOnlyThenResultIsError() {
-        ValidationResult result = StringValidations.containsNotOnly("my").test(() -> "myMyMy");
-        assertErrorResult(result, "value mustn't contain only my");
+        ValidationResult result = StringValidations.containsNotOnly("ma").test(() -> "mama");
+        assertErrorResult(result, "value mustn't contain only ma");
     }
 
-    private void assertErrorResult(ValidationResult result, String expectedMessage) {
-        assertThat(result.isValid()).isFalse();
-        assertThat(result.getErrorMessage()).isEqualTo(expectedMessage);
-    }
 }
