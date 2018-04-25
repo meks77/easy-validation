@@ -21,11 +21,11 @@ public class StringValidations {
     }
 
     public static Validation<String> lengthIsMoreThan(int size){
-        return SimpleValidation.from(s -> s.length() > size, withMessage(format("must have more than %s chars", size)));
+        return SimpleValidation.from(s -> StringUtils.length(s) > size, withMessage(format("must have more than %s chars", size)));
     }
 
     public static Validation<String> lengthIsLessThan(int size){
-        return SimpleValidation.from(s -> s.length() < size, withMessage(format("must have less than %s chars", size)));
+        return SimpleValidation.from(s -> StringUtils.length(s) < size, withMessage(format("must have less than %s chars", size)));
     }
 
     public static Validation<String> lengthIsBetween(int minSize, int maxSize){
@@ -33,11 +33,11 @@ public class StringValidations {
     }
 
     public static Validation<String> hasLength(int length) {
-        return SimpleValidation.from(s -> s.length() == length, withMessage(format("length must be %s chars", length)));
+        return SimpleValidation.from(s -> StringUtils.length(s) == length, withMessage(format("length must be %s chars", length)));
     }
 
     public static Validation<String> contains(String c){
-        return SimpleValidation.from(s -> s.contains(c), withMessage(format("must contain %s", c)));
+        return SimpleValidation.from(s -> StringUtils.contains(s, c), withMessage(format("must contain %s", c)));
     }
 
     public static Validation<String> isNotBlank() {

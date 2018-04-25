@@ -12,9 +12,6 @@ public class ValidationException extends Exception {
 
     @Override
     public String getMessage() {
-        if (errorDescription != null) {
-            return String.format("%s: %s", valueDescription, errorDescription.getErrorMessage());
-        }
-        return valueDescription;
+        return String.format("%s: %s", valueDescription, errorDescription.getErrorMessage());
     }
 }

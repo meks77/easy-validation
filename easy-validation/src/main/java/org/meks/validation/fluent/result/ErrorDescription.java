@@ -1,6 +1,8 @@
 package org.meks.validation.fluent.result;
 
-public interface ErrorDescription {
+import java.io.Serializable;
+
+public interface ErrorDescription extends Serializable {
 
     String getErrorMessage();
 
