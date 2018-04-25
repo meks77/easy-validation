@@ -11,20 +11,20 @@ public class ValidationTest {
 
     @Test
     public void givenJoinedValidationsByAndExecutesRootValidationAsFirst() {
-        ValidationResult result = ObjectValidations.notNull().and(isNotBlank()).test(() -> null);
+        ValidationResult result = ObjectValidations.notNull().and(isNotBlank()).test(null);
         assertThat(result.isValid()).isFalse();
         assertThat(result.getErrorMessage()).isEqualTo("must not be null");
     }
 
     @Test
     public void givenJoinedValidationsByOrWhenOneIsValidThenResultIsValid() {
-        ValidationResult result = ObjectValidations.notNull().or(isNotBlank()).test(() -> "  ");
+        ValidationResult result = ObjectValidations.notNull().or(isNotBlank()).test("  ");
         assertThat(result.isValid()).isTrue();
     }
 
     @Test
     public void givenJoinedInvalidValidationsByOrWhenTestReturnsLastValidationResult() {
-        ValidationResult result = ObjectValidations.notNull().or(hasLength(10)).or(isNotBlank()).test(() -> null);
+        ValidationResult result = ObjectValidations.notNull().or(hasLength(10)).or(isNotBlank()).test(null);
         assertThat(result.isValid()).isFalse();
         assertThat(result.getErrorMessage()).isEqualTo("mustn't be blank");
     }

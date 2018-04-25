@@ -10,12 +10,12 @@ public class ObjectValidationsTest {
 
     @Test
     public void givenNotNullWhenNotNullReturnsValidResult() {
-        Assertions.assertThat(ObjectValidations.notNull().test(() -> "a").isValid()).isTrue();
+        Assertions.assertThat(ObjectValidations.notNull().test("a").isValid()).isTrue();
     }
 
     @Test
     public void givenNullWhenNotNullReturnsErrorResult() {
-        Assertions.assertThat(ObjectValidations.notNull().test(() -> null).isValid()).isFalse();
+        Assertions.assertThat(ObjectValidations.notNull().test(null).isValid()).isFalse();
     }
 
 }

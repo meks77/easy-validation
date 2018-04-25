@@ -61,18 +61,18 @@ class PersonInfoValidator {
     }
 
     void validatePerson(DeserializedPersonInfo personInfo) throws ValidationException {
-        nameValidation.test(personInfo::getFirstName).throwIfInvalid("firstName");
-        nameValidation.test(personInfo::getName).throwIfInvalid("name");
-        postalCodeQuickValidation.test(personInfo::getPostalCode).throwIfInvalid("postalCode");
-        birthDayStringValidation.test(personInfo::getBirthDate).throwIfInvalid("birthDay");
+        nameValidation.test(personInfo.getFirstName()).throwIfInvalid("firstName");
+        nameValidation.test(personInfo.getName()).throwIfInvalid("name");
+        postalCodeQuickValidation.test(personInfo.getPostalCode()).throwIfInvalid("postalCode");
+        birthDayStringValidation.test(personInfo.getBirthDate()).throwIfInvalid("birthDay");
         LocalDateTime birthDayDate = LocalDateTime.from(DEFAULT_DATE_FORMAT.parse(personInfo.getBirthDate()));
-        birthDayDateValidation.test(() -> birthDayDate).throwIfInvalid("birthDay");
-        accountNrStringValidation.test(personInfo::getAccount).throwIfInvalid("account");
-        bankCodeValidation.test(personInfo::getBankCode);
+        birthDayDateValidation.test(birthDayDate).throwIfInvalid("birthDay");
+        accountNrStringValidation.test(personInfo.getAccount()).throwIfInvalid("account");
+        bankCodeValidation.test(personInfo.getBankCode());
 
-        postalCodeSlowValidation.test(personInfo::getPostalCode).throwIfInvalid("postalCode");
-        accountSlowValidation.test(this::getAccountsOfPersonOfSlowService).throwIfInvalid("account");
-        bankCodeSlowValidation.test(this::getBankCodeOfPersonOfSlowService).throwIfInvalid("bankCode");
+        postalCodeSlowValidation.test(personInfo.getPostalCode()).throwIfInvalid("postalCode");
+        accountSlowValidation.test(getAccountsOfPersonOfSlowService()).throwIfInvalid("account");
+        bankCodeSlowValidation.test(getBankCodeOfPersonOfSlowService()).throwIfInvalid("bankCode");
     }
 
     private List<Bank> getBankCodeOfPersonOfSlowService() {

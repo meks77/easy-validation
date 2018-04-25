@@ -4,7 +4,6 @@ import org.meks.validation.result.ErrorDescription;
 import org.meks.validation.result.ValidationResult;
 
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 class SimpleValidation<K> implements Validation<K> {
 
@@ -21,8 +20,8 @@ class SimpleValidation<K> implements Validation<K> {
     }
 
     @Override
-    public ValidationResult test(Supplier<K> param) {
-        return predicate.test(param.get()) ? ValidationResult.ok() : ValidationResult.fail(onErrorMessage);
+    public ValidationResult test(K param) {
+        return predicate.test(param) ? ValidationResult.ok() : ValidationResult.fail(onErrorMessage);
     }
 
 }

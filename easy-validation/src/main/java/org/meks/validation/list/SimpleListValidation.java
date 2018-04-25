@@ -6,7 +6,6 @@ import org.meks.validation.result.ValidationResult;
 
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 public class SimpleListValidation<T> implements Validation<List<T>> {
 
@@ -25,8 +24,8 @@ public class SimpleListValidation<T> implements Validation<List<T>> {
     }
 
     @Override
-    public ValidationResult test(Supplier<List<T>> list) {
-        return predicate.test(list.get()) ? ValidationResult.ok() : ValidationResult.fail(onErrorMessage);
+    public ValidationResult test(List<T> list) {
+        return predicate.test(list) ? ValidationResult.ok() : ValidationResult.fail(onErrorMessage);
     }
 
 }

@@ -5,7 +5,6 @@ import org.meks.validation.result.ValidationResult;
 
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 class ListPropertyValidationImpl<T, E> implements Validation<List<T>> {
@@ -19,8 +18,8 @@ class ListPropertyValidationImpl<T, E> implements Validation<List<T>> {
     }
 
     @Override
-    public ValidationResult test(Supplier<List<T>> param) {
-        return validation.test(() -> param.get().stream().map(propertyGetter).collect(Collectors.toList()));
+    public ValidationResult test(List<T> param) {
+        return validation.test(param.stream().map(propertyGetter).collect(Collectors.toList()));
     }
 
     static <X, Y> Validation<List<X>> onProperty(Function<X, Y> propertyGetter, Validation<List<Y>> validation) {

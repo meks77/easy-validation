@@ -34,14 +34,15 @@ public class ListPropertyValidationImplTest {
 
         @SuppressWarnings("unchecked")
         Validation<List<Double>> validation = Mockito.mock(Validation.class);
-        Mockito.doReturn(ValidationResult.ok()).when(validation).test(() -> points.stream().map(propertyGetter).collect(Collectors.toList()));
+        List<Double> doubleList = points.stream().map(Point::getY).collect(Collectors.toList());
+        Mockito.doReturn(ValidationResult.ok()).when(validation).test(doubleList);
 
-        ListPropertyValidationImpl.onProperty(propertyGetter, validation).test(() -> points);
+        ListPropertyValidationImpl.onProperty(propertyGetter, validation).test(points);
 
         @SuppressWarnings("unchecked")
-        ArgumentCaptor<Supplier<List<Double>>> argumentCaptor = ArgumentCaptor.forClass(Supplier.class);
+        ArgumentCaptor<List<Double>> argumentCaptor = ArgumentCaptor.forClass(List.class);
         verify(validation).test(argumentCaptor.capture());
-        assertThat(argumentCaptor.getValue().get()).containsExactly(1.0, 3.0);
+        assertThat(argumentCaptor.getValue()).containsExactly(1.0, 3.0);
         verify(propertyGetter).apply(points.get(0));
         verify(propertyGetter).apply(points.get(1));
     }

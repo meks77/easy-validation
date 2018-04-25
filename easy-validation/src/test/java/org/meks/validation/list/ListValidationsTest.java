@@ -25,101 +25,101 @@ public class ListValidationsTest {
 
     @Test
     public void givenListContainingOnlyTestedValueWhenContainsOnlyReturnsValidResult() {
-        assertValidResult(ListValidations.containsOnly(TESTED_VALUE).test(() -> asList(TESTED_VALUE, TESTED_VALUE)));
+        assertValidResult(ListValidations.containsOnly(TESTED_VALUE).test(asList(TESTED_VALUE, TESTED_VALUE)));
     }
 
     @Test
     public void givenListWithoutContainedValueWhenContainsOnlyReturnsErrorResult() {
-        ValidationResult result = ListValidations.containsOnly(TESTED_VALUE).test(() -> singletonList("somethingElse"));
+        ValidationResult result = ListValidations.containsOnly(TESTED_VALUE).test(singletonList("somethingElse"));
         assertErrorResult(result, ERROR_CONTAINS_ONLY);
     }
 
     @Test
     public void givenListContainingNotOnlyTestedValueWhenContainsOnlyReturnsErrorResult() {
-        ValidationResult result = ListValidations.containsOnly(TESTED_VALUE).test(() -> asList(TESTED_VALUE, "somethingElse"));
+        ValidationResult result = ListValidations.containsOnly(TESTED_VALUE).test(asList(TESTED_VALUE, "somethingElse"));
         assertErrorResult(result, ERROR_CONTAINS_ONLY);
     }
 
     @Test
     public void givenListContainingTestedValueWhenContainsReturnsValidResult() {
-        assertValidResult(ListValidations.contains(TESTED_VALUE).test(() -> asList("firstValue", TESTED_VALUE, "thirdValue")));
+        assertValidResult(ListValidations.contains(TESTED_VALUE).test(asList("firstValue", TESTED_VALUE, "thirdValue")));
     }
 
     @Test
     public void givenListNotContainingTestedValueWhenContainsReturnsErrorResult() {
-        ValidationResult result = ListValidations.contains(TESTED_VALUE).test(() -> asList("first", "second", "third"));
+        ValidationResult result = ListValidations.contains(TESTED_VALUE).test(asList("first", "second", "third"));
         assertErrorResult(result, "list must contain " + TESTED_VALUE);
     }
 
     @Test
     public void givenListNotContainingTestedValueWhenDoesNotContainReturnsValidResult() {
-        assertValidResult(ListValidations.doesNotContain(TESTED_VALUE).test(() -> singletonList("other")));
+        assertValidResult(ListValidations.doesNotContain(TESTED_VALUE).test(singletonList("other")));
     }
 
     @Test
     public void givenListContainingTestedValueWhenDoesNotContainReturnsErrorResult() {
-        ValidationResult result = ListValidations.doesNotContain(TESTED_VALUE).test(() -> asList("first", TESTED_VALUE, "third"));
+        ValidationResult result = ListValidations.doesNotContain(TESTED_VALUE).test(asList("first", TESTED_VALUE, "third"));
         assertErrorResult(result, "list mustn't contain " + TESTED_VALUE);
     }
 
     @Test
     public void givenNotEmptyListWhenIsNotEmptyReturnsValidResult() {
-        assertValidResult(ListValidations.isNotEmpty().test(() -> singletonList("first")));
+        assertValidResult(ListValidations.isNotEmpty().test(singletonList("first")));
     }
 
     @Test
     public void givenEmptyListWhenIsNotEmptyReturnsValidResult() {
-        assertErrorResult(ListValidations.isNotEmpty().test(Collections::emptyList), "list mustn't be empty");
+        assertErrorResult(ListValidations.isNotEmpty().test(Collections.emptyList()), "list mustn't be empty");
     }
 
     @Test
     public void givenEmptyListWhenIsEmptyReturnsValidResult() {
-        assertValidResult(ListValidations.isEmpty().test(Collections::emptyList));
+        assertValidResult(ListValidations.isEmpty().test(Collections.emptyList()));
     }
 
     @Test
     public void givenNotEmptyListWhenIsEmptyReturnsValidResult() {
-        assertErrorResult(ListValidations.isEmpty().test(() -> singletonList("first")), "list must be empty");
+        assertErrorResult(ListValidations.isEmpty().test(singletonList("first")), "list must be empty");
     }
 
     @Test
     public void givenListSize5WhenHasSize5RturnsValidResult() {
-        assertValidResult(ListValidations.hasSize(5).test(() -> asList("one", "two", "three", "four", "five")));
+        assertValidResult(ListValidations.hasSize(5).test(asList("one", "two", "three", "four", "five")));
     }
 
     @Test
     public void givenListSize2WhenHasSize5RturnsErrorResult() {
-        assertErrorResult(ListValidations.hasSize(5).test(() -> asList("one", "two", "three")), "size of list must be 5");
+        assertErrorResult(ListValidations.hasSize(5).test(asList("one", "two", "three")), "size of list must be 5");
     }
 
     @Test
     public void givenListSize3WhenHasMinSize3ReturnsValidResult() {
-        assertValidResult(ListValidations.hasMinSize(3).test(() -> asList("one", "two", "three")));
+        assertValidResult(ListValidations.hasMinSize(3).test(asList("one", "two", "three")));
     }
 
     @Test
     public void givenListSize4WhenHasMinSize3ReturnsValidResult() {
-        assertValidResult(ListValidations.hasMinSize(3).test(() -> asList("one", "two", "three", "four")));
+        assertValidResult(ListValidations.hasMinSize(3).test(asList("one", "two", "three", "four")));
     }
 
     @Test
     public void givenListSize2WhenHasMinSize3ReturnsErrorResult() {
-        assertErrorResult(ListValidations.hasMinSize(3).test(() -> asList("one", "two")), "size of list must be at least 3");
+        assertErrorResult(ListValidations.hasMinSize(3).test(asList("one", "two")), "size of list must be at least 3");
     }
 
     @Test
     public void givenListSize3WhenHasMaxSize3ReturnsValidResult() {
-        assertValidResult(ListValidations.hasMaxSize(3).test(() -> asList("one", "two", "three")));
+        assertValidResult(ListValidations.hasMaxSize(3).test(asList("one", "two", "three")));
     }
 
     @Test
     public void givenListSize2WhenHasMaxSize3ReturnsValidResult() {
-        assertValidResult(ListValidations.hasMaxSize(3).test(() -> asList("one", "two")));
+        assertValidResult(ListValidations.hasMaxSize(3).test(asList("one", "two")));
     }
 
     @Test
     public void givenListSize4WhenHasMaxSize3ReturnsErrorResult() {
-        ValidationResult result = ListValidations.hasMaxSize(3).test(() -> asList("one", "two", "three", "four"));
+        ValidationResult result = ListValidations.hasMaxSize(3).test(asList("one", "two", "three", "four"));
         assertErrorResult(result, "size of list mustn't be greater than 3");
     }
 

@@ -2,12 +2,10 @@ package org.meks.validation;
 
 import org.meks.validation.result.ValidationResult;
 
-import java.util.function.Supplier;
-
 @FunctionalInterface
 public interface Validation<K> {
 
-    ValidationResult test(Supplier<K> param);
+    ValidationResult test(K param);
 
     default Validation<K> and(Validation<K> other) {
         return param -> {

@@ -35,7 +35,7 @@ public class SimpleValidationTest {
     public void givenPredicateReturnsTrueWhenTestThenValidationResultIsValid() {
         Predicate<String> expectedPredicate = mockPredicate(true);
         ValidationResult result = SimpleValidation.from(expectedPredicate, ErrorDescriptionBuilder.withMessage("xxx"))
-                .test(() -> VALIDATED_VALUE);
+                .test(VALIDATED_VALUE);
         assertThat(result.isValid()).isTrue();
     }
 
@@ -43,7 +43,7 @@ public class SimpleValidationTest {
     public void givenPredicateReturnsFalseWhenTestThenValidationResultIsNotValid() {
         Predicate<String> expectedPredicate = mockPredicate(false);
         ValidationResult result = SimpleValidation.from(expectedPredicate, ErrorDescriptionBuilder.withMessage("xxx"))
-                .test(() -> VALIDATED_VALUE);
+                .test(VALIDATED_VALUE);
         assertThat(result.isValid()).isFalse();
     }
 
@@ -51,7 +51,7 @@ public class SimpleValidationTest {
     public void givenPredicateReturnsFalseWhenTestThenValidationResultContainsErrorDescription() throws Exception {
         ErrorDescription expectedErrorDescription = ErrorDescriptionBuilder.withMessage("xxx");
         ValidationResult result = SimpleValidation.from(mockPredicate(false), expectedErrorDescription)
-                .test(() -> VALIDATED_VALUE);
+                .test(VALIDATED_VALUE);
         assertThat(FieldUtils.readField(result, "errorDescription", true)).isSameAs(expectedErrorDescription);
     }
 
