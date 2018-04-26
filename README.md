@@ -1,6 +1,7 @@
 # easy-validation
 Very easy way to validate simple and complex objects by using an fluent interface.
 
+The main concept of using lambda combinded with a fluent interface is from Joel Planes, what can be found [here](https://medium.com/@jplanes/lambda-validations-with-java-8-86aa8143bd9f).
 
 ## Goals
 - simple reusable API for validation (use of the fluent interface)
@@ -30,8 +31,6 @@ So many things are open. First I just developed the interface usage.
 Till now the api was to heavy change while I was fighting with problems with generics when using the fluent interface.
 
 The next steps will be:
-* cleanup of the code
-* implement tests
 * setting up SonarQube for code statistics
 * add the possibility to either use error codes or not
 * add the possibility to user custom error messages for the validations
@@ -47,4 +46,4 @@ The first stable release will be 1.0.0.
 
 ## User Guide
 Todo! 
-Currently there is a Unit test class which shows the usage.
+Currently there are only some code examples which can be found in the module easy-validation-examples.
