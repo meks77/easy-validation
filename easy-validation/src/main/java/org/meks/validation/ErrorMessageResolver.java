@@ -1,5 +1,6 @@
 package org.meks.validation;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
@@ -9,6 +10,7 @@ class ErrorMessageResolver {
 
     private static final String MUSTN_T_BE_BLANK = "mustn't be blank";
     private static final String VALUE_MUST_BE_NUMERIC = "value must be numeric";
+    private static final String MUST_NOT_BE_NULL = "must not be null";
 
     private ErrorMessageResolver() {}
 
@@ -46,5 +48,13 @@ class ErrorMessageResolver {
 
     static String getContainsNotOnlyMessage(String containedValue) {
         return format("value mustn't contain only %s", containedValue);
+    }
+
+    static String getNotNullMessage() {
+        return MUST_NOT_BE_NULL;
+    }
+
+    static String getIsDateAfterMessage(LocalDateTime minDate) {
+        return format("date must be after %s", minDate);
     }
 }

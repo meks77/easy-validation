@@ -69,5 +69,4 @@ public class StringValidations {
         return CoreStringValidations.containsNotOnly(containedValue,
                 withMessage(getContainsNotOnlyMessage(containedValue)));
     }
-
 }
