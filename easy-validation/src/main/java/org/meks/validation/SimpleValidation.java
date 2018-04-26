@@ -5,22 +5,22 @@ import org.meks.validation.result.ValidationResult;
 
 import java.util.function.Predicate;
 
-class SimpleValidation<K> implements Validation<K> {
+class SimpleValidation<T> implements Validation<T> {
 
-    private final Predicate<K> predicate;
+    private final Predicate<T> predicate;
     private final ErrorDescription onErrorMessage;
 
     static <K> SimpleValidation<K> from(Predicate<K> predicate, ErrorDescription onErrorMessage) {
         return new SimpleValidation<>(predicate, onErrorMessage);
     }
 
-    private SimpleValidation(Predicate<K> predicate, ErrorDescription onErrorMessage) {
+    private SimpleValidation(Predicate<T> predicate, ErrorDescription onErrorMessage) {
         this.predicate = predicate;
         this.onErrorMessage = onErrorMessage;
     }
 
     @Override
-    public ValidationResult test(K param) {
+    public ValidationResult test(T param) {
         return predicate.test(param) ? ValidationResult.ok() : ValidationResult.fail(onErrorMessage);
     }
 
