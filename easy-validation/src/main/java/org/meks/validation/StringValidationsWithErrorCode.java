@@ -1,14 +1,14 @@
 package org.meks.validation;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.meks.validation.result.ErrorDescriptionBuilder;
-
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
-import static java.lang.String.format;
+import static org.meks.validation.ErrorMessageResolver.getContainsNotOnlyMessage;
+import static org.meks.validation.ErrorMessageResolver.getIsDateMessage;
+import static org.meks.validation.ErrorMessageResolver.getIsInListMessage;
+import static org.meks.validation.ErrorMessageResolver.getIsNumericMessage;
+import static org.meks.validation.result.ErrorDescriptionBuilder.withCode;
 
 @SuppressWarnings("WeakerAccess")
 public class StringValidationsWithErrorCode {
@@ -18,24 +18,24 @@ public class StringValidationsWithErrorCode {
     }
 
     public static Validation<String> isNotBlank(String errorCode) {
-        return SimpleValidation.from(StringUtils::isNotBlank, ErrorDescriptionBuilder.withCode("mustn't be blank", errorCode));
+        return CoreStringValidations.isNotBlank(withCode(ErrorMessageResolver.getIsNotBlankMessage(), errorCode));
     }
 
-    public static Validation<String> isInList(Supplier<String[]> validValueSupplier, String errorCode) {
-        return SimpleValidation.from(s -> ArrayUtils.contains(validValueSupplier.get(), s),
-                ErrorDescriptionBuilder.withCode(format("must be in valid list: %s", Arrays.toString(validValueSupplier.get())), errorCode));
+    public static Validation<String> isInArray(Supplier<String[]> validValueSupplier, String errorCode) {
+        return CoreStringValidations.isInArray(validValueSupplier,
+                () -> withCode(getIsInListMessage(Arrays.asList(validValueSupplier.get())), errorCode));
     }
 
     public static Validation<String> isDate(DateTimeFormatter formatter, String errorCode) {
-        return StringValidations.isDate(formatter, ErrorDescriptionBuilder.withCode(format("must match to date format %s", formatter), errorCode));
+        return CoreStringValidations.isDate(formatter, withCode(getIsDateMessage(formatter), errorCode));
     }
 
     public static Validation<String> isNumeric(String errorCode) {
-        return StringValidations.isNumeric(ErrorDescriptionBuilder.withCode("value must be numeric", errorCode));
+        return CoreStringValidations.isNumeric(withCode(getIsNumericMessage(), errorCode));
     }
 
     public static Validation<String> containsNotOnly(String containedValue, String errorCode) {
-        return StringValidations.containsNotOnly(containedValue, ErrorDescriptionBuilder.withCode(format("value mustn't contain only %s", containedValue),
-                errorCode));
+        return CoreStringValidations.containsNotOnly(containedValue,
+                withCode(getContainsNotOnlyMessage(containedValue), errorCode));
     }
 }

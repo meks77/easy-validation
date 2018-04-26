@@ -13,7 +13,7 @@ import static org.meks.validation.Account.AccountBuilder.anAccount;
 import static org.meks.validation.DateValidations.isDateAfter;
 import static org.meks.validation.StringValidations.hasLength;
 import static org.meks.validation.StringValidationsWithErrorCode.isDate;
-import static org.meks.validation.StringValidationsWithErrorCode.isInList;
+import static org.meks.validation.StringValidationsWithErrorCode.isInArray;
 import static org.meks.validation.StringValidationsWithErrorCode.isNotBlank;
 import static org.meks.validation.StringValidationsWithErrorCode.isNumeric;
 import static org.meks.validation.StringValidations.lengthIsBetween;
@@ -43,7 +43,7 @@ class PersonInfoValidator {
     private void setupValidationConfig() {
         nameValidation = isNotBlank("1").and(lengthIsMoreThan(1));
         postalCodeQuickValidation = isNotBlank("2").and(lengthIsBetween(4, 8));
-        postalCodeSlowValidation = isInList(this::getValidPostalCodes, "3");
+        postalCodeSlowValidation = isInArray(this::getValidPostalCodes, "3");
         birthDayStringValidation = isNotBlank("4").and(isDate(DEFAULT_DATE_FORMAT, "4"));
         birthDayDateValidation = isDateAfter(LocalDateTime.of(1940, 1, 1, 0, 0, 0), "5");
         accountNrStringValidation = isNotBlank("6").and(isNumeric("6")).and(StringValidations.containsNotOnly("0"));

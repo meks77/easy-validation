@@ -36,6 +36,6 @@ public class DateValidations {
     }
 
     private static Validation<LocalDateTime> isDateAfter(LocalDateTime minDate, ErrorDescription errorDescription) {
-        return SimpleValidation.from(minDate::isBefore, errorDescription);
+        return SimpleValidation.from(minDate::isBefore, () -> errorDescription);
     }
 }

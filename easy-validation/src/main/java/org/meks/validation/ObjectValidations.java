@@ -1,8 +1,8 @@
 package org.meks.validation;
 
-import org.meks.validation.result.ErrorDescriptionBuilder;
-
 import java.util.Objects;
+
+import static org.meks.validation.result.ErrorDescriptionBuilder.withMessage;
 
 @SuppressWarnings("WeakerAccess")
 public class ObjectValidations {
@@ -11,7 +11,7 @@ public class ObjectValidations {
     }
 
     public static Validation<String> notNull() {
-        return SimpleValidation.from(Objects::nonNull, ErrorDescriptionBuilder.withMessage("must not be null"));
+        return SimpleValidation.from(Objects::nonNull, () -> withMessage("must not be null"));
     }
 
 }
