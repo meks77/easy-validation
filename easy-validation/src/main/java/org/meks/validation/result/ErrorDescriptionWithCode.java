@@ -1,6 +1,6 @@
 package org.meks.validation.result;
 
-class ErrorDescriptionWithCode implements ErrorDescription {
+public class ErrorDescriptionWithCode implements ErrorDescription {
 
     private final String message;
     private final String errorCode;

@@ -1,4 +1,4 @@
-package org.meks.validation.list;
+package org.meks.validation.validations.list;
 
 import org.fest.assertions.api.Assertions;
 import org.junit.Test;

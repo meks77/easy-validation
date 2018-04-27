@@ -6,12 +6,12 @@ import org.meks.validation.result.ValidationResult;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-class SimpleValidation<T> implements Validation<T> {
+public class SimpleValidation<T> implements Validation<T> {
 
     private final Predicate<T> predicate;
     private final Supplier<ErrorDescription> onErrorMessage;
 
-    static <K> SimpleValidation<K> from(Predicate<K> predicate, Supplier<ErrorDescription> onErrorMessage) {
+    public static <K> SimpleValidation<K> from(Predicate<K> predicate, Supplier<ErrorDescription> onErrorMessage) {
         return new SimpleValidation<>(predicate, onErrorMessage);
     }
 

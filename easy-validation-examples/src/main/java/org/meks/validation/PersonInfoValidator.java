@@ -1,7 +1,8 @@
 package org.meks.validation;
 
+import org.meks.validation.validations.list.ListValidations;
 import org.meks.validation.result.ValidationException;
-import org.meks.validation.list.ListValidations;
+import org.meks.validation.validations.string.StringValidations;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,14 +11,14 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.meks.validation.Account.AccountBuilder.anAccount;
-import static org.meks.validation.DateValidations.isDateAfter;
-import static org.meks.validation.StringValidations.hasLength;
-import static org.meks.validation.StringValidationsWithErrorCode.isDate;
-import static org.meks.validation.StringValidationsWithErrorCode.isInArray;
-import static org.meks.validation.StringValidationsWithErrorCode.isNotBlank;
-import static org.meks.validation.StringValidationsWithErrorCode.isNumeric;
-import static org.meks.validation.StringValidations.lengthIsBetween;
-import static org.meks.validation.StringValidations.lengthIsMoreThan;
+import static org.meks.validation.validations.date.DateValidationsWithErrorCode.isDateAfter;
+import static org.meks.validation.validations.string.StringValidations.hasLength;
+import static org.meks.validation.validations.string.StringValidations.lengthIsBetween;
+import static org.meks.validation.validations.string.StringValidations.lengthIsMoreThan;
+import static org.meks.validation.validations.string.StringValidationsWithErrorCode.isDate;
+import static org.meks.validation.validations.string.StringValidationsWithErrorCode.isInArray;
+import static org.meks.validation.validations.string.StringValidationsWithErrorCode.isNotBlank;
+import static org.meks.validation.validations.string.StringValidationsWithErrorCode.isNumeric;
 
 /**
  * An example how a validator can be implemented for a complex object.

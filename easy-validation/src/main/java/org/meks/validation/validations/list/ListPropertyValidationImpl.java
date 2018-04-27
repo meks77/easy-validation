@@ -1,4 +1,4 @@
-package org.meks.validation.list;
+package org.meks.validation.validations.list;
 
 import org.meks.validation.Validation;
 import org.meks.validation.result.ValidationResult;

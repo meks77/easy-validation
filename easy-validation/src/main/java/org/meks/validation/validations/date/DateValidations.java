@@ -1,8 +1,10 @@
-package org.meks.validation;
+package org.meks.validation.validations.date;
+
+import org.meks.validation.ErrorMessageResolver;
+import org.meks.validation.Validation;
 
 import java.time.LocalDateTime;
 
-import static org.meks.validation.ErrorMessageResolver.getIsDateAfterMessage;
 import static org.meks.validation.result.ErrorDescriptionBuilder.withMessage;
 
 /**
@@ -10,6 +12,9 @@ import static org.meks.validation.result.ErrorDescriptionBuilder.withMessage;
  */
 @SuppressWarnings("WeakerAccess")
 public class DateValidations {
+
+    private static ErrorMessageResolver messageResolver = new ErrorMessageResolver();
+    private static CoreDateValidations validations = new CoreDateValidations();
 
     private DateValidations() {
     }
@@ -20,7 +25,7 @@ public class DateValidations {
      * @return a new validation instance
      */
     public static Validation<LocalDateTime> isDateAfter(LocalDateTime minDate) {
-        return CoreDateValidations.isDateAfter(minDate, withMessage(getIsDateAfterMessage(minDate)));
+        return validations.isDateAfter(minDate, withMessage(messageResolver.getIsDateAfterMessage(minDate)));
     }
 
 }

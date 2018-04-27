@@ -1,4 +1,4 @@
-package org.meks.validation;
+package org.meks.validation.validations.string;
 
 import org.junit.Test;
 import org.meks.validation.result.ValidationResult;

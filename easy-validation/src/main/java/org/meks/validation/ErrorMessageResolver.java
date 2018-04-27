@@ -6,55 +6,53 @@ import java.util.Collection;
 
 import static java.lang.String.format;
 
-class ErrorMessageResolver {
+public class ErrorMessageResolver {
 
     private static final String MUSTN_T_BE_BLANK = "mustn't be blank";
     private static final String VALUE_MUST_BE_NUMERIC = "value must be numeric";
     private static final String MUST_NOT_BE_NULL = "must not be null";
 
-    private ErrorMessageResolver() {}
-
-    static String getLengthIsMoreThanMessage(int size) {
+    public String getLengthIsMoreThanMessage(int size) {
         return format("must have more than %s chars", size);
     }
 
-    static String getLenghtIsLessThanMessage(int size) {
+    public String getLenghtIsLessThanMessage(int size) {
         return format("must have less than %s chars", size);
     }
 
-    static String getHasLenghtMessage(int length) {
+    public String getHasLenghtMessage(int length) {
         return format("length must be %s chars", length);
     }
 
-    static String getContainsMessage(String contained) {
+    public String getContainsMessage(String contained) {
         return format("must contain %s", contained);
     }
 
-    static String getIsNotBlankMessage() {
+    public String getIsNotBlankMessage() {
         return MUSTN_T_BE_BLANK;
     }
 
-    static String getIsInListMessage(Collection<String> validValueSupplier) {
+    public String getIsInListMessage(Collection<String> validValueSupplier) {
         return format("must be in list: [%s]", String.join(", ", validValueSupplier));
     }
 
-    static String getIsDateMessage(DateTimeFormatter formatter) {
+    public String getIsDateMessage(DateTimeFormatter formatter) {
         return format("must match to date format %s", formatter);
     }
 
-    static String getIsNumericMessage() {
+    public String getIsNumericMessage() {
         return VALUE_MUST_BE_NUMERIC;
     }
 
-    static String getContainsNotOnlyMessage(String containedValue) {
+    public String getContainsNotOnlyMessage(String containedValue) {
         return format("value mustn't contain only %s", containedValue);
     }
 
-    static String getNotNullMessage() {
+    public String getNotNullMessage() {
         return MUST_NOT_BE_NULL;
     }
 
-    static String getIsDateAfterMessage(LocalDateTime minDate) {
+    public String getIsDateAfterMessage(LocalDateTime minDate) {
         return format("date must be after %s", minDate);
     }
 }
