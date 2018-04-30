@@ -1,8 +1,8 @@
 package org.meks.validation;
 
 import org.junit.Test;
-import org.meks.validation.validations.object.ObjectValidations;
 import org.meks.validation.result.ValidationResult;
+import org.meks.validation.validations.object.ObjectValidations;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.meks.validation.validations.string.StringValidations.hasLength;

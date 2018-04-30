@@ -1,12 +1,10 @@
 package org.meks.validation;
 
-import org.fest.assertions.api.Assertions;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Collections;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 

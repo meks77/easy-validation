@@ -2,8 +2,6 @@ package org.meks.validation.validations;
 
 import org.meks.validation.result.ErrorDescription;
 import org.meks.validation.result.ErrorDescriptionWithCode;
-import org.meks.validation.result.ErrorDescriptionWithMessage;
-import org.mockito.ArgumentCaptor;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 

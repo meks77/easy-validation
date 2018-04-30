@@ -2,11 +2,9 @@ package org.meks.validation.validations;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.meks.validation.result.ErrorDescription;
 import org.meks.validation.result.ErrorDescriptionWithCode;
 import org.meks.validation.result.ValidationResult;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.fest.assertions.api.Assertions.assertThat;

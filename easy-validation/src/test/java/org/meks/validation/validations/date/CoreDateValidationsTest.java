@@ -1,8 +1,8 @@
 package org.meks.validation.validations.date;
 
 import org.junit.Test;
-import org.meks.validation.validations.AbstractCoreValidationsTest;
 import org.meks.validation.result.ValidationResult;
+import org.meks.validation.validations.AbstractCoreValidationsTest;
 
 import java.time.LocalDateTime;
 

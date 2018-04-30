@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 @RunWith(MockitoJUnitRunner.class)
 public abstract class AbstractValidationsTest<T> {

@@ -3,7 +3,6 @@ package org.meks.validation.validations.object;
 import org.junit.Before;
 import org.junit.Test;
 import org.meks.validation.validations.AbstractCodeValidationsTest;
-import org.meks.validation.validations.AbstractValidationsTest;
 import org.mockito.Mock;
 
 public class ObjectValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<Object> {

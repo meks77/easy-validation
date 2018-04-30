@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.meks.validation.validations.AbstractCodeValidationsTest;
-import org.meks.validation.validations.AbstractValidationsTest;
 import org.mockito.Mock;
 
 import java.time.format.DateTimeFormatter;

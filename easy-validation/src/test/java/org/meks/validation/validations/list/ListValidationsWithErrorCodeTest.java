@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.meks.validation.Validation;
 import org.meks.validation.validations.AbstractCodeValidationsTest;
-import org.meks.validation.validations.AbstractValidationsTest;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 

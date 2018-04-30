@@ -3,14 +3,11 @@ package org.meks.validation.validations.list;
 import org.meks.validation.Validation;
 import org.meks.validation.result.ErrorDescription;
 import org.meks.validation.validations.AbstractValidationsTest;
-import org.mockito.Mockito;
 
-import java.awt.Point;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;

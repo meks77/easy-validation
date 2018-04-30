@@ -3,18 +3,10 @@ package org.meks.validation.validations.string;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.meks.validation.Validation;
-import org.meks.validation.result.ErrorDescription;
 import org.meks.validation.validations.AbstractValidationsTest;
 import org.mockito.Mock;
 
 import java.time.format.DateTimeFormatter;
-
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
 
 
 public class StringValidationsTest extends AbstractValidationsTest<String> {

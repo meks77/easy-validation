@@ -1,9 +1,7 @@
 package org.meks.validation.validations.list;
 
-import org.fest.assertions.api.Assertions;
 import org.junit.Test;
 import org.meks.validation.Validation;
-import org.meks.validation.result.ValidationResult;
 import org.meks.validation.validations.AbstractCoreValidationsTest;
 import org.mockito.Mockito;
 
@@ -15,8 +13,6 @@ import java.util.function.Function;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.meks.validation.TestUtils.assertErrorResult;
-import static org.meks.validation.TestUtils.assertValidResult;
 import static org.mockito.Mockito.mock;
 
 public class CoreListValidationsTest extends AbstractCoreValidationsTest {
