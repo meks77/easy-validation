@@ -6,7 +6,7 @@ public class ErrorDescriptionBuilder {
 
     }
 
-    public static ErrorDescription withCode(String message, String code) {
+    public static ErrorDescriptionWithCode withCode(String message, String code) {
         return new ErrorDescriptionWithCode(message, code);
     }
 

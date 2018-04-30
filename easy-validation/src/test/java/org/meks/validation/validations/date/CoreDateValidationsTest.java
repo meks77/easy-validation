@@ -1,7 +1,7 @@
 package org.meks.validation.validations.date;
 
 import org.junit.Test;
-import org.meks.validation.AbstractCoreValidationsTest;
+import org.meks.validation.validations.AbstractCoreValidationsTest;
 import org.meks.validation.result.ValidationResult;
 
 import java.time.LocalDateTime;
@@ -19,9 +19,7 @@ public class CoreDateValidationsTest extends AbstractCoreValidationsTest {
     public void givenSmallerDateWhenIsDateAfterReturnsErrorWithExpectedMessage() {
         ValidationResult result = validations.isDateAfter(now().plus(2, SECONDS), errorDescription)
                 .test(LocalDateTime.now());
-        assertThat(result.isValid()).as("valid").isFalse();
-        assertThat(result.getErrorMessage()).isEqualTo(exptectedMessage);
-        assertThat(result.getErrorCode()).isNull();
+        assertErrorResult(result);
     }
 
     @Test
@@ -30,14 +28,14 @@ public class CoreDateValidationsTest extends AbstractCoreValidationsTest {
         LocalDateTime comparedDate = of(2017, 5, 8, 7, 12, 14);
         assertThat(validatedDate).isNotSameAs(comparedDate);
         ValidationResult result = validations.isDateAfter(comparedDate, errorDescription).test(validatedDate);
-        assertThat(result.isValid()).as("valid").isFalse();
+        assertErrorResult(result);
     }
 
     @Test
     public void givenGreaterDateWhenIsDateAfterReturnsOk() {
         ValidationResult result = validations.isDateAfter(now().minus(1, SECONDS), errorDescription)
                 .test(LocalDateTime.now());
-        assertThat(result.isValid()).as("valid").isTrue();
+        assertValidResult(result);
     }
 
 }

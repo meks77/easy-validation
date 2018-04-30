@@ -23,13 +23,13 @@ public class StringValidationsWithErrorCode {
     }
 
     public static Validation<String> lengthIsLessThan(int size, String errorCode){
-        return validations.lengthIsLessThan(size, withCode(messageResolver.getLenghtIsLessThanMessage(size), errorCode));
+        return validations.lengthIsLessThan(size, withCode(messageResolver.getLengthIsLessThanMessage(size), errorCode));
     }
 
     public static Validation<String> lengthIsBetween(int minSize, int maxSize,
                                                      String minSizeErrorCode, String maxSizeErrorCode){
         return validations.lengthIsBetween(minSize, maxSize,
-                withCode(messageResolver.getLenghtIsLessThanMessage(maxSize + 1), maxSizeErrorCode),
+                withCode(messageResolver.getLengthIsLessThanMessage(maxSize + 1), maxSizeErrorCode),
                 withCode(messageResolver.getLengthIsMoreThanMessage(minSize - 1), minSizeErrorCode));
     }
 

@@ -3,21 +3,14 @@ package org.meks.validation.validations.string;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.meks.validation.Validation;
-import org.meks.validation.result.ErrorDescription;
+import org.meks.validation.validations.AbstractCodeValidationsTest;
 import org.meks.validation.validations.AbstractValidationsTest;
 import org.mockito.Mock;
 
 import java.time.format.DateTimeFormatter;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
 
-
-public class StringValidationsTest extends AbstractValidationsTest<String> {
+public class StringValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<String> {
 
 
     private static final String FIVE_LETTER_WORD = "apple";
@@ -35,7 +28,7 @@ public class StringValidationsTest extends AbstractValidationsTest<String> {
 
     @Override
     protected Class<?> getTestedClass() {
-        return StringValidations.class;
+        return StringValidationsWithErrorCode.class;
     }
 
     @Override
@@ -52,58 +45,59 @@ public class StringValidationsTest extends AbstractValidationsTest<String> {
 
     @Test
     public void testLengthIsMoreThan() {
-        testHelper.testLengthIsMoreThan(StringValidations::lengthIsMoreThan);
+        testHelper.testLengthIsMoreThan(size -> StringValidationsWithErrorCode.lengthIsMoreThan(size, expectedCode));
     }
 
     @Test
     public void testLengthIsLessThan() {
-        testHelper.testLengthIsLessThan(StringValidations::lengthIsLessThan);
+        testHelper.testLengthIsLessThan(size -> StringValidationsWithErrorCode.lengthIsLessThan(size, expectedCode));
     }
 
     @Test
     @Ignore("verificatino fails currently. between is a special case where the tests needs to be implemented special")
     public void testLengthIsBetween() {
-        testHelper.testLengthIsBetween(range -> StringValidations.lengthIsBetween(range.getMinimum(), range.getMaximum()));
+        testHelper.testLengthIsBetween(range -> StringValidationsWithErrorCode.lengthIsBetween(range.getMinimum(),
+                range.getMaximum(), expectedCode, expectedCode));
     }
 
     @Test
     public void testHasLength() {
-        testHelper.testHasLength(StringValidations::hasLength);
+        testHelper.testHasLength(size -> StringValidationsWithErrorCode.hasLength(size, expectedCode));
     }
 
     @Test
     public void testContains() {
-        testHelper.testContains(StringValidations::contains);
+        testHelper.testContains(s -> StringValidationsWithErrorCode.contains(s, expectedCode));
     }
 
     @Test
     public void testIsNotBlank() {
-        testHelper.testIsNotBlank(StringValidations::isNotBlank);
+        testHelper.testIsNotBlank(() -> StringValidationsWithErrorCode.isNotBlank(expectedCode));
     }
 
     @Test
     public void testIsInArray() {
-        testHelper.testIsInArray(StringValidations::isInArray);
+        testHelper.testIsInArray(supplier -> StringValidationsWithErrorCode.isInArray(supplier, expectedCode));
     }
 
     @Test
     public void testIsInList() {
-        testHelper.testIsInList(StringValidations::isInList);
+        testHelper.testIsInList(supplier -> StringValidationsWithErrorCode.isInList(supplier, expectedCode));
     }
 
     @Test
     public void testIsDate() {
-        testHelper.testIsDate(StringValidations::isDate);
+        testHelper.testIsDate(formatter -> StringValidationsWithErrorCode.isDate(formatter, expectedCode));
     }
 
     @Test
     public void testIsNumeric() {
-        testHelper.testIsNumeric(StringValidations::isNumeric);
+        testHelper.testIsNumeric(() -> StringValidationsWithErrorCode.isNumeric(expectedCode));
     }
 
     @Test
     public void testContainsNot() {
-        testHelper.testContainsNotOnly(StringValidations::containsNotOnly);
+        testHelper.testContainsNotOnly(s -> StringValidationsWithErrorCode.containsNotOnly(s, expectedCode));
     }
 
 }

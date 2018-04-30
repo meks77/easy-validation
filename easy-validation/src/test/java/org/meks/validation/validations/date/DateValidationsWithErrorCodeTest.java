@@ -1,22 +1,37 @@
 package org.meks.validation.validations.date;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.meks.validation.result.ValidationResult;
+import org.meks.validation.validations.AbstractCodeValidationsTest;
+import org.mockito.Mock;
 
 import java.time.LocalDateTime;
 
-import static java.time.LocalDateTime.now;
-import static java.time.temporal.ChronoUnit.SECONDS;
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.meks.validation.validations.date.DateValidationsWithErrorCode.isDateAfter;
+public class DateValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<LocalDateTime> {
 
-public class DateValidationsWithErrorCodeTest {
+    @Mock
+    private CoreDateValidations coreValidations;
+
+    @Override
+    protected Class<?> getTestedClass() {
+        return DateValidationsWithErrorCode.class;
+    }
+
+    @Override
+    protected Object getCoreValidations() {
+        return coreValidations;
+    }
+
+    private DateValidationsTestHelper testHelper;
+
+    @Before
+    public void initTestHelper() {
+        testHelper = new DateValidationsTestHelper(coreValidations, this);
+    }
 
     @Test
-    public void givenErrorCodeWhenIsDateAfterReturnsErrorCode() {
-        String expectedErrorCode = "myErrorCode";
-        ValidationResult result = isDateAfter(now().plus(2, SECONDS), expectedErrorCode).test(LocalDateTime.now());
-        assertThat(result.getErrorCode()).isEqualTo(expectedErrorCode);
+    public void testIsDateAfter() {
+        testHelper.testIsDateAfter(dateAfter ->  DateValidationsWithErrorCode.isDateAfter(dateAfter, expectedCode));
     }
 
 }

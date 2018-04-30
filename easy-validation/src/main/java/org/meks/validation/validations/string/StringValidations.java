@@ -23,12 +23,12 @@ public class StringValidations {
     }
 
     public static Validation<String> lengthIsLessThan(int size){
-        return validations.lengthIsLessThan(size, withMessage(messageResolver.getLenghtIsLessThanMessage(size)));
+        return validations.lengthIsLessThan(size, withMessage(messageResolver.getLengthIsLessThanMessage(size)));
     }
 
     public static Validation<String> lengthIsBetween(int minSize, int maxSize){
         return validations.lengthIsBetween(minSize, maxSize,
-                withMessage(messageResolver.getLenghtIsLessThanMessage(maxSize + 1)),
+                withMessage(messageResolver.getLengthIsLessThanMessage(maxSize + 1)),
                 withMessage(messageResolver.getLengthIsMoreThanMessage(minSize - 1)));
     }
 

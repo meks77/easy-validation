@@ -1,24 +1,13 @@
 package org.meks.validation.validations.date;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.meks.validation.AbstractValidationsTest;
-import org.meks.validation.Validation;
-import org.meks.validation.result.ErrorDescription;
-import org.mockito.ArgumentCaptor;
+import org.meks.validation.validations.AbstractValidationsTest;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDateTime;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.same;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-@RunWith(MockitoJUnitRunner.class)
-public class DateValidationsTest extends AbstractValidationsTest {
+public class DateValidationsTest extends AbstractValidationsTest<LocalDateTime> {
 
     @Mock
     private CoreDateValidations coreValidations;
@@ -33,19 +22,16 @@ public class DateValidationsTest extends AbstractValidationsTest {
         return coreValidations;
     }
 
+    private DateValidationsTestHelper testHelper;
+
+    @Before
+    public void initTestHelper() {
+        testHelper = new DateValidationsTestHelper(coreValidations, this);
+    }
+
     @Test
-    public void testThatIsDateAfterDelegatesToCoreValidations() {
-        LocalDateTime dateBefore = LocalDateTime.of(2010, 5, 1, 10, 5, 10);
-        when(messageResolver.getIsDateAfterMessage(dateBefore)).thenReturn(expectedMessage);
-        Validation<LocalDateTime> expectedValidation = mockValidation();
-        when(coreValidations.isDateAfter(same(dateBefore), any(ErrorDescription.class))).thenReturn(expectedValidation);
-
-        Validation<LocalDateTime> validation = DateValidations.isDateAfter(dateBefore);
-
-        assertThat(validation).isSameAs(expectedValidation);
-        ArgumentCaptor<ErrorDescription> errorDescriptionArgCaptor = getErrorDescCaptor();
-        verify(coreValidations).isDateAfter(same(dateBefore), errorDescriptionArgCaptor.capture());
-        assertErrorDescMessageOnly(errorDescriptionArgCaptor);
+    public void testIsDateAfter() {
+        testHelper.testIsDateAfter(DateValidations::isDateAfter);
     }
 
 }

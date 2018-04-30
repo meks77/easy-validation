@@ -2,17 +2,18 @@ package org.meks.validation.validations.object;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.meks.validation.validations.AbstractCodeValidationsTest;
 import org.meks.validation.validations.AbstractValidationsTest;
 import org.mockito.Mock;
 
-public class ObjectValidationsTest extends AbstractValidationsTest<Object> {
+public class ObjectValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<Object> {
 
     @Mock
     private CoreObjectValidations coreValidations;
 
     @Override
     protected Class<?> getTestedClass() {
-        return ObjectValidations.class;
+        return ObjectValidationsWithErrorCode.class;
     }
 
     @Override
@@ -29,6 +30,6 @@ public class ObjectValidationsTest extends AbstractValidationsTest<Object> {
 
     @Test
     public void testNotNull() {
-        testHelper.testNotNull(ObjectValidations::notNull);
+        testHelper.testNotNull(() -> ObjectValidationsWithErrorCode.notNull(expectedCode));
     }
 }

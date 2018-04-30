@@ -16,7 +16,7 @@ public class ErrorMessageResolver {
         return format("must have more than %s chars", size);
     }
 
-    public String getLenghtIsLessThanMessage(int size) {
+    public String getLengthIsLessThanMessage(int size) {
         return format("must have less than %s chars", size);
     }
 

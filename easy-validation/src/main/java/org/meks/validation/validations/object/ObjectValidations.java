@@ -14,7 +14,7 @@ public class ObjectValidations {
     private ObjectValidations() {
     }
 
-    public static Validation<String> notNull() {
+    public static <T> Validation<T> notNull() {
         return validations.notNull(withMessage(messageResolver.getNotNullMessage()));
     }
 

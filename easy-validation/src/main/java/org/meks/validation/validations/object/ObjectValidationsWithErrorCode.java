@@ -14,7 +14,7 @@ public class ObjectValidationsWithErrorCode {
     private ObjectValidationsWithErrorCode() {
     }
 
-    public static Validation<String> notNull(String errorCode) {
+    public static <T> Validation<T> notNull(String errorCode) {
         return validations.notNull(withCode(messageResolver.getNotNullMessage(), errorCode));
     }
 

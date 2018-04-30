@@ -8,7 +8,7 @@ import java.util.Objects;
 
 class CoreObjectValidations {
 
-    Validation<String> notNull(ErrorDescription errorDescription) {
+    <T> Validation<T> notNull(ErrorDescription errorDescription) {
         return SimpleValidation.from(Objects::nonNull, () -> errorDescription);
     }
 
