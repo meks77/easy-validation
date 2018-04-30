@@ -10,25 +10,26 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.meks.validation.Account.AccountBuilder.anAccount;
-import static org.meks.validation.validations.date.DateValidations.isDateAfter;
-import static org.meks.validation.validations.list.ListValidations.containsOnly;
-import static org.meks.validation.validations.list.ListValidations.forType;
-import static org.meks.validation.validations.list.ListValidations.hasMaxSize;
-import static org.meks.validation.validations.list.ListValidations.hasMinSize;
-import static org.meks.validation.validations.list.ListValidations.onProperty;
-import static org.meks.validation.validations.string.StringValidations.containsNotOnly;
-import static org.meks.validation.validations.string.StringValidations.hasLength;
-import static org.meks.validation.validations.string.StringValidations.isDate;
-import static org.meks.validation.validations.string.StringValidations.isInArray;
-import static org.meks.validation.validations.string.StringValidations.isNotBlank;
-import static org.meks.validation.validations.string.StringValidations.isNumeric;
-import static org.meks.validation.validations.string.StringValidations.lengthIsBetween;
-import static org.meks.validation.validations.string.StringValidations.lengthIsMoreThan;
+import static org.meks.validation.validations.date.DateValidationsWithErrorCode.isDateAfter;
+import static org.meks.validation.validations.list.ListValidationsWithErrorCode.containsOnly;
+import static org.meks.validation.validations.list.ListValidationsWithErrorCode.forType;
+import static org.meks.validation.validations.list.ListValidationsWithErrorCode.hasMaxSize;
+import static org.meks.validation.validations.list.ListValidationsWithErrorCode.hasMinSize;
+import static org.meks.validation.validations.list.ListValidationsWithErrorCode.isNotEmpty;
+import static org.meks.validation.validations.list.ListValidationsWithErrorCode.onProperty;
+import static org.meks.validation.validations.string.StringValidationsWithErrorCode.containsNotOnly;
+import static org.meks.validation.validations.string.StringValidationsWithErrorCode.hasLength;
+import static org.meks.validation.validations.string.StringValidationsWithErrorCode.isDate;
+import static org.meks.validation.validations.string.StringValidationsWithErrorCode.isInArray;
+import static org.meks.validation.validations.string.StringValidationsWithErrorCode.isNotBlank;
+import static org.meks.validation.validations.string.StringValidationsWithErrorCode.isNumeric;
+import static org.meks.validation.validations.string.StringValidationsWithErrorCode.lengthIsBetween;
+import static org.meks.validation.validations.string.StringValidationsWithErrorCode.lengthIsMoreThan;
 
 /**
  * An example how a validator can be implemented for a complex object.
  */
-class PersonInfoValidator {
+class PersonInfoValidatorWithErrorCodes {
 
     private static final DateTimeFormatter DEFAULT_DATE_FORMAT = DateTimeFormatter.BASIC_ISO_DATE;
 
@@ -42,23 +43,23 @@ class PersonInfoValidator {
     private Validation<String> bankCodeValidation;
     private Validation<List<Bank>> bankCodeSlowValidation;
 
-    PersonInfoValidator() {
+    PersonInfoValidatorWithErrorCodes() {
         setupValidationConfig();
     }
 
     private void setupValidationConfig() {
-        nameValidation = isNotBlank().and(lengthIsMoreThan(1));
-        postalCodeQuickValidation = isNotBlank().and(lengthIsBetween(4, 8));
-        postalCodeSlowValidation = isInArray(this::getValidPostalCodes);
-        birthDayStringValidation = isNotBlank().and(isDate(DEFAULT_DATE_FORMAT));
-        birthDayDateValidation = isDateAfter(LocalDateTime.of(1940, 1, 1, 0, 0, 0));
-        accountNrStringValidation = isNotBlank().and(isNumeric()).and(containsNotOnly("0"));
-        accountSlowValidation = forType(Account.class, hasMinSize(1)).and(hasMaxSize(5))
-                .and(onProperty(Account::isActive, containsOnly(true)))
-                .and(onProperty(Account::isOnBadList, containsOnly(false)));
+        nameValidation = isNotBlank("C0001").and(lengthIsMoreThan(1, "C0002"));
+        postalCodeQuickValidation = isNotBlank("C0003").and(lengthIsBetween(4, 8, "C0004", "C0005"));
+        postalCodeSlowValidation = isInArray(this::getValidPostalCodes, "C0006");
+        birthDayStringValidation = isNotBlank("C0007").and(isDate(DEFAULT_DATE_FORMAT, "C0008"));
+        birthDayDateValidation = isDateAfter(LocalDateTime.of(1940, 1, 1, 0, 0, 0), "C0009");
+        accountNrStringValidation = isNotBlank("C0010").and(isNumeric("C0011")).and(containsNotOnly("0", "C0012"));
+        accountSlowValidation = forType(Account.class, hasMinSize(1, "C0013")).and(hasMaxSize(5, "C0014"))
+                .and(onProperty(Account::isActive, containsOnly(true, "C0015")))
+                .and(ListValidations.onProperty(Account::isOnBadList, containsOnly(false, "C0016")));
 
-        bankCodeValidation = isNotBlank().and(isNumeric()).and(hasLength(6));
-        bankCodeSlowValidation = onProperty(Bank::isActive, ListValidations.isNotEmpty().and(containsOnly(true)));
+        bankCodeValidation = isNotBlank("C0017").and(isNumeric("C0018")).and(hasLength(6, "C0019"));
+        bankCodeSlowValidation = onProperty(Bank::isActive, isNotEmpty("C0020").and(containsOnly(true, "C0021")));
     }
 
     private String[] getValidPostalCodes() {
