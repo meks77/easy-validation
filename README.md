@@ -32,11 +32,8 @@ Till now the api was to heavy change while I was fighting with problems with gen
 
 The next steps will be:
 * setting up SonarQube for code statistics
-* add the possibility to either use error codes or not
-* add the possibility to user custom error messages for the validations
-* maybe add an api to setup if the validation should't stop at the first error. That's very complex because of
-  * dependencies between validation steps(eg. if validation x fails validation y and z must not be executed)
-  * and I am sure because of the things I have currently not in my mind 
+* add the possibility to use custom error messages for the validations
+* add the possibility to add translated messages for other languages beside english
 * adding common validation steps
   * Date validations(Date, LocalDate, LocalDateTime,...)
   * more List validations(if something comes to my mind)
