@@ -1,27 +1,15 @@
 package org.meks.validation.validations.list;
 
-import org.meks.validation.ErrorMessageResolver;
 import org.meks.validation.Validation;
+import org.meks.validation.result.ErrorDescription;
 
 import java.util.List;
 import java.util.function.Function;
 
-import static java.lang.String.format;
-import static org.meks.validation.result.ErrorDescriptionBuilder.withMessage;
-
 /**
  * This class provides validations for lists. The methods always create new validation instances.
  */
-@SuppressWarnings("WeakerAccess")
-public class ListValidations {
-
-    private ListValidations() {
-
-    }
-
-    private static ErrorMessageResolver messageResolver = new ErrorMessageResolver();
-
-    private static CoreListValidations validations = new CoreListValidations();
+class CoreListValidations {
 
     /**
      * validates that a list contains only entries which match to the provided arg.
@@ -29,9 +17,9 @@ public class ListValidations {
      * @param <T>   the type of the list
      * @return  new instance of list validation
      */
-    public static <T> Validation<List<T>> containsOnly(T containedValue) {
-        return validations.containsOnly(containedValue,
-                withMessage(messageResolver.getListContainsOnlyMessage(containedValue)));
+    <T> Validation<List<T>> containsOnly(T containedValue, ErrorDescription errorDescription) {
+        return SimpleListValidation.forList(list -> list.stream().allMatch(t -> t.equals(containedValue)),
+                errorDescription);
     }
 
     /**
@@ -40,9 +28,9 @@ public class ListValidations {
      * @param <T>   the type of the list
      * @return  new instance of list validation
      */
-    public static <T> Validation<List<T>> contains(T containedValue) {
-        return validations.contains(containedValue,
-                withMessage(messageResolver.getListContainsMessage(containedValue)));
+    <T> Validation<List<T>> contains(T containedValue, ErrorDescription errorDescription) {
+        return SimpleListValidation.forList(list -> list.stream().anyMatch(t -> t.equals(containedValue)),
+                errorDescription);
     }
 
     /**
@@ -51,9 +39,9 @@ public class ListValidations {
      * @param <T>   the type of the list
      * @return  new instance of list validation
      */
-    public static <T> Validation<List<T>> doesNotContain(T excludedValue) {
-        return validations.doesNotContain(excludedValue,
-                withMessage(messageResolver.getListDoesNotContainMessage(excludedValue)));
+    <T> Validation<List<T>> doesNotContain(T excludedValue, ErrorDescription errorDescription) {
+        return SimpleListValidation.forList(list -> list.stream().noneMatch(t -> t.equals(excludedValue)),
+                errorDescription);
     }
 
     /**
@@ -61,8 +49,8 @@ public class ListValidations {
      * @param <T>   the type of the list
      * @return  new instance of list validation
      */
-    public static <T> Validation<List<T>> isNotEmpty() {
-        return validations.isNotEmpty(withMessage(messageResolver.getListIsNotEmptyMessage()));
+    <T> Validation<List<T>> isNotEmpty(ErrorDescription errorDescription) {
+        return SimpleListValidation.forList(list -> list != null && !list.isEmpty(), errorDescription);
     }
 
     /**
@@ -70,8 +58,8 @@ public class ListValidations {
      * @param <T>   the type of the list
      * @return  new instance of list validation
      */
-    public static <T> Validation<List<T>> isEmpty() {
-        return validations.isEmpty(withMessage(messageResolver.getListIsEmptyMessage()));
+    <T> Validation<List<T>> isEmpty(ErrorDescription errorDescription) {
+        return SimpleListValidation.forList(list -> list != null && list.isEmpty(), errorDescription);
     }
 
     /**
@@ -80,8 +68,8 @@ public class ListValidations {
      * @param <T>   type of the list
      * @return  new instance of list validation
      */
-    public static <T> Validation<List<T>> hasSize(int size) {
-        return validations.hasSize(size, withMessage(messageResolver.getListHasSizeMessage(size)));
+    <T> Validation<List<T>> hasSize(int size, ErrorDescription errorDescription) {
+        return SimpleListValidation.forList(list -> list != null && list.size() == size, errorDescription);
     }
 
     /**
@@ -90,8 +78,8 @@ public class ListValidations {
      * @param <T>   type of the list
      * @return  new instance of list validation
      */
-    public static <T> Validation<List<T>> hasMinSize(int size) {
-        return validations.hasMinSize(size, withMessage(messageResolver.getListHasMinSizeMessage(size)));
+    <T> Validation<List<T>> hasMinSize(int size, ErrorDescription errorDescription) {
+        return SimpleListValidation.forList(list -> list != null && list.size() >= size, errorDescription);
     }
 
     /**
@@ -100,8 +88,8 @@ public class ListValidations {
      * @param <T>   type of the list
      * @return  new instance of list validation
      */
-    public static <T> Validation<List<T>> hasMaxSize(int size) {
-        return validations.hasMaxSize(size, withMessage(messageResolver.getListHasMaxSizeMessage(size)));
+    <T> Validation<List<T>> hasMaxSize(int size, ErrorDescription errorDescription) {
+        return SimpleListValidation.forList(list -> list != null && list.size() <= size, errorDescription);
     }
 
     /**
@@ -112,21 +100,22 @@ public class ListValidations {
      * @param <E>   type of the validated property of the list entry
      * @return  new instance of a list validation
      */
-    public static <T, E> Validation<List<T>> onProperty(Function<T, E> function, Validation<List<E>> validation) {
-        return validations.onProperty(function, validation);
+    <T, E> Validation<List<T>> onProperty(Function<T, E> function, Validation<List<E>> validation) {
+        return ListPropertyValidationImpl.onProperty(function, validation);
     }
 
     /**
      * sadly this method is needed if you want to start with general validations on lists, like the notEmpty, and
-     * afterwards the entries should be validated by a property. If you would just start with {@link #isNotEmpty()},
+     * afterwards the entries should be validated by a property. If you would just start with {@link #isNotEmpty(ErrorDescription)} ()},
      * a Validation for {@link List} of type {@link Object} is returned, instead of the type of the list entries.
      * @param listType  the generic typ of the list, which will be validated
      * @param validation    the validation which should be invoked for the validated list.
      * @param <T>   the type of the validated list
      * @return  new instance of a list validation
      */
-    public static <T> Validation<List<T>> forType(Class<T> listType,
+    <T> Validation<List<T>> forType(@SuppressWarnings("unused") Class<T> listType,
                                                   Validation<List<T>> validation) {
-        return validations.forType(listType, validation);
+        // the arg listType is necessary that the generic type is returned for the list. otherwise it would be Object
+        return validation;
     }
 }

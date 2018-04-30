@@ -1,28 +1,20 @@
 package org.meks.validation.validations.list;
 
-import org.fest.assertions.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.meks.validation.Validation;
-import org.meks.validation.result.ValidationResult;
+import org.meks.validation.validations.AbstractCodeValidationsTest;
 import org.meks.validation.validations.AbstractValidationsTest;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import java.awt.Point;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-import static java.util.Arrays.asList;
-import static java.util.Collections.singletonList;
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.meks.validation.TestUtils.assertErrorResult;
-import static org.meks.validation.TestUtils.assertValidResult;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 
-public class ListValidationsTest extends AbstractValidationsTest<List<String>> {
+public class ListValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<List<String>> {
 
     private static final String TESTED_VALUE = "testedValue";
     private static final String ERROR_CONTAINS_ONLY = "list must contain only " + TESTED_VALUE;
@@ -34,7 +26,7 @@ public class ListValidationsTest extends AbstractValidationsTest<List<String>> {
 
     @Override
     protected Class<?> getTestedClass() {
-        return ListValidations.class;
+        return ListValidationsWithErrorCode.class;
     }
 
     @Override
@@ -49,42 +41,42 @@ public class ListValidationsTest extends AbstractValidationsTest<List<String>> {
 
     @Test
     public void testContainsOnly() {
-        testHelper.testContainsOnly(ListValidations::containsOnly);
+        testHelper.testContainsOnly(s -> ListValidationsWithErrorCode.containsOnly(s, expectedCode));
     }
 
     @Test
     public void testContains() {
-        testHelper.testContains(ListValidations::contains);
+        testHelper.testContains(s -> ListValidationsWithErrorCode.contains(s, expectedCode));
     }
 
     @Test
     public void testDoesNotContain() {
-        testHelper.testDoesNotContain(ListValidations::doesNotContain);
+        testHelper.testDoesNotContain(s -> ListValidationsWithErrorCode.doesNotContain(s, expectedCode));
     }
 
     @Test
     public void testIsNotEmpty() {
-        testHelper.testIsNotEmpty(ListValidations::isNotEmpty);
+        testHelper.testIsNotEmpty(() -> ListValidationsWithErrorCode.isNotEmpty(expectedCode));
     }
 
     @Test
     public void testIsEmpty() {
-        testHelper.testIsEmpty(ListValidations::isEmpty);
+        testHelper.testIsEmpty(() -> ListValidationsWithErrorCode.isEmpty(expectedCode));
     }
 
     @Test
     public void testHasSize() {
-        testHelper.testHasSize(ListValidations::hasSize);
+        testHelper.testHasSize(size -> ListValidationsWithErrorCode.hasSize(size, expectedCode));
     }
 
     @Test
     public void testHasMinSize() {
-        testHelper.testHasMinSize(ListValidations::hasMinSize);
+        testHelper.testHasMinSize(size -> ListValidationsWithErrorCode.hasMinSize(size, expectedCode));
     }
 
     @Test
     public void testHasMaxSize() {
-        testHelper.testHasMaxSize(ListValidations::hasMaxSize);
+        testHelper.testHasMaxSize(size -> ListValidationsWithErrorCode.hasMaxSize(size, expectedCode));
     }
 
     @Test
@@ -92,13 +84,13 @@ public class ListValidationsTest extends AbstractValidationsTest<List<String>> {
         @SuppressWarnings("unchecked")
         Function<String, String> mapperMock = Mockito.mock(Function.class);
         doReturn(getExpectedValidation()).when(coreValidations).onProperty(mapperMock, getExpectedValidation());
-        Validation<List<String>> validation = ListValidations.onProperty(mapperMock, getExpectedValidation());
+        Validation<List<String>> validation = ListValidationsWithErrorCode.onProperty(mapperMock, getExpectedValidation());
         assertThat(validation).isSameAs(getExpectedValidation());
     }
 
     @Test
     public void givenValidationWhenForTypeThenSameValidationIsReturned() {
         doReturn(getExpectedValidation()).when(coreValidations).forType(String.class, getExpectedValidation());
-        assertThat(ListValidations.forType(String.class, getExpectedValidation())).isSameAs(getExpectedValidation());
+        assertThat(ListValidationsWithErrorCode.forType(String.class, getExpectedValidation())).isSameAs(getExpectedValidation());
     }
 }
