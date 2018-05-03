@@ -15,9 +15,6 @@ import static org.mockito.Mockito.doReturn;
 
 public class ListValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<List<String>> {
 
-    private static final String TESTED_VALUE = "testedValue";
-    private static final String ERROR_CONTAINS_ONLY = "list must contain only " + TESTED_VALUE;
-
     @Mock
     private CoreListValidations coreValidations;
 
@@ -40,42 +37,42 @@ public class ListValidationsWithErrorCodeTest extends AbstractCodeValidationsTes
 
     @Test
     public void testContainsOnly() {
-        testHelper.testContainsOnly(s -> ListValidationsWithErrorCode.containsOnly(s, expectedCode));
+        testHelper.testContainsOnly(s -> ListValidationsWithErrorCode.containsOnly(s, EXPECTED_CODE));
     }
 
     @Test
     public void testContains() {
-        testHelper.testContains(s -> ListValidationsWithErrorCode.contains(s, expectedCode));
+        testHelper.testContains(s -> ListValidationsWithErrorCode.contains(s, EXPECTED_CODE));
     }
 
     @Test
     public void testDoesNotContain() {
-        testHelper.testDoesNotContain(s -> ListValidationsWithErrorCode.doesNotContain(s, expectedCode));
+        testHelper.testDoesNotContain(s -> ListValidationsWithErrorCode.doesNotContain(s, EXPECTED_CODE));
     }
 
     @Test
     public void testIsNotEmpty() {
-        testHelper.testIsNotEmpty(() -> ListValidationsWithErrorCode.isNotEmpty(expectedCode));
+        testHelper.testIsNotEmpty(() -> ListValidationsWithErrorCode.isNotEmpty(EXPECTED_CODE));
     }
 
     @Test
     public void testIsEmpty() {
-        testHelper.testIsEmpty(() -> ListValidationsWithErrorCode.isEmpty(expectedCode));
+        testHelper.testIsEmpty(() -> ListValidationsWithErrorCode.isEmpty(EXPECTED_CODE));
     }
 
     @Test
     public void testHasSize() {
-        testHelper.testHasSize(size -> ListValidationsWithErrorCode.hasSize(size, expectedCode));
+        testHelper.testHasSize(size -> ListValidationsWithErrorCode.hasSize(size, EXPECTED_CODE));
     }
 
     @Test
     public void testHasMinSize() {
-        testHelper.testHasMinSize(size -> ListValidationsWithErrorCode.hasMinSize(size, expectedCode));
+        testHelper.testHasMinSize(size -> ListValidationsWithErrorCode.hasMinSize(size, EXPECTED_CODE));
     }
 
     @Test
     public void testHasMaxSize() {
-        testHelper.testHasMaxSize(size -> ListValidationsWithErrorCode.hasMaxSize(size, expectedCode));
+        testHelper.testHasMaxSize(size -> ListValidationsWithErrorCode.hasMaxSize(size, EXPECTED_CODE));
     }
 
     @Test
