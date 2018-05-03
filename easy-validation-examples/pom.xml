@@ -12,11 +12,6 @@
 
     <artifactId>easy-validation-examples</artifactId>
 
-    <properties>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.source>1.8</maven.compiler.source>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.meks.validation</groupId>
@@ -25,7 +20,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
