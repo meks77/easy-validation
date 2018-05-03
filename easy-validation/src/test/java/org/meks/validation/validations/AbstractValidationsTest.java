@@ -1,6 +1,5 @@
 package org.meks.validation.validations;
 
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.meks.validation.ErrorMessageResolver;
@@ -9,14 +8,15 @@ import org.meks.validation.result.ErrorDescription;
 import org.meks.validation.result.ErrorDescriptionWithMessage;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.reflect.Whitebox;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(PowerMockRunner.class)
 public abstract class AbstractValidationsTest<T> {
 
-    final String expectedMessage = "expected message on error";
+    private static final String EXPECTED_MESSAGE = "expected message on error";
 
     @Mock
     private ErrorMessageResolver messageResolver;
@@ -31,7 +31,7 @@ public abstract class AbstractValidationsTest<T> {
     }
 
     public String getExpectedMessage() {
-        return expectedMessage;
+        return EXPECTED_MESSAGE;
     }
 
     public ErrorMessageResolver getMessageResolver() {
@@ -43,9 +43,9 @@ public abstract class AbstractValidationsTest<T> {
     }
 
     @Before
-    public void setStaticFieldMocks() throws IllegalAccessException {
-        FieldUtils.writeStaticField(getTestedClass(), "messageResolver", messageResolver, true);
-        FieldUtils.writeStaticField(getTestedClass(), "validations", getCoreValidations(), true);
+    public void setStaticFieldMocks() {
+        Whitebox.setInternalState(getTestedClass(), ErrorMessageResolver.class, messageResolver);
+        Whitebox.setInternalState(getTestedClass(), "validations", getCoreValidations());
     }
 
     protected abstract Class<?> getTestedClass();
@@ -70,6 +70,6 @@ public abstract class AbstractValidationsTest<T> {
 
     public void assertErrorDesc(ErrorDescription errorDescription) {
         assertThat(errorDescription).isInstanceOf(ErrorDescriptionWithMessage.class);
-        assertThat(errorDescription.getErrorMessage()).isSameAs(expectedMessage);
+        assertThat(errorDescription.getErrorMessage()).isSameAs(EXPECTED_MESSAGE);
     }
 }

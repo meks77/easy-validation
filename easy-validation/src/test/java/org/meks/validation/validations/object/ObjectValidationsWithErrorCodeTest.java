@@ -29,6 +29,6 @@ public class ObjectValidationsWithErrorCodeTest extends AbstractCodeValidationsT
 
     @Test
     public void testNotNull() {
-        testHelper.testNotNull(() -> ObjectValidationsWithErrorCode.notNull(expectedCode));
+        testHelper.testNotNull(() -> ObjectValidationsWithErrorCode.notNull(EXPECTED_CODE));
     }
 }

@@ -31,7 +31,7 @@ public class DateValidationsWithErrorCodeTest extends AbstractCodeValidationsTes
 
     @Test
     public void testIsDateAfter() {
-        testHelper.testIsDateAfter(dateAfter ->  DateValidationsWithErrorCode.isDateAfter(dateAfter, expectedCode));
+        testHelper.testIsDateAfter(dateAfter ->  DateValidationsWithErrorCode.isDateAfter(dateAfter, EXPECTED_CODE));
     }
 
 }
