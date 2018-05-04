@@ -2,8 +2,28 @@ package at.meks.validation.result;
 
 import java.io.Serializable;
 
-public interface ErrorDescription extends Serializable {
+public class ErrorDescription implements Serializable {
 
-    String getErrorMessage();
+    private String message;
+    private String errorCode;
 
+    ErrorDescription() {
+
+    }
+
+    public String getErrorMessage() {
+        return message;
+    }
+
+    void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
+    }
 }

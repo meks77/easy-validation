@@ -1,6 +1,6 @@
 package at.meks.validation.validations;
 
-import at.meks.validation.result.ErrorDescriptionWithCode;
+import at.meks.validation.result.ErrorDescription;
 import at.meks.validation.result.ValidationResult;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -17,10 +17,11 @@ public abstract class AbstractCoreValidationsTest {
     private final String expectedCode = "myExpectedCode";
 
     @Mock
-    protected ErrorDescriptionWithCode errorDescription;
+    protected ErrorDescription errorDescription;
 
     @Before
     public void mockErrorDescription() {
+        //noinspection ResultOfMethodCallIgnored
         doReturn(exptectedMessage).when(errorDescription).getErrorMessage();
         //noinspection ResultOfMethodCallIgnored
         doReturn(expectedCode).when(errorDescription).getErrorCode();

@@ -13,10 +13,7 @@ public class ValidationResult {
     }
 
     public String getErrorCode() {
-        if (errorDescription instanceof ErrorDescriptionWithCode) {
-            return ((ErrorDescriptionWithCode) errorDescription).getErrorCode();
-        }
-        return null;
+        return errorDescription.getErrorCode();
     }
 
     public String getErrorMessage() {

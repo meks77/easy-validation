@@ -11,33 +11,43 @@ import static org.mockito.Mockito.verify;
 
 public class ValidationResultTest {
 
+    private static final String EXPECTED_MESSAGE = "myMessage";
+
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
     @Test
-    public void givenErrorDescriptionWithErrorCodeWhenGetErrorCodeReturnCodeOfDesc() {
-        ErrorDescriptionWithCode errorDescription = mock(ErrorDescriptionWithCode.class);
-        String expectedErrorCode = "myCode";
-        //noinspection ResultOfMethodCallIgnored
-        doReturn(expectedErrorCode).when(errorDescription).getErrorCode();
-        assertThat(ValidationResult.fail(errorDescription).getErrorCode()).isEqualTo(expectedErrorCode);
+    public void givenErrorDescriptionWhenGetErrorCodeReturnsCodeFromDescription() {
+        String expectedCode = "myCode";
+        ErrorDescription errorDescription = mockDescription(expectedCode);
+        assertThat(ValidationResult.fail(errorDescription).getErrorCode()).isSameAs(expectedCode);
         //noinspection ResultOfMethodCallIgnored
         verify(errorDescription).getErrorCode();
     }
 
     @Test
     public void givenErrorDescriptionWithMessageOnlyWhenGetErrorCodeReturnNull() {
-        ErrorDescriptionWithMessage errorDescription = mock(ErrorDescriptionWithMessage.class);
+        ErrorDescription errorDescription = mockDescription(null);
         assertThat(ValidationResult.fail(errorDescription).getErrorCode()).isNull();
+        //noinspection ResultOfMethodCallIgnored
+        verify(errorDescription).getErrorCode();
     }
 
     @Test
     public void givenErrorDescriptionWhenGetErrorMessageReturnsMessageFromDescription() {
-        ErrorDescription errorDescription = mock(ErrorDescription.class);
-        String expectedMessage = "myMessage";
-        doReturn(expectedMessage).when(errorDescription).getErrorMessage();
-        assertThat(ValidationResult.fail(errorDescription).getErrorMessage()).isEqualTo(expectedMessage);
+        ErrorDescription errorDescription = mockDescription(null);
+        assertThat(ValidationResult.fail(errorDescription).getErrorMessage()).isEqualTo(EXPECTED_MESSAGE);
+        //noinspection ResultOfMethodCallIgnored
         verify(errorDescription).getErrorMessage();
+    }
+
+    private ErrorDescription mockDescription(String code) {
+        ErrorDescription errorDescription = mock(ErrorDescription.class);
+        //noinspection ResultOfMethodCallIgnored
+        doReturn(EXPECTED_MESSAGE).when(errorDescription).getErrorMessage();
+        //noinspection ResultOfMethodCallIgnored
+        doReturn(code).when(errorDescription).getErrorCode();
+        return errorDescription;
     }
 
     @Test
@@ -70,6 +80,7 @@ public class ValidationResultTest {
         expectedException.expect(ValidationException.class);
         String errorMessage = "my expected message";
         ErrorDescription errorDescription = mock(ErrorDescription.class);
+        //noinspection ResultOfMethodCallIgnored
         doReturn(errorMessage).when(errorDescription).getErrorMessage();
         expectedException.expectMessage(String.format("%s: %s", "valueName", errorMessage));
         ValidationResult.fail(errorDescription).throwIfInvalid("valueName");

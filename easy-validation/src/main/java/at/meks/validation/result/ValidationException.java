@@ -12,6 +12,15 @@ public class ValidationException extends Exception {
 
     @Override
     public String getMessage() {
-        return String.format("%s: %s", valueDescription, errorDescription.getErrorMessage());
+        if (getErrorCode() == null) {
+            return String.format("%s: %s", valueDescription, errorDescription.getErrorMessage());
+        } else {
+            return String.format("%s: %s - %s", valueDescription, getErrorCode(), errorDescription.getErrorMessage());
+        }
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    public String getErrorCode() {
+        return errorDescription.getErrorCode();
     }
 }

@@ -3,7 +3,6 @@ package at.meks.validation.validations;
 import at.meks.validation.ErrorMessageResolver;
 import at.meks.validation.Validation;
 import at.meks.validation.result.ErrorDescription;
-import at.meks.validation.result.ErrorDescriptionWithMessage;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -69,7 +68,6 @@ public abstract class AbstractValidationsTest<T> {
     }
 
     public void assertErrorDesc(ErrorDescription errorDescription) {
-        assertThat(errorDescription).isInstanceOf(ErrorDescriptionWithMessage.class);
         assertThat(errorDescription.getErrorMessage()).isSameAs(EXPECTED_MESSAGE);
     }
 }
