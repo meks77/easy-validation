@@ -1,5 +1,9 @@
 package at.meks.validation.result;
 
+/**
+ * This class is used as exception if a validatino fails. It contains a description what was validated and the
+ * {@link ErrorDescription}.
+ */
 public class ValidationException extends Exception {
 
     private final String valueDescription;
@@ -19,6 +23,9 @@ public class ValidationException extends Exception {
         }
     }
 
+    /**
+     * @return error code which was set when the validaton was created
+     */
     @SuppressWarnings("WeakerAccess")
     public String getErrorCode() {
         return errorDescription.getErrorCode();

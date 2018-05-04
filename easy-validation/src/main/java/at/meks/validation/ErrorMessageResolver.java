@@ -6,6 +6,14 @@ import java.util.Collection;
 
 import static java.lang.String.format;
 
+/**
+ * This class provides all messages for validation errors. It was just centralized to be able to extend the message
+ * creation later.
+ *
+ * The ideas are:
+ * * extend by resource bundle to provide more languages
+ * * extend by factory to be able to provide another message resolver
+ */
 public class ErrorMessageResolver {
 
     private static final String MUSTN_T_BE_BLANK = "mustn't be blank";

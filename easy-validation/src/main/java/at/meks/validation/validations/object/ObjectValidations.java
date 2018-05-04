@@ -13,6 +13,11 @@ public class ObjectValidations {
     private ObjectValidations() {
     }
 
+    /**
+     * returns a validation which validates that a value is not null.
+     * @param <T>   type of the tested value
+     * @return  new instance of a validation
+     */
     public static <T> Validation<T> notNull() {
         return validations.notNull(ErrorDescriptionBuilder.withMessage(messageResolver.getNotNullMessage()));
     }
