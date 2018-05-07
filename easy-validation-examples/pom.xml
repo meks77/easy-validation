@@ -35,6 +35,12 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-assert-core</artifactId>
+            <scope>test</scope>
+            <version>2.0M10</version>
+        </dependency>
     </dependencies>
 
 </project>

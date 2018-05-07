@@ -1,4 +1,4 @@
-package at.meks.validation;
+package at.meks.validation.complexobjectvalidation.model;
 
 
 public class DeserializedPersonInfo {
@@ -12,7 +12,7 @@ public class DeserializedPersonInfo {
     private String country;
     private String personalNumber;
 
-    String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
@@ -20,7 +20,7 @@ public class DeserializedPersonInfo {
         this.firstName = firstName;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
@@ -28,7 +28,7 @@ public class DeserializedPersonInfo {
         this.name = name;
     }
 
-    String getPostalCode() {
+    public String getPostalCode() {
         return postalCode;
     }
 
@@ -36,7 +36,7 @@ public class DeserializedPersonInfo {
         this.postalCode = postalCode;
     }
 
-    String getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
@@ -44,7 +44,7 @@ public class DeserializedPersonInfo {
         this.birthDate = birthDate;
     }
 
-    String getAccount() {
+    public String getAccount() {
         return account;
     }
 
@@ -52,7 +52,7 @@ public class DeserializedPersonInfo {
         this.account = account;
     }
 
-    String getBankCode() {
+    public String getBankCode() {
         return bankCode;
     }
 

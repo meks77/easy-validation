@@ -1,4 +1,4 @@
-package at.meks.validation;
+package at.meks.validation.complexobjectvalidation.model;
 
 public final class DeserializedPersonInfoBuilder {
     private String firstName;

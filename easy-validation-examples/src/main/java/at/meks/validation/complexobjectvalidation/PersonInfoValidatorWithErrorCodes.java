@@ -1,5 +1,9 @@
-package at.meks.validation;
+package at.meks.validation.complexobjectvalidation;
 
+import at.meks.validation.Validation;
+import at.meks.validation.complexobjectvalidation.model.Account;
+import at.meks.validation.complexobjectvalidation.model.Bank;
+import at.meks.validation.complexobjectvalidation.model.DeserializedPersonInfo;
 import at.meks.validation.result.ValidationException;
 import at.meks.validation.validations.date.DateValidationsWithErrorCode;
 import at.meks.validation.validations.list.ListValidations;

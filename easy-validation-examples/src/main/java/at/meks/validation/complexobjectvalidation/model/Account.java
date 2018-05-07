@@ -1,16 +1,16 @@
-package at.meks.validation;
+package at.meks.validation.complexobjectvalidation.model;
 
-class Account {
+public class Account {
 
     private boolean active;
 
     private boolean onBadList;
 
-    boolean isActive() {
+    public boolean isActive() {
         return active;
     }
 
-    boolean isOnBadList() {
+    public boolean isOnBadList() {
         return onBadList;
     }
 
@@ -21,11 +21,11 @@ class Account {
         private AccountBuilder() {
         }
 
-        static AccountBuilder anAccount() {
+        public static AccountBuilder anAccount() {
             return new AccountBuilder();
         }
 
-        AccountBuilder withActive(boolean active) {
+        public AccountBuilder withActive(boolean active) {
             this.active = active;
             return this;
         }
@@ -35,7 +35,7 @@ class Account {
             return this;
         }
 
-        Account build() {
+        public Account build() {
             Account account = new Account();
             account.active = this.active;
             account.onBadList = this.onBadList;

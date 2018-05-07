@@ -41,6 +41,82 @@ The next steps will be:
   
 The first stable release will be 1.0.0.
 
-## User Guide
-Todo! 
-Currently there are only some code examples which can be found in the module easy-validation-examples.
+## Quickstart
+### Maven Dependency
+````
+<dependency>
+    <groupId>at.meks</groupId>
+    <artifactId>easy-validation</artifactId>
+    <version>x.x.x</version>
+</dependency>
+````
+
+### Simple Examples
+Here are just some simple Examples listed. You will also find them in the code of the example module.
+
+#### Validation getting a result
+````
+ValidationResult result = ObjectValidations.notNull().test(userInput);
+if (!result.isValid()) {
+    System.out.println(result.getErrorMessage());
+}
+````
+
+#### Validation throwing an error
+This is usefull to stop further validation and action if an validation error occurs.
+````
+isNotBlank().test(file.getName()).throwIfInvalid("fileName");
+isGreaterThan(10L).test(file.length()).throwIfInvalid("fileSize");
+````
+#### combine more validations
+````
+ObjectValidations.<String>notNull().and(isNotBlank()).and(contains("e")).and(isInList(this::getValidCities)).test(cityName);
+````
+#### String validation for a number
+````
+StringValidations.isNumeric().test(ageString).throwIfInvalid("age"); 
+````
+#### Validation of a complex ojbect
+First here you can see the setup of the configuration. That's usefull if 
+* you plan to validate more objects of the same type with the same rules
+* you want to separate the code a little bit to get it more readable
+
+Setup of the validation rules:
+````
+private void setupValidationConfig() {
+    nameValidation = isNotBlank().and(lengthIsMoreThan(1));
+    postalCodeQuickValidation = isNotBlank().and(lengthIsBetween(4, 8));
+    postalCodeSlowValidation = isInArray(this::getValidPostalCodes);
+    birthDayStringValidation = isNotBlank().and(isDate(DEFAULT_DATE_FORMAT));
+    birthDayDateValidation = isDateAfter(LocalDateTime.of(1940, 1, 1, 0, 0, 0));
+    accountNrStringValidation = isNotBlank().and(isNumeric()).and(containsNotOnly("0"));
+    accountSlowValidation = forType(Account.class, hasMinSize(1)).and(hasMaxSize(5))
+            .and(onProperty(Account::isActive, containsOnly(true)))
+            .and(onProperty(Account::isOnBadList, containsOnly(false)));
+
+    bankCodeValidation = isNotBlank().and(isNumeric()).and(hasLength(6));
+    bankCodeSlowValidation = onProperty(Bank::isActive, ListValidations.isNotEmpty().and(containsOnly(true)));
+}
+````
+execution of the validation rules:
+````
+void validatePerson(DeserializedPersonInfo personInfo) throws ValidationException {
+        nameValidation.test(personInfo.getFirstName()).throwIfInvalid("firstName");
+        nameValidation.test(personInfo.getName()).throwIfInvalid("name");
+        postalCodeQuickValidation.test(personInfo.getPostalCode()).throwIfInvalid("postalCode");
+        birthDayStringValidation.test(personInfo.getBirthDate()).throwIfInvalid("birthDay");
+        LocalDateTime birthDayDate = LocalDateTime.from(DEFAULT_DATE_FORMAT.parse(personInfo.getBirthDate()));
+        birthDayDateValidation.test(birthDayDate).throwIfInvalid("birthDay");
+        accountNrStringValidation.test(personInfo.getAccount()).throwIfInvalid("account");
+        bankCodeValidation.test(personInfo.getBankCode());
+
+        postalCodeSlowValidation.test(personInfo.getPostalCode()).throwIfInvalid("postalCode");
+        accountSlowValidation.test(getAccountsOfPersonOfSlowService()).throwIfInvalid("account");
+        bankCodeSlowValidation.test(getBankCodeOfPersonOfSlowService()).throwIfInvalid("bankCode");
+    }
+```` 
+## Releases
+### 1.0.0-M1
+First release. The API still can change massivly if it comes to the mind of the users that it is easy to use. Furthermore more validations will be added if necessary for the first release.
+
+

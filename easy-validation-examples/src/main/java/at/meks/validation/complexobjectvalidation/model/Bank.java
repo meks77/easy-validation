@@ -1,6 +1,6 @@
-package at.meks.validation;
+package at.meks.validation.complexobjectvalidation.model;
 
-class Bank {
+public class Bank {
 
     private String code;
 
@@ -10,7 +10,7 @@ class Bank {
         return code;
     }
 
-    boolean isActive() {
+    public boolean isActive() {
         return active;
     }
 

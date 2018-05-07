@@ -1,5 +1,9 @@
-package at.meks.validation;
+package at.meks.validation.complexobjectvalidation;
 
+import at.meks.validation.Validation;
+import at.meks.validation.complexobjectvalidation.model.Account;
+import at.meks.validation.complexobjectvalidation.model.Bank;
+import at.meks.validation.complexobjectvalidation.model.DeserializedPersonInfo;
 import at.meks.validation.result.ValidationException;
 import at.meks.validation.validations.list.ListValidations;
 
@@ -9,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static at.meks.validation.Account.AccountBuilder.anAccount;
+import static at.meks.validation.complexobjectvalidation.model.Account.AccountBuilder.anAccount;
 import static at.meks.validation.validations.date.DateValidations.isDateAfter;
 import static at.meks.validation.validations.list.ListValidations.containsOnly;
 import static at.meks.validation.validations.list.ListValidations.forType;
