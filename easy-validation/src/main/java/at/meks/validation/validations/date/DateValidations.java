@@ -2,9 +2,10 @@ package at.meks.validation.validations.date;
 
 import at.meks.validation.ErrorMessageResolver;
 import at.meks.validation.Validation;
-import at.meks.validation.result.ErrorDescriptionBuilder;
 
 import java.time.LocalDateTime;
+
+import static at.meks.validation.result.ErrorDescriptionBuilder.withMessage;
 
 /**
  * This class contains validations for dates.
@@ -24,7 +25,7 @@ public class DateValidations {
      * @return a new validation instance
      */
     public static Validation<LocalDateTime> isDateAfter(LocalDateTime minDate) {
-        return validations.isDateAfter(minDate, ErrorDescriptionBuilder.withMessage(messageResolver.getIsDateAfterMessage(minDate)));
+        return validations.isDateAfter(minDate, withMessage(messageResolver.getIsDateAfterMessage(minDate)));
     }
 
 }

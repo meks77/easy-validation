@@ -109,4 +109,34 @@ public class ErrorMessageResolverTest {
     public void getListHasMaxSizeMessage() {
         assertThat(resolver.getListHasMaxSizeMessage(6)).isEqualTo("size of list mustn't be greater than 6");
     }
+
+    @Test
+    public void getIsNumberLessThanMessage() {
+        assertThat(resolver.getIsNumberLessThanMessage(6)).isEqualTo("value must be less than 6");
+    }
+
+    @Test
+    public void getIsNumberGreaterThanMessage() {
+        assertThat(resolver.getIsNumberGreaterThanMessage(6)).isEqualTo("value must be greater than 6");
+    }
+
+    @Test
+    public void getNumberIsBetweenMessage() {
+        assertThat(resolver.getNumberIsBetweenMessage(4, 6)).isEqualTo("value must be between 4 and 6");
+    }
+
+    @Test
+    public void getIsIntMessage() {
+        assertThat(resolver.getIsIntMessage()).isEqualTo("value must be an integer");
+    }
+
+    @Test
+    public void getIsByteMessage() {
+        assertThat(resolver.getIsByteMessage()).isEqualTo("value must be a byte");
+    }
+
+    @Test
+    public void getIsShortMessage() {
+        assertThat(resolver.getIsShortMessage()).isEqualTo("value must be a short");
+    }
 }

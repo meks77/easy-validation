@@ -21,6 +21,9 @@ public class ErrorMessageResolver {
     private static final String MUST_NOT_BE_NULL = "must not be null";
     private static final String LIST_MUSTN_T_BE_EMPTY = "list mustn't be empty";
     private static final String LIST_MUST_BE_EMPTY = "list must be empty";
+    private static final String VALUE_MUST_BE_AN_INTEGER = "value must be an integer";
+    private static final String VALUE_MUST_BE_A_BYTE = "value must be a byte";
+    private static final String VALUE_MUST_BE_A_SHORT = "value must be a short";
 
     public String getLengthIsMoreThanMessage(int size) {
         return format("must have more than %s chars", size);
@@ -96,5 +99,29 @@ public class ErrorMessageResolver {
 
     public String getListHasMaxSizeMessage(int size) {
         return format("size of list mustn't be greater than %s", size);
+    }
+
+    public String getIsNumberLessThanMessage(Number compareTo) {
+        return format("value must be less than %s", compareTo);
+    }
+
+    public String getIsNumberGreaterThanMessage(Number compareTo) {
+        return format("value must be greater than %s", compareTo);
+    }
+
+    public String getNumberIsBetweenMessage(Number min, Number max) {
+        return format("value must be between %s and %s", min, max);
+    }
+
+    public String getIsIntMessage() {
+        return VALUE_MUST_BE_AN_INTEGER;
+    }
+
+    public String getIsByteMessage() {
+        return VALUE_MUST_BE_A_BYTE;
+    }
+
+    public String getIsShortMessage() {
+        return VALUE_MUST_BE_A_SHORT;
     }
 }
