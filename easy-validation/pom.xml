@@ -4,9 +4,13 @@
 
     <groupId>at.meks</groupId>
     <artifactId>easy-validation</artifactId>
-    <version>1.0.0-M1</version>
+    <version>1.0.0-M1.1-SNAPSHOT</version>
 
     <packaging>jar</packaging>
+
+    <name>Easy Validation</name>
+    <description>This project contains the api for validation</description>
+    <url>https://github.com/meks77/easy-validation</url>
 
     <licenses>
         <license>
@@ -27,12 +31,19 @@
         </repository>
     </distributionManagement>
 
+    <developers>
+        <developer>
+            <name>Markus Hager</name>
+            <url>https://github.com/meks77</url>
+        </developer>
+    </developers>
+
     <scm>
-        <connection>scm:git:git://github.com/meks77/easy-validation.git</connection>
-        <developerConnection>scm:git:ssh://github.com:meks77/easy-validation.git</developerConnection>
-        <url>http://github.com/meks77/easy-validation</url>
-      <tag>easy-validation-parent-1.0.0-M1</tag>
-  </scm>
+        <connection>scm:git:https://github.com/meks77/easy-validation.git</connection>
+        <developerConnection>scm:git:https://github.com/meks77/easy-validation.git</developerConnection>
+        <url>https://github.com/meks77/easy-validation</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
