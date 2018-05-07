@@ -58,7 +58,7 @@ public class ValidationResult {
     /**
      * This method is very handy if you'd like to catch and violation without the need of using if statements.
      * Example:
-     * old school</br>
+     * old school<br>
      * <code>
      * ValidationResult result = validation.test(testedValue);
      * if (!result.isValid()) {
