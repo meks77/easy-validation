@@ -25,6 +25,7 @@ public class ListValidationsWithErrorCode {
     /**
      * validates that a list contains only entries which match to the provided arg.
      * @param containedValue   the only value which is allowed in the list
+     * @param errorCode error code used incase of an violation
      * @param <T>   the type of the list
      * @return  new instance of list validation
      */
@@ -36,6 +37,7 @@ public class ListValidationsWithErrorCode {
     /**
      * validates that a list contains at least one entry which matches to the provided arg.
      * @param containedValue    the value which must exist in the list
+     * @param errorCode error code used incase of an violation
      * @param <T>   the type of the list
      * @return  new instance of list validation
      */
@@ -47,6 +49,7 @@ public class ListValidationsWithErrorCode {
     /**
      * validates that a list does not contain an entry which matches the provided arg.
      * @param excludedValue the value which mustn't exists in the list
+     * @param errorCode error code used incase of an violation
      * @param <T>   the type of the list
      * @return  new instance of list validation
      */
@@ -58,6 +61,7 @@ public class ListValidationsWithErrorCode {
 
     /**
      * validates that a list isn't empty. It mustn't be null and not empty.
+     * @param errorCode error code used incase of an violation
      * @param <T>   the type of the list
      * @return  new instance of list validation
      */
@@ -67,6 +71,7 @@ public class ListValidationsWithErrorCode {
 
     /**
      * validates that a list is empty.
+     * @param errorCode error code used incase of an violation
      * @param <T>   the type of the list
      * @return  new instance of list validation
      */
@@ -77,6 +82,7 @@ public class ListValidationsWithErrorCode {
     /**
      * validates that a list has an expected size.
      * @param size  the expected size
+     * @param errorCode error code used incase of an violation
      * @param <T>   type of the list
      * @return  new instance of list validation
      */
@@ -87,6 +93,7 @@ public class ListValidationsWithErrorCode {
     /**
      * validates that a list has an expected minimum size.
      * @param size  the expected minimum size
+     * @param errorCode error code used incase of an violation
      * @param <T>   type of the list
      * @return  new instance of list validation
      */
@@ -97,6 +104,7 @@ public class ListValidationsWithErrorCode {
     /**
      * validates that a list has an expected maximum size.
      * @param size  the expected maximum size
+     * @param errorCode error code used incase of an violation
      * @param <T>   type of the list
      * @return  new instance of list validation
      */
