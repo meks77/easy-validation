@@ -4,7 +4,7 @@
 
     <groupId>at.meks</groupId>
     <artifactId>easy-validation</artifactId>
-    <version>1.0.0-M1.1</version>
+    <version>1.0.0-M2-SNAPSHOT</version>
 
     <packaging>jar</packaging>
 
@@ -42,7 +42,7 @@
         <connection>scm:git:https://github.com/meks77/easy-validation.git</connection>
         <developerConnection>scm:git:https://github.com/meks77/easy-validation.git</developerConnection>
         <url>https://github.com/meks77/easy-validation</url>
-        <tag>easy-validation-parent-1.0.0-M1.1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
