@@ -21,8 +21,8 @@
     </developers>
 
     <scm>
-        <connection>scm:git:ssh://github.com/meks77/easy-validation.git</connection>
-        <developerConnection>scm:git:ssh://github.com/meks77/easy-validation.git</developerConnection>
+        <connection>scm:git:https://github.com/meks77/easy-validation.git</connection>
+        <developerConnection>scm:git:https://github.com/meks77/easy-validation.git</developerConnection>
         <url>https://github.com/meks77/easy-validation</url>
     </scm>
 
