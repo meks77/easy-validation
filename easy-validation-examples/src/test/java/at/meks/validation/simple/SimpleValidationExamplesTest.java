@@ -67,4 +67,9 @@ public class SimpleValidationExamplesTest {
     public void tesCombineMoreValidationsInASingleLine() throws Exception {
         examples.combineMoreValidationsInASingleLine();
     }
+
+    @Test
+    public void testCombineValidationsForDifferentTypes() {
+        examples.combineValidationsForDifferentTypes();
+    }
 }

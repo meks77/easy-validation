@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 
 import static at.meks.validation.validations.number.NumberValidations.isBetween;
 import static at.meks.validation.validations.number.NumberValidations.isGreaterThan;
+import static at.meks.validation.validations.number.NumberValidations.isLessThan;
 import static at.meks.validation.validations.string.StringValidations.contains;
 import static at.meks.validation.validations.string.StringValidations.isInList;
 import static at.meks.validation.validations.string.StringValidations.isNotBlank;
@@ -62,5 +63,10 @@ class SimpleValidationExamples {
                 .test(cityName).throwIfInvalid("cityName");
     }
 
+    void combineValidationsForDifferentTypes() {
+        isNumeric().and(Integer::parseInt, isGreaterThan(17).and(isLessThan(28)));
+        // or better use between :)
+        isNumeric().and(Integer::parseInt, isBetween(18, 27));
+    }
 
 }

@@ -76,6 +76,10 @@ ObjectValidations.<String>notNull().and(isNotBlank()).and(contains("e")).and(isI
 ````
 StringValidations.isNumeric().test(ageString).throwIfInvalid("age"); 
 ````
+#### Combine Validations for different Types
+````
+isNumeric().and(Long::parseLong, isGreaterThan(18L));
+````
 #### Validation of a complex ojbect
 First here you can see the setup of the configuration. That's usefull if 
 * you plan to validate more objects of the same type with the same rules
