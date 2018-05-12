@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.logging.Logger;
 
+import static at.meks.validation.validations.common.CommonValidations.isEqualTo;
 import static at.meks.validation.validations.number.NumberValidations.isBetween;
 import static at.meks.validation.validations.number.NumberValidations.isGreaterThan;
 import static at.meks.validation.validations.number.NumberValidations.isLessThan;
@@ -67,6 +68,11 @@ class SimpleValidationExamples {
         isNumeric().and(Integer::parseInt, isGreaterThan(17).and(isLessThan(28)));
         // or better use between :)
         isNumeric().and(Integer::parseInt, isBetween(18, 27));
+    }
+
+    void combineEqualAndIsGreaterThan() throws ValidationException {
+        Long minValue = 10L;
+        isGreaterThan(minValue).or(isEqualTo(minValue)).test(10L).throwIfInvalid("10");
     }
 
 }

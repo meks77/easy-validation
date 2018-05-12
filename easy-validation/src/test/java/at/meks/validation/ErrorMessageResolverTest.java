@@ -139,4 +139,9 @@ public class ErrorMessageResolverTest {
     public void getIsShortMessage() {
         assertThat(resolver.getIsShortMessage()).isEqualTo("value must be a short");
     }
+
+    @Test
+    public void getIsEqualToMessage()  {
+        assertThat(resolver.getIsEqualToMessage("other")).isEqualTo("value must be equal to other");
+    }
 }

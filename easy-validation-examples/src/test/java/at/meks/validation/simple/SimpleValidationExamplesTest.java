@@ -72,4 +72,9 @@ public class SimpleValidationExamplesTest {
     public void testCombineValidationsForDifferentTypes() {
         examples.combineValidationsForDifferentTypes();
     }
+
+    @Test
+    public void testCombineEqualAndIsGreaterThan() throws ValidationException {
+        examples.combineEqualAndIsGreaterThan();
+    }
 }

@@ -3,7 +3,6 @@ package at.meks.validation;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
-import java.util.function.Supplier;
 
 import static java.lang.String.format;
 
@@ -124,5 +123,9 @@ public class ErrorMessageResolver {
 
     public String getIsShortMessage() {
         return VALUE_MUST_BE_A_SHORT;
+    }
+
+    public String getIsEqualToMessage(Object comparedTo) {
+        return format("value must be equal to %s", comparedTo);
     }
 }

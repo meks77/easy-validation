@@ -1,6 +1,5 @@
 package at.meks.validation.validations.common;
 
-import at.meks.validation.result.ValidationResult;
 import at.meks.validation.validations.AbstractCoreValidationsTest;
 import org.junit.Test;
 
@@ -16,8 +15,16 @@ public class CoreCommonValidationsTest extends AbstractCoreValidationsTest {
 
     @Test
     public void givenNullWhenNotNullReturnsErrorResult() {
-        ValidationResult result = validations.notNull(errorDescription).test(null);
-        assertErrorResult(result);
+        assertErrorResult(validations.notNull(errorDescription).test(null));
     }
 
+    @Test
+    public void givenEqualObjectWhenIsEqualToReturnsOk() {
+        assertValidResult(validations.isEqualTo(() -> 5L, () -> errorDescription).test(5L));
+    }
+
+    @Test
+    public void givenNotEqualObjectWhenIsEqualToReturnsError() {
+        assertErrorResult(validations.isEqualTo(() -> 5L, () -> errorDescription).test(4L));
+    }
 }

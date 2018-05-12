@@ -20,15 +20,18 @@ public class CommonValidationsTest extends AbstractValidationsTest<Object> {
         return coreValidations;
     }
 
-    private ObjectValidationsTestHelper testHelper;
+    private CommonsValidationsTestHelper testHelper;
 
     @Before
     public void initTestHelper() {
-        testHelper = new ObjectValidationsTestHelper(coreValidations, this);
+        testHelper = new CommonsValidationsTestHelper(coreValidations, this);
     }
 
     @Test
     public void testNotNull() {
         testHelper.testNotNull(CommonValidations::notNull);
     }
+
+    @Test
+    public void testIsEqualTo() { testHelper.testIsEqualTo(CommonValidations::isEqualTo);}
 }

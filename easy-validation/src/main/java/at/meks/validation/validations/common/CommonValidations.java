@@ -2,7 +2,10 @@ package at.meks.validation.validations.common;
 
 import at.meks.validation.ErrorMessageResolver;
 import at.meks.validation.Validation;
-import at.meks.validation.result.ErrorDescriptionBuilder;
+
+import java.util.function.Supplier;
+
+import static at.meks.validation.result.ErrorDescriptionBuilder.withMessage;
 
 @SuppressWarnings("WeakerAccess")
 public class CommonValidations {
@@ -19,7 +22,29 @@ public class CommonValidations {
      * @return  new instance of a validation
      */
     public static <T> Validation<T> notNull() {
-        return validations.notNull(ErrorDescriptionBuilder.withMessage(messageResolver.getNotNullMessage()));
+        return validations.notNull(withMessage(messageResolver.getNotNullMessage()));
+    }
+
+    /**
+     * returns a validation which validates that the validated value is equal to anotherone. If both are null it is
+     * also equal.
+     * @param compareTo the validated value is compared to this one
+     * @param <T>   type of the tested value
+     * @return  new instance of a validation
+     */
+    public static <T> Validation<T> isEqualTo(T compareTo) {
+        return isEqualTo(() -> compareTo);
+    }
+
+    /**
+     * returns a validation which validates that the validated value is equal to anotherone. If both are null it is
+     * also equal.
+     * @param compareTo the validated value is compared to this one
+     * @param <T>   type of the tested value
+     * @return  new instance of a validation
+     */
+    public static <T> Validation<T> isEqualTo(Supplier<T> compareTo) {
+        return validations.isEqualTo(compareTo, () -> withMessage(messageResolver.getIsEqualToMessage(compareTo.get())));
     }
 
 }

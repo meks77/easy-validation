@@ -5,6 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.isEqualTo;
+import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.notNull;
+
 public class CommonValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<Object> {
 
     @Mock
@@ -20,15 +23,18 @@ public class CommonValidationsWithErrorCodeTest extends AbstractCodeValidationsT
         return coreValidations;
     }
 
-    private ObjectValidationsTestHelper testHelper;
+    private CommonsValidationsTestHelper testHelper;
 
     @Before
     public void initTestHelper() {
-        testHelper = new ObjectValidationsTestHelper(coreValidations, this);
+        testHelper = new CommonsValidationsTestHelper(coreValidations, this);
     }
 
     @Test
     public void testNotNull() {
-        testHelper.testNotNull(() -> CommonValidationsWithErrorCode.notNull(EXPECTED_CODE));
+        testHelper.testNotNull(() -> notNull(EXPECTED_CODE));
     }
+
+    @Test
+    public void testIsEqualTo() { testHelper.testIsEqualTo(validated -> isEqualTo(validated, EXPECTED_CODE));}
 }
