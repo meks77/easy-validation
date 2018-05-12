@@ -53,16 +53,21 @@ class NumberValidationsTestHelper {
         assertSupplierValue(compareTo, valueCaptor);
     }
 
-//    void testIsBetween(Function<Number, Validation<Number>> methodeInvoker) {
-//        Number min = 10.1;
-//        Number max = 12.0;
-//        doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getNumberIsBetweenMessage(min, max);
-//        doReturn(test.getExpectedValidation()).when(coreValidations).isBetween(same(min), same(max), any(ErrorDescription.class));
-//
-//        Validation<Number> validation = methodeInvoker.apply(compareTo);
-//        test.doAssertionsAndVerifications(validation,
-//                errorDescCaptor ->  verify(coreValidations).isGreaterThan(same(compareTo), errorDescCaptor.capture()));
-//    }
+    void testIsBetween(IsBetween methodeInvoker) {
+        Number min = 10.1;
+        Number max = 12.0;
+        doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getNumberIsBetweenMessage(min, max);
+        doReturn(test.getExpectedValidation()).when(coreValidations)
+                .isBetween(anySupplier(), anySupplier(), anySupplier());
+
+        Validation<Number> validation = methodeInvoker.isBetween(min, max);
+        ArgumentCaptor<Supplier<Number>> minCaptor = getSupplierCaptor();
+        ArgumentCaptor<Supplier<Number>> maxCaptor = getSupplierCaptor();
+        test.doAssertionsAndVerificationsWithSupplier(validation,
+                errorDescCaptor ->  verify(coreValidations).isBetween(minCaptor.capture(), maxCaptor.capture(), errorDescCaptor.capture()));
+        assertSupplierValue(min, minCaptor);
+        assertSupplierValue(max, maxCaptor);
+    }
 
 
     void testIsInt(Supplier<Validation<Number>> methodeInvoker) {

@@ -7,6 +7,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import static at.meks.validation.validations.number.NumberValidationsWithErrorCode.isBetween;
 import static at.meks.validation.validations.number.NumberValidationsWithErrorCode.isByte;
 import static at.meks.validation.validations.number.NumberValidationsWithErrorCode.isGreaterThan;
 import static at.meks.validation.validations.number.NumberValidationsWithErrorCode.isInt;
@@ -46,8 +47,8 @@ public class NumberValidationsWithErrorCodeTest extends AbstractCodeValidationsT
     }
 
     @Test
-    @Ignore
     public void testIsBetween() {
+        testHelper.testIsBetween((min, max) -> isBetween(min, max, EXPECTED_CODE));
     }
 
     @Test

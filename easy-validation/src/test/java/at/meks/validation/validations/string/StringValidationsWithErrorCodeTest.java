@@ -39,10 +39,9 @@ public class StringValidationsWithErrorCodeTest extends AbstractCodeValidationsT
     }
 
     @Test
-    @Ignore("verificatino fails currently. between is a special case where the tests needs to be implemented special")
     public void testLengthIsBetween() {
-        testHelper.testLengthIsBetween(range -> StringValidationsWithErrorCode.lengthIsBetween(range.getMinimum(),
-                range.getMaximum(), EXPECTED_CODE, EXPECTED_CODE));
+        testHelper.testLengthIsBetween((min, max) -> StringValidationsWithErrorCode.lengthIsBetween(min, max,
+                EXPECTED_CODE, EXPECTED_CODE));
     }
 
     @Test

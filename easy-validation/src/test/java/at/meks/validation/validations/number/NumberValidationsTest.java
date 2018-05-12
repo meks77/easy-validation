@@ -42,8 +42,8 @@ public class NumberValidationsTest extends AbstractValidationsTest<Number> {
     }
 
     @Test
-    @Ignore
     public void testIsBetween() {
+        testHelper.testIsBetween(NumberValidations::isBetween);
     }
 
     @Test
