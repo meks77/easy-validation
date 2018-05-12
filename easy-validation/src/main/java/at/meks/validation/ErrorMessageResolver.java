@@ -3,6 +3,7 @@ package at.meks.validation;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.function.Supplier;
 
 import static java.lang.String.format;
 

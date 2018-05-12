@@ -5,6 +5,7 @@ import at.meks.validation.result.ErrorDescription;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * This class provides validations for lists. The methods always create new validation instances.
@@ -17,8 +18,8 @@ class CoreListValidations {
      * @param <T>   the type of the list
      * @return  new instance of list validation
      */
-    <T> Validation<List<T>> containsOnly(T containedValue, ErrorDescription errorDescription) {
-        return SimpleListValidation.forList(list -> list.stream().allMatch(t -> t.equals(containedValue)),
+    <T> Validation<List<T>> containsOnly(Supplier<T> containedValue, Supplier<ErrorDescription> errorDescription) {
+        return SimpleListValidation.forList(list -> list.stream().allMatch(t -> t.equals(containedValue.get())),
                 errorDescription);
     }
 
@@ -28,8 +29,8 @@ class CoreListValidations {
      * @param <T>   the type of the list
      * @return  new instance of list validation
      */
-    <T> Validation<List<T>> contains(T containedValue, ErrorDescription errorDescription) {
-        return SimpleListValidation.forList(list -> list.stream().anyMatch(t -> t.equals(containedValue)),
+    <T> Validation<List<T>> contains(Supplier<T> containedValue, Supplier<ErrorDescription> errorDescription) {
+        return SimpleListValidation.forList(list -> list.stream().anyMatch(t -> t.equals(containedValue.get())),
                 errorDescription);
     }
 
@@ -39,8 +40,8 @@ class CoreListValidations {
      * @param <T>   the type of the list
      * @return  new instance of list validation
      */
-    <T> Validation<List<T>> doesNotContain(T excludedValue, ErrorDescription errorDescription) {
-        return SimpleListValidation.forList(list -> list.stream().noneMatch(t -> t.equals(excludedValue)),
+    <T> Validation<List<T>> doesNotContain(Supplier<T> excludedValue, Supplier<ErrorDescription> errorDescription) {
+        return SimpleListValidation.forList(list -> list.stream().noneMatch(t -> t.equals(excludedValue.get())),
                 errorDescription);
     }
 
@@ -68,8 +69,8 @@ class CoreListValidations {
      * @param <T>   type of the list
      * @return  new instance of list validation
      */
-    <T> Validation<List<T>> hasSize(int size, ErrorDescription errorDescription) {
-        return SimpleListValidation.forList(list -> list != null && list.size() == size, errorDescription);
+    <T> Validation<List<T>> hasSize(Supplier<Integer> size, Supplier<ErrorDescription> errorDescription) {
+        return SimpleListValidation.forList(list -> list != null && list.size() == size.get(), errorDescription);
     }
 
     /**
@@ -78,8 +79,8 @@ class CoreListValidations {
      * @param <T>   type of the list
      * @return  new instance of list validation
      */
-    <T> Validation<List<T>> hasMinSize(int size, ErrorDescription errorDescription) {
-        return SimpleListValidation.forList(list -> list != null && list.size() >= size, errorDescription);
+    <T> Validation<List<T>> hasMinSize(Supplier<Integer> size, Supplier<ErrorDescription> errorDescription) {
+        return SimpleListValidation.forList(list -> list != null && list.size() >= size.get(), errorDescription);
     }
 
     /**
@@ -88,8 +89,8 @@ class CoreListValidations {
      * @param <T>   type of the list
      * @return  new instance of list validation
      */
-    <T> Validation<List<T>> hasMaxSize(int size, ErrorDescription errorDescription) {
-        return SimpleListValidation.forList(list -> list != null && list.size() <= size, errorDescription);
+    <T> Validation<List<T>> hasMaxSize(Supplier<Integer> size, Supplier<ErrorDescription> errorDescription) {
+        return SimpleListValidation.forList(list -> list != null && list.size() <= size.get(), errorDescription);
     }
 
     /**

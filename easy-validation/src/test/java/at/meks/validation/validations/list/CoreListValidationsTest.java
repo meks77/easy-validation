@@ -18,47 +18,48 @@ import static org.mockito.Mockito.mock;
 public class CoreListValidationsTest extends AbstractCoreValidationsTest {
 
     private static final String TESTED_VALUE = "testedValue";
-    private static final String ERROR_CONTAINS_ONLY = "list must contain only " + TESTED_VALUE;
 
     private CoreListValidations validations = new CoreListValidations();
 
     @Test
     public void givenListContainingOnlyTestedValueWhenContainsOnlyReturnsValidResult() {
-        assertValidResult(validations.containsOnly(TESTED_VALUE, errorDescription)
+        assertValidResult(validations.containsOnly(() -> TESTED_VALUE, () -> errorDescription)
                 .test(asList(TESTED_VALUE, TESTED_VALUE)));
     }
 
     @Test
     public void givenListWithoutContainedValueWhenContainsOnlyReturnsErrorResult() {
-        assertErrorResult(validations.containsOnly(TESTED_VALUE, errorDescription)
+        assertErrorResult(validations.containsOnly(() -> TESTED_VALUE, () -> errorDescription)
                 .test(singletonList("somethingElse")));
     }
 
     @Test
     public void givenListContainingNotOnlyTestedValueWhenContainsOnlyReturnsErrorResult() {
-        assertErrorResult(validations.containsOnly(TESTED_VALUE, errorDescription)
+        assertErrorResult(validations.containsOnly(() -> TESTED_VALUE, () -> errorDescription)
                 .test(asList(TESTED_VALUE, "somethingElse")));
     }
 
     @Test
     public void givenListContainingTestedValueWhenContainsReturnsValidResult() {
-        assertValidResult(validations.contains(TESTED_VALUE, errorDescription)
+        assertValidResult(validations.contains(() -> TESTED_VALUE, () -> errorDescription)
                 .test(asList("firstValue", TESTED_VALUE, "thirdValue")));
     }
 
     @Test
     public void givenListNotContainingTestedValueWhenContainsReturnsErrorResult() {
-        assertErrorResult(validations.contains(TESTED_VALUE, errorDescription).test(asList("first", "second", "third")));
+        assertErrorResult(validations.contains(() -> TESTED_VALUE, () -> errorDescription)
+                .test(asList("first", "second", "third")));
     }
 
     @Test
     public void givenListNotContainingTestedValueWhenDoesNotContainReturnsValidResult() {
-        assertValidResult(validations.doesNotContain(TESTED_VALUE, errorDescription).test(singletonList("other")));
+        assertValidResult(validations.doesNotContain(() -> TESTED_VALUE, () -> errorDescription)
+                .test(singletonList("other")));
     }
 
     @Test
     public void givenListContainingTestedValueWhenDoesNotContainReturnsErrorResult() {
-        assertErrorResult(validations.doesNotContain(TESTED_VALUE, errorDescription)
+        assertErrorResult(validations.doesNotContain(() -> TESTED_VALUE, () -> errorDescription)
                 .test(asList("first", TESTED_VALUE, "third")));
     }
 
@@ -84,42 +85,45 @@ public class CoreListValidationsTest extends AbstractCoreValidationsTest {
 
     @Test
     public void givenListSize5WhenHasSize5RturnsValidResult() {
-        assertValidResult(validations.hasSize(5, errorDescription).test(asList("one", "two", "three", "four", "five")));
+        assertValidResult(validations.hasSize(() -> 5, () -> errorDescription)
+                .test(asList("one", "two", "three", "four", "five")));
     }
 
     @Test
     public void givenListSize2WhenHasSize5RturnsErrorResult() {
-        assertErrorResult(validations.hasSize(5, errorDescription).test(asList("one", "two", "three")));
+        assertErrorResult(validations.hasSize(() -> 5, () -> errorDescription).test(asList("one", "two", "three")));
     }
 
     @Test
     public void givenListSize3WhenHasMinSize3ReturnsValidResult() {
-        assertValidResult(validations.hasMinSize(3, errorDescription).test(asList("one", "two", "three")));
+        assertValidResult(validations.hasMinSize(() -> 3, () -> errorDescription).test(asList("one", "two", "three")));
     }
 
     @Test
     public void givenListSize4WhenHasMinSize3ReturnsValidResult() {
-        assertValidResult(validations.hasMinSize(3, errorDescription).test(asList("one", "two", "three", "four")));
+        assertValidResult(validations.hasMinSize(() -> 3, () -> errorDescription)
+                .test(asList("one", "two", "three", "four")));
     }
 
     @Test
     public void givenListSize2WhenHasMinSize3ReturnsErrorResult() {
-        assertErrorResult(validations.hasMinSize(3, errorDescription).test(asList("one", "two")));
+        assertErrorResult(validations.hasMinSize(() -> 3, () -> errorDescription).test(asList("one", "two")));
     }
 
     @Test
     public void givenListSize3WhenHasMaxSize3ReturnsValidResult() {
-        assertValidResult(validations.hasMaxSize(3, errorDescription).test(asList("one", "two", "three")));
+        assertValidResult(validations.hasMaxSize(() -> 3, () -> errorDescription).test(asList("one", "two", "three")));
     }
 
     @Test
     public void givenListSize2WhenHasMaxSize3ReturnsValidResult() {
-        assertValidResult(validations.hasMaxSize(3, errorDescription).test(asList("one", "two")));
+        assertValidResult(validations.hasMaxSize(() -> 3, () -> errorDescription).test(asList("one", "two")));
     }
 
     @Test
     public void givenListSize4WhenHasMaxSize3ReturnsErrorResult() {
-        assertErrorResult(validations.hasMaxSize(3, errorDescription).test(asList("one", "two", "three", "four")));
+        assertErrorResult(validations.hasMaxSize(() -> 3, () -> errorDescription)
+                .test(asList("one", "two", "three", "four")));
     }
 
     @Test

@@ -3,13 +3,16 @@ package at.meks.validation.validations.list;
 import at.meks.validation.Validation;
 import at.meks.validation.result.ErrorDescription;
 import at.meks.validation.validations.AbstractValidationsTest;
+import org.mockito.ArgumentCaptor;
 
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static at.meks.validation.TestUtils.anySupplier;
+import static at.meks.validation.TestUtils.assertSupplierValue;
+import static at.meks.validation.TestUtils.getSupplierCaptor;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
@@ -26,31 +29,46 @@ class ListValidationsTestHelper {
     void testContainsOnly(Function<String, Validation<List<String>>> methodeInvoker) {
         String containedValue = "A";
         doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getListContainsOnlyMessage(containedValue);
-        doReturn(test.getExpectedValidation()).when(coreValidations).containsOnly(eq(containedValue), any(ErrorDescription.class));
+        doReturn(test.getExpectedValidation()).when(coreValidations)
+                .containsOnly(anySupplier(), anySupplier());
 
         Validation<List<String>> validation = methodeInvoker.apply(containedValue);
-        test.doAssertionsAndVerifications(validation,
-                errorDescCaptor ->  verify(coreValidations).containsOnly(eq(containedValue), errorDescCaptor.capture()));
+
+        ArgumentCaptor<Supplier<String>> supplierCaptor = getSupplierCaptor();
+        test.doAssertionsAndVerificationsWithSupplier(validation,
+                errorDescCaptor ->  verify(coreValidations).containsOnly(supplierCaptor.capture(),
+                        errorDescCaptor.capture()));
+        assertSupplierValue(containedValue, supplierCaptor);
     }
 
     void testContains(Function<String, Validation<List<String>>> methodeInvoker) {
         String containedValue = "A";
         doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getListContainsMessage(containedValue);
-        doReturn(test.getExpectedValidation()).when(coreValidations).contains(eq(containedValue), any(ErrorDescription.class));
+        doReturn(test.getExpectedValidation()).when(coreValidations)
+                .contains(anySupplier(), anySupplier());
 
         Validation<List<String>> validation = methodeInvoker.apply(containedValue);
-        test.doAssertionsAndVerifications(validation,
-                errorDescCaptor ->  verify(coreValidations).contains(eq(containedValue), errorDescCaptor.capture()));
+
+        ArgumentCaptor<Supplier<String>> supplierCaptor = getSupplierCaptor();
+        test.doAssertionsAndVerificationsWithSupplier(validation,
+                errorDescCaptor ->  verify(coreValidations).contains(supplierCaptor.capture(),
+                        errorDescCaptor.capture()));
+        assertSupplierValue(containedValue, supplierCaptor);
     }
 
     void testDoesNotContain(Function<String, Validation<List<String>>> methodeInvoker) {
         String containedValue = "A";
         doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getListDoesNotContainMessage(containedValue);
-        doReturn(test.getExpectedValidation()).when(coreValidations).doesNotContain(eq(containedValue), any(ErrorDescription.class));
+        doReturn(test.getExpectedValidation()).when(coreValidations)
+                .doesNotContain(anySupplier(), anySupplier());
 
         Validation<List<String>> validation = methodeInvoker.apply(containedValue);
-        test.doAssertionsAndVerifications(validation,
-                errorDescCaptor ->  verify(coreValidations).doesNotContain(eq(containedValue), errorDescCaptor.capture()));
+
+        ArgumentCaptor<Supplier<String>> supplierCaptor = getSupplierCaptor();
+        test.doAssertionsAndVerificationsWithSupplier(validation,
+                errorDescCaptor ->  verify(coreValidations).doesNotContain(supplierCaptor.capture(),
+                        errorDescCaptor.capture()));
+        assertSupplierValue(containedValue, supplierCaptor);
     }
 
     void testIsNotEmpty(Supplier<Validation<List<String>>> methodeInvoker) {
@@ -76,31 +94,45 @@ class ListValidationsTestHelper {
     void testHasSize(Function<Integer, Validation<List<String>>> methodeInvoker) {
         int size = 5;
         doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getListHasSizeMessage(size);
-        doReturn(test.getExpectedValidation()).when(coreValidations).hasSize(eq(size), any(ErrorDescription.class));
+        doReturn(test.getExpectedValidation()).when(coreValidations)
+                .hasSize(anySupplier(), anySupplier());
 
         Validation<List<String>> validation = methodeInvoker.apply(size);
-        test.doAssertionsAndVerifications(validation,
-                errorDescCaptor ->  verify(coreValidations).hasSize(eq(size), errorDescCaptor.capture()));
+        ArgumentCaptor<Supplier<Integer>> supplierCaptor = getSupplierCaptor();
+        test.doAssertionsAndVerificationsWithSupplier(validation,
+                errorDescCaptor ->  verify(coreValidations).hasSize(supplierCaptor.capture(),
+                        errorDescCaptor.capture()));
+        assertSupplierValue(size, supplierCaptor);
     }
 
     void testHasMinSize(Function<Integer, Validation<List<String>>> methodeInvoker) {
         int size = 5;
         doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getListHasMinSizeMessage(size);
-        doReturn(test.getExpectedValidation()).when(coreValidations).hasMinSize(eq(size), any(ErrorDescription.class));
+        doReturn(test.getExpectedValidation()).when(coreValidations)
+                .hasMinSize(anySupplier(), anySupplier());
 
         Validation<List<String>> validation = methodeInvoker.apply(size);
-        test.doAssertionsAndVerifications(validation,
-                errorDescCaptor ->  verify(coreValidations).hasMinSize(eq(size), errorDescCaptor.capture()));
+
+        ArgumentCaptor<Supplier<Integer>> supplierCaptor = getSupplierCaptor();
+        test.doAssertionsAndVerificationsWithSupplier(validation,
+                errorDescCaptor ->  verify(coreValidations).hasMinSize(supplierCaptor.capture(),
+                        errorDescCaptor.capture()));
+        assertSupplierValue(size, supplierCaptor);
     }
 
     void testHasMaxSize(Function<Integer, Validation<List<String>>> methodeInvoker) {
         int size = 5;
         doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getListHasMaxSizeMessage(size);
-        doReturn(test.getExpectedValidation()).when(coreValidations).hasMaxSize(eq(size), any(ErrorDescription.class));
+        doReturn(test.getExpectedValidation()).when(coreValidations)
+                .hasMaxSize(anySupplier(), anySupplier());
 
         Validation<List<String>> validation = methodeInvoker.apply(size);
-        test.doAssertionsAndVerifications(validation,
-                errorDescCaptor ->  verify(coreValidations).hasMaxSize(eq(size), errorDescCaptor.capture()));
+
+        ArgumentCaptor<Supplier<Integer>> supplierCaptor = getSupplierCaptor();
+        test.doAssertionsAndVerificationsWithSupplier(validation,
+                errorDescCaptor ->  verify(coreValidations).hasMaxSize(supplierCaptor.capture(),
+                        errorDescCaptor.capture()));
+        assertSupplierValue(size, supplierCaptor);
     }
 
 }

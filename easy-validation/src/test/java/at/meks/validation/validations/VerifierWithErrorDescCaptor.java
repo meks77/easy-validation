@@ -4,7 +4,7 @@ import at.meks.validation.result.ErrorDescription;
 import org.mockito.ArgumentCaptor;
 
 @FunctionalInterface
-public interface Verifier {
+public interface VerifierWithErrorDescCaptor {
 
     void doVerification(ArgumentCaptor<ErrorDescription> errorDescCaptor);
 }

@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
 
+import java.util.function.Supplier;
+
 import static org.fest.assertions.api.Assertions.assertThat;
 
 @RunWith(PowerMockRunner.class)
@@ -24,9 +26,15 @@ public abstract class AbstractValidationsTest<T> {
     private Validation<T> expectedValidation;
 
     private  ArgumentCaptor<ErrorDescription> errorDescriptionArgCaptor = getErrorDescCaptor();
+    private  ArgumentCaptor<Supplier<ErrorDescription>> errorDescSupplierArgCaptor = getErrorDescSupplierCaptor();
 
     private ArgumentCaptor<ErrorDescription> getErrorDescCaptor() {
         return ArgumentCaptor.forClass(ErrorDescription.class);
+    }
+
+    private ArgumentCaptor<Supplier<ErrorDescription>> getErrorDescSupplierCaptor() {
+        //noinspection unchecked
+        return ArgumentCaptor.forClass(Supplier.class);
     }
 
     public String getExpectedMessage() {
@@ -55,16 +63,16 @@ public abstract class AbstractValidationsTest<T> {
         assertThat(validation).isSameAs(expectedValidation);
     }
 
-    public void doAssertionsAndVerifications(Validation<T> validation, Verifier coreMethodVerifier) {
+    public void doAssertionsAndVerifications(Validation<T> validation, VerifierWithErrorDescCaptor coreMethodVerifier) {
         assertForExpectedValidation(validation);
         coreMethodVerifier.doVerification(errorDescriptionArgCaptor);
-        assertErrorDesc(errorDescriptionArgCaptor);
+        assertErrorDesc(errorDescriptionArgCaptor.getValue());
     }
 
-    private void assertErrorDesc(ArgumentCaptor<ErrorDescription>
-                                         errorDescriptionArgCaptor) {
-        ErrorDescription errorDescription = errorDescriptionArgCaptor.getValue();
-        assertErrorDesc(errorDescription);
+    public void doAssertionsAndVerificationsWithSupplier(Validation<T> validation, VerifierWithErrorDescSupplierCaptor coreMethodVerifier) {
+        assertForExpectedValidation(validation);
+        coreMethodVerifier.doVerification(errorDescSupplierArgCaptor);
+        assertErrorDesc(errorDescSupplierArgCaptor.getValue().get());
     }
 
     public void assertErrorDesc(ErrorDescription errorDescription) {

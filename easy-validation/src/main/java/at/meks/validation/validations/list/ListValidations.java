@@ -2,10 +2,12 @@ package at.meks.validation.validations.list;
 
 import at.meks.validation.ErrorMessageResolver;
 import at.meks.validation.Validation;
-import at.meks.validation.result.ErrorDescriptionBuilder;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
+
+import static at.meks.validation.result.ErrorDescriptionBuilder.withMessage;
 
 /**
  * This class provides validations for lists. The methods always create new validation instances.
@@ -28,8 +30,18 @@ public class ListValidations {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> containsOnly(T containedValue) {
+        return containsOnly(() -> containedValue);
+    }
+
+    /**
+     * validates that a list contains only entries which match to the provided arg.
+     * @param containedValue   the only value which is allowed in the list
+     * @param <T>   the type of the list
+     * @return  new instance of list validation
+     */
+    public static <T> Validation<List<T>> containsOnly(Supplier<T> containedValue) {
         return validations.containsOnly(containedValue,
-                ErrorDescriptionBuilder.withMessage(messageResolver.getListContainsOnlyMessage(containedValue)));
+                () -> withMessage(messageResolver.getListContainsOnlyMessage(containedValue.get())));
     }
 
     /**
@@ -39,8 +51,18 @@ public class ListValidations {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> contains(T containedValue) {
+        return contains(() -> containedValue);
+    }
+
+    /**
+     * validates that a list contains at least one entry which matches to the provided arg.
+     * @param containedValue    the value which must exist in the list
+     * @param <T>   the type of the list
+     * @return  new instance of list validation
+     */
+    public static <T> Validation<List<T>> contains(Supplier<T> containedValue) {
         return validations.contains(containedValue,
-                ErrorDescriptionBuilder.withMessage(messageResolver.getListContainsMessage(containedValue)));
+                () -> withMessage(messageResolver.getListContainsMessage(containedValue.get())));
     }
 
     /**
@@ -50,8 +72,18 @@ public class ListValidations {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> doesNotContain(T excludedValue) {
+        return doesNotContain(() -> excludedValue);
+    }
+
+    /**
+     * validates that a list does not contain an entry which matches the provided arg.
+     * @param excludedValue the value which mustn't exists in the list
+     * @param <T>   the type of the list
+     * @return  new instance of list validation
+     */
+    public static <T> Validation<List<T>> doesNotContain(Supplier<T> excludedValue) {
         return validations.doesNotContain(excludedValue,
-                ErrorDescriptionBuilder.withMessage(messageResolver.getListDoesNotContainMessage(excludedValue)));
+                () -> withMessage(messageResolver.getListDoesNotContainMessage(excludedValue.get())));
     }
 
     /**
@@ -60,7 +92,7 @@ public class ListValidations {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> isNotEmpty() {
-        return validations.isNotEmpty(ErrorDescriptionBuilder.withMessage(messageResolver.getListIsNotEmptyMessage()));
+        return validations.isNotEmpty(withMessage(messageResolver.getListIsNotEmptyMessage()));
     }
 
     /**
@@ -69,7 +101,7 @@ public class ListValidations {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> isEmpty() {
-        return validations.isEmpty(ErrorDescriptionBuilder.withMessage(messageResolver.getListIsEmptyMessage()));
+        return validations.isEmpty(withMessage(messageResolver.getListIsEmptyMessage()));
     }
 
     /**
@@ -79,7 +111,17 @@ public class ListValidations {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> hasSize(int size) {
-        return validations.hasSize(size, ErrorDescriptionBuilder.withMessage(messageResolver.getListHasSizeMessage(size)));
+        return hasSize(() -> size);
+    }
+
+    /**
+     * validates that a list has an expected size.
+     * @param size  the expected size
+     * @param <T>   type of the list
+     * @return  new instance of list validation
+     */
+    public static <T> Validation<List<T>> hasSize(Supplier<Integer> size) {
+        return validations.hasSize(size, () -> withMessage(messageResolver.getListHasSizeMessage(size.get())));
     }
 
     /**
@@ -89,7 +131,17 @@ public class ListValidations {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> hasMinSize(int size) {
-        return validations.hasMinSize(size, ErrorDescriptionBuilder.withMessage(messageResolver.getListHasMinSizeMessage(size)));
+        return hasMinSize(() -> size);
+    }
+
+    /**
+     * validates that a list has an expected minimum size.
+     * @param size  the expected minimum size
+     * @param <T>   type of the list
+     * @return  new instance of list validation
+     */
+    public static <T> Validation<List<T>> hasMinSize(Supplier<Integer> size) {
+        return validations.hasMinSize(size, () -> withMessage(messageResolver.getListHasMinSizeMessage(size.get())));
     }
 
     /**
@@ -99,7 +151,17 @@ public class ListValidations {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> hasMaxSize(int size) {
-        return validations.hasMaxSize(size, ErrorDescriptionBuilder.withMessage(messageResolver.getListHasMaxSizeMessage(size)));
+        return hasMaxSize(() -> size);
+    }
+
+    /**
+     * validates that a list has an expected maximum size.
+     * @param size  the expected maximum size
+     * @param <T>   type of the list
+     * @return  new instance of list validation
+     */
+    public static <T> Validation<List<T>> hasMaxSize(Supplier<Integer> size) {
+        return validations.hasMaxSize(size, () -> withMessage(messageResolver.getListHasMaxSizeMessage(size.get())));
     }
 
     /**

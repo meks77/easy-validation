@@ -17,7 +17,7 @@ public class CoreDateValidationsTest extends AbstractCoreValidationsTest {
 
     @Test
     public void givenSmallerDateWhenIsDateAfterReturnsErrorWithExpectedMessage() {
-        ValidationResult result = validations.isDateAfter(now().plus(2, SECONDS), errorDescription)
+        ValidationResult result = validations.isDateAfter(() -> now().plus(2, SECONDS), () -> errorDescription)
                 .test(LocalDateTime.now());
         assertErrorResult(result);
     }
@@ -27,13 +27,14 @@ public class CoreDateValidationsTest extends AbstractCoreValidationsTest {
         LocalDateTime validatedDate = of(2017, 5, 8, 7, 12, 14);
         LocalDateTime comparedDate = of(2017, 5, 8, 7, 12, 14);
         assertThat(validatedDate).isNotSameAs(comparedDate);
-        ValidationResult result = validations.isDateAfter(comparedDate, errorDescription).test(validatedDate);
+        ValidationResult result = validations.isDateAfter(() -> comparedDate, () -> errorDescription)
+                .test(validatedDate);
         assertErrorResult(result);
     }
 
     @Test
     public void givenGreaterDateWhenIsDateAfterReturnsOk() {
-        ValidationResult result = validations.isDateAfter(now().minus(1, SECONDS), errorDescription)
+        ValidationResult result = validations.isDateAfter(() -> now().minus(1, SECONDS), () -> errorDescription)
                 .test(LocalDateTime.now());
         assertValidResult(result);
     }

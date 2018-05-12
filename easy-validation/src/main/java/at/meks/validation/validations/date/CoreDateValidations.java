@@ -5,10 +5,12 @@ import at.meks.validation.Validation;
 import at.meks.validation.result.ErrorDescription;
 
 import java.time.LocalDateTime;
+import java.util.function.Supplier;
 
 class CoreDateValidations {
 
-    Validation<LocalDateTime> isDateAfter(LocalDateTime minDate, ErrorDescription errorDescription) {
-        return SimpleValidation.from(minDate::isBefore, () -> errorDescription);
+    Validation<LocalDateTime> isDateAfter(Supplier<LocalDateTime> supplierMinDate, Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(date -> supplierMinDate.get().isBefore(date), errorDescription);
     }
+
 }

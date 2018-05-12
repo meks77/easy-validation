@@ -5,21 +5,25 @@ import at.meks.validation.Validation;
 import at.meks.validation.result.ErrorDescription;
 import org.apache.commons.lang3.Range;
 
+import java.util.function.Supplier;
+
 @SuppressWarnings("WeakerAccess")
 public class CoreNumberValidations {
 
-    public <T extends Number> Validation<T> isLessThan(T compareTo, ErrorDescription errorDescription) {
-        return SimpleValidation.from(number -> number.doubleValue() < compareTo.doubleValue(), () -> errorDescription);
+    public <T extends Number> Validation<T> isLessThan(Supplier<T> compareTo,
+                                                       Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(number -> number.doubleValue() < compareTo.get().doubleValue(), errorDescription);
     }
 
-    public <T extends Number> Validation<T> isGreaterThan(T compareTo, ErrorDescription errorDescription) {
-        return SimpleValidation.from(number -> number.doubleValue() > compareTo.doubleValue(), () -> errorDescription);
+    public <T extends Number> Validation<T> isGreaterThan(Supplier<T> compareTo,
+                                                          Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(number -> number.doubleValue() > compareTo.get().doubleValue(), errorDescription);
     }
 
-    public <T extends Number> Validation<T> isBetween(T min, T max, ErrorDescription errorDescription) {
+    public <T extends Number> Validation<T> isBetween(Supplier<T> min, Supplier<T> max, Supplier<ErrorDescription> errorDescription) {
         return SimpleValidation.from(
-                number -> Range.between(min.doubleValue(), max.doubleValue()).contains(number.doubleValue()),
-                () -> errorDescription);
+                number -> Range.between(min.get().doubleValue(), max.get().doubleValue()).contains(number.doubleValue()),
+                errorDescription);
     }
 
     public <T extends Number> Validation<T> isInt(ErrorDescription errorDescription) {

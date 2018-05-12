@@ -26,72 +26,77 @@ public class CoreStringValidationsTest extends AbstractCoreValidationsTest {
 
     @Test
     public void givenStringLength5WhenLengthIsMoreThan4ThenResultIsValid() {
-        assertValidResult(validations.lengthIsMoreThan(4, errorDescription).test(FIVE_LETTER_WORD));
+        assertValidResult(validations.lengthIsMoreThan(() -> 4, () -> errorDescription).test(FIVE_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength4WhenLengthIsMoreThan4ThenResultIsError() {
-        assertErrorResult(validations.lengthIsMoreThan(4, errorDescription).test(FOUR_LETTER_WORD));
+        assertErrorResult(validations.lengthIsMoreThan(() -> 4, () -> errorDescription).test(FOUR_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength3WhenLengthIsLessThan4ThenResultIsValid() {
-        assertValidResult(validations.lengthIsLessThan(4, errorDescription).test(THREE_LETTER_WORD));
+        assertValidResult(validations.lengthIsLessThan(() -> 4, () -> errorDescription).test(THREE_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength4WhenLengthIsLessThan4ThenResultIsError() {
-        assertErrorResult(validations.lengthIsLessThan(4, errorDescription).test(FOUR_LETTER_WORD));
+        assertErrorResult(validations.lengthIsLessThan(() -> 4, () -> errorDescription).test(FOUR_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength4WhenLengthIsBetween4And6ThenResultIsValid() {
-        assertValidResult(validations.lengthIsBetween(4,  6, errorDescription, errorDescription).test(FOUR_LETTER_WORD));
+        assertValidResult(validations.lengthIsBetween(() -> 4,  () -> 6, () -> errorDescription, () -> errorDescription)
+                .test(FOUR_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength5WhenLengthIsBetween4And6ThenResultIsValid() {
-        assertValidResult(validations.lengthIsBetween(4,  6, errorDescription, errorDescription).test(FIVE_LETTER_WORD));
+        assertValidResult(validations.lengthIsBetween(() -> 4,  () -> 6, () -> errorDescription, () -> errorDescription)
+                .test(FIVE_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength6WhenLengthIsBetween4And6ThenResultIsValid() {
-        assertValidResult(validations.lengthIsBetween(4,  6, errorDescription, errorDescription).test(SIX_LETTER_WORD));
+        assertValidResult(validations.lengthIsBetween(() -> 4,  () -> 6, () -> errorDescription, () -> errorDescription)
+                .test(SIX_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength3WhenLengthIsBetween4And6ThenResultIsError() {
-        assertErrorResult(validations.lengthIsBetween(4, 6, errorDescription, errorDescription).test(THREE_LETTER_WORD));
+        assertErrorResult(validations.lengthIsBetween(() -> 4, () -> 6, () -> errorDescription, () -> errorDescription)
+                .test(THREE_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength7WhenLengthIsBetween4And6ThenResultIsError() {
-        assertErrorResult(validations.lengthIsBetween(4, 6, errorDescription, errorDescription).test(SEVEN_LETTER_WORD));
+        assertErrorResult(validations.lengthIsBetween(() -> 4, () -> 6, () -> errorDescription, () -> errorDescription)
+                .test(SEVEN_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength4WhenHasLength4ThenResultIsValid() {
-        assertValidResult(validations.hasLength(4, errorDescription).test(FOUR_LETTER_WORD));
+        assertValidResult(validations.hasLength(() -> 4, () -> errorDescription).test(FOUR_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength3WhenHasLength4ThenResultIsError() {
-        assertErrorResult(validations.hasLength(4, errorDescription).test(THREE_LETTER_WORD));
+        assertErrorResult(validations.hasLength(() -> 4, () -> errorDescription).test(THREE_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength5WhenHasLength4ThenResultIsError() {
-        assertErrorResult(validations.hasLength(4, errorDescription).test(FIVE_LETTER_WORD));
+        assertErrorResult(validations.hasLength(() -> 4, () -> errorDescription).test(FIVE_LETTER_WORD));
     }
 
     @Test
     public void givenStringContainsAWhenContainsAThenResultIsValid() {
-        assertValidResult(validations.contains("a", errorDescription).test(FIVE_LETTER_WORD));
+        assertValidResult(validations.contains(() -> "a", () -> errorDescription).test(FIVE_LETTER_WORD));
     }
 
     @Test
     public void givenStringContainNosAWhenContainsAThenResultIsError() {
-        assertErrorResult(validations.contains("a", errorDescription).test("believe"));
+        assertErrorResult(validations.contains(() -> "a", () -> errorDescription).test("believe"));
     }
 
     @Test
@@ -148,32 +153,32 @@ public class CoreStringValidationsTest extends AbstractCoreValidationsTest {
 
     @Test
     public void givenValidDateStringWhenIsDateThenResultIsValid() {
-        assertValidResult(validations.isDate(dateTimeFormatter, errorDescription).test("19900102"));
+        assertValidResult(validations.isDate(() -> dateTimeFormatter, () -> errorDescription).test("19900102"));
     }
 
     @Test
     public void givenDateStringWitDay0WhenIsDateThenResultIsError() {
-        assertErrorResult(validations.isDate(dateTimeFormatter, errorDescription).test("19900100"));
+        assertErrorResult(validations.isDate(() -> dateTimeFormatter, () -> errorDescription).test("19900100"));
     }
 
     @Test
     public void givenDateStringWitMonth0WhenIsDateThenResultIsError() {
-        assertErrorResult(validations.isDate(dateTimeFormatter, errorDescription).test("19900001"));
+        assertErrorResult(validations.isDate(() -> dateTimeFormatter, () -> errorDescription).test("19900001"));
     }
 
     @Test
     public void givenDateStringWitDay32WhenIsDateThenResultIsError() {
-        assertErrorResult(validations.isDate(dateTimeFormatter, errorDescription).test("19900132"));
+        assertErrorResult(validations.isDate(() -> dateTimeFormatter, () -> errorDescription).test("19900132"));
     }
 
     @Test
     public void givenDateWithWrongFormatWhenIsDateThenResultIsError() {
-        assertErrorResult(validations.isDate(dateTimeFormatter, errorDescription).test("1990-10-32"));
+        assertErrorResult(validations.isDate(() -> dateTimeFormatter, () -> errorDescription).test("1990-10-32"));
     }
 
     @Test
     public void givenAlphanumericStringWhenIsDateThenResultIsError() {
-        assertErrorResult(validations.isDate(dateTimeFormatter, errorDescription).test("invalid"));
+        assertErrorResult(validations.isDate(() -> dateTimeFormatter, () -> errorDescription).test("invalid"));
     }
 
     @Test
@@ -194,12 +199,12 @@ public class CoreStringValidationsTest extends AbstractCoreValidationsTest {
 
     @Test
     public void givenStringContainsNotOnlyMyWhenContainsNotOnlyThenResultIsOk() {
-        assertValidResult(validations.containsNotOnly("my", errorDescription).test("myWay"));
+        assertValidResult(validations.containsNotOnly(() -> "my", () -> errorDescription).test("myWay"));
     }
 
     @Test
     public void givenStringContainsOnlyMyWhenContainsNotOnlyThenResultIsError() {
-        assertErrorResult(validations.containsNotOnly("ma", errorDescription).test("mama"));
+        assertErrorResult(validations.containsNotOnly(() -> "ma", () -> errorDescription).test("mama"));
     }
 
 }

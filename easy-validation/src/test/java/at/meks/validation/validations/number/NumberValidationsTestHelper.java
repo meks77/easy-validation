@@ -1,13 +1,19 @@
 package at.meks.validation.validations.number;
 
+import at.meks.validation.TestUtils;
 import at.meks.validation.Validation;
 import at.meks.validation.result.ErrorDescription;
 import at.meks.validation.validations.AbstractValidationsTest;
+import org.fest.assertions.api.Assertions;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static at.meks.validation.TestUtils.anySupplier;
+import static at.meks.validation.TestUtils.assertSupplierValue;
+import static at.meks.validation.TestUtils.getSupplierCaptor;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.same;
 import static org.mockito.Mockito.doReturn;
@@ -26,21 +32,26 @@ class NumberValidationsTestHelper {
     void testIsLessThan(Function<Number, Validation<Number>> methodeInvoker) {
         Number compareTo = 10.1;
         doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getIsNumberLessThanMessage(compareTo);
-        doReturn(test.getExpectedValidation()).when(coreValidations).isLessThan(same(compareTo), any(ErrorDescription.class));
+        doReturn(test.getExpectedValidation()).when(coreValidations).isLessThan(anySupplier(), anySupplier());
 
         Validation<Number> validation = methodeInvoker.apply(compareTo);
-        test.doAssertionsAndVerifications(validation,
-                errorDescCaptor ->  verify(coreValidations).isLessThan(same(compareTo), errorDescCaptor.capture()));
+        ArgumentCaptor<Supplier<Number>> valueCaptor = getSupplierCaptor();
+        test.doAssertionsAndVerificationsWithSupplier(validation,
+                errorDescCaptor ->  verify(coreValidations).isLessThan(valueCaptor.capture(), errorDescCaptor.capture()));
+        assertSupplierValue(compareTo, valueCaptor);
     }
 
     void testIsGreaterThan(Function<Number, Validation<Number>> methodeInvoker) {
         Number compareTo = 10.1;
         doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getIsNumberGreaterThanMessage(compareTo);
-        doReturn(test.getExpectedValidation()).when(coreValidations).isGreaterThan(same(compareTo), any(ErrorDescription.class));
+        doReturn(test.getExpectedValidation()).when(coreValidations).isGreaterThan(anySupplier(), anySupplier());
 
         Validation<Number> validation = methodeInvoker.apply(compareTo);
-        test.doAssertionsAndVerifications(validation,
-                errorDescCaptor ->  verify(coreValidations).isGreaterThan(same(compareTo), errorDescCaptor.capture()));}
+        ArgumentCaptor<Supplier<Number>> valueCaptor = getSupplierCaptor();
+        test.doAssertionsAndVerificationsWithSupplier(validation,
+                errorDescCaptor ->  verify(coreValidations).isGreaterThan(valueCaptor.capture(), errorDescCaptor.capture()));
+        assertSupplierValue(compareTo, valueCaptor);
+    }
 
 //    void testIsBetween(Function<Number, Validation<Number>> methodeInvoker) {
 //        Number min = 10.1;

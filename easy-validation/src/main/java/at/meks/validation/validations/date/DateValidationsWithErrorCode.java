@@ -5,6 +5,9 @@ import at.meks.validation.Validation;
 import at.meks.validation.result.ErrorDescriptionBuilder;
 
 import java.time.LocalDateTime;
+import java.util.function.Supplier;
+
+import static at.meks.validation.result.ErrorDescriptionBuilder.withCode;
 
 /**
  * This class contains validations for dates.
@@ -25,8 +28,18 @@ public class DateValidationsWithErrorCode {
      * @return  a new validation instance
      */
     public static Validation<LocalDateTime> isDateAfter(LocalDateTime minDate, String errorCode) {
-        return validations.isDateAfter(minDate,
-                ErrorDescriptionBuilder.withCode(messageResolver.getIsDateAfterMessage(minDate), errorCode));
+        return isDateAfter(() -> minDate, errorCode);
+    }
+
+    /**
+     * validates if the validated date is after the date provided by the argument minDateSupplier.
+     * @param minDateSupplier   the validated date must be after this one
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @return  a new validation instance
+     */
+    public static Validation<LocalDateTime> isDateAfter(Supplier<LocalDateTime> minDateSupplier, String errorCode) {
+        return validations.isDateAfter(minDateSupplier,
+                () -> withCode(messageResolver.getIsDateAfterMessage(minDateSupplier.get()), errorCode));
     }
 
 }

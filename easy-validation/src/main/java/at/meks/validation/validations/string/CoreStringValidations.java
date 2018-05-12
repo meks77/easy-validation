@@ -13,25 +13,27 @@ import java.util.function.Supplier;
 
 class CoreStringValidations {
 
-    Validation<String> lengthIsMoreThan(int size, ErrorDescription errorDescription){
-        return SimpleValidation.from(s -> StringUtils.length(s) > size, () -> errorDescription);
+    Validation<String> lengthIsMoreThan(Supplier<Integer> size, Supplier<ErrorDescription> errorDescription){
+        return SimpleValidation.from(s -> StringUtils.length(s) > size.get(), errorDescription);
     }
 
-    Validation<String> lengthIsLessThan(int size, ErrorDescription errorDescription){
-        return SimpleValidation.from(s -> StringUtils.length(s) < size, () -> errorDescription);
+    Validation<String> lengthIsLessThan(Supplier<Integer> size, Supplier<ErrorDescription> errorDescription){
+        return SimpleValidation.from(s -> StringUtils.length(s) < size.get(), errorDescription);
     }
 
-    Validation<String> lengthIsBetween(int minSize, int maxSize, ErrorDescription whenMaxSizeExceeds,
-                                              ErrorDescription whenMinSizeExceeds){
-        return lengthIsMoreThan(minSize - 1, whenMinSizeExceeds).and(lengthIsLessThan(maxSize + 1, whenMaxSizeExceeds));
+    Validation<String> lengthIsBetween(Supplier<Integer> minSize, Supplier<Integer> maxSize,
+                                       Supplier<ErrorDescription> whenMaxSizeExceeds,
+                                       Supplier<ErrorDescription> whenMinSizeExceeds){
+        return lengthIsMoreThan(() -> minSize.get() - 1, whenMinSizeExceeds)
+                .and(lengthIsLessThan(() -> maxSize.get() + 1, whenMaxSizeExceeds));
     }
 
-    Validation<String> hasLength(int length, ErrorDescription errorDescription) {
-        return SimpleValidation.from(s -> StringUtils.length(s) == length, () -> errorDescription);
+    Validation<String> hasLength(Supplier<Integer> length, Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(s -> StringUtils.length(s) == length.get(),errorDescription);
     }
 
-    Validation<String> contains(String c, ErrorDescription errorDescription){
-        return SimpleValidation.from(s -> StringUtils.contains(s, c), () -> errorDescription);
+    Validation<String> contains(Supplier<String> c, Supplier<ErrorDescription> errorDescription){
+        return SimpleValidation.from(s -> StringUtils.contains(s, c.get()), errorDescription);
     }
 
     Validation<String> isNotBlank(ErrorDescription errorDescription) {
@@ -48,22 +50,22 @@ class CoreStringValidations {
         return SimpleValidation.from(validValueSupplier.get()::contains, errorDescription);
     }
 
-    Validation<String> isDate(DateTimeFormatter formatter, ErrorDescription errorDescription) {
+    Validation<String> isDate(Supplier<DateTimeFormatter> formatter, Supplier<ErrorDescription> errorDescription) {
         return SimpleValidation.from(s -> {
             try {
-                formatter.parse(s);
+                formatter.get().parse(s);
                 return true;
             } catch (DateTimeParseException e) {
                 return false;
             }
-        }, () -> errorDescription);
+        }, errorDescription);
     }
 
     Validation<String> isNumeric(ErrorDescription errorDescription) {
         return SimpleValidation.from(StringUtils::isNumeric, () -> errorDescription);
     }
 
-    Validation<String> containsNotOnly(String containedValue, ErrorDescription errorDescription) {
-        return SimpleValidation.from(s -> !StringUtils.containsOnly(s, containedValue), () -> errorDescription);
+    Validation<String> containsNotOnly(Supplier<String> containedValue, Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(s -> !StringUtils.containsOnly(s, containedValue.get()), errorDescription);
     }
 }
