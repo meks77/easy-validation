@@ -4,7 +4,7 @@
 
     <groupId>at.meks</groupId>
     <artifactId>easy-validation-parent</artifactId>
-    <version>1.0.0-M1.1-SNAPSHOT</version>
+    <version>1.0.0-M2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Easy Validation</name>
