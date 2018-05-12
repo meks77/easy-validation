@@ -1,16 +1,16 @@
-package at.meks.validation.validations.object;
+package at.meks.validation.validations.common;
 
 import at.meks.validation.ErrorMessageResolver;
 import at.meks.validation.Validation;
 import at.meks.validation.result.ErrorDescriptionBuilder;
 
 @SuppressWarnings("WeakerAccess")
-public class ObjectValidations {
+public class CommonValidations {
 
     private static ErrorMessageResolver messageResolver = new ErrorMessageResolver();
-    private static CoreObjectValidations validations = new CoreObjectValidations();
+    private static CoreCommonValidations validations = new CoreCommonValidations();
 
-    private ObjectValidations() {
+    private CommonValidations() {
     }
 
     /**

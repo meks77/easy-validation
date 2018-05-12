@@ -1,18 +1,18 @@
-package at.meks.validation.validations.object;
+package at.meks.validation.validations.common;
 
 import at.meks.validation.validations.AbstractCodeValidationsTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-public class ObjectValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<Object> {
+public class CommonValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<Object> {
 
     @Mock
-    private CoreObjectValidations coreValidations;
+    private CoreCommonValidations coreValidations;
 
     @Override
     protected Class<?> getTestedClass() {
-        return ObjectValidationsWithErrorCode.class;
+        return CommonValidationsWithErrorCode.class;
     }
 
     @Override
@@ -29,6 +29,6 @@ public class ObjectValidationsWithErrorCodeTest extends AbstractCodeValidationsT
 
     @Test
     public void testNotNull() {
-        testHelper.testNotNull(() -> ObjectValidationsWithErrorCode.notNull(EXPECTED_CODE));
+        testHelper.testNotNull(() -> CommonValidationsWithErrorCode.notNull(EXPECTED_CODE));
     }
 }

@@ -1,18 +1,18 @@
-package at.meks.validation.validations.object;
+package at.meks.validation.validations.common;
 
 import at.meks.validation.validations.AbstractValidationsTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-public class ObjectValidationsTest extends AbstractValidationsTest<Object> {
+public class CommonValidationsTest extends AbstractValidationsTest<Object> {
 
     @Mock
-    private CoreObjectValidations coreValidations;
+    private CoreCommonValidations coreValidations;
 
     @Override
     protected Class<?> getTestedClass() {
-        return ObjectValidations.class;
+        return CommonValidations.class;
     }
 
     @Override
@@ -29,6 +29,6 @@ public class ObjectValidationsTest extends AbstractValidationsTest<Object> {
 
     @Test
     public void testNotNull() {
-        testHelper.testNotNull(ObjectValidations::notNull);
+        testHelper.testNotNull(CommonValidations::notNull);
     }
 }

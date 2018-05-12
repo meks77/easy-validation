@@ -1,4 +1,4 @@
-package at.meks.validation.validations.object;
+package at.meks.validation.validations.common;
 
 import at.meks.validation.Validation;
 import at.meks.validation.result.ErrorDescription;
@@ -12,10 +12,10 @@ import static org.mockito.Mockito.when;
 
 class ObjectValidationsTestHelper {
 
-    private final CoreObjectValidations coreValidations;
+    private final CoreCommonValidations coreValidations;
     private final AbstractValidationsTest<Object> test;
 
-    ObjectValidationsTestHelper(CoreObjectValidations coreValidationsMock, AbstractValidationsTest<Object> testInstance) {
+    ObjectValidationsTestHelper(CoreCommonValidations coreValidationsMock, AbstractValidationsTest<Object> testInstance) {
         this.coreValidations = coreValidationsMock;
         this.test = testInstance;
     }

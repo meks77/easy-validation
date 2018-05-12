@@ -1,9 +1,7 @@
 package at.meks.validation;
 
 import at.meks.validation.result.ValidationResult;
-import at.meks.validation.validations.number.NumberValidations;
-import at.meks.validation.validations.object.ObjectValidations;
-import at.meks.validation.validations.string.StringValidations;
+import at.meks.validation.validations.common.CommonValidations;
 import org.junit.Test;
 
 import static at.meks.validation.validations.number.NumberValidations.isGreaterThan;
@@ -16,19 +14,19 @@ public class ValidationTest {
 
     @Test
     public void givenJoinedValidationsByAndExecutesRootValidationAsFirst() {
-        ValidationResult result = ObjectValidations.<String>notNull().and(isNotBlank()).test(null);
+        ValidationResult result = CommonValidations.<String>notNull().and(isNotBlank()).test(null);
         assertErrorResult(result, "must not be null");
     }
 
     @Test
     public void givenJoinedValidationsByOrWhenOneIsValidThenResultIsValid() {
-        ValidationResult result = ObjectValidations.<String>notNull().or(isNotBlank()).test("  ");
+        ValidationResult result = CommonValidations.<String>notNull().or(isNotBlank()).test("  ");
         assertValidResult(result);
     }
 
     @Test
     public void givenJoinedInvalidValidationsByOrWhenTestReturnsLastValidationResult() {
-        ValidationResult result = ObjectValidations.<String>notNull().or(hasLength(10)).or(isNotBlank()).test(null);
+        ValidationResult result = CommonValidations.<String>notNull().or(hasLength(10)).or(isNotBlank()).test(null);
         assertErrorResult(result, "mustn't be blank");
     }
 

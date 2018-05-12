@@ -2,7 +2,7 @@ package at.meks.validation.simple;
 
 import at.meks.validation.result.ValidationException;
 import at.meks.validation.result.ValidationResult;
-import at.meks.validation.validations.object.ObjectValidations;
+import at.meks.validation.validations.common.CommonValidations;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,7 +40,7 @@ class SimpleValidationExamples {
 
     ValidationResult validateUsingResult() {
         String userInput = "";
-        ValidationResult result = ObjectValidations.notNull().test(userInput);
+        ValidationResult result = CommonValidations.notNull().test(userInput);
         if (!result.isValid()) {
             logger.fine(() -> String.format("error message of validation: %s", result.getErrorMessage()));
         }
@@ -59,7 +59,7 @@ class SimpleValidationExamples {
 
     void combineMoreValidationsInASingleLine() throws ValidationException {
         String cityName = "Vienna";
-        ObjectValidations.<String>notNull().and(isNotBlank()).and(contains("e")).and(isInList(this::getValidCities))
+        CommonValidations.<String>notNull().and(isNotBlank()).and(contains("e")).and(isInList(this::getValidCities))
                 .test(cityName).throwIfInvalid("cityName");
     }
 

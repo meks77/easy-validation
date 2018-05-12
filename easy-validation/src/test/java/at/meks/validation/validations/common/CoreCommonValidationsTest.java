@@ -1,13 +1,13 @@
-package at.meks.validation.validations.object;
+package at.meks.validation.validations.common;
 
 import at.meks.validation.result.ValidationResult;
 import at.meks.validation.validations.AbstractCoreValidationsTest;
 import org.junit.Test;
 
 
-public class CoreObjectValidationsTest extends AbstractCoreValidationsTest {
+public class CoreCommonValidationsTest extends AbstractCoreValidationsTest {
 
-    private CoreObjectValidations validations = new CoreObjectValidations();
+    private CoreCommonValidations validations = new CoreCommonValidations();
 
     @Test
     public void givenNotNullWhenNotNullReturnsValidResult() {
