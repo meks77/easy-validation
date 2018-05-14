@@ -2,9 +2,21 @@ package at.meks.validation.result;
 
 import org.junit.Test;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
+
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class ErrorDescriptionBuilderTest {
+
+
+    @Test
+    public void testConstructorIsPrivate() throws Exception {
+        Constructor<ErrorDescriptionBuilder> constructor = ErrorDescriptionBuilder.class.getDeclaredConstructor();
+        assertThat(Modifier.isPrivate(constructor.getModifiers())).isTrue();
+        constructor.setAccessible(true);
+        constructor.newInstance();
+    }
 
     @Test
     public void givenMessageAndCodeWhenWithCodeReturnsDescriptionWithCodeAndMessage() {

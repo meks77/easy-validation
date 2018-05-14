@@ -69,18 +69,28 @@ public class CoreListValidationsTest extends AbstractCoreValidationsTest {
     }
 
     @Test
-    public void givenEmptyListWhenIsNotEmptyReturnsValidResult() {
+    public void givenEmptyListWhenIsNotEmptyReturnsErrorResult() {
         assertErrorResult(validations.isNotEmpty(errorDescription).test(Collections.emptyList()));
     }
 
     @Test
-    public void givenEmptyListWhenIsEmptyReturnsValidResult() {
+    public void givenNullWhenIsNotEmptyReturnsErrorResult() {
+        assertErrorResult(validations.isNotEmpty(errorDescription).test(null));
+    }
+
+    @Test
+    public void givenEmptyListWhenIsEmptyReturnsValidResultResult() {
         assertValidResult(validations.isEmpty(errorDescription).test(Collections.emptyList()));
     }
 
     @Test
-    public void givenNotEmptyListWhenIsEmptyReturnsValidResult() {
+    public void givenNotEmptyListWhenIsEmptyReturnsErrorResult() {
         assertErrorResult(validations.isEmpty(errorDescription).test(singletonList("first")));
+    }
+
+    @Test
+    public void givenNullWhenIsEmptyReturnError() {
+        assertErrorResult(validations.isEmpty(errorDescription).test(null));
     }
 
     @Test
@@ -92,6 +102,11 @@ public class CoreListValidationsTest extends AbstractCoreValidationsTest {
     @Test
     public void givenListSize2WhenHasSize5RturnsErrorResult() {
         assertErrorResult(validations.hasSize(() -> 5, () -> errorDescription).test(asList("one", "two", "three")));
+    }
+
+    @Test
+    public void givenNullWhenHasSizeReturnsErrorResult() {
+        assertErrorResult(validations.hasSize(() -> 5, () -> errorDescription).test(null));
     }
 
     @Test
@@ -111,6 +126,11 @@ public class CoreListValidationsTest extends AbstractCoreValidationsTest {
     }
 
     @Test
+    public void givenNullWhenHasMinSizeReturnsErrorResult() {
+        assertErrorResult(validations.hasMinSize(() -> 3, () -> errorDescription).test(null));
+    }
+
+    @Test
     public void givenListSize3WhenHasMaxSize3ReturnsValidResult() {
         assertValidResult(validations.hasMaxSize(() -> 3, () -> errorDescription).test(asList("one", "two", "three")));
     }
@@ -124,6 +144,12 @@ public class CoreListValidationsTest extends AbstractCoreValidationsTest {
     public void givenListSize4WhenHasMaxSize3ReturnsErrorResult() {
         assertErrorResult(validations.hasMaxSize(() -> 3, () -> errorDescription)
                 .test(asList("one", "two", "three", "four")));
+    }
+
+    @Test
+    public void givenNullWhenHasMaxSizeReturnsErrorResult() {
+        assertErrorResult(validations.hasMaxSize(() -> 3, () -> errorDescription).test(null));
+
     }
 
     @Test
