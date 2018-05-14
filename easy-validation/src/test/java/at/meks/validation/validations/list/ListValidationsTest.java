@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.function.Function;
 
@@ -31,6 +33,14 @@ public class ListValidationsTest extends AbstractValidationsTest<List<String>> {
     @Override
     protected Object getCoreValidations() {
         return coreValidations;
+    }
+
+    @Test
+    public void testConstructorIsPrivate() throws Exception {
+        Constructor<ListValidations> constructor = ListValidations.class.getDeclaredConstructor();
+        assertThat(Modifier.isPrivate(constructor.getModifiers())).isTrue();
+        constructor.setAccessible(true);
+        constructor.newInstance();
     }
 
     @Before

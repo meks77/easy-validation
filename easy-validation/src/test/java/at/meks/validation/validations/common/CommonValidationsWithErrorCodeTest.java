@@ -5,8 +5,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
+
 import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.isEqualTo;
 import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.notNull;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 public class CommonValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<Object> {
 
@@ -28,6 +32,15 @@ public class CommonValidationsWithErrorCodeTest extends AbstractCodeValidationsT
     @Before
     public void initTestHelper() {
         testHelper = new CommonsValidationsTestHelper(coreValidations, this);
+    }
+
+    @Test
+    public void testConstructorIsPrivate() throws Exception {
+        Constructor<CommonValidationsWithErrorCode> constructor = CommonValidationsWithErrorCode.class
+                .getDeclaredConstructor();
+        assertThat(Modifier.isPrivate(constructor.getModifiers())).isTrue();
+        constructor.setAccessible(true);
+        constructor.newInstance();
     }
 
     @Test

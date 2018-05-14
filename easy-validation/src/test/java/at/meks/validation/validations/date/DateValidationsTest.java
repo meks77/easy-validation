@@ -5,7 +5,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 import java.time.LocalDateTime;
+
+import static org.fest.assertions.api.Assertions.assertThat;
 
 public class DateValidationsTest extends AbstractValidationsTest<LocalDateTime> {
 
@@ -27,6 +31,14 @@ public class DateValidationsTest extends AbstractValidationsTest<LocalDateTime> 
     @Before
     public void initTestHelper() {
         testHelper = new DateValidationsTestHelper(coreValidations, this);
+    }
+
+    @Test
+    public void testConstructorIsPrivate() throws Exception {
+        Constructor<DateValidations> constructor = DateValidations.class.getDeclaredConstructor();
+        assertThat(Modifier.isPrivate(constructor.getModifiers())).isTrue();
+        constructor.setAccessible(true);
+        constructor.newInstance();
     }
 
     @Test

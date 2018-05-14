@@ -1,11 +1,12 @@
 package at.meks.validation.validations.number;
 
 import at.meks.validation.validations.AbstractCodeValidationsTest;
-import at.meks.validation.validations.AbstractValidationsTest;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 
 import static at.meks.validation.validations.number.NumberValidationsWithErrorCode.isBetween;
 import static at.meks.validation.validations.number.NumberValidationsWithErrorCode.isByte;
@@ -13,6 +14,7 @@ import static at.meks.validation.validations.number.NumberValidationsWithErrorCo
 import static at.meks.validation.validations.number.NumberValidationsWithErrorCode.isInt;
 import static at.meks.validation.validations.number.NumberValidationsWithErrorCode.isLessThan;
 import static at.meks.validation.validations.number.NumberValidationsWithErrorCode.isShort;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 public class NumberValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<Number> {
 
@@ -34,6 +36,14 @@ public class NumberValidationsWithErrorCodeTest extends AbstractCodeValidationsT
     @Before
     public void initTestHelper() {
         testHelper = new NumberValidationsTestHelper(coreValidations, this);
+    }
+
+    @Test
+    public void testConstructorIsPrivate() throws Exception {
+        Constructor<NumberValidationsWithErrorCode> constructor = NumberValidationsWithErrorCode.class.getDeclaredConstructor();
+        assertThat(Modifier.isPrivate(constructor.getModifiers())).isTrue();
+        constructor.setAccessible(true);
+        constructor.newInstance();
     }
 
     @Test

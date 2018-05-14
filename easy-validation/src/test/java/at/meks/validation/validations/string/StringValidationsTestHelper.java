@@ -3,7 +3,6 @@ package at.meks.validation.validations.string;
 import at.meks.validation.Validation;
 import at.meks.validation.result.ErrorDescription;
 import at.meks.validation.validations.AbstractValidationsTest;
-import org.apache.commons.lang3.Range;
 import org.mockito.ArgumentCaptor;
 
 import java.time.format.DateTimeFormatter;

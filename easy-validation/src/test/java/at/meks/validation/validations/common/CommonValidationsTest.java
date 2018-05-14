@@ -5,6 +5,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
+
+import static org.fest.assertions.api.Assertions.assertThat;
+
 public class CommonValidationsTest extends AbstractValidationsTest<Object> {
 
     @Mock
@@ -25,6 +30,14 @@ public class CommonValidationsTest extends AbstractValidationsTest<Object> {
     @Before
     public void initTestHelper() {
         testHelper = new CommonsValidationsTestHelper(coreValidations, this);
+    }
+
+    @Test
+    public void testConstructorIsPrivate() throws Exception {
+        Constructor<CommonValidations> constructor = CommonValidations.class.getDeclaredConstructor();
+        assertThat(Modifier.isPrivate(constructor.getModifiers())).isTrue();
+        constructor.setAccessible(true);
+        constructor.newInstance();
     }
 
     @Test

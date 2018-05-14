@@ -1,13 +1,14 @@
 package at.meks.validation.validations.number;
 
-import at.meks.validation.Validation;
 import at.meks.validation.validations.AbstractValidationsTest;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import static at.meks.validation.result.ErrorDescriptionBuilder.withMessage;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
+
+import static org.fest.assertions.api.Assertions.assertThat;
 
 public class NumberValidationsTest extends AbstractValidationsTest<Number> {
 
@@ -29,6 +30,14 @@ public class NumberValidationsTest extends AbstractValidationsTest<Number> {
     @Before
     public void initTestHelper() {
         testHelper = new NumberValidationsTestHelper(coreValidations, this);
+    }
+
+    @Test
+    public void testConstructorIsPrivate() throws Exception {
+        Constructor<NumberValidations> constructor = NumberValidations.class.getDeclaredConstructor();
+        assertThat(Modifier.isPrivate(constructor.getModifiers())).isTrue();
+        constructor.setAccessible(true);
+        constructor.newInstance();
     }
 
     @Test

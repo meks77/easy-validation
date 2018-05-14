@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.function.Function;
 
@@ -33,6 +35,15 @@ public class ListValidationsWithErrorCodeTest extends AbstractCodeValidationsTes
     @Before
     public void initTestHelper() {
         testHelper = new ListValidationsTestHelper(coreValidations, this);
+    }
+
+    @Test
+    public void testConstructorIsPrivate() throws Exception {
+        Constructor<ListValidationsWithErrorCode> constructor = ListValidationsWithErrorCode.class
+                .getDeclaredConstructor();
+        assertThat(Modifier.isPrivate(constructor.getModifiers())).isTrue();
+        constructor.setAccessible(true);
+        constructor.newInstance();
     }
 
     @Test

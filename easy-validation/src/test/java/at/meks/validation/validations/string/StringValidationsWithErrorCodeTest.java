@@ -2,9 +2,13 @@ package at.meks.validation.validations.string;
 
 import at.meks.validation.validations.AbstractCodeValidationsTest;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
+
+import static org.fest.assertions.api.Assertions.assertThat;
 
 public class StringValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<String> {
 
@@ -26,6 +30,15 @@ public class StringValidationsWithErrorCodeTest extends AbstractCodeValidationsT
     @Before
     public void initTestHelper() {
         testHelper = new StringValidationsTestHelper(coreValidations, this);
+    }
+
+    @Test
+    public void testConstructorIsPrivate() throws Exception {
+        Constructor<StringValidationsWithErrorCode> constructor = StringValidationsWithErrorCode.class
+                .getDeclaredConstructor();
+        assertThat(Modifier.isPrivate(constructor.getModifiers())).isTrue();
+        constructor.setAccessible(true);
+        constructor.newInstance();
     }
 
     @Test

@@ -2,11 +2,14 @@ package at.meks.validation.validations.string;
 
 import at.meks.validation.validations.AbstractValidationsTest;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 import java.time.format.DateTimeFormatter;
+
+import static org.fest.assertions.api.Assertions.assertThat;
 
 
 public class StringValidationsTest extends AbstractValidationsTest<String> {
@@ -40,6 +43,14 @@ public class StringValidationsTest extends AbstractValidationsTest<String> {
     @Before
     public void initTestHelper() {
         testHelper = new StringValidationsTestHelper(coreValidations, this);
+    }
+
+    @Test
+    public void testConstructorIsPrivate() throws Exception {
+        Constructor<StringValidations> constructor = StringValidations.class.getDeclaredConstructor();
+        assertThat(Modifier.isPrivate(constructor.getModifiers())).isTrue();
+        constructor.setAccessible(true);
+        constructor.newInstance();
     }
 
     @Test
