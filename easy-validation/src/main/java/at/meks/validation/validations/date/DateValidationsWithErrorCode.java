@@ -2,7 +2,6 @@ package at.meks.validation.validations.date;
 
 import at.meks.validation.ErrorMessageResolver;
 import at.meks.validation.Validation;
-import at.meks.validation.result.ErrorDescriptionBuilder;
 
 import java.time.LocalDateTime;
 import java.util.function.Supplier;

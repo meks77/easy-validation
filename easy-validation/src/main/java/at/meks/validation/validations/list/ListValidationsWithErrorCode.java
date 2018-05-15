@@ -2,7 +2,6 @@ package at.meks.validation.validations.list;
 
 import at.meks.validation.ErrorMessageResolver;
 import at.meks.validation.Validation;
-import at.meks.validation.result.ErrorDescriptionBuilder;
 
 import java.util.List;
 import java.util.function.Function;
@@ -17,13 +16,13 @@ import static at.meks.validation.result.ErrorDescriptionBuilder.withCode;
 @SuppressWarnings("WeakerAccess")
 public class ListValidationsWithErrorCode {
 
-    private ListValidationsWithErrorCode() {
-
-    }
-
     private static ErrorMessageResolver messageResolver = new ErrorMessageResolver();
 
     private static CoreListValidations validations = new CoreListValidations();
+
+    private ListValidationsWithErrorCode() {
+
+    }
 
     /**
      * validates that a list contains only entries which match to the provided arg.

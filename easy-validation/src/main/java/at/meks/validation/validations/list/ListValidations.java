@@ -15,13 +15,13 @@ import static at.meks.validation.result.ErrorDescriptionBuilder.withMessage;
 @SuppressWarnings("WeakerAccess")
 public class ListValidations {
 
-    private ListValidations() {
-
-    }
-
     private static ErrorMessageResolver messageResolver = new ErrorMessageResolver();
 
     private static CoreListValidations validations = new CoreListValidations();
+
+    private ListValidations() {
+
+    }
 
     /**
      * validates that a list contains only entries which match to the provided arg.
