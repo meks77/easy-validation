@@ -10,6 +10,10 @@
 
     <artifactId>easy-validation-examples</artifactId>
 
+    <properties>
+        <sonar.skip>true</sonar.skip>
+    </properties>
+
     <build>
         <plugins>
             <plugin>

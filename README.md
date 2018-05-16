@@ -1,4 +1,14 @@
-# easy-validation
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=alert_status)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=bugs)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=code_smells)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=coverage)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=sqale_index)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=security_rating)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
+# easy-validation 
+
 Very easy way to validate simple and complex objects by using an fluent interface.
 
 The main concept of using lambda combinded with a fluent interface is from Joel Planes, what can be found [here](https://medium.com/@jplanes/lambda-validations-with-java-8-86aa8143bd9f).
@@ -26,12 +36,10 @@ I thought its too complex to use. I would like to use it easier without that som
 I did not like to have a fluent interface for the setting up the validation, while I can't use it because I have a restriction if a validation should be executed.
 
 ## State
-Currently this project is under development in alpha phase. 
-So many things are open. First I just developed the interface usage. 
-Till now the api was to heavy change while I was fighting with problems with generics when using the fluent interface.
+Currently this project is under development. I try to finalize the first release.
 
+Features for future releases:
 The next steps will be:
-* setting up SonarQube for code statistics
 * add the possibility to use custom error messages for the validations
 * add the possibility to add translated messages for other languages beside english
 * adding common validation steps
