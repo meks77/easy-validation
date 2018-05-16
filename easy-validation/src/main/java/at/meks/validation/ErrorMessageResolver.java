@@ -128,4 +128,8 @@ public class ErrorMessageResolver {
     public String getIsEqualToMessage(Object comparedTo) {
         return format("value must be equal to %s", comparedTo);
     }
+
+    public String getIsNotEqualToMessage(Object compareTo) {
+        return format("value must not be equal to %s", compareTo);
+    }
 }

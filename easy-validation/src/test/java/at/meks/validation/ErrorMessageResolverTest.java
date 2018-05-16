@@ -144,4 +144,9 @@ public class ErrorMessageResolverTest {
     public void getIsEqualToMessage()  {
         assertThat(resolver.getIsEqualToMessage("other")).isEqualTo("value must be equal to other");
     }
+
+    @Test
+    public void getIsNotEqualToMessage()  {
+        assertThat(resolver.getIsNotEqualToMessage("other")).isEqualTo("value must not be equal to other");
+    }
 }

@@ -51,4 +51,29 @@ public class CommonValidationsWithErrorCode {
         return validations.isEqualTo(compareTo,
                 () -> withCode(messageResolver.getIsEqualToMessage(compareTo.get()), errorCode));
     }
+
+    /**
+     * returns a validation which validates that the validated value is NOT equal to anotherone. If both are null it is
+     * also equal.
+     * @param compareTo the validated value is compared to this one
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @param <T>   type of the tested value
+     * @return  new instance of a validation
+     */
+    public static <T> Validation<T> isNotEqualTo(T compareTo, String errorCode) {
+        return isNotEqualTo(() -> compareTo, errorCode);
+    }
+
+    /**
+     * returns a validation which validates that the validated value is NOT equal to anotherone. If both are null it is
+     * also equal.
+     * @param compareTo the validated value is compared to this one
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @param <T>   type of the tested value
+     * @return  new instance of a validation
+     */
+    public static <T> Validation<T> isNotEqualTo(Supplier<T> compareTo, String errorCode) {
+        return validations.isNotEqualTo(compareTo,
+                () -> withCode(messageResolver.getIsNotEqualToMessage(compareTo.get()), errorCode));
+    }
 }

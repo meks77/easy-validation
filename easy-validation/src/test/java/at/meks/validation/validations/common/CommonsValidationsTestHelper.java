@@ -43,4 +43,15 @@ class CommonsValidationsTestHelper {
                 errorDescCaptor -> verify(coreValidations).isEqualTo(valueCaptor.capture(), errorDescCaptor.capture()));
         assertSupplierValue(compareTo, valueCaptor);
     }
+
+    void testIsNotEqualTo(Function<Object, Validation<Object>> methodInvoker) {
+        Object compareTo = "whatever";
+        when(test.getMessageResolver().getIsNotEqualToMessage(compareTo)).thenReturn(test.getExpectedMessage());
+        when(coreValidations.isNotEqualTo(TestUtils.anySupplier(), TestUtils.anySupplier())).thenReturn(test.getExpectedValidation());
+        Validation<Object> validation = methodInvoker.apply(compareTo);
+        ArgumentCaptor<Supplier<Object>> valueCaptor = getSupplierCaptor();
+        test.doAssertionsAndVerificationsWithSupplier(validation,
+                errorDescCaptor -> verify(coreValidations).isNotEqualTo(valueCaptor.capture(), errorDescCaptor.capture()));
+        assertSupplierValue(compareTo, valueCaptor);
+    }
 }

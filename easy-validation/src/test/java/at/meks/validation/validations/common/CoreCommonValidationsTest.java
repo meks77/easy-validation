@@ -27,4 +27,15 @@ public class CoreCommonValidationsTest extends AbstractCoreValidationsTest {
     public void givenNotEqualObjectWhenIsEqualToReturnsError() {
         assertErrorResult(validations.isEqualTo(() -> 5L, () -> errorDescription).test(4L));
     }
+
+    @Test
+    public void givenEqualObjectWhenNotEqualReturnsError() {
+        assertErrorResult(validations.isNotEqualTo(() -> 6L, () -> errorDescription).test(6L));
+    }
+
+    @Test
+    public void givenNotEqualObjectWhenIsNotEqualReturnsOk() {
+        assertValidResult(validations.isNotEqualTo(() -> 5L, () -> errorDescription).test(6L));
+    }
+
 }

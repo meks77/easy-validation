@@ -9,6 +9,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 
 import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.isEqualTo;
+import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.isNotEqualTo;
 import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.notNull;
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -50,4 +51,7 @@ public class CommonValidationsWithErrorCodeTest extends AbstractCodeValidationsT
 
     @Test
     public void testIsEqualTo() { testHelper.testIsEqualTo(validated -> isEqualTo(validated, EXPECTED_CODE));}
+
+    @Test
+    public void testIsNotEqualTo() { testHelper.testIsNotEqualTo(validated -> isNotEqualTo(validated, EXPECTED_CODE));}
 }

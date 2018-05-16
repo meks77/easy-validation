@@ -47,4 +47,26 @@ public class CommonValidations {
         return validations.isEqualTo(compareTo, () -> withMessage(messageResolver.getIsEqualToMessage(compareTo.get())));
     }
 
+    /**
+     * returns a validation which validates that the validated value is NOT equal to anotherone. If both are null it is
+     * also equal.
+     * @param compareTo the validated value is compared to this one
+     * @param <T>   type of the tested value
+     * @return  new instance of a validation
+     */
+    public static <T> Validation<T> isNotEqualTo(T compareTo) {
+        return isNotEqualTo(() -> compareTo);
+    }
+
+    /**
+     * returns a validation which validates that the validated value is NOT equal to anotherone. If both are null it is
+     * also equal.
+     * @param compareTo the validated value is compared to this one
+     * @param <T>   type of the tested value
+     * @return  new instance of a validation
+     */
+    public static <T> Validation<T> isNotEqualTo(Supplier<T> compareTo) {
+        return validations.isNotEqualTo(compareTo,
+                () -> withMessage(messageResolver.getIsNotEqualToMessage(compareTo.get())));
+    }
 }
