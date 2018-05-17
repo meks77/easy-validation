@@ -69,4 +69,31 @@ public class CommonValidations {
         return validations.isNotEqualTo(compareTo,
                 () -> withMessage(messageResolver.getIsNotEqualToMessage(compareTo.get())));
     }
+
+    public static <T, C extends Comparable<T>> Validation<C> isLessThan(T compareTo) {
+        return isLessThan(() -> compareTo);
+    }
+
+    public static <T, C extends Comparable<T>> Validation<C> isLessThan(Supplier<T> compareTo) {
+        return validations.isLessThan(compareTo,
+                () -> withMessage(messageResolver.getIsLessThanMessage(compareTo.get())));
+    }
+
+    public static <T, C extends Comparable<T>> Validation<C> isGreaterThan(T compareTo) {
+        return isGreaterThan((() -> compareTo));
+    }
+
+    public static <T, C extends Comparable<T>> Validation<C> isGreaterThan(Supplier<T> compareTo) {
+        return validations.isGreaterThan(compareTo,
+                () -> withMessage(messageResolver.getIsGreaterThanMessage(compareTo.get())));
+    }
+
+    public static <T, C extends Comparable<T>> Validation<C> isBetween(T min, T max) {
+        return isBetween(() -> min, () -> max);
+    }
+
+    public static <T, C extends Comparable<T>> Validation<C> isBetween(Supplier<T> min, Supplier<T> max) {
+        return validations.isBetween(min, max,
+                () -> withMessage(messageResolver.getIsBetweenMessage(min.get(), max.get())));
+    }
 }

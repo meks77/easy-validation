@@ -1,6 +1,6 @@
 package at.meks.validation.validations.string;
 
-import at.meks.validation.validations.AbstractCodeValidationsTest;
+import at.meks.validation.validations.AbstractErrorCodeValidationsTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -10,7 +10,7 @@ import java.lang.reflect.Modifier;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-public class StringValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<String> {
+public class StringValidationsWithErrorCodeTest extends AbstractErrorCodeValidationsTest<String> {
 
     @Mock
     private CoreStringValidations coreValidations;

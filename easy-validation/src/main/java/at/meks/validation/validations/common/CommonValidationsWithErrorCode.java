@@ -76,4 +76,31 @@ public class CommonValidationsWithErrorCode {
         return validations.isNotEqualTo(compareTo,
                 () -> withCode(messageResolver.getIsNotEqualToMessage(compareTo.get()), errorCode));
     }
+
+    public static <T, C extends Comparable<T>> Validation<C> isLessThan(T compareTo, String errorCode) {
+        return isLessThan(() -> compareTo, errorCode);
+    }
+
+    public static <T, C extends Comparable<T>> Validation<C> isLessThan(Supplier<T> compareTo, String errorCode) {
+        return validations.isLessThan(compareTo,
+                () -> withCode(messageResolver.getIsLessThanMessage(compareTo.get()), errorCode));
+    }
+
+    public static <T, C extends Comparable<T>> Validation<C> isGreaterThan(T compareTo, String errorCode) {
+        return isGreaterThan(() -> compareTo, errorCode);
+    }
+
+    public static <T, C extends Comparable<T>> Validation<C> isGreaterThan(Supplier<T> compareTo, String errorCode) {
+        return validations.isGreaterThan(compareTo,
+                () -> withCode(messageResolver.getIsGreaterThanMessage(compareTo.get()), errorCode));
+    }
+
+    public static <T, C extends Comparable<T>> Validation<C> isBetween(T min, T max, String errorCode) {
+        return isBetween(() -> min, () -> max, errorCode);
+    }
+
+    public static <T, C extends Comparable<T>> Validation<C> isBetween(Supplier<T> min, Supplier<T> max, String errorCode) {
+        return validations.isBetween(min, max,
+                () -> withCode(messageResolver.getIsBetweenMessage(min.get(), max.get()), errorCode));
+    }
 }

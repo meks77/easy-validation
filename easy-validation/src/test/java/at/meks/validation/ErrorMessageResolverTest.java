@@ -111,18 +111,18 @@ public class ErrorMessageResolverTest {
     }
 
     @Test
-    public void getIsNumberLessThanMessage() {
-        assertThat(resolver.getIsNumberLessThanMessage(6)).isEqualTo("value must be less than 6");
+    public void getIsLessThanMessage() {
+        assertThat(resolver.getIsLessThanMessage(6)).isEqualTo("value must be less than 6");
     }
 
     @Test
-    public void getIsNumberGreaterThanMessage() {
-        assertThat(resolver.getIsNumberGreaterThanMessage(6)).isEqualTo("value must be greater than 6");
+    public void getIsGreaterThanMessage() {
+        assertThat(resolver.getIsGreaterThanMessage(6)).isEqualTo("value must be greater than 6");
     }
 
     @Test
-    public void getNumberIsBetweenMessage() {
-        assertThat(resolver.getNumberIsBetweenMessage(4, 6)).isEqualTo("value must be between 4 and 6");
+    public void getIsBetweenMessage() {
+        assertThat(resolver.getIsBetweenMessage(4, 6)).isEqualTo("value must be between 4 and 6");
     }
 
     @Test

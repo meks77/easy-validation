@@ -10,7 +10,7 @@ import java.lang.reflect.Modifier;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-public class CommonValidationsTest extends AbstractValidationsTest<Object> {
+public class CommonValidationsTest extends AbstractValidationsTest {
 
     @Mock
     private CoreCommonValidations coreValidations;
@@ -50,4 +50,19 @@ public class CommonValidationsTest extends AbstractValidationsTest<Object> {
 
     @Test
     public void testIsNotEqualTo() { testHelper.testIsNotEqualTo(CommonValidations::isNotEqualTo);}
+
+    @Test
+    public void testIsLessThan() {
+        testHelper.testIsLessThan(CommonValidations::isLessThan);
+    }
+
+    @Test
+    public void testIsGreaterThan() {
+        testHelper.testIsGreaterThan(CommonValidations::isGreaterThan);
+    }
+
+    @Test
+    public void testIsBetween() {
+        testHelper.testIsBetween(CommonValidations::isBetween);
+    }
 }

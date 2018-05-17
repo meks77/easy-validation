@@ -1,7 +1,7 @@
 package at.meks.validation.validations.list;
 
 import at.meks.validation.Validation;
-import at.meks.validation.validations.AbstractCodeValidationsTest;
+import at.meks.validation.validations.AbstractErrorCodeValidationsTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -15,7 +15,7 @@ import java.util.function.Function;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 
-public class ListValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<List<String>> {
+public class ListValidationsWithErrorCodeTest extends AbstractErrorCodeValidationsTest<List<String>> {
 
     @Mock
     private CoreListValidations coreValidations;

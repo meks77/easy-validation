@@ -5,5 +5,5 @@ import at.meks.validation.Validation;
 @FunctionalInterface
 public interface IsBetween {
 
-    Validation<Number> isBetween(Number min, Number max);
+    Validation<Comparable<Number>> isBetween(Number min, Number max);
 }

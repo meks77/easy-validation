@@ -1,6 +1,6 @@
 package at.meks.validation.validations.common;
 
-import at.meks.validation.validations.AbstractCodeValidationsTest;
+import at.meks.validation.validations.AbstractErrorCodeValidationsTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -8,12 +8,15 @@ import org.mockito.Mock;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 
+import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.isBetween;
 import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.isEqualTo;
+import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.isGreaterThan;
+import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.isLessThan;
 import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.isNotEqualTo;
 import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.notNull;
 import static org.fest.assertions.api.Assertions.assertThat;
 
-public class CommonValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<Object> {
+public class CommonValidationsWithErrorCodeTest extends AbstractErrorCodeValidationsTest {
 
     @Mock
     private CoreCommonValidations coreValidations;
@@ -54,4 +57,19 @@ public class CommonValidationsWithErrorCodeTest extends AbstractCodeValidationsT
 
     @Test
     public void testIsNotEqualTo() { testHelper.testIsNotEqualTo(validated -> isNotEqualTo(validated, EXPECTED_CODE));}
+
+    @Test
+    public void testIsLessThan() {
+        testHelper.testIsLessThan(compareTo -> isLessThan(compareTo, EXPECTED_CODE));
+    }
+
+    @Test
+    public void testIsGreaterThan() {
+        testHelper.testIsGreaterThan(compareTo -> isGreaterThan(compareTo, EXPECTED_CODE));
+    }
+
+    @Test
+    public void testIsBetween() {
+        testHelper.testIsBetween((min, max) -> isBetween(min, max, EXPECTED_CODE));
+    }
 }

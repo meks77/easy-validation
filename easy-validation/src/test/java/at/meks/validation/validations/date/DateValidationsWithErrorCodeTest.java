@@ -1,6 +1,6 @@
 package at.meks.validation.validations.date;
 
-import at.meks.validation.validations.AbstractCodeValidationsTest;
+import at.meks.validation.validations.AbstractErrorCodeValidationsTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-public class DateValidationsWithErrorCodeTest extends AbstractCodeValidationsTest<LocalDateTime> {
+public class DateValidationsWithErrorCodeTest extends AbstractErrorCodeValidationsTest<LocalDateTime> {
 
     @Mock
     private CoreDateValidations coreValidations;

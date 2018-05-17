@@ -41,21 +41,6 @@ public class NumberValidationsTest extends AbstractValidationsTest<Number> {
     }
 
     @Test
-    public void testIsLessThan() {
-        testHelper.testIsLessThan(NumberValidations::isLessThan);
-    }
-
-    @Test
-    public void testIsGreaterThan() {
-        testHelper.testIsGreaterThan(NumberValidations::isGreaterThan);
-    }
-
-    @Test
-    public void testIsBetween() {
-        testHelper.testIsBetween(NumberValidations::isBetween);
-    }
-
-    @Test
     public void testIsInt() {
         testHelper.testIsInt(NumberValidations::isInt);
     }

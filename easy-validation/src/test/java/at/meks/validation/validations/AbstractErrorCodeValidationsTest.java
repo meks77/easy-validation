@@ -4,7 +4,7 @@ import at.meks.validation.result.ErrorDescription;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-public abstract class AbstractCodeValidationsTest<T> extends AbstractValidationsTest<T> {
+public abstract class AbstractErrorCodeValidationsTest<T> extends AbstractValidationsTest<T> {
 
     protected static final String EXPECTED_CODE = "my expected code";
 

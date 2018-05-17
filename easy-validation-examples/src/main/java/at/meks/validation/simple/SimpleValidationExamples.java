@@ -10,10 +10,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.logging.Logger;
 
+import static at.meks.validation.validations.common.CommonValidations.isBetween;
 import static at.meks.validation.validations.common.CommonValidations.isEqualTo;
-import static at.meks.validation.validations.number.NumberValidations.isBetween;
-import static at.meks.validation.validations.number.NumberValidations.isGreaterThan;
-import static at.meks.validation.validations.number.NumberValidations.isLessThan;
+import static at.meks.validation.validations.common.CommonValidations.isGreaterThan;
+import static at.meks.validation.validations.common.CommonValidations.isLessThan;
 import static at.meks.validation.validations.string.StringValidations.contains;
 import static at.meks.validation.validations.string.StringValidations.isInList;
 import static at.meks.validation.validations.string.StringValidations.isNotBlank;

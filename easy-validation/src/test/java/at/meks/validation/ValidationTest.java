@@ -4,7 +4,7 @@ import at.meks.validation.result.ValidationResult;
 import at.meks.validation.validations.common.CommonValidations;
 import org.junit.Test;
 
-import static at.meks.validation.validations.number.NumberValidations.isGreaterThan;
+import static at.meks.validation.validations.common.CommonValidations.isGreaterThan;
 import static at.meks.validation.validations.string.StringValidations.hasLength;
 import static at.meks.validation.validations.string.StringValidations.isNotBlank;
 import static at.meks.validation.validations.string.StringValidations.isNumeric;
@@ -43,19 +43,19 @@ public class ValidationTest {
 
     @Test
     public void givenNumericStringWhenIsNumericCanBeCombinedWithNumberValidationsReturnsOk() {
-        Validation<String> validation = isNumeric().and(Long::parseLong,isGreaterThan(5));
+        Validation<String> validation = isNumeric().and(Long::parseLong, isGreaterThan(5L));
         assertValidResult(validation.test("11"));
     }
 
     @Test
     public void givenNumericStringWhenIsNumericCanBeCombinedWithNumberValidationsReturnsNumericError() {
-        Validation<String> validation = isNumeric().and(Long::parseLong, isGreaterThan(5));
+        Validation<String> validation = isNumeric().and(Long::parseLong, isGreaterThan(5L));
         assertErrorResult(validation.test("4"), "value must be greater than 5");
     }
 
     @Test
     public void givenNotNumericStringWhenIsNumericCanBeCombinedWithNumberValidationsReturnsError() {
-        Validation<String> validation = isNumeric().and(Long::parseLong,isGreaterThan(5));
+        Validation<String> validation = isNumeric().and(Long::parseLong,isGreaterThan(5L));
         assertErrorResult(validation.test("a"), "value must be numeric");
     }
 

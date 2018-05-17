@@ -101,15 +101,15 @@ public class ErrorMessageResolver {
         return format("size of list mustn't be greater than %s", size);
     }
 
-    public String getIsNumberLessThanMessage(Number compareTo) {
+    public String getIsLessThanMessage(Object compareTo) {
         return format("value must be less than %s", compareTo);
     }
 
-    public String getIsNumberGreaterThanMessage(Number compareTo) {
+    public String getIsGreaterThanMessage(Object compareTo) {
         return format("value must be greater than %s", compareTo);
     }
 
-    public String getNumberIsBetweenMessage(Number min, Number max) {
+    public String getIsBetweenMessage(Object min, Object max) {
         return format("value must be between %s and %s", min, max);
     }
 
