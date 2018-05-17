@@ -77,29 +77,78 @@ public class CommonValidationsWithErrorCode {
                 () -> withCode(MESSAGE_RESOLVER.getIsNotEqualToMessage(compareTo.get()), errorCode));
     }
 
-
+    /**
+     * returns a validation which validates that the validated value is less than another one.
+     * @param compareTo the validated value is compared to this one
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @param <T>   type of the tested value
+     * @param <C>   the comparable to T
+     * @return  new instance of a validation
+     */
     public static <T, C extends Comparable<T>> Validation<C> isLessThan(T compareTo, String errorCode) {
         return isLessThan(() -> compareTo, errorCode);
     }
 
+    /**
+     * returns a validation which validates that the validated value is less than another one.
+     * @param compareTo the validated value is compared to this one
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @param <T>   type of the tested value
+     * @param <C>   the comparable to T
+     * @return  new instance of a validation
+     */
     public static <T, C extends Comparable<T>> Validation<C> isLessThan(Supplier<T> compareTo, String errorCode) {
         return VALIDATIONS.isLessThan(compareTo,
                 () -> withCode(MESSAGE_RESOLVER.getIsLessThanMessage(compareTo.get()), errorCode));
     }
 
+    /**
+     * returns a validation which validates that the validated value is greater than another one.
+     * @param compareTo the validated value is compared to this one
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @param <T>   type of the tested value
+     * @param <C>   the comparable to T
+     * @return  new instance of a validation
+     */
     public static <T, C extends Comparable<T>> Validation<C> isGreaterThan(T compareTo, String errorCode) {
         return isGreaterThan(() -> compareTo, errorCode);
     }
 
+    /**
+     * returns a validation which validates that the validated value is greater than another one.
+     * @param compareTo the validated value is compared to this one
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @param <T>   type of the tested value
+     * @param <C>   the comparable to T
+     * @return  new instance of a validation
+     */
     public static <T, C extends Comparable<T>> Validation<C> isGreaterThan(Supplier<T> compareTo, String errorCode) {
         return VALIDATIONS.isGreaterThan(compareTo,
                 () -> withCode(MESSAGE_RESOLVER.getIsGreaterThanMessage(compareTo.get()), errorCode));
     }
 
+    /**
+     * returns a validation which validates that the validated value is between two another values.
+     * @param min the minimum allowed value
+     * @param max the maximum allowed value
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @param <T>   type of the tested value
+     * @param <C>   the comparable to T
+     * @return  new instance of a validation
+     */
     public static <T, C extends Comparable<T>> Validation<C> isBetween(T min, T max, String errorCode) {
         return isBetween(() -> min, () -> max, errorCode);
     }
 
+    /**
+     * returns a validation which validates that the validated value is between two another values.
+     * @param min the minimum allowed value
+     * @param max the maximum allowed value
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @param <T>   type of the tested value
+     * @param <C>   the comparable to T
+     * @return  new instance of a validation
+     */
     public static <T, C extends Comparable<T>> Validation<C> isBetween(Supplier<T> min, Supplier<T> max, String errorCode) {
         return VALIDATIONS.isBetween(min, max,
                 () -> withCode(MESSAGE_RESOLVER.getIsBetweenMessage(min.get(), max.get()), errorCode));
