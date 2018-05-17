@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class CoreNumberValidationsTest extends AbstractCoreValidationsTest {
 
-    private CoreNumberValidations validations = new CoreNumberValidations();
+    private final CoreNumberValidations validations = new CoreNumberValidations();
 
     @Test
     public void givenMinIntWhenIsIntReturnsOk() {

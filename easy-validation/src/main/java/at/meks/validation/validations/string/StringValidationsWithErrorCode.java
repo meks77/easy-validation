@@ -13,8 +13,8 @@ import static at.meks.validation.result.ErrorDescriptionBuilder.withCode;
 @SuppressWarnings("WeakerAccess")
 public class StringValidationsWithErrorCode {
 
-    private static ErrorMessageResolver messageResolver = new ErrorMessageResolver();
-    private static CoreStringValidations validations = new CoreStringValidations();
+    private static final ErrorMessageResolver MESSAGE_RESOLVER = new ErrorMessageResolver();
+    private static final CoreStringValidations VALIDATIONS = new CoreStringValidations();
 
     private StringValidationsWithErrorCode() { }
 
@@ -23,8 +23,8 @@ public class StringValidationsWithErrorCode {
     }
 
     public static Validation<String> lengthIsMoreThan(Supplier<Integer> size, String errorCode){
-        return validations.lengthIsMoreThan(size,
-                () -> withCode(messageResolver.getLengthIsMoreThanMessage(size.get()), errorCode));
+        return VALIDATIONS.lengthIsMoreThan(size,
+                () -> withCode(MESSAGE_RESOLVER.getLengthIsMoreThanMessage(size.get()), errorCode));
     }
 
     public static Validation<String> lengthIsLessThan(int size, String errorCode){
@@ -32,8 +32,8 @@ public class StringValidationsWithErrorCode {
     }
 
     public static Validation<String> lengthIsLessThan(Supplier<Integer> size, String errorCode){
-        return validations.lengthIsLessThan(size,
-                () -> withCode(messageResolver.getLengthIsLessThanMessage(size.get()), errorCode));
+        return VALIDATIONS.lengthIsLessThan(size,
+                () -> withCode(MESSAGE_RESOLVER.getLengthIsLessThanMessage(size.get()), errorCode));
     }
 
     public static Validation<String> lengthIsBetween(int minSize, int maxSize,
@@ -43,9 +43,9 @@ public class StringValidationsWithErrorCode {
 
     public static Validation<String> lengthIsBetween(Supplier<Integer> minSize, Supplier<Integer> maxSize,
                                                      String minSizeErrorCode, String maxSizeErrorCode){
-        return validations.lengthIsBetween(minSize, maxSize,
-                () -> withCode(messageResolver.getLengthIsLessThanMessage(maxSize.get() + 1), maxSizeErrorCode),
-                () -> withCode(messageResolver.getLengthIsMoreThanMessage(minSize.get() - 1), minSizeErrorCode));
+        return VALIDATIONS.lengthIsBetween(minSize, maxSize,
+                () -> withCode(MESSAGE_RESOLVER.getLengthIsLessThanMessage(maxSize.get() + 1), maxSizeErrorCode),
+                () -> withCode(MESSAGE_RESOLVER.getLengthIsMoreThanMessage(minSize.get() - 1), minSizeErrorCode));
     }
 
     public static Validation<String> hasLength(int length, String errorCode) {
@@ -53,8 +53,8 @@ public class StringValidationsWithErrorCode {
     }
 
     public static Validation<String> hasLength(Supplier<Integer> length, String errorCode) {
-        return validations.hasLength(length,
-                () -> withCode(messageResolver.getHasLengthMessage(length.get()), errorCode));
+        return VALIDATIONS.hasLength(length,
+                () -> withCode(MESSAGE_RESOLVER.getHasLengthMessage(length.get()), errorCode));
     }
 
     public static Validation<String> contains(String contained, String errorCode){
@@ -62,22 +62,22 @@ public class StringValidationsWithErrorCode {
     }
 
     public static Validation<String> contains(Supplier<String> contained, String errorCode){
-        return validations.contains(contained,
-                () -> withCode(messageResolver.getContainsMessage(contained.get()), errorCode));
+        return VALIDATIONS.contains(contained,
+                () -> withCode(MESSAGE_RESOLVER.getContainsMessage(contained.get()), errorCode));
     }
 
     public static Validation<String> isNotBlank(String errorCode) {
-        return validations.isNotBlank(withCode(messageResolver.getIsNotBlankMessage(), errorCode));
+        return VALIDATIONS.isNotBlank(withCode(MESSAGE_RESOLVER.getIsNotBlankMessage(), errorCode));
     }
 
     public static Validation<String> isInArray(Supplier<String[]> validValueSupplier, String errorCode) {
-        return validations.isInArray(validValueSupplier,
-                () -> withCode(messageResolver.getIsInListMessage(Arrays.asList(validValueSupplier.get())), errorCode));
+        return VALIDATIONS.isInArray(validValueSupplier,
+                () -> withCode(MESSAGE_RESOLVER.getIsInListMessage(Arrays.asList(validValueSupplier.get())), errorCode));
     }
 
     public static Validation<String> isInList(Supplier<Collection<String>> validValueSupplier, String errorCode) {
-        return validations.isInList(validValueSupplier,
-                () -> withCode(messageResolver.getIsInListMessage(validValueSupplier.get()), errorCode));
+        return VALIDATIONS.isInList(validValueSupplier,
+                () -> withCode(MESSAGE_RESOLVER.getIsInListMessage(validValueSupplier.get()), errorCode));
     }
 
     public static Validation<String> isDate(DateTimeFormatter formatter, String errorCode) {
@@ -85,12 +85,12 @@ public class StringValidationsWithErrorCode {
     }
 
     public static Validation<String> isDate(Supplier<DateTimeFormatter> formatter, String errorCode) {
-        return validations.isDate(formatter,
-                () -> withCode(messageResolver.getIsDateMessage(formatter.get()), errorCode));
+        return VALIDATIONS.isDate(formatter,
+                () -> withCode(MESSAGE_RESOLVER.getIsDateMessage(formatter.get()), errorCode));
     }
 
     public static Validation<String> isNumeric(String errorCode) {
-        return validations.isNumeric(withCode(messageResolver.getIsNumericMessage(), errorCode));
+        return VALIDATIONS.isNumeric(withCode(MESSAGE_RESOLVER.getIsNumericMessage(), errorCode));
     }
 
     public static Validation<String> containsNotOnly(String containedValue, String errorCode) {
@@ -98,7 +98,7 @@ public class StringValidationsWithErrorCode {
     }
 
     public static Validation<String> containsNotOnly(Supplier<String> containedValue, String errorCode) {
-        return validations.containsNotOnly(containedValue,
-                () -> withCode(messageResolver.getContainsNotOnlyMessage(containedValue.get()), errorCode));
+        return VALIDATIONS.containsNotOnly(containedValue,
+                () -> withCode(MESSAGE_RESOLVER.getContainsNotOnlyMessage(containedValue.get()), errorCode));
     }
 }

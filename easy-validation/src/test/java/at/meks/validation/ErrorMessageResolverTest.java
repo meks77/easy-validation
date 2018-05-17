@@ -10,7 +10,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 
 public class ErrorMessageResolverTest {
 
-    private ErrorMessageResolver resolver = new ErrorMessageResolver();
+    private final ErrorMessageResolver resolver = new ErrorMessageResolver();
 
     @Test
     public void getLengthIsMoreThanMessage() {

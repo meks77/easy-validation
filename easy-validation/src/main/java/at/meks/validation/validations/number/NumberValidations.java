@@ -8,22 +8,22 @@ import static at.meks.validation.result.ErrorDescriptionBuilder.withMessage;
 @SuppressWarnings("WeakerAccess")
 public class NumberValidations {
 
-    private static ErrorMessageResolver messageResolver = new ErrorMessageResolver();
-    private static CoreNumberValidations validations = new CoreNumberValidations();
+    private static final ErrorMessageResolver MESSAGE_RESOLVER = new ErrorMessageResolver();
+    private static final CoreNumberValidations VALIDATIONS = new CoreNumberValidations();
 
     private NumberValidations() {
 
     }
 
     public static <T extends Number> Validation<T> isInt() {
-        return validations.isInt(withMessage(messageResolver.getIsIntMessage()));
+        return VALIDATIONS.isInt(withMessage(MESSAGE_RESOLVER.getIsIntMessage()));
     }
 
     public static <T extends Number> Validation<T> isByte() {
-        return validations.isByte(withMessage(messageResolver.getIsByteMessage()));
+        return VALIDATIONS.isByte(withMessage(MESSAGE_RESOLVER.getIsByteMessage()));
     }
 
     public static <T extends Number> Validation<T> isShort() {
-        return validations.isShort(withMessage(messageResolver.getIsShortMessage()));
+        return VALIDATIONS.isShort(withMessage(MESSAGE_RESOLVER.getIsShortMessage()));
     }
 }

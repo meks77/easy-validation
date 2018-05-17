@@ -16,9 +16,9 @@ import static at.meks.validation.result.ErrorDescriptionBuilder.withCode;
 @SuppressWarnings("WeakerAccess")
 public class ListValidationsWithErrorCode {
 
-    private static ErrorMessageResolver messageResolver = new ErrorMessageResolver();
+    private static final ErrorMessageResolver MESSAGE_RESOLVER = new ErrorMessageResolver();
 
-    private static CoreListValidations validations = new CoreListValidations();
+    private static final CoreListValidations VALIDATIONS = new CoreListValidations();
 
     private ListValidationsWithErrorCode() {
 
@@ -43,8 +43,8 @@ public class ListValidationsWithErrorCode {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> containsOnly(Supplier<T> containedValue, String errorCode) {
-        return validations.containsOnly(containedValue,
-                () -> withCode(messageResolver.getListContainsOnlyMessage(containedValue.get()), errorCode));
+        return VALIDATIONS.containsOnly(containedValue,
+                () -> withCode(MESSAGE_RESOLVER.getListContainsOnlyMessage(containedValue.get()), errorCode));
     }
 
     /**
@@ -66,8 +66,8 @@ public class ListValidationsWithErrorCode {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> contains(Supplier<T> containedValue, String errorCode) {
-        return validations.contains(containedValue,
-                () -> withCode(messageResolver.getListContainsMessage(containedValue.get()), errorCode));
+        return VALIDATIONS.contains(containedValue,
+                () -> withCode(MESSAGE_RESOLVER.getListContainsMessage(containedValue.get()), errorCode));
     }
 
     /**
@@ -89,8 +89,8 @@ public class ListValidationsWithErrorCode {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> doesNotContain(Supplier<T> excludedValue, String errorCode) {
-        return validations.doesNotContain(excludedValue,
-                () -> withCode(messageResolver.getListDoesNotContainMessage(excludedValue.get()), errorCode));
+        return VALIDATIONS.doesNotContain(excludedValue,
+                () -> withCode(MESSAGE_RESOLVER.getListDoesNotContainMessage(excludedValue.get()), errorCode));
     }
 
     /**
@@ -100,7 +100,7 @@ public class ListValidationsWithErrorCode {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> isNotEmpty(String errorCode) {
-        return validations.isNotEmpty(withCode(messageResolver.getListIsNotEmptyMessage(), errorCode));
+        return VALIDATIONS.isNotEmpty(withCode(MESSAGE_RESOLVER.getListIsNotEmptyMessage(), errorCode));
     }
 
     /**
@@ -110,7 +110,7 @@ public class ListValidationsWithErrorCode {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> isEmpty(String errorCode) {
-        return validations.isEmpty(withCode(messageResolver.getListIsEmptyMessage(), errorCode));
+        return VALIDATIONS.isEmpty(withCode(MESSAGE_RESOLVER.getListIsEmptyMessage(), errorCode));
     }
 
     /**
@@ -132,7 +132,7 @@ public class ListValidationsWithErrorCode {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> hasSize(Supplier<Integer> size, String errorCode) {
-        return validations.hasSize(size, () -> withCode(messageResolver.getListHasSizeMessage(size.get()), errorCode));
+        return VALIDATIONS.hasSize(size, () -> withCode(MESSAGE_RESOLVER.getListHasSizeMessage(size.get()), errorCode));
     }
 
     /**
@@ -154,7 +154,7 @@ public class ListValidationsWithErrorCode {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> hasMinSize(Supplier<Integer> size, String errorCode) {
-        return validations.hasMinSize(size, () -> withCode(messageResolver.getListHasMinSizeMessage(size.get()), errorCode));
+        return VALIDATIONS.hasMinSize(size, () -> withCode(MESSAGE_RESOLVER.getListHasMinSizeMessage(size.get()), errorCode));
     }
 
     /**
@@ -176,7 +176,7 @@ public class ListValidationsWithErrorCode {
      * @return  new instance of list validation
      */
     public static <T> Validation<List<T>> hasMaxSize(Supplier<Integer> size, String errorCode) {
-        return validations.hasMaxSize(size, () -> withCode(messageResolver.getListHasMaxSizeMessage(size.get()), errorCode));
+        return VALIDATIONS.hasMaxSize(size, () -> withCode(MESSAGE_RESOLVER.getListHasMaxSizeMessage(size.get()), errorCode));
     }
 
     /**
@@ -188,7 +188,7 @@ public class ListValidationsWithErrorCode {
      * @return  new instance of a list validation
      */
     public static <T, E> Validation<List<T>> onProperty(Function<T, E> function, Validation<List<E>> validation) {
-        return validations.onProperty(function, validation);
+        return VALIDATIONS.onProperty(function, validation);
     }
 
     /**
@@ -202,6 +202,6 @@ public class ListValidationsWithErrorCode {
      */
     public static <T> Validation<List<T>> forType(Class<T> listType,
                                                   Validation<List<T>> validation) {
-        return validations.forType(listType, validation);
+        return VALIDATIONS.forType(listType, validation);
     }
 }

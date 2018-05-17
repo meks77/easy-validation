@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class CoreCommonValidationsTest extends AbstractCoreValidationsTest {
 
-    private CoreCommonValidations validations = new CoreCommonValidations();
+    private final CoreCommonValidations validations = new CoreCommonValidations();
 
     @Test
     public void givenNotNullWhenNotNullReturnsValidResult() {

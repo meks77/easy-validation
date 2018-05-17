@@ -30,8 +30,10 @@ class CommonsValidationsTestHelper {
 
     void testNotNull(Supplier<Validation<Object>> methodInvoker) {
         when(test.getMessageResolver().getNotNullMessage()).thenReturn(test.getExpectedMessage());
+        //noinspection unchecked
         when(coreValidations.notNull(Mockito.any(ErrorDescription.class))).thenReturn(test.getExpectedValidation());
         Validation<Object> validation = methodInvoker.get();
+        //noinspection unchecked
         test.doAssertionsAndVerifications(validation,
                 errorDescCaptor -> verify(coreValidations).notNull(errorDescCaptor.capture()));
     }
@@ -39,9 +41,11 @@ class CommonsValidationsTestHelper {
     void testIsEqualTo(Function<Object, Validation<Object>> methodInvoker) {
         Object compareTo = "whatever";
         when(test.getMessageResolver().getIsEqualToMessage(compareTo)).thenReturn(test.getExpectedMessage());
+        //noinspection unchecked
         when(coreValidations.isEqualTo(TestUtils.anySupplier(), TestUtils.anySupplier())).thenReturn(test.getExpectedValidation());
         Validation<Object> validation = methodInvoker.apply(compareTo);
         ArgumentCaptor<Supplier<Object>> valueCaptor = getSupplierCaptor();
+        //noinspection unchecked
         test.doAssertionsAndVerificationsWithSupplier(validation,
                 errorDescCaptor -> verify(coreValidations).isEqualTo(valueCaptor.capture(), errorDescCaptor.capture()));
         assertSupplierValue(compareTo, valueCaptor);
@@ -50,9 +54,11 @@ class CommonsValidationsTestHelper {
     void testIsNotEqualTo(Function<Object, Validation<Object>> methodInvoker) {
         Object compareTo = "whatever";
         when(test.getMessageResolver().getIsNotEqualToMessage(compareTo)).thenReturn(test.getExpectedMessage());
+        //noinspection unchecked
         when(coreValidations.isNotEqualTo(TestUtils.anySupplier(), TestUtils.anySupplier())).thenReturn(test.getExpectedValidation());
         Validation<Object> validation = methodInvoker.apply(compareTo);
         ArgumentCaptor<Supplier<Object>> valueCaptor = getSupplierCaptor();
+        //noinspection unchecked
         test.doAssertionsAndVerificationsWithSupplier(validation,
                 errorDescCaptor -> verify(coreValidations).isNotEqualTo(valueCaptor.capture(), errorDescCaptor.capture()));
         assertSupplierValue(compareTo, valueCaptor);
@@ -65,6 +71,7 @@ class CommonsValidationsTestHelper {
 
         Validation<Comparable<Number>> validation = methodInvoker.apply(compareTo);
         ArgumentCaptor<Supplier<Number>> valueCaptor = getSupplierCaptor();
+        //noinspection unchecked
         test.doAssertionsAndVerificationsWithSupplier(validation,
                 errorDescCaptor ->  verify(coreValidations).isLessThan(valueCaptor.capture(), errorDescCaptor.capture()));
         assertSupplierValue(compareTo, valueCaptor);
@@ -77,6 +84,7 @@ class CommonsValidationsTestHelper {
 
         Validation<Comparable<Number>> validation = methodInvoker.apply(compareTo);
         ArgumentCaptor<Supplier<Number>> valueCaptor = getSupplierCaptor();
+        //noinspection unchecked
         test.doAssertionsAndVerificationsWithSupplier(validation,
                 errorDescCaptor ->  verify(coreValidations).isGreaterThan(valueCaptor.capture(), errorDescCaptor.capture()));
         assertSupplierValue(compareTo, valueCaptor);
@@ -92,6 +100,7 @@ class CommonsValidationsTestHelper {
         Validation<Comparable<Number>> validation = methodInvoker.isBetween(min, max);
         ArgumentCaptor<Supplier<Number>> minCaptor = getSupplierCaptor();
         ArgumentCaptor<Supplier<Number>> maxCaptor = getSupplierCaptor();
+        //noinspection unchecked
         test.doAssertionsAndVerificationsWithSupplier(validation,
                 errorDescCaptor ->  verify(coreValidations).isBetween(minCaptor.capture(), maxCaptor.capture(), errorDescCaptor.capture()));
         assertSupplierValue(min, minCaptor);

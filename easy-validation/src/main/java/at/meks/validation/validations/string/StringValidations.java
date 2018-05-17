@@ -16,8 +16,8 @@ import static at.meks.validation.result.ErrorDescriptionBuilder.withMessage;
 @SuppressWarnings("WeakerAccess")
 public class StringValidations {
 
-    private static ErrorMessageResolver messageResolver = new ErrorMessageResolver();
-    private static CoreStringValidations validations = new CoreStringValidations();
+    private static final ErrorMessageResolver MESSAGE_RESOLVER = new ErrorMessageResolver();
+    private static final CoreStringValidations VALIDATIONS = new CoreStringValidations();
 
     private StringValidations() { }
 
@@ -36,8 +36,8 @@ public class StringValidations {
      * @return  new validation instance
      */
     public static Validation<String> lengthIsMoreThan(Supplier<Integer> size){
-        return validations.lengthIsMoreThan(size,
-                () -> withMessage(messageResolver.getLengthIsMoreThanMessage(size.get())));
+        return VALIDATIONS.lengthIsMoreThan(size,
+                () -> withMessage(MESSAGE_RESOLVER.getLengthIsMoreThanMessage(size.get())));
     }
 
     /**
@@ -55,7 +55,7 @@ public class StringValidations {
      * @return  new validation instance
      */
     public static Validation<String> lengthIsLessThan(Supplier<Integer> size){
-        return validations.lengthIsLessThan(size, () -> withMessage(messageResolver.getLengthIsLessThanMessage(size.get())));
+        return VALIDATIONS.lengthIsLessThan(size, () -> withMessage(MESSAGE_RESOLVER.getLengthIsLessThanMessage(size.get())));
     }
 
     /**
@@ -75,9 +75,9 @@ public class StringValidations {
      * @return  new validation insstance
      */
     public static Validation<String> lengthIsBetween(Supplier<Integer> minSize, Supplier<Integer> maxSize){
-        return validations.lengthIsBetween(minSize, maxSize,
-                () -> withMessage(messageResolver.getLengthIsLessThanMessage(maxSize.get() + 1)),
-                () -> withMessage(messageResolver.getLengthIsMoreThanMessage(minSize.get() - 1)));
+        return VALIDATIONS.lengthIsBetween(minSize, maxSize,
+                () -> withMessage(MESSAGE_RESOLVER.getLengthIsLessThanMessage(maxSize.get() + 1)),
+                () -> withMessage(MESSAGE_RESOLVER.getLengthIsMoreThanMessage(minSize.get() - 1)));
     }
 
     /**
@@ -95,7 +95,7 @@ public class StringValidations {
      * @return  new validation instance
      */
     public static Validation<String> hasLength(Supplier<Integer> length) {
-        return validations.hasLength(length, () -> withMessage(messageResolver.getHasLengthMessage(length.get())));
+        return VALIDATIONS.hasLength(length, () -> withMessage(MESSAGE_RESOLVER.getHasLengthMessage(length.get())));
     }
 
     /**
@@ -113,7 +113,7 @@ public class StringValidations {
      * @return  new validation instance
      */
     public static Validation<String> contains(Supplier<String> contained){
-        return validations.contains(contained, () -> withMessage(messageResolver.getContainsMessage(contained.get())));
+        return VALIDATIONS.contains(contained, () -> withMessage(MESSAGE_RESOLVER.getContainsMessage(contained.get())));
     }
 
     /**
@@ -121,7 +121,7 @@ public class StringValidations {
      * @return  new validation instance
      */
     public static Validation<String> isNotBlank() {
-        return validations.isNotBlank(withMessage(messageResolver.getIsNotBlankMessage()));
+        return VALIDATIONS.isNotBlank(withMessage(MESSAGE_RESOLVER.getIsNotBlankMessage()));
     }
 
     /**
@@ -130,8 +130,8 @@ public class StringValidations {
      * @return  new validation instance
      */
     public static Validation<String> isInArray(Supplier<String[]> validValueSupplier) {
-        return validations.isInArray(validValueSupplier,
-                () -> withMessage(messageResolver.getIsInListMessage(Arrays.asList(validValueSupplier.get()))));
+        return VALIDATIONS.isInArray(validValueSupplier,
+                () -> withMessage(MESSAGE_RESOLVER.getIsInListMessage(Arrays.asList(validValueSupplier.get()))));
     }
 
     /**
@@ -140,8 +140,8 @@ public class StringValidations {
      * @return  new validation instance
      */
     public static Validation<String> isInList(Supplier<Collection<String>> validValueSupplier) {
-        return validations.isInList(validValueSupplier,
-                () -> withMessage(messageResolver.getIsInListMessage(validValueSupplier.get())));
+        return VALIDATIONS.isInList(validValueSupplier,
+                () -> withMessage(MESSAGE_RESOLVER.getIsInListMessage(validValueSupplier.get())));
     }
 
     /**
@@ -159,7 +159,7 @@ public class StringValidations {
      * @return  new validation instance
      */
     public static Validation<String> isDate(Supplier<DateTimeFormatter> formatter) {
-        return validations.isDate(formatter, () -> withMessage(messageResolver.getIsDateMessage(formatter.get())));
+        return VALIDATIONS.isDate(formatter, () -> withMessage(MESSAGE_RESOLVER.getIsDateMessage(formatter.get())));
     }
 
     /**
@@ -168,7 +168,7 @@ public class StringValidations {
      * @return new validation instance
      */
     public static Validation<String> isNumeric() {
-        return validations.isNumeric(withMessage(messageResolver.getIsNumericMessage()));
+        return VALIDATIONS.isNumeric(withMessage(MESSAGE_RESOLVER.getIsNumericMessage()));
     }
 
     /**
@@ -186,7 +186,7 @@ public class StringValidations {
      * @return  new validation instance
      */
     public static Validation<String> containsNotOnly(Supplier<String> containedValue) {
-        return validations.containsNotOnly(containedValue,
-                () -> withMessage(messageResolver.getContainsNotOnlyMessage(containedValue.get())));
+        return VALIDATIONS.containsNotOnly(containedValue,
+                () -> withMessage(MESSAGE_RESOLVER.getContainsNotOnlyMessage(containedValue.get())));
     }
 }

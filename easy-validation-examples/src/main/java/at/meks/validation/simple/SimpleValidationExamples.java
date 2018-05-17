@@ -21,7 +21,7 @@ import static at.meks.validation.validations.string.StringValidations.isNumeric;
 
 class SimpleValidationExamples {
 
-    private Logger logger = Logger.getLogger(getClass().getName());
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     void validateForNotBlankNumericAndThrow(String ageString) throws ValidationException {
         isNumeric().test(ageString).throwIfInvalid("age");

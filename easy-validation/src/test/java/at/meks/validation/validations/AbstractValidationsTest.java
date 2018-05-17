@@ -52,7 +52,7 @@ public abstract class AbstractValidationsTest<T> {
     @Before
     public void setStaticFieldMocks() {
         Whitebox.setInternalState(getTestedClass(), ErrorMessageResolver.class, messageResolver);
-        Whitebox.setInternalState(getTestedClass(), "validations", getCoreValidations());
+        Whitebox.setInternalState(getTestedClass(), "VALIDATIONS", getCoreValidations());
     }
 
     protected abstract Class<?> getTestedClass();

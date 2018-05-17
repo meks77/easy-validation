@@ -14,8 +14,8 @@ import static at.meks.validation.result.ErrorDescriptionBuilder.withCode;
 @SuppressWarnings("WeakerAccess")
 public class DateValidationsWithErrorCode {
 
-    private static ErrorMessageResolver messageResolver = new ErrorMessageResolver();
-    private static CoreDateValidations validations = new CoreDateValidations();
+    private static final ErrorMessageResolver MESSAGE_RESOLVER = new ErrorMessageResolver();
+    private static final CoreDateValidations VALIDATIONS = new CoreDateValidations();
 
     private DateValidationsWithErrorCode() {
     }
@@ -37,8 +37,8 @@ public class DateValidationsWithErrorCode {
      * @return  a new validation instance
      */
     public static Validation<LocalDateTime> isDateAfter(Supplier<LocalDateTime> minDateSupplier, String errorCode) {
-        return validations.isDateAfter(minDateSupplier,
-                () -> withCode(messageResolver.getIsDateAfterMessage(minDateSupplier.get()), errorCode));
+        return VALIDATIONS.isDateAfter(minDateSupplier,
+                () -> withCode(MESSAGE_RESOLVER.getIsDateAfterMessage(minDateSupplier.get()), errorCode));
     }
 
 }
