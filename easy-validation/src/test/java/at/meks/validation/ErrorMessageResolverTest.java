@@ -23,8 +23,8 @@ public class ErrorMessageResolverTest {
     }
 
     @Test
-    public void getHasLenghtMessage() {
-        assertThat(resolver.getHasLenghtMessage(4)).isEqualTo("length must be 4 chars");
+    public void getHasLengthMessage() {
+        assertThat(resolver.getHasLengthMessage(4)).isEqualTo("length must be 4 chars");
     }
 
     @Test

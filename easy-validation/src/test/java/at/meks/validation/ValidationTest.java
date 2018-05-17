@@ -19,7 +19,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void givenJoinedValdationsByAndWhenTestThenSecondValidationFails() {
+    public void givenJoinedValidationsByAndWhenTestThenSecondValidationFails() {
         ValidationResult result = CommonValidations.<String>notNull().and(isNotBlank()).test(" ");
         assertErrorResult(result, "mustn't be blank");
     }

@@ -17,8 +17,8 @@ class CoreCommonValidations {
         return SimpleValidation.from(validated -> Objects.equals(validated, compareTo.get()), errorDescription);
     }
 
-    <T> Validation<T> isNotEqualTo(Supplier<T> compareTo, Supplier<ErrorDescription> errorDescritpion) {
-        return SimpleValidation.from(validated -> !Objects.equals(validated, compareTo.get()), errorDescritpion);
+    <T> Validation<T> isNotEqualTo(Supplier<T> compareTo, Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(validated -> !Objects.equals(validated, compareTo.get()), errorDescription);
     }
 
     <T, C extends Comparable<T>> Validation<C> isLessThan(Supplier<T> compareTo,

@@ -54,7 +54,7 @@ public class StringValidationsWithErrorCode {
 
     public static Validation<String> hasLength(Supplier<Integer> length, String errorCode) {
         return validations.hasLength(length,
-                () -> withCode(messageResolver.getHasLenghtMessage(length.get()), errorCode));
+                () -> withCode(messageResolver.getHasLengthMessage(length.get()), errorCode));
     }
 
     public static Validation<String> contains(String contained, String errorCode){

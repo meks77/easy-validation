@@ -28,7 +28,7 @@ public class CommonValidationsWithErrorCode {
     }
 
     /**
-     * returns a validation which validates that the validated value is equal to anotherone. If both are null it is
+     * returns a validation which validates that the validated value is equal to another one. If both are null it is
      * also equal.
      * @param compareTo the validated value is compared to this one
      * @param errorCode in the case the validation violates this code is reported in the result
@@ -40,7 +40,7 @@ public class CommonValidationsWithErrorCode {
     }
 
     /**
-     * returns a validation which validates that the validated value is equal to anotherone. If both are null it is
+     * returns a validation which validates that the validated value is equal to another one. If both are null it is
      * also equal.
      * @param compareTo the validated value is compared to this one
      * @param errorCode in the case the validation violates this code is reported in the result
@@ -53,7 +53,7 @@ public class CommonValidationsWithErrorCode {
     }
 
     /**
-     * returns a validation which validates that the validated value is NOT equal to anotherone. If both are null it is
+     * returns a validation which validates that the validated value is NOT equal to another one. If both are null it is
      * also equal.
      * @param compareTo the validated value is compared to this one
      * @param errorCode in the case the validation violates this code is reported in the result
@@ -65,7 +65,7 @@ public class CommonValidationsWithErrorCode {
     }
 
     /**
-     * returns a validation which validates that the validated value is NOT equal to anotherone. If both are null it is
+     * returns a validation which validates that the validated value is NOT equal to another one. If both are null it is
      * also equal.
      * @param compareTo the validated value is compared to this one
      * @param errorCode in the case the validation violates this code is reported in the result
@@ -76,6 +76,7 @@ public class CommonValidationsWithErrorCode {
         return validations.isNotEqualTo(compareTo,
                 () -> withCode(messageResolver.getIsNotEqualToMessage(compareTo.get()), errorCode));
     }
+
 
     public static <T, C extends Comparable<T>> Validation<C> isLessThan(T compareTo, String errorCode) {
         return isLessThan(() -> compareTo, errorCode);

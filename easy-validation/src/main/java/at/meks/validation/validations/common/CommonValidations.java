@@ -26,7 +26,7 @@ public class CommonValidations {
     }
 
     /**
-     * returns a validation which validates that the validated value is equal to anotherone. If both are null it is
+     * returns a validation which validates that the validated value is equal to another one. If both are null it is
      * also equal.
      * @param compareTo the validated value is compared to this one
      * @param <T>   type of the tested value
@@ -37,7 +37,7 @@ public class CommonValidations {
     }
 
     /**
-     * returns a validation which validates that the validated value is equal to anotherone. If both are null it is
+     * returns a validation which validates that the validated value is equal to another one. If both are null it is
      * also equal.
      * @param compareTo the validated value is compared to this one
      * @param <T>   type of the tested value
@@ -48,7 +48,7 @@ public class CommonValidations {
     }
 
     /**
-     * returns a validation which validates that the validated value is NOT equal to anotherone. If both are null it is
+     * returns a validation which validates that the validated value is NOT equal to another one. If both are null it is
      * also equal.
      * @param compareTo the validated value is compared to this one
      * @param <T>   type of the tested value
@@ -59,7 +59,7 @@ public class CommonValidations {
     }
 
     /**
-     * returns a validation which validates that the validated value is NOT equal to anotherone. If both are null it is
+     * returns a validation which validates that the validated value is NOT equal to another one. If both are null it is
      * also equal.
      * @param compareTo the validated value is compared to this one
      * @param <T>   type of the tested value

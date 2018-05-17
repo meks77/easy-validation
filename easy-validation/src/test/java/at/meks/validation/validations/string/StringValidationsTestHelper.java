@@ -79,7 +79,7 @@ class StringValidationsTestHelper {
 
     void testHasLength(Function<Integer, Validation<String>> methodInvoker) {
         int length = 4;
-        doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getHasLenghtMessage(length);
+        doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getHasLengthMessage(length);
         doReturn(test.getExpectedValidation()).when(coreValidations).hasLength(anySupplier(), anySupplier());
         Validation<String> validation = methodInvoker.apply(length);
         ArgumentCaptor<Supplier<Integer>> valueCaptor = getSupplierCaptor();

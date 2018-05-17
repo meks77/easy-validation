@@ -95,7 +95,7 @@ public class StringValidations {
      * @return  new validation instance
      */
     public static Validation<String> hasLength(Supplier<Integer> length) {
-        return validations.hasLength(length, () -> withMessage(messageResolver.getHasLenghtMessage(length.get())));
+        return validations.hasLength(length, () -> withMessage(messageResolver.getHasLengthMessage(length.get())));
     }
 
     /**

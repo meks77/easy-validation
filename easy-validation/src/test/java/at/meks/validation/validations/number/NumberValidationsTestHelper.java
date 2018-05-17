@@ -20,33 +20,33 @@ class NumberValidationsTestHelper {
         this.test = testInstance;
     }
 
-    void testIsInt(Supplier<Validation<Number>> methodeInvoker) {
+    void testIsInt(Supplier<Validation<Number>> methodInvoker) {
         //noinspection ResultOfMethodCallIgnored
         doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getIsIntMessage();
         doReturn(test.getExpectedValidation()).when(coreValidations).isInt(any(ErrorDescription.class));
 
-        Validation<Number> validation = methodeInvoker.get();
+        Validation<Number> validation = methodInvoker.get();
         test.doAssertionsAndVerifications(validation,
                 errorDescCaptor ->  verify(coreValidations).isInt(errorDescCaptor.capture()));
     }
 
 
-    void testIsByte(Supplier<Validation<Number>> methodeInvoker) {
+    void testIsByte(Supplier<Validation<Number>> methodInvoker) {
         //noinspection ResultOfMethodCallIgnored
         doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getIsByteMessage();
         doReturn(test.getExpectedValidation()).when(coreValidations).isByte(any(ErrorDescription.class));
 
-        Validation<Number> validation = methodeInvoker.get();
+        Validation<Number> validation = methodInvoker.get();
         test.doAssertionsAndVerifications(validation,
                 errorDescCaptor ->  verify(coreValidations).isByte(errorDescCaptor.capture()));
     }
 
-    void testIsShort(Supplier<Validation<Number>> methodeInvoker) {
+    void testIsShort(Supplier<Validation<Number>> methodInvoker) {
         //noinspection ResultOfMethodCallIgnored
         doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getIsShortMessage();
         doReturn(test.getExpectedValidation()).when(coreValidations).isShort(any(ErrorDescription.class));
 
-        Validation<Number> validation = methodeInvoker.get();
+        Validation<Number> validation = methodInvoker.get();
         test.doAssertionsAndVerifications(validation,
                 errorDescCaptor ->  verify(coreValidations).isShort(errorDescCaptor.capture()));
     }

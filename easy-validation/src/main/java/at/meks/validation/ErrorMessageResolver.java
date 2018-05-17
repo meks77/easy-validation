@@ -16,10 +16,10 @@ import static java.lang.String.format;
  */
 public class ErrorMessageResolver {
 
-    private static final String MUSTN_T_BE_BLANK = "mustn't be blank";
+    private static final String MUST_NOT_BE_BLANK = "mustn't be blank";
     private static final String VALUE_MUST_BE_NUMERIC = "value must be numeric";
     private static final String MUST_NOT_BE_NULL = "must not be null";
-    private static final String LIST_MUSTN_T_BE_EMPTY = "list mustn't be empty";
+    private static final String LIST_MUST_NOT_BE_EMPTY = "list mustn't be empty";
     private static final String LIST_MUST_BE_EMPTY = "list must be empty";
     private static final String VALUE_MUST_BE_AN_INTEGER = "value must be an integer";
     private static final String VALUE_MUST_BE_A_BYTE = "value must be a byte";
@@ -33,7 +33,7 @@ public class ErrorMessageResolver {
         return format("must have less than %s chars", size);
     }
 
-    public String getHasLenghtMessage(int length) {
+    public String getHasLengthMessage(int length) {
         return format("length must be %s chars", length);
     }
 
@@ -42,7 +42,7 @@ public class ErrorMessageResolver {
     }
 
     public String getIsNotBlankMessage() {
-        return MUSTN_T_BE_BLANK;
+        return MUST_NOT_BE_BLANK;
     }
 
     public String getIsInListMessage(Collection<String> validValueSupplier) {
@@ -82,7 +82,7 @@ public class ErrorMessageResolver {
     }
 
     public String getListIsNotEmptyMessage() {
-        return LIST_MUSTN_T_BE_EMPTY;
+        return LIST_MUST_NOT_BE_EMPTY;
     }
 
     public String getListIsEmptyMessage() {
