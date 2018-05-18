@@ -4,7 +4,7 @@
 
     <groupId>at.meks</groupId>
     <artifactId>easy-validation-parent</artifactId>
-    <version>1.0.0-M4-SNAPSHOT</version>
+    <version>1.0.0-RC2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Easy Validation - Parent</name>
@@ -50,6 +50,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.3</version>
+                <configuration>
+                  <releaseProfiles>ossrh,sonar</releaseProfiles>
+                  <preparationGoals>clean org.jacoco:jacoco-maven-plugin:prepare-agent install</preparationGoal>
+                  <goals>deploy sonar:sonar</goals>
+                </configuration>
             </plugin>
         </plugins>
     </build>
