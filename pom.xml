@@ -52,7 +52,7 @@
                 <version>2.5.3</version>
                 <configuration>
                   <releaseProfiles>ossrh,sonar</releaseProfiles>
-                  <preparationGoals>clean org.jacoco:jacoco-maven-plugin:prepare-agent install</preparationGoal>
+                    <preparationGoals>clean org.jacoco:jacoco-maven-plugin:prepare-agent install</preparationGoals>
                   <goals>deploy sonar:sonar</goals>
                 </configuration>
             </plugin>
