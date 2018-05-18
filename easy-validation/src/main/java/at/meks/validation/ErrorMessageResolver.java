@@ -24,6 +24,7 @@ public class ErrorMessageResolver {
     private static final String VALUE_MUST_BE_AN_INTEGER = "value must be an integer";
     private static final String VALUE_MUST_BE_A_BYTE = "value must be a byte";
     private static final String VALUE_MUST_BE_A_SHORT = "value must be a short";
+    private static final String VALUE_MUST_BE_NULL = "value must be null";
 
     public String getLengthIsMoreThanMessage(int size) {
         return format("must have more than %s chars", size);
@@ -131,5 +132,9 @@ public class ErrorMessageResolver {
 
     public String getIsNotEqualToMessage(Object compareTo) {
         return format("value must not be equal to %s", compareTo);
+    }
+
+    public String getIsNullMessage() {
+        return VALUE_MUST_BE_NULL;
     }
 }

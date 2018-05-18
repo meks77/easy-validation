@@ -38,6 +38,16 @@ class CommonsValidationsTestHelper {
                 errorDescCaptor -> verify(coreValidations).notNull(errorDescCaptor.capture()));
     }
 
+    void testIsNull(Supplier<Validation<Object>> methodInvoker) {
+        when(test.getMessageResolver().getIsNullMessage()).thenReturn(test.getExpectedMessage());
+        //noinspection unchecked
+        when(coreValidations.isNull(Mockito.any(ErrorDescription.class))).thenReturn(test.getExpectedValidation());
+        Validation<Object> validation = methodInvoker.get();
+        //noinspection unchecked
+        test.doAssertionsAndVerifications(validation,
+                errorDescCaptor -> verify(coreValidations).isNull(errorDescCaptor.capture()));
+    }
+
     void testIsEqualTo(Function<Object, Validation<Object>> methodInvoker) {
         Object compareTo = "whatever";
         when(test.getMessageResolver().getIsEqualToMessage(compareTo)).thenReturn(test.getExpectedMessage());

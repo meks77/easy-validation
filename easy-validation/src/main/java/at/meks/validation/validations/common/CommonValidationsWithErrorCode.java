@@ -7,6 +7,7 @@ import at.meks.validation.result.ErrorDescriptionBuilder;
 import java.util.function.Supplier;
 
 import static at.meks.validation.result.ErrorDescriptionBuilder.withCode;
+import static at.meks.validation.result.ErrorDescriptionBuilder.withMessage;
 
 @SuppressWarnings("WeakerAccess")
 public class CommonValidationsWithErrorCode {
@@ -25,6 +26,16 @@ public class CommonValidationsWithErrorCode {
      */
     public static <T> Validation<T> notNull(String errorCode) {
         return VALIDATIONS.notNull(ErrorDescriptionBuilder.withCode(MESSAGE_RESOLVER.getNotNullMessage(), errorCode));
+    }
+
+    /**
+     * returns a validation which validates that a value is null.
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @param <T>   type of the tested value
+     * @return  new instance of a validation
+     */
+    public static <T> Validation<T> isNull(String errorCode) {
+        return VALIDATIONS.isNull(withCode(MESSAGE_RESOLVER.getIsNullMessage(), errorCode));
     }
 
     /**

@@ -26,6 +26,15 @@ public class CommonValidations {
     }
 
     /**
+     * returns a validation which validates that a value is null.
+     * @param <T>   type of the tested value
+     * @return  new instance of a validation
+     */
+    public static <T> Validation<T> isNull() {
+        return VALIDATIONS.isNull(withMessage(MESSAGE_RESOLVER.getIsNullMessage()));
+    }
+
+    /**
      * returns a validation which validates that the validated value is equal to another one. If both are null it is
      * also equal.
      * @param compareTo the validated value is compared to this one

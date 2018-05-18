@@ -13,6 +13,10 @@ class CoreCommonValidations {
         return SimpleValidation.from(Objects::nonNull, () -> errorDescription);
     }
 
+    <T> Validation<T> isNull(ErrorDescription errorDescription) {
+        return SimpleValidation.from(Objects::isNull, () -> errorDescription);
+    }
+
     <T> Validation<T> isEqualTo(Supplier<T> compareTo, Supplier<ErrorDescription> errorDescription) {
         return SimpleValidation.from(validated -> Objects.equals(validated, compareTo.get()), errorDescription);
     }

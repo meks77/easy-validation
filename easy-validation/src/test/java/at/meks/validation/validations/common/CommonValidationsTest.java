@@ -46,6 +46,11 @@ public class CommonValidationsTest extends AbstractValidationsTest {
     }
 
     @Test
+    public void testIsNull() {
+        testHelper.testIsNull(CommonValidations::isNull);
+    }
+
+    @Test
     public void testIsEqualTo() { testHelper.testIsEqualTo(CommonValidations::isEqualTo);}
 
     @Test

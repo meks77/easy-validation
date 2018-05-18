@@ -14,6 +14,7 @@ import static at.meks.validation.validations.common.CommonValidationsWithErrorCo
 import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.isLessThan;
 import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.isNotEqualTo;
 import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.notNull;
+import static at.meks.validation.validations.common.CommonValidationsWithErrorCode.isNull;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class CommonValidationsWithErrorCodeTest extends AbstractErrorCodeValidationsTest {
@@ -50,6 +51,11 @@ public class CommonValidationsWithErrorCodeTest extends AbstractErrorCodeValidat
     @Test
     public void testNotNull() {
         testHelper.testNotNull(() -> notNull(EXPECTED_CODE));
+    }
+
+    @Test
+    public void testIsNull() {
+        testHelper.testIsNull(() -> isNull(EXPECTED_CODE));
     }
 
     @Test

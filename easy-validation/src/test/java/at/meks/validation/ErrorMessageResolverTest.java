@@ -149,4 +149,9 @@ public class ErrorMessageResolverTest {
     public void getIsNotEqualToMessage()  {
         assertThat(resolver.getIsNotEqualToMessage("other")).isEqualTo("value must not be equal to other");
     }
+
+    @Test
+    public void getIsNullMessage() {
+        assertThat(resolver.getIsNullMessage()).isEqualTo("value must be null");
+    }
 }

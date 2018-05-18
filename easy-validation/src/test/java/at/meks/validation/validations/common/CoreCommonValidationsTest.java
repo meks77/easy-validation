@@ -108,5 +108,14 @@ public class CoreCommonValidationsTest extends AbstractCoreValidationsTest {
         assertErrorResult(validations.isBetween(() -> 10, () -> 12, () -> errorDescription).test(13));
     }
 
+    @Test
+    public void givenNullWhenIsNullReturnsOk() {
+        assertValidResult(validations.isNull(errorDescription).test(null));
+    }
+
+    @Test
+    public void givenNotNullWhenIsNullReturnsError() {
+        assertErrorResult(validations.isNull(errorDescription).test("a"));
+    }
 
 }
