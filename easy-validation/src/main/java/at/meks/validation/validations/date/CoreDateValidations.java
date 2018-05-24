@@ -1,16 +1,14 @@
 package at.meks.validation.validations.date;
 
-import at.meks.validation.SimpleValidation;
-import at.meks.validation.Validation;
-import at.meks.validation.result.ErrorDescription;
+import at.meks.validation.validations.common.CommonValidations;
 
-import java.time.LocalDateTime;
-import java.util.function.Supplier;
-
+/**
+ * is*After, is*Before and isBetween are just delegated to {@link CommonValidations} to ease the use of of those
+ * methods with the LocalDate, LocalDateTime or ZoneDateTime. Sadly, if simply overloaded isAfter with the different
+ * types leads to a compilation error because of the same signature of the methods.
+ */
 class CoreDateValidations {
 
-    Validation<LocalDateTime> isDateAfter(Supplier<LocalDateTime> supplierMinDate, Supplier<ErrorDescription> errorDescription) {
-        return SimpleValidation.from(date -> supplierMinDate.get().isBefore(date), errorDescription);
-    }
+
 
 }

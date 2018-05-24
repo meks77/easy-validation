@@ -6,6 +6,8 @@ import at.meks.validation.validations.common.CommonValidations;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -73,6 +75,11 @@ class SimpleValidationExamples {
     void combineEqualAndIsGreaterThan() throws ValidationException {
         Long minValue = 10L;
         isGreaterThan(minValue).or(isEqualTo(minValue)).test(10L).throwIfInvalid("10");
+    }
+
+    void validateLocalDate() throws ValidationException {
+        isGreaterThan((ChronoLocalDate)LocalDate.of(2010, 1,1)).test(LocalDate.now()).throwIfInvalid("localDate");
+        isBetween((ChronoLocalDate) LocalDate.of(2011, 1, 1), LocalDate.of(2012, 1, 1)).test(LocalDate.of(2011, 12, 1));
     }
 
 }

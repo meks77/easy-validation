@@ -1,17 +1,15 @@
 package at.meks.validation.simple;
 
 import at.meks.validation.result.ValidationException;
-import org.fest.assertions.api.Assertions;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class SimpleValidationExamplesTest {
 
-    private SimpleValidationExamples examples = new SimpleValidationExamples();
+    private final SimpleValidationExamples examples = new SimpleValidationExamples();
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -76,5 +74,10 @@ public class SimpleValidationExamplesTest {
     @Test
     public void testCombineEqualAndIsGreaterThan() throws ValidationException {
         examples.combineEqualAndIsGreaterThan();
+    }
+
+    @Test
+    public void testValidateLocalDate() throws ValidationException {
+        examples.validateLocalDate();
     }
 }
