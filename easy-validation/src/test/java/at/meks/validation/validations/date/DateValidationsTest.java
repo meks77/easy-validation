@@ -261,6 +261,20 @@ public class DateValidationsTest extends AbstractValidationsTest<LocalDateTime> 
     }
 
     @Test
+    public void testIsLocalDateLastDayOfYear() {
+        testHelper.testIsLocalDateLastDayOfYear(DateValidations::isLocalDateLastDayOfYear);
+    }
+    @Test
+    public void testIsLocalDateTimeLastDayOfYear() {
+        testHelper.testIsLocalDateTimeLastDayOfYear(DateValidations::isLocalDateTimeLastDayOfYear);
+    }
+
+    @Test
+    public void testIsZonedDateLastDayOfYear() {
+        testHelper.testIsZonedDateTimeLastDayOfYear(DateValidations::isZonedDateTimeLastDayOfYear);
+    }
+
+    @Test
     public void testIsLocalDateFirstDayOfMonth() {
         testHelper.testIsLocalDateFirstDayOfMonth(DateValidations::isLocalDateFirstDayOfMonth);
     }

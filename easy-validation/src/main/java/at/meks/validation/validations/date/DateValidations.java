@@ -196,7 +196,7 @@ public class DateValidations {
     }
 
     /**
-     * Validates that the validated date is the first date of the year
+     * Validates that the validated date is the first day of the year
      * @return  new instance of validation
      */
     public static Validation<LocalDate> isLocalDateFirstDayOfYear() {
@@ -205,7 +205,7 @@ public class DateValidations {
     }
 
     /**
-     * Validates that the validated date is the first date of the year
+     * Validates that the validated date is the first day of the year
      * @return  new instance of validation
      */
     public static Validation<LocalDateTime> isLocalDateTimeFirstDayOfYear() {
@@ -214,12 +214,39 @@ public class DateValidations {
     }
 
     /**
-     * Validates that the validated date is the first date of the year
+     * Validates that the validated date is the first day of the year
      * @return  new instance of validation
      */
     public static Validation<ZonedDateTime> isZonedDateTimeFirstDayOfYear() {
         return VALIDATIONS.isZonedDateTimeFirstDayOfYear(
                 () -> withMessage(MESSAGE_RESOLVER.getIsDateFirstDayOfYearMessage()));
+    }
+
+    /**
+     * Validates that the validated date is the last day of the year
+     * @return  new instance of validation
+     */
+    public static Validation<LocalDate> isLocalDateLastDayOfYear() {
+        return VALIDATIONS.isLocalDateLastDayOfYear(
+                () -> withMessage(MESSAGE_RESOLVER.getIsDateLastDayOfYearMessage()));
+    }
+
+    /**
+     * Validates that the validated date is the last day of the year
+     * @return  new instance of validation
+     */
+    public static Validation<LocalDateTime> isLocalDateTimeLastDayOfYear() {
+        return VALIDATIONS.isLocalDateTimeLastDayOfYear(
+                () -> withMessage(MESSAGE_RESOLVER.getIsDateLastDayOfYearMessage()));
+    }
+
+    /**
+     * Validates that the validated date is the last day of the year
+     * @return  new instance of validation
+     */
+    public static Validation<ZonedDateTime> isZonedDateTimeLastDayOfYear() {
+        return VALIDATIONS.isZonedDateTimeLastDayOfYear(
+                () -> withMessage(MESSAGE_RESOLVER.getIsDateLastDayOfYearMessage()));
     }
 
     /**

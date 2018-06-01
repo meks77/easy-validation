@@ -13,7 +13,6 @@ import java.util.function.Supplier;
 @SuppressWarnings("WeakerAccess")
 class CoreDateValidations {
 
-
     Validation<LocalDate> isLocalDateFirstDayOfYear(Supplier<ErrorDescription> errorDescription) {
         return SimpleValidation.from(date -> date.getDayOfMonth() == 1 && date.getMonth() == Month.JANUARY,
                 errorDescription);
@@ -26,6 +25,21 @@ class CoreDateValidations {
 
     Validation<ZonedDateTime> isZonedDateTimeFirstDayOfYear(Supplier<ErrorDescription> errorDescription) {
         return SimpleValidation.from(date -> date.getDayOfMonth() == 1 && date.getMonth() == Month.JANUARY,
+                errorDescription);
+    }
+
+    Validation<LocalDate> isLocalDateLastDayOfYear(Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(date -> date.getDayOfMonth() == 31 && date.getMonth() == Month.DECEMBER,
+                errorDescription);
+    }
+
+    Validation<LocalDateTime> isLocalDateTimeLastDayOfYear(Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(date -> date.getDayOfMonth() == 31 && date.getMonth() == Month.DECEMBER,
+                errorDescription);
+    }
+
+    Validation<ZonedDateTime> isZonedDateTimeLastDayOfYear(Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(date -> date.getDayOfMonth() == 31 && date.getMonth() == Month.DECEMBER,
                 errorDescription);
     }
 
@@ -71,7 +85,6 @@ class CoreDateValidations {
         return LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth()).lengthOfMonth();
     }
 
-    //TODO lastDayOfYear
     //TODO startOfHour
     //TODO isWeekDay
     //TODO isFirstDayOfWeek

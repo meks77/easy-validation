@@ -283,6 +283,24 @@ public class DateValidationsWithErrorCodeTest extends AbstractErrorCodeValidatio
     }
 
     @Test
+    public void testIsLocalDateLastDayOfYear() {
+        testHelper.testIsLocalDateLastDayOfYear(
+                () -> DateValidationsWithErrorCode.isLocalDateLastDayOfYear(EXPECTED_CODE));
+    }
+
+    @Test
+    public void testIsLocalDateTimeLastDayOfYear() {
+        testHelper.testIsLocalDateTimeLastDayOfYear(
+                () -> DateValidationsWithErrorCode.isLocalDateTimeLastDayOfYear(EXPECTED_CODE));
+    }
+
+    @Test
+    public void testIsZonedDateLastDayOfYear() {
+        testHelper.testIsZonedDateTimeLastDayOfYear(
+                () -> DateValidationsWithErrorCode.isZonedDateTimeLastDayOfYear(EXPECTED_CODE));
+    }
+
+    @Test
     public void testIsLocalDateFirstDayOfMonth() {
         testHelper.testIsLocalDateFirstDayOfMonth(
                 () -> DateValidationsWithErrorCode.isLocalDateFirstDayOfMonth(EXPECTED_CODE));

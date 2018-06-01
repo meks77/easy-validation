@@ -55,6 +55,31 @@ class DateValidationsTestHelper {
         test.doAssertionsAndVerificationsWithSupplier(validation, verifier);
     }
 
+    void testIsLocalDateLastDayOfYear(Supplier<Validation<LocalDate>> methodInvoker) {
+        willReturn(test.getExpectedValidation()).given(coreValidations).isLocalDateLastDayOfYear(anySupplier());
+        testIsDateTimeLastDayOfYear(methodInvoker,
+                errorDescCaptor ->  verify(coreValidations).isLocalDateLastDayOfYear(errorDescCaptor.capture()));
+    }
+
+    void testIsLocalDateTimeLastDayOfYear(Supplier<Validation<LocalDateTime>> methodInvoker) {
+        willReturn(test.getExpectedValidation()).given(coreValidations).isLocalDateTimeLastDayOfYear(anySupplier());
+        testIsDateTimeLastDayOfYear(methodInvoker,
+                errorDescCaptor ->  verify(coreValidations).isLocalDateTimeLastDayOfYear(errorDescCaptor.capture()));
+    }
+
+    void testIsZonedDateTimeLastDayOfYear(Supplier<Validation<ZonedDateTime>> methodInvoker) {
+        when(coreValidations.isZonedDateTimeLastDayOfYear(anySupplier())).thenReturn(test.getExpectedValidation());
+        testIsDateTimeLastDayOfYear(methodInvoker,
+                errorDescCaptor ->  verify(coreValidations).isZonedDateTimeLastDayOfYear(errorDescCaptor.capture()));
+    }
+
+    private <T> void testIsDateTimeLastDayOfYear(Supplier<Validation<T>> methodInvoker,
+            VerifierWithErrorDescSupplierCaptor verifier) {
+        when(test.getMessageResolver().getIsDateLastDayOfYearMessage()).thenReturn(test.getExpectedMessage());
+        Validation<T> validation = methodInvoker.get();
+        test.doAssertionsAndVerificationsWithSupplier(validation, verifier);
+    }
+
     void testIsLocalDateFirstDayOfMonth(Supplier<Validation<LocalDate>> methodInvoker) {
         willReturn(test.getExpectedValidation()).given(coreValidations).isLocalDateFirstDayOfMonth(anySupplier());
         testIsDateFirstDayOfMonth(methodInvoker,

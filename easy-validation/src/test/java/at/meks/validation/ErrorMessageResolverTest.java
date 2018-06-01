@@ -168,4 +168,9 @@ public class ErrorMessageResolverTest {
     public void getIsLastDayOfMonthMessage() {
         assertThat(resolver.getIsLastDayOfMonthMessage()).isEqualTo("Date must be the last day of the month");
     }
+
+    @Test
+    public void getIsDateLastDayOfYearMessage() {
+        assertThat(resolver.getIsDateLastDayOfYearMessage()).isEqualTo("Date must be the last day of the year");
+    }
 }

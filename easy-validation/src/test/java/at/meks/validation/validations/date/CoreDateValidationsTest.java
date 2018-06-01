@@ -81,6 +81,74 @@ public class CoreDateValidationsTest extends AbstractCoreValidationsTest {
     }
 
     @Test
+    public void given31DecemberWhenIsLocalDateLastDayOfYearReturnsOk() {
+        assertValidResult(validations.isLocalDateLastDayOfYear(() -> errorDescription).test(LocalDate.of(2010, 12, 31)));
+    }
+
+    @Test
+    public void given30DecemberWhenIsLocalDateLastDayOfYearReturnsError() {
+        assertErrorResult(validations.isLocalDateLastDayOfYear(() -> errorDescription).test(LocalDate.of(2010, 12, 30)));
+    }
+
+    @Test
+    public void given31OctoberWhenIsLocalDateLastDayOfYearReturnsError() {
+        assertErrorResult(validations.isLocalDateLastDayOfYear(() -> errorDescription).test(LocalDate.of(2010, 10, 31)));
+    }
+
+    @Test
+    public void given30NovemberWhenIsLocalDateLastDayOfYearReturnsError() {
+        assertErrorResult(validations.isLocalDateLastDayOfYear(() -> errorDescription).test(LocalDate.of(2010, 11, 30)));
+    }
+
+    @Test
+    public void given31DecemberWhenIsLocalDateTimeLastDayOfYearReturnsOk() {
+        assertValidResult(validations.isLocalDateTimeLastDayOfYear(() -> errorDescription)
+                .test(LocalDateTime.of(2010, 12, 31, 1, 2)));
+    }
+
+    @Test
+    public void given30DecemberWhenIsLocalDateTimeLastDayOfYearReturnsError() {
+        assertErrorResult(validations.isLocalDateTimeLastDayOfYear(() -> errorDescription)
+                .test(LocalDateTime.of(2010, 12, 30, 1, 2)));
+    }
+
+    @Test
+    public void given31OctoberWhenIsLocalDateTimeLastDayOfYearReturnsError() {
+        assertErrorResult(validations.isLocalDateTimeLastDayOfYear(() -> errorDescription)
+                .test(LocalDateTime.of(2010, 10, 31, 1, 2)));
+    }
+
+    @Test
+    public void given30NovemberWhenIsLocalDateTimeLastDayOfYearReturnsError() {
+        assertErrorResult(validations.isLocalDateTimeLastDayOfYear(() -> errorDescription)
+                .test(LocalDateTime.of(2010, 11, 30, 1, 2)));
+    }
+
+    @Test
+    public void given31DecemberWhenIsZonedDateTimeLastDayOfYearReturnsOk() {
+        assertValidResult(validations.isZonedDateTimeLastDayOfYear(() -> errorDescription)
+                .test(ZonedDateTime.of(LocalDateTime.of(2010, 12, 31, 1, 2), ZoneId.systemDefault())));
+    }
+
+    @Test
+    public void given30DecemberWhenIsZonedDateTimeLastDayOfYearReturnsError() {
+        assertErrorResult(validations.isZonedDateTimeLastDayOfYear(() -> errorDescription)
+                .test(ZonedDateTime.of(LocalDateTime.of(2010, 12, 30, 1, 2), ZoneId.systemDefault())));
+    }
+
+    @Test
+    public void given31OctoberWhenIsZonedDateTimeLastDayOfYearReturnsError() {
+        assertErrorResult(validations.isZonedDateTimeLastDayOfYear(() -> errorDescription)
+                .test(ZonedDateTime.of(LocalDateTime.of(2010, 10, 31, 1, 2), ZoneId.systemDefault())));
+    }
+
+    @Test
+    public void given30NovemberWhenIsZonedDateTimeLastDayOfYearReturnsError() {
+        assertErrorResult(validations.isZonedDateTimeLastDayOfYear(() -> errorDescription)
+                .test(ZonedDateTime.of(LocalDateTime.of(2010, 11, 30, 1, 2), ZoneId.systemDefault())));
+    }
+
+    @Test
     public void givenFirstDayOfMonthWhenIsLocalDateFirstDayOfMonthReturnsOk() {
         assertValidResult(validations.isLocalDateFirstDayOfMonth(() -> errorDescription).test(LocalDate.of(2010, 2, 1)));
     }

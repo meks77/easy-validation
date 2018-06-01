@@ -223,7 +223,7 @@ public class DateValidationsWithErrorCode {
     }
 
     /**
-     * Validates that the validated date is the first date of the year
+     * Validates that the validated date is the first day of the year
      * @param errorCode in the case the validation violates this code is reported in the result
      * @return  new instance of validation
      */
@@ -233,7 +233,7 @@ public class DateValidationsWithErrorCode {
     }
 
     /**
-     * Validates that the validated date is the first date of the year
+     * Validates that the validated date is the first day of the year
      * @param errorCode in the case the validation violates this code is reported in the result
      * @return  new instance of validation
      */
@@ -243,13 +243,43 @@ public class DateValidationsWithErrorCode {
     }
 
     /**
-     * Validates that the validated date is the first date of the year
+     * Validates that the validated date is the first day of the year
      * @param errorCode in the case the validation violates this code is reported in the result
      * @return  new instance of validation
      */
     public static Validation<ZonedDateTime> isZonedDateTimeFirstDayOfYear(String errorCode) {
         return VALIDATIONS.isZonedDateTimeFirstDayOfYear(
                 () -> withCode(MESSAGE_RESOLVER.getIsDateFirstDayOfYearMessage(), errorCode));
+    }
+
+    /**
+     * Validates that the validated date is the last day of the year
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @return  new instance of validation
+     */
+    public static Validation<LocalDate> isLocalDateLastDayOfYear(String errorCode) {
+        return VALIDATIONS.isLocalDateLastDayOfYear(
+                () -> withCode(MESSAGE_RESOLVER.getIsDateLastDayOfYearMessage(), errorCode));
+    }
+
+    /**
+     * Validates that the validated date is the last day of the year
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @return  new instance of validation
+     */
+    public static Validation<LocalDateTime> isLocalDateTimeLastDayOfYear(String errorCode) {
+        return VALIDATIONS.isLocalDateTimeLastDayOfYear(
+                () -> withCode(MESSAGE_RESOLVER.getIsDateLastDayOfYearMessage(), errorCode));
+    }
+
+    /**
+     * Validates that the validated date is the first day of the year
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @return  new instance of validation
+     */
+    public static Validation<ZonedDateTime> isZonedDateTimeLastDayOfYear(String errorCode) {
+        return VALIDATIONS.isZonedDateTimeLastDayOfYear(
+                () -> withCode(MESSAGE_RESOLVER.getIsDateLastDayOfYearMessage(), errorCode));
     }
 
     /**
