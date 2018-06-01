@@ -85,7 +85,14 @@ class CoreDateValidations {
         return LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth()).lengthOfMonth();
     }
 
-    //TODO startOfHour
+    Validation<LocalDateTime> isLocalDateTimeStartOfHour(Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(date -> date.getMinute() == 0 && date.getSecond() == 0, errorDescription);
+    }
+
+    Validation<ZonedDateTime> isZonedDateTimeStartOfHour(Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(date -> date.getMinute() == 0 && date.getSecond() == 0, errorDescription);
+    }
+
     //TODO isWeekDay
     //TODO isFirstDayOfWeek
     //TODO isLastDayOfWeek

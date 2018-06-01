@@ -314,4 +314,14 @@ public class DateValidationsTest extends AbstractValidationsTest<LocalDateTime> 
         testHelper.testIsZonedDateTimeLastDayOfMonth(DateValidations::isZonedDateTimeLastDayOfMonth);
     }
 
+    @Test
+    public void testLocalDateTimeIsStartOfHour() {
+        testHelper.testIsLocalDateTimeStartOfHour(DateValidations::isLocalDateTimeStartOfHour);
+    }
+
+    @Test
+    public void testZonedDateTimeIsStartOfHour() {
+        testHelper.testIsZonedDateTimeStartOfHour(DateValidations::isZonedDateTimeStartOfHour);
+    }
+
 }

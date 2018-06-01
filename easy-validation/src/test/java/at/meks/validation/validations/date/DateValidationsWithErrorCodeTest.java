@@ -348,4 +348,15 @@ public class DateValidationsWithErrorCodeTest extends AbstractErrorCodeValidatio
                 () -> DateValidationsWithErrorCode.isZonedDateTimeLastDayOfMonth(EXPECTED_CODE));
     }
 
+    @Test
+    public void testLocalDateTimeIsStartOfHour() {
+        testHelper.testIsLocalDateTimeStartOfHour(
+                () -> DateValidationsWithErrorCode.isLocalDateTimeStartOfHour(EXPECTED_CODE));
+    }
+
+    @Test
+    public void testZonedDateTimeIsStartOfHour() {
+        testHelper.testIsZonedDateTimeStartOfHour(
+                () -> DateValidationsWithErrorCode.isZonedDateTimeStartOfHour(EXPECTED_CODE));
+    }
 }

@@ -317,4 +317,22 @@ public class DateValidations {
         return VALIDATIONS.isZonedDateTimeLastDayOfMonth(
                 () -> withMessage(MESSAGE_RESOLVER.getIsLastDayOfMonthMessage()));
     }
+
+    /**
+     * Validates that the validated date has the minutes and seconds set to 0.
+     * @return  new instance of validation
+     */
+    public static Validation<LocalDateTime> isLocalDateTimeStartOfHour() {
+        return VALIDATIONS.isLocalDateTimeStartOfHour(
+                () -> withMessage(MESSAGE_RESOLVER.getIsDateTimeStartOfHourMessage()));
+    }
+
+    /**
+     * Validates that the validated date has the minutes and seconds set to 0.
+     * @return  new instance of validation
+     */
+    public static Validation<ZonedDateTime> isZonedDateTimeStartOfHour() {
+        return VALIDATIONS.isZonedDateTimeStartOfHour(
+                () -> withMessage(MESSAGE_RESOLVER.getIsDateTimeStartOfHourMessage()));
+    }
 }

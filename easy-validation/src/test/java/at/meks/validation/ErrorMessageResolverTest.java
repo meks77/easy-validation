@@ -173,4 +173,9 @@ public class ErrorMessageResolverTest {
     public void getIsDateLastDayOfYearMessage() {
         assertThat(resolver.getIsDateLastDayOfYearMessage()).isEqualTo("Date must be the last day of the year");
     }
+
+    @Test
+    public void getIsDateTimeStartOfHourMessage() {
+        assertThat(resolver.getIsDateTimeStartOfHourMessage()).isEqualTo("Date must have minutes and seconds set to 0");
+    }
 }

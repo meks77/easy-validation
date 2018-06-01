@@ -149,4 +149,24 @@ class DateValidationsTestHelper {
         Validation<T> validation = methodInvoker.get();
         test.doAssertionsAndVerificationsWithSupplier(validation, verifier);
     }
+
+    void testIsLocalDateTimeStartOfHour(Supplier<Validation<LocalDateTime>> methodInvoker) {
+        willReturn(test.getExpectedValidation()).given(coreValidations).isLocalDateTimeStartOfHour(anySupplier());
+        testIsDateStartOfHour(methodInvoker,
+                errorDescCaptor -> BDDMockito.verify(coreValidations).isLocalDateTimeStartOfHour(errorDescCaptor.capture()));
+    }
+
+    void testIsZonedDateTimeStartOfHour(Supplier<Validation<ZonedDateTime>> methodInvoker) {
+        willReturn(test.getExpectedValidation()).given(coreValidations).isZonedDateTimeStartOfHour(anySupplier());
+        testIsDateStartOfHour(methodInvoker,
+                errorDescCaptor -> BDDMockito.verify(coreValidations).isZonedDateTimeStartOfHour(errorDescCaptor.capture()));
+    }
+
+    private <T> void testIsDateStartOfHour(Supplier<Validation<T>> methodInvoker,
+            VerifierWithErrorDescSupplierCaptor verifier) {
+        when(test.getMessageResolver().getIsDateTimeStartOfHourMessage()).thenReturn(test.getExpectedMessage());
+        Validation<T> validation = methodInvoker.get();
+        test.doAssertionsAndVerificationsWithSupplier(validation, verifier);
+    }
+
 }

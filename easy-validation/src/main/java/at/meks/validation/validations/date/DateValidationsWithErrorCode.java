@@ -361,4 +361,22 @@ public class DateValidationsWithErrorCode {
         return VALIDATIONS.isZonedDateTimeLastDayOfMonth(
                 () -> withCode(MESSAGE_RESOLVER.getIsLastDayOfMonthMessage(), errorCode));
     }
+
+    /**
+     * Validates that the validated date has the minutes and seconds set to 0.
+     * @return  new instance of validation
+     */
+    public static Validation<LocalDateTime> isLocalDateTimeStartOfHour(String expectedCode) {
+        return VALIDATIONS.isLocalDateTimeStartOfHour(
+                () -> withCode(MESSAGE_RESOLVER.getIsDateTimeStartOfHourMessage(), expectedCode));
+    }
+
+    /**
+     * Validates that the validated date has the minutes and seconds set to 0.
+     * @return  new instance of validation
+     */
+    public static Validation<ZonedDateTime> isZonedDateTimeStartOfHour(String expectedCode) {
+        return VALIDATIONS.isZonedDateTimeStartOfHour(
+                () -> withCode(MESSAGE_RESOLVER.getIsDateTimeStartOfHourMessage(), expectedCode));
+    }
 }

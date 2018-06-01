@@ -29,6 +29,7 @@ public class ErrorMessageResolver {
     private static final String TIME_MUST_BE_THE_START_OF_THE_DAY = "Time must be 00:00:00";
     private static final String DATE_MUST_BE_THE_LAST_DATE_OF_THE_MONTH = "Date must be the last day of the month";
     private static final String DATE_MUST_BE_LAST_DAY_OF_THE_YEAR = "Date must be the last day of the year";
+    private static final String DATE_MUST_HAVE_MINUTES_AND_SECONDS_SET_TO_0 = "Date must have minutes and seconds set to 0";
 
     public String getLengthIsMoreThanMessage(int size) {
         return format("must have more than %s chars", size);
@@ -156,5 +157,9 @@ public class ErrorMessageResolver {
 
     public String getIsDateLastDayOfYearMessage() {
         return DATE_MUST_BE_LAST_DAY_OF_THE_YEAR;
+    }
+
+    public String getIsDateTimeStartOfHourMessage() {
+        return DATE_MUST_HAVE_MINUTES_AND_SECONDS_SET_TO_0;
     }
 }
