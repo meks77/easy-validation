@@ -65,12 +65,6 @@ public class ErrorMessageResolverTest {
     }
 
     @Test
-    public void getIsDateAfterMessage() {
-        assertThat(resolver.getIsDateAfterMessage(LocalDateTime.of(2012, 8, 24, 4, 2, 16)))
-                .isEqualTo("date must be after 2012-08-24T04:02:16");
-    }
-
-    @Test
     public void getListContainsOnlyMessage() {
         assertThat(resolver.getListContainsOnlyMessage("x")).isEqualTo("list must contain only x");
     }
@@ -153,5 +147,25 @@ public class ErrorMessageResolverTest {
     @Test
     public void getIsNullMessage() {
         assertThat(resolver.getIsNullMessage()).isEqualTo("value must be null");
+    }
+
+    @Test
+    public void getIsDateFirstDayOfYearMessage() {
+        assertThat(resolver.getIsDateFirstDayOfYearMessage()).isEqualTo("Date must be the first day of the year");
+    }
+
+    @Test
+    public void getIsDateFirstDayOfMonthMessage() {
+        assertThat(resolver.getIsDateFirstDayOfMonthMessage()).isEqualTo("Date must be the first day of the month");
+    }
+
+    @Test
+    public void getIsTimeStartOfDayMessage() {
+        assertThat(resolver.getIsTimeStartOfDayMessage()).isEqualTo("Time must be 00:00:00");
+    }
+
+    @Test
+    public void getIsLastDayOfMonthMessage() {
+        assertThat(resolver.getIsLastDayOfMonthMessage()).isEqualTo("Date must be the last day of the month");
     }
 }

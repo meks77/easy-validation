@@ -10,6 +10,8 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.MockitoRule;
 
+import java.util.function.Supplier;
+
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 
@@ -24,6 +26,12 @@ public abstract class AbstractCoreValidationsTest {
 
     @Mock
     protected ErrorDescription errorDescription;
+
+    private Supplier<ErrorDescription> errorDescriptionSupplier = () -> errorDescription;
+
+    protected Supplier<ErrorDescription> getErrorDescriptionSupplier() {
+        return errorDescriptionSupplier;
+    }
 
     @Before
     public void mockErrorDescription() {

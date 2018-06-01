@@ -4,7 +4,6 @@ import at.meks.validation.complexobjectvalidation.model.Account;
 import at.meks.validation.complexobjectvalidation.model.Bank;
 import at.meks.validation.complexobjectvalidation.model.DeserializedPersonInfo;
 import at.meks.validation.result.ValidationException;
-import at.meks.validation.validations.date.DateValidations;
 import at.meks.validation.validations.list.ListValidations;
 import at.meks.validation.validations.string.StringValidations;
 
@@ -13,6 +12,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static at.meks.validation.validations.date.DateValidations.isLocalDateTimeAfter;
+import static at.meks.validation.validations.list.ListValidations.containsOnly;
+import static at.meks.validation.validations.list.ListValidations.forType;
+import static at.meks.validation.validations.list.ListValidations.hasMaxSize;
+import static at.meks.validation.validations.list.ListValidations.isNotEmpty;
+import static at.meks.validation.validations.list.ListValidations.onProperty;
+import static at.meks.validation.validations.string.StringValidations.hasLength;
+import static at.meks.validation.validations.string.StringValidations.isDate;
+import static at.meks.validation.validations.string.StringValidations.isInArray;
+import static at.meks.validation.validations.string.StringValidations.isNotBlank;
+import static at.meks.validation.validations.string.StringValidations.isNumeric;
+import static at.meks.validation.validations.string.StringValidations.lengthIsBetween;
+import static at.meks.validation.validations.string.StringValidations.lengthIsMoreThan;
 
 /**
  * An example how a validator can be implemented for a complex object.
@@ -26,24 +39,29 @@ class PersonInfoValidatorNotSeparatedConfig {
     }
 
     void validatePerson(DeserializedPersonInfo personInfo) throws ValidationException {
-        StringValidations.isNotBlank().and(StringValidations.lengthIsMoreThan(1)).test(personInfo.getFirstName()).throwIfInvalid("firstName");
-        StringValidations.isNotBlank().and(StringValidations.lengthIsMoreThan(1)).test(personInfo.getName()).throwIfInvalid("name");
-        StringValidations.isNotBlank().and(StringValidations.lengthIsBetween(4, 8)).and(StringValidations.isInArray(this::getValidPostalCodes))
+        isNotBlank().and(lengthIsMoreThan(1)).test(personInfo.getFirstName()).throwIfInvalid("firstName");
+        isNotBlank().and(lengthIsMoreThan(1)).test(personInfo.getName()).throwIfInvalid("name");
+        isNotBlank().and(lengthIsBetween(4, 8)).and(isInArray(this::getValidPostalCodes))
                 .test(personInfo.getPostalCode()).throwIfInvalid("postalCode");
 
-        StringValidations.isNotBlank().and(StringValidations.isDate(DEFAULT_DATE_FORMAT)).test(personInfo.getBirthDate()).throwIfInvalid("birthDay");
-        LocalDateTime birthDayDate = LocalDateTime.from(DEFAULT_DATE_FORMAT.parse(personInfo.getBirthDate()));
-        DateValidations.isDateAfter(LocalDateTime.of(1940, 1, 1, 0, 0, 0)).test(birthDayDate).throwIfInvalid("birthDay");
+        isNotBlank().and(isDate(DEFAULT_DATE_FORMAT))
+                .and(this::parseToDate, isLocalDateTimeAfter(LocalDateTime.of(1940, 1, 1, 0, 0, 0)))
+                .test(personInfo.getBirthDate()).throwIfInvalid("birthDay");
 
-        StringValidations.isNotBlank().and(StringValidations.isNumeric()).and(StringValidations.containsNotOnly("0")).test(personInfo.getAccount()).throwIfInvalid("account");
-        ListValidations.forType(Account.class, ListValidations.hasMinSize(1)).and(ListValidations.hasMaxSize(5))
-                .and(ListValidations.onProperty(Account::isActive, ListValidations.containsOnly(true)))
-                .and(ListValidations.onProperty(Account::isOnBadList, ListValidations.containsOnly(false)))
+        isNotBlank().and(isNumeric()).and(StringValidations.containsNotOnly("0")).test(personInfo.getAccount())
+                .throwIfInvalid("account");
+        forType(Account.class, ListValidations.hasMinSize(1)).and(hasMaxSize(5))
+                .and(onProperty(Account::isActive, containsOnly(true)))
+                .and(onProperty(Account::isOnBadList, containsOnly(false)))
                 .test(getAccountsOfPersonOfSlowService()).throwIfInvalid("account");
 
-        StringValidations.isNotBlank().and(StringValidations.isNumeric()).and(StringValidations.hasLength(6)).test(personInfo.getBankCode());
-        ListValidations.onProperty(Bank::isActive, ListValidations.isNotEmpty().and(ListValidations.containsOnly(true)))
-                .test(getBankCodeOfPersonOfSlowService()).throwIfInvalid("bankCode");
+        isNotBlank().and(isNumeric()).and(hasLength(6)).test(personInfo.getBankCode());
+        onProperty(Bank::isActive, isNotEmpty().and(containsOnly(true))).test(getBankCodeOfPersonOfSlowService())
+                .throwIfInvalid("bankCode");
+    }
+
+    private LocalDateTime parseToDate(String s) {
+        return LocalDateTime.from(DEFAULT_DATE_FORMAT.parse(s));
     }
 
     private List<Bank> getBankCodeOfPersonOfSlowService() {

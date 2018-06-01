@@ -6,7 +6,7 @@ import org.mockito.ArgumentCaptor;
 import java.util.function.Supplier;
 
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.any;
 
 public class TestUtils {
 

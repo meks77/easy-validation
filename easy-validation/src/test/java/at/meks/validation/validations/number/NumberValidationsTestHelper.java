@@ -6,7 +6,7 @@ import at.meks.validation.validations.AbstractValidationsTest;
 
 import java.util.function.Supplier;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
@@ -29,7 +29,6 @@ class NumberValidationsTestHelper {
         test.doAssertionsAndVerifications(validation,
                 errorDescCaptor ->  verify(coreValidations).isInt(errorDescCaptor.capture()));
     }
-
 
     void testIsByte(Supplier<Validation<Number>> methodInvoker) {
         //noinspection ResultOfMethodCallIgnored

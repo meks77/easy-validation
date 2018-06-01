@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 import static at.meks.validation.TestUtils.anySupplier;
 import static at.meks.validation.TestUtils.assertSupplierValue;
 import static at.meks.validation.TestUtils.getSupplierCaptor;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 

@@ -1,6 +1,5 @@
 package at.meks.validation;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
@@ -25,6 +24,10 @@ public class ErrorMessageResolver {
     private static final String VALUE_MUST_BE_A_BYTE = "value must be a byte";
     private static final String VALUE_MUST_BE_A_SHORT = "value must be a short";
     private static final String VALUE_MUST_BE_NULL = "value must be null";
+    private static final String DATE_MUST_BE_THE_FIRST_DAY_OF_THE_YEAR = "Date must be the first day of the year";
+    private static final String DATE_MUST_BE_THE_FIRST_DAY_OF_THE_MONTH = "Date must be the first day of the month";
+    private static final String TIME_MUST_BE_THE_START_OF_THE_DAY = "Time must be 00:00:00";
+    private static final String DATE_MUST_BE_THE_LAST_DATE_OF_THE_MONTH = "Date must be the last day of the month";
 
     public String getLengthIsMoreThanMessage(int size) {
         return format("must have more than %s chars", size);
@@ -64,10 +67,6 @@ public class ErrorMessageResolver {
 
     public String getNotNullMessage() {
         return MUST_NOT_BE_NULL;
-    }
-
-    public String getIsDateAfterMessage(LocalDateTime minDate) {
-        return format("date must be after %s", minDate);
     }
 
     public String getListContainsOnlyMessage(Object containedValue) {
@@ -136,5 +135,21 @@ public class ErrorMessageResolver {
 
     public String getIsNullMessage() {
         return VALUE_MUST_BE_NULL;
+    }
+
+    public String getIsDateFirstDayOfYearMessage() {
+        return DATE_MUST_BE_THE_FIRST_DAY_OF_THE_YEAR;
+    }
+
+    public String getIsDateFirstDayOfMonthMessage() {
+        return DATE_MUST_BE_THE_FIRST_DAY_OF_THE_MONTH;
+    }
+
+    public String getIsTimeStartOfDayMessage() {
+        return TIME_MUST_BE_THE_START_OF_THE_DAY;
+    }
+
+    public String getIsLastDayOfMonthMessage() {
+        return DATE_MUST_BE_THE_LAST_DATE_OF_THE_MONTH;
     }
 }

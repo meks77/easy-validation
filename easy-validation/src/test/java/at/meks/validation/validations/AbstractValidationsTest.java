@@ -6,7 +6,9 @@ import at.meks.validation.result.ErrorDescription;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
 
@@ -23,19 +25,13 @@ public abstract class AbstractValidationsTest<T> {
     private ErrorMessageResolver messageResolver;
 
     @Mock
-    private Validation<T> expectedValidation;
+    private Validation expectedValidation;
 
-    private  ArgumentCaptor<ErrorDescription> errorDescriptionArgCaptor = getErrorDescCaptor();
-    private  ArgumentCaptor<Supplier<ErrorDescription>> errorDescSupplierArgCaptor = getErrorDescSupplierCaptor();
+    @Captor
+    private  ArgumentCaptor<ErrorDescription> errorDescriptionArgCaptor;
 
-    private ArgumentCaptor<ErrorDescription> getErrorDescCaptor() {
-        return ArgumentCaptor.forClass(ErrorDescription.class);
-    }
-
-    private ArgumentCaptor<Supplier<ErrorDescription>> getErrorDescSupplierCaptor() {
-        //noinspection unchecked
-        return ArgumentCaptor.forClass(Supplier.class);
-    }
+    @Captor
+    private  ArgumentCaptor<Supplier<ErrorDescription>> errorDescSupplierArgCaptor;
 
     public String getExpectedMessage() {
         return EXPECTED_MESSAGE;
@@ -45,7 +41,8 @@ public abstract class AbstractValidationsTest<T> {
         return messageResolver;
     }
 
-    public Validation<T> getExpectedValidation() {
+    public <V> Validation<V> getExpectedValidation() {
+        //noinspection unchecked
         return expectedValidation;
     }
 
@@ -59,7 +56,7 @@ public abstract class AbstractValidationsTest<T> {
 
     protected abstract Object getCoreValidations();
 
-    public void assertForExpectedValidation(Validation<T> validation) {
+    public void assertForExpectedValidation(Validation validation) {
         assertThat(validation).isSameAs(expectedValidation);
     }
 
@@ -69,7 +66,7 @@ public abstract class AbstractValidationsTest<T> {
         assertErrorDesc(errorDescriptionArgCaptor.getValue());
     }
 
-    public void doAssertionsAndVerificationsWithSupplier(Validation<T> validation, VerifierWithErrorDescSupplierCaptor coreMethodVerifier) {
+    public <V> void doAssertionsAndVerificationsWithSupplier(Validation<V> validation, VerifierWithErrorDescSupplierCaptor coreMethodVerifier) {
         assertForExpectedValidation(validation);
         coreMethodVerifier.doVerification(errorDescSupplierArgCaptor);
         assertErrorDesc(errorDescSupplierArgCaptor.getValue().get());

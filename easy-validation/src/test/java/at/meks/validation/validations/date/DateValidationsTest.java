@@ -14,8 +14,6 @@ import java.lang.reflect.Modifier;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.time.chrono.ChronoLocalDate;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.function.Supplier;
 
 import static at.meks.validation.validations.common.CommonValidations.isBetween;
@@ -28,7 +26,7 @@ import static at.meks.validation.validations.date.DateValidations.isZonedDateTim
 import static java.time.LocalDateTime.of;
 import static java.time.ZoneId.systemDefault;
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.same;
+import static org.mockito.Mockito.same;
 import static org.mockito.Mockito.mock;
 
 @PrepareForTest(CommonValidations.class)
@@ -67,35 +65,35 @@ public class DateValidationsTest extends AbstractValidationsTest<LocalDateTime> 
     @Test
     public void testIsLocalDateAfter() throws Exception {
         LocalDate expectedDate = mockIsGreaterThan(LocalDate.of(2011, 1, 1));
-        Validation<Comparable<ChronoLocalDate>> validation = DateValidations.isLocalDateAfter(expectedDate);
+        Validation<LocalDate> validation = DateValidations.isLocalDateAfter(expectedDate);
         verifyResultAndCommonsInvocation(validation, () -> isGreaterThan(same(expectedDate)));
     }
 
     @Test
     public void testIsLocalDateAfterWithSupplier() throws Exception {
-        Supplier<ChronoLocalDate> expectedSupplier = mockIsGreaterThan(() -> LocalDate.of(2011, 1, 1));
-        Validation<Comparable<ChronoLocalDate>> validation = DateValidations.isLocalDateAfter(expectedSupplier);
+        Supplier<LocalDate> expectedSupplier = mockIsGreaterThan(() -> LocalDate.of(2011, 1, 1));
+        Validation<Comparable<LocalDate>> validation = DateValidations.isLocalDateAfter(expectedSupplier);
         verifyResultAndCommonsInvocation(validation, () -> isGreaterThan(same(expectedSupplier)));
     }
 
     @Test
     public void testIsLocalDateTimeAfter() throws Exception {
         LocalDateTime expectedDate = mockIsGreaterThan(of(2011, 1, 1, 2, 2));
-        Validation<Comparable<ChronoLocalDateTime>> validation = DateValidations.isLocalDateTimeAfter(expectedDate);
+        Validation<LocalDateTime> validation = DateValidations.isLocalDateTimeAfter(expectedDate);
         verifyResultAndCommonsInvocation(validation, () -> isGreaterThan(same(expectedDate)));
     }
 
     @Test
     public void testIsLocalDateTimeAfterWithSupplier() throws Exception {
-        Supplier<ChronoLocalDateTime> expectedSupplier = mockIsGreaterThan(() -> of(2011, 1, 1, 5, 1));
-        Validation<Comparable<ChronoLocalDateTime>> validation = DateValidations.isLocalDateTimeAfter(expectedSupplier);
+        Supplier<LocalDateTime> expectedSupplier = mockIsGreaterThan(() -> of(2011, 1, 1, 5, 1));
+        Validation<Comparable<LocalDateTime>> validation = DateValidations.isLocalDateTimeAfter(expectedSupplier);
         verifyResultAndCommonsInvocation(validation, () -> isGreaterThan(same(expectedSupplier)));
     }
 
     @Test
     public void testIsZonedDateTimeAfter() throws Exception {
         ZonedDateTime expectedDate = mockIsGreaterThan(ZonedDateTime.of(of(2011, 1, 1, 2, 2), systemDefault()));
-        Validation<Comparable<ZonedDateTime>> validation = DateValidations.isZonedDateTimeAfter(expectedDate);
+        Validation<ZonedDateTime> validation = DateValidations.isZonedDateTimeAfter(expectedDate);
         verifyResultAndCommonsInvocation(validation, () -> isGreaterThan(same(expectedDate)));
     }
 
@@ -114,35 +112,35 @@ public class DateValidationsTest extends AbstractValidationsTest<LocalDateTime> 
     @Test
     public void testIsLocalDateBefore() throws Exception {
         LocalDate expectedDate = mockIsLessThan(LocalDate.of(2011, 1, 1));
-        Validation<Comparable<ChronoLocalDate>> validation = DateValidations.isLocalDateBefore(expectedDate);
+        Validation<LocalDate> validation = DateValidations.isLocalDateBefore(expectedDate);
         verifyResultAndCommonsInvocation(validation, () -> isLessThan(same(expectedDate)));
     }
 
     @Test
     public void testIsLocalDateBeforeWithSupplier() throws Exception {
-        Supplier<ChronoLocalDate> expectedSupplier = mockIsLessThan(() -> LocalDate.of(2011, 1, 1));
-        Validation<Comparable<ChronoLocalDate>> validation = DateValidations.isLocalDateBefore(expectedSupplier);
+        Supplier<LocalDate> expectedSupplier = mockIsLessThan(() -> LocalDate.of(2011, 1, 1));
+        Validation<Comparable<LocalDate>> validation = DateValidations.isLocalDateBefore(expectedSupplier);
         verifyResultAndCommonsInvocation(validation, () -> isLessThan(same(expectedSupplier)));
     }
 
     @Test
     public void testIsLocalDateTimeBefore() throws Exception {
         LocalDateTime expectedDate = mockIsLessThan(of(2011, 1, 1, 2, 2));
-        Validation<Comparable<ChronoLocalDateTime>> validation = DateValidations.isLocalDateTimeBefore(expectedDate);
+        Validation<LocalDateTime> validation = DateValidations.isLocalDateTimeBefore(expectedDate);
         verifyResultAndCommonsInvocation(validation, () -> isLessThan(same(expectedDate)));
     }
 
     @Test
     public void testIsLocalDateTimeBeforeWithSupplier() throws Exception {
-        Supplier<ChronoLocalDateTime> expectedSupplier = mockIsLessThan(() -> of(2011, 1, 1, 5, 1));
-        Validation<Comparable<ChronoLocalDateTime>> validation = DateValidations.isLocalDateTimeBefore(expectedSupplier);
+        Supplier<LocalDateTime> expectedSupplier = mockIsLessThan(() -> of(2011, 1, 1, 5, 1));
+        Validation<Comparable<LocalDateTime>> validation = DateValidations.isLocalDateTimeBefore(expectedSupplier);
         verifyResultAndCommonsInvocation(validation, () -> isLessThan(same(expectedSupplier)));
     }
 
     @Test
     public void testIsZonedDateTimeBefore() throws Exception {
         ZonedDateTime expectedDate = mockIsLessThan(ZonedDateTime.of(of(2011, 1, 1, 2, 2), systemDefault()));
-        Validation<Comparable<ZonedDateTime>> validation = isZonedDateTimeBefore(expectedDate);
+        Validation<ZonedDateTime> validation = isZonedDateTimeBefore(expectedDate);
         verifyResultAndCommonsInvocation(validation, () -> isLessThan(same(expectedDate)));
     }
 
@@ -161,14 +159,14 @@ public class DateValidationsTest extends AbstractValidationsTest<LocalDateTime> 
     @Test
     public void testIsLocalDateBetween() throws Exception {
         Range<LocalDate> dateRange = mockIsBetween(LocalDate.of(2011, 1, 1), LocalDate.of(2012, 1, 1));
-        Validation<Comparable<ChronoLocalDate>> validation = isLocalDateBetween(dateRange.getMin(), dateRange.getMax());
+        Validation<LocalDate> validation = isLocalDateBetween(dateRange.getMin(), dateRange.getMax());
         verifyResultAndCommonsInvocation(validation, () -> isBetween(dateRange.getMin(), dateRange.getMax()));
     }
 
     @Test
     public void testIsLocalDateBetweenWithSupplier() throws Exception {
-        Range<Supplier<ChronoLocalDate>> range = mockIsBetween(() -> LocalDate.of(2011, 1, 1), () -> LocalDate.of(2011, 1, 1));
-        Validation<Comparable<ChronoLocalDate>> validation = isLocalDateBetween(range.getMin(), range.getMax());
+        Range<Supplier<LocalDate>> range = mockIsBetween(() -> LocalDate.of(2011, 1, 1), () -> LocalDate.of(2011, 1, 1));
+        Validation<Comparable<LocalDate>> validation = isLocalDateBetween(range.getMin(), range.getMax());
         verifyResultAndCommonsInvocation(validation, () -> isBetween(same(range.getMin()), same(range.getMax())));
     }
 
@@ -176,15 +174,15 @@ public class DateValidationsTest extends AbstractValidationsTest<LocalDateTime> 
     public void testIsLocalDateTimeBetween() throws Exception {
         Range<LocalDateTime> range = mockIsBetween(LocalDateTime.of(2011, 1, 1, 2, 2),
                 LocalDateTime.of(2012, 1, 1, 2, 2));
-        Validation<Comparable<ChronoLocalDateTime>> validation = isLocalDateTimeBetween(range.getMin(), range.getMax());
+        Validation<LocalDateTime> validation = isLocalDateTimeBetween(range.getMin(), range.getMax());
         verifyResultAndCommonsInvocation(validation, () -> isBetween(same(range.getMin()), same(range.getMax())));
     }
 
     @Test
     public void testIsLocalDateTimeBetweenWithSupplier() throws Exception {
-        Range<Supplier<ChronoLocalDateTime>> range = mockIsBetween(() -> of(2011, 1, 1, 5, 1),
+        Range<Supplier<LocalDateTime>> range = mockIsBetween(() -> of(2011, 1, 1, 5, 1),
                 () -> of(2012, 1, 1, 2, 2));
-        Validation<Comparable<ChronoLocalDateTime>> validation = isLocalDateTimeBetween(range.getMin(), range.getMax());
+        Validation<Comparable<LocalDateTime>> validation = isLocalDateTimeBetween(range.getMin(), range.getMax());
         verifyResultAndCommonsInvocation(validation, () -> isBetween(same(range.getMin()), same(range.getMax())));
     }
 
@@ -192,7 +190,7 @@ public class DateValidationsTest extends AbstractValidationsTest<LocalDateTime> 
     public void testIsZonedDateTimeBetween() throws Exception {
         Range<ZonedDateTime> range = mockIsBetween(ZonedDateTime.of(of(2011, 1, 1, 2, 2),systemDefault()),
                 ZonedDateTime.of(of(2012, 1, 1, 2, 2), systemDefault()));
-        Validation<Comparable<ZonedDateTime>> validation = isZonedDateTimeBetween(range.getMin(), range.getMax());
+        Validation<ZonedDateTime> validation = isZonedDateTimeBetween(range.getMin(), range.getMax());
         verifyResultAndCommonsInvocation(validation, () -> isBetween(same(range.getMin()), same(range.getMax())));
     }
 
@@ -217,8 +215,7 @@ public class DateValidationsTest extends AbstractValidationsTest<LocalDateTime> 
         return Range.of(minDate, maxDate);
     }
 
-
-    private <V> void verifyResultAndCommonsInvocation(Validation<Comparable<V>> currentValidation, Runnable verifications) {
+    private <V> void verifyResultAndCommonsInvocation(Validation<V> currentValidation, Runnable verifications) {
         assertThat((Object) currentValidation).isSameAs(expectedValidation);
         verifyCommonsInvocations(verifications);
     }
@@ -247,6 +244,60 @@ public class DateValidationsTest extends AbstractValidationsTest<LocalDateTime> 
     private <V> Validation<V> getStubValidation() {
         //noinspection unchecked
         return mock(Validation.class);
+    }
+
+    @Test
+    public void testIsLocalDateFirstDayOfYear() {
+        testHelper.testIsLocalDateFirstDayOfYear(DateValidations::isLocalDateFirstDayOfYear);
+    }
+    @Test
+    public void testIsLocalDateTimeFirstDayOfYear() {
+        testHelper.testIsLocalDateTimeFirstDayOfYear(DateValidations::isLocalDateTimeFirstDayOfYear);
+    }
+
+    @Test
+    public void testIsZonedDateFirstDayOfYear() {
+        testHelper.testIsZonedDateTimeFirstDayOfYear(DateValidations::isZonedDateTimeFirstDayOfYear);
+    }
+
+    @Test
+    public void testIsLocalDateFirstDayOfMonth() {
+        testHelper.testIsLocalDateFirstDayOfMonth(DateValidations::isLocalDateFirstDayOfMonth);
+    }
+
+    @Test
+    public void testIsLocalDateTimeFirstDayOfMonth() {
+        testHelper.testIsLocalDateTimeFirstDayOfMonth(DateValidations::isLocalDateTimeFirstDayOfMonth);
+    }
+
+    @Test
+    public void testIsZonedDateTimeFirstDayOfMonth() {
+        testHelper.testIsZonedDateTimeFirstDayOfMonth(DateValidations::isZonedDateTimeFirstDayOfMonth);
+    }
+
+    @Test
+    public void testIsLocalDateTimeStartOfDay() {
+        testHelper.testIsLocalDateTimeStartOfDay(DateValidations::isLocalDateTimeStartOfDay);
+    }
+
+    @Test
+    public void testIsZonedDateTimeStartOfDay() {
+        testHelper.testIsZonedDateTimeStartOfDay(DateValidations::isZonedDateTimeStartOfDay);
+    }
+
+    @Test
+    public void testIsLocalDateLastDayOfMonth() {
+        testHelper.testIsLocalDateLastDayOfMonth(DateValidations::isLocalDateLastDayOfMonth);
+    }
+
+    @Test
+    public void testIsLocalDateTimeLastDayOfMonth() {
+        testHelper.testIsLocalDateTimeLastDayOfMonth(DateValidations::isLocalDateTimeLastDayOfMonth);
+    }
+
+    @Test
+    public void testIsZonedDateTimeLastDayOfMonth() {
+        testHelper.testIsZonedDateTimeLastDayOfMonth(DateValidations::isZonedDateTimeLastDayOfMonth);
     }
 
 }

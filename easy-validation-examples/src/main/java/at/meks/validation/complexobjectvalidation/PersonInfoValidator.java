@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static at.meks.validation.complexobjectvalidation.model.Account.AccountBuilder.anAccount;
-import static at.meks.validation.validations.date.DateValidations.isDateAfter;
+import static at.meks.validation.validations.date.DateValidations.isLocalDateTimeAfter;
 import static at.meks.validation.validations.list.ListValidations.containsOnly;
 import static at.meks.validation.validations.list.ListValidations.forType;
 import static at.meks.validation.validations.list.ListValidations.hasMaxSize;
@@ -55,7 +55,7 @@ class PersonInfoValidator {
         postalCodeQuickValidation = isNotBlank().and(lengthIsBetween(4, 8));
         postalCodeSlowValidation = isInArray(this::getValidPostalCodes);
         birthDayStringValidation = isNotBlank().and(isDate(DEFAULT_DATE_FORMAT));
-        birthDayDateValidation = isDateAfter(LocalDateTime.of(1940, 1, 1, 0, 0, 0));
+        birthDayDateValidation = isLocalDateTimeAfter(LocalDateTime.of(1940, 1, 1, 0, 0, 0));
         accountNrStringValidation = isNotBlank().and(isNumeric()).and(containsNotOnly("0"));
         accountSlowValidation = forType(Account.class, hasMinSize(1)).and(hasMaxSize(5))
                 .and(onProperty(Account::isActive, containsOnly(true)))

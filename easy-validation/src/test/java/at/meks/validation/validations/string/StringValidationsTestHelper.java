@@ -1,5 +1,6 @@
 package at.meks.validation.validations.string;
 
+import at.meks.validation.TestUtils;
 import at.meks.validation.Validation;
 import at.meks.validation.result.ErrorDescription;
 import at.meks.validation.validations.AbstractValidationsTest;
@@ -17,7 +18,7 @@ import static at.meks.validation.TestUtils.anySupplier;
 import static at.meks.validation.TestUtils.assertSupplierValue;
 import static at.meks.validation.TestUtils.getSupplierCaptor;
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
@@ -116,10 +117,8 @@ class StringValidationsTestHelper {
         doReturn(test.getExpectedValidation()).when(coreValidations).isInArray(any(Supplier.class), any(Supplier.class));
         Validation<String> validation = methodInvoker.apply(() -> validValues);
         test.assertForExpectedValidation(validation);
-        @SuppressWarnings("unchecked")
-        ArgumentCaptor<Supplier<String[]>> validValueSupplierCaptor = ArgumentCaptor.forClass(Supplier.class);
-        @SuppressWarnings("unchecked")
-        ArgumentCaptor<Supplier<ErrorDescription>> errorDescSupplierCaptor = ArgumentCaptor.forClass(Supplier.class);
+        ArgumentCaptor<Supplier<String[]>> validValueSupplierCaptor = TestUtils.getSupplierCaptor();
+        ArgumentCaptor<Supplier<ErrorDescription>> errorDescSupplierCaptor = TestUtils.getSupplierCaptor();
         verify(coreValidations).isInArray(validValueSupplierCaptor.capture(), errorDescSupplierCaptor.capture());
         test.assertErrorDesc(errorDescSupplierCaptor.getValue().get());
         assertThat(validValueSupplierCaptor.getValue().get()).isSameAs(validValues);
@@ -132,10 +131,8 @@ class StringValidationsTestHelper {
         doReturn(test.getExpectedValidation()).when(coreValidations).isInList(any(Supplier.class), any(Supplier.class));
         Validation<String> validation = methodInvoker.apply(() -> validValues);
         test.assertForExpectedValidation(validation);
-        @SuppressWarnings("unchecked")
-        ArgumentCaptor<Supplier<Collection<String>>> validValueSupplierCaptor = ArgumentCaptor.forClass(Supplier.class);
-        @SuppressWarnings("unchecked")
-        ArgumentCaptor<Supplier<ErrorDescription>> errorDescSupplierCaptor = ArgumentCaptor.forClass(Supplier.class);
+        ArgumentCaptor<Supplier<Collection<String>>> validValueSupplierCaptor = TestUtils.getSupplierCaptor();
+        ArgumentCaptor<Supplier<ErrorDescription>> errorDescSupplierCaptor = TestUtils.getSupplierCaptor();
         verify(coreValidations).isInList(validValueSupplierCaptor.capture(), errorDescSupplierCaptor.capture());
         test.assertErrorDesc(errorDescSupplierCaptor.getValue().get());
         assertThat(validValueSupplierCaptor.getValue().get()).isSameAs(validValues);
