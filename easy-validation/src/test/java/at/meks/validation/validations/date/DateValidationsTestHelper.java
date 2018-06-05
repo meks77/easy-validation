@@ -4,13 +4,17 @@ import at.meks.validation.Validation;
 import at.meks.validation.validations.AbstractValidationsTest;
 import at.meks.validation.validations.VerifierWithErrorDescSupplierCaptor;
 import org.mockito.BDDMockito;
+import org.mockito.Mockito;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static at.meks.validation.TestUtils.anySupplier;
+import static org.mockito.ArgumentMatchers.same;
 import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.BDDMockito.verify;
 import static org.mockito.Mockito.when;
@@ -166,6 +170,40 @@ class DateValidationsTestHelper {
             VerifierWithErrorDescSupplierCaptor verifier) {
         when(test.getMessageResolver().getIsDateTimeStartOfHourMessage()).thenReturn(test.getExpectedMessage());
         Validation<T> validation = methodInvoker.get();
+        test.doAssertionsAndVerificationsWithSupplier(validation, verifier);
+    }
+
+    void testIsLocalDateDayOfWeek(Function<DayOfWeek, Validation<LocalDate>> methodInvoker) {
+        DayOfWeek dayOfWeek = DayOfWeek.THURSDAY;
+        willReturn(test.getExpectedValidation()).given(coreValidations)
+                .isLocalDateDayOfWeek(same(dayOfWeek), anySupplier());
+        testIsDateDayOfWeek(dayOfWeek, methodInvoker,
+                errorDescCaptor -> BDDMockito.verify(coreValidations)
+                        .isLocalDateDayOfWeek(same(dayOfWeek), errorDescCaptor.capture()));
+    }
+
+    void testIsLocalDateTimeDayOfWeek(Function<DayOfWeek, Validation<LocalDateTime>> methodInvoker) {
+        DayOfWeek dayOfWeek = DayOfWeek.THURSDAY;
+        willReturn(test.getExpectedValidation()).given(coreValidations)
+                .isLocalDateTimeDayOfWeek(same(dayOfWeek), anySupplier());
+        testIsDateDayOfWeek(dayOfWeek, methodInvoker,
+                errorDescCaptor -> BDDMockito.verify(coreValidations)
+                        .isLocalDateTimeDayOfWeek(same(dayOfWeek), errorDescCaptor.capture()));
+    }
+
+    void testIsZonedDateTimeDayOfWeek(Function<DayOfWeek, Validation<ZonedDateTime>> methodInvoker) {
+        DayOfWeek dayOfWeek = DayOfWeek.THURSDAY;
+        willReturn(test.getExpectedValidation()).given(coreValidations)
+                .isZonedDateTimeDayOfWeek(same(dayOfWeek), anySupplier());
+        testIsDateDayOfWeek(dayOfWeek, methodInvoker,
+                errorDescCaptor -> BDDMockito.verify(coreValidations)
+                        .isZonedDateTimeDayOfWeek(same(dayOfWeek), errorDescCaptor.capture()));
+    }
+
+    private <T> void testIsDateDayOfWeek(DayOfWeek dayOfWeek, Function<DayOfWeek, Validation<T>> methodInvoker,
+            VerifierWithErrorDescSupplierCaptor verifier) {
+        when(test.getMessageResolver().getIsDateDayOfWeekMessage(dayOfWeek)).thenReturn(test.getExpectedMessage());
+        Validation<T> validation = methodInvoker.apply(dayOfWeek);
         test.doAssertionsAndVerificationsWithSupplier(validation, verifier);
     }
 

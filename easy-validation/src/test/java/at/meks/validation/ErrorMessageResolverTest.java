@@ -2,6 +2,7 @@ package at.meks.validation;
 
 import org.junit.Test;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -177,5 +178,15 @@ public class ErrorMessageResolverTest {
     @Test
     public void getIsDateTimeStartOfHourMessage() {
         assertThat(resolver.getIsDateTimeStartOfHourMessage()).isEqualTo("Date must have minutes and seconds set to 0");
+    }
+
+    @Test
+    public void givenMondayWhenGetIsDateDayOfWeekMessageReturnsExpected() {
+        assertThat(resolver.getIsDateDayOfWeekMessage(DayOfWeek.MONDAY)).isEqualTo("Date must be weekday MONDAY");
+    }
+
+    @Test
+    public void givenTuesdayWhenGetIsDateDayOfWeekMessageReturnsExpected() {
+        assertThat(resolver.getIsDateDayOfWeekMessage(DayOfWeek.TUESDAY)).isEqualTo("Date must be weekday TUESDAY");
     }
 }

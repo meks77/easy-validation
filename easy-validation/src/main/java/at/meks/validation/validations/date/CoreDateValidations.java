@@ -4,6 +4,7 @@ import at.meks.validation.SimpleValidation;
 import at.meks.validation.Validation;
 import at.meks.validation.result.ErrorDescription;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -93,8 +94,15 @@ class CoreDateValidations {
         return SimpleValidation.from(date -> date.getMinute() == 0 && date.getSecond() == 0, errorDescription);
     }
 
-    //TODO isWeekDay
-    //TODO isFirstDayOfWeek
-    //TODO isLastDayOfWeek
-    //TODO ???
+    Validation<LocalDate> isLocalDateDayOfWeek(DayOfWeek dayOfWeek, Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(date -> date.getDayOfWeek() == dayOfWeek, errorDescription);
+    }
+
+    Validation<LocalDateTime> isLocalDateTimeDayOfWeek(DayOfWeek dayOfWeek, Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(date -> date.getDayOfWeek() == dayOfWeek, errorDescription);
+    }
+
+    Validation<ZonedDateTime> isZonedDateTimeDayOfWeek(DayOfWeek dayOfWeek, Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(date -> date.getDayOfWeek() == dayOfWeek, errorDescription);
+    }
 }

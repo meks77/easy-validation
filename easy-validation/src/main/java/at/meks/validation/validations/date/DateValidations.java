@@ -4,6 +4,7 @@ import at.meks.validation.ErrorMessageResolver;
 import at.meks.validation.Validation;
 import at.meks.validation.validations.common.CommonValidations;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
@@ -335,4 +336,35 @@ public class DateValidations {
         return VALIDATIONS.isZonedDateTimeStartOfHour(
                 () -> withMessage(MESSAGE_RESOLVER.getIsDateTimeStartOfHourMessage()));
     }
+
+    /**
+     * Validates that the validated date is the provided day of the week.
+     * @param dayOfWeek date must match to this day of the week
+     * @return new instance of validation
+     */
+    public static Validation<LocalDate> isLocalDateDayOfWeek(DayOfWeek dayOfWeek) {
+        return VALIDATIONS.isLocalDateDayOfWeek(dayOfWeek,
+                () -> withMessage(MESSAGE_RESOLVER.getIsDateDayOfWeekMessage(dayOfWeek)));
+    }
+
+    /**
+     * Validates that the validated date is the provided day of the week.
+     * @param dayOfWeek date must match to this day of the week
+     * @return new instance of validation
+     */
+    public static Validation<LocalDateTime> isLocalDateTimeDayOfWeek(DayOfWeek dayOfWeek) {
+        return VALIDATIONS.isLocalDateTimeDayOfWeek(dayOfWeek,
+                () -> withMessage(MESSAGE_RESOLVER.getIsDateDayOfWeekMessage(dayOfWeek)));
+    }
+
+    /**
+     * Validates that the validated date is the provided day of the week.
+     * @param dayOfWeek date must match to this day of the week
+     * @return new instance of validation
+     */
+    public static Validation<ZonedDateTime> isZonedDateTimeDayOfWeek(DayOfWeek dayOfWeek) {
+        return VALIDATIONS.isZonedDateTimeDayOfWeek(dayOfWeek,
+                () -> withMessage(MESSAGE_RESOLVER.getIsDateDayOfWeekMessage(dayOfWeek)));
+    }
+
 }

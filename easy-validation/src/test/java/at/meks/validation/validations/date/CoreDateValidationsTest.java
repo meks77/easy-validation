@@ -3,10 +3,12 @@ package at.meks.validation.validations.date;
 import at.meks.validation.validations.AbstractCoreValidationsTest;
 import org.junit.Test;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.WeekFields;
 
 import static java.time.LocalDateTime.of;
 
@@ -325,6 +327,60 @@ public class CoreDateValidationsTest extends AbstractCoreValidationsTest {
     public void givenMinute1Second1WhenIsZonedDateStartOfHourReturnsError() {
         assertErrorResult(validations.isZonedDateTimeStartOfHour(() -> errorDescription)
                 .test(ZonedDateTime.of(of(2018, 1, 5, 0, 1, 1), ZoneId.systemDefault())));
+    }
+
+    @Test
+    public void givenMondayWhenIsLocalDateDayOfWeekMondayReturnsOk() {
+        assertValidResult(validations.isLocalDateDayOfWeek(DayOfWeek.MONDAY, () -> errorDescription)
+                .test(LocalDate.of(2018, 6, 4)));
+    }
+
+    @Test
+    public void givenTuesdayWhenIsLocalDateDayOfWeekMondayReturnsError() {
+        assertErrorResult(validations.isLocalDateDayOfWeek(DayOfWeek.MONDAY, () -> errorDescription)
+                .test(LocalDate.of(2018, 6, 5)));
+    }
+
+    @Test
+    public void givenTuesdayWhenIsLocalDateDayOfWeekTuesdayReturnsOk() {
+        assertValidResult(validations.isLocalDateDayOfWeek(DayOfWeek.TUESDAY, () -> errorDescription)
+                .test(LocalDate.of(2018, 6, 5)));
+    }
+
+    @Test
+    public void givenMondayWhenIsLocalDateTimeDayOfWeekMondayReturnsOk() {
+        assertValidResult(validations.isLocalDateTimeDayOfWeek(DayOfWeek.MONDAY, () -> errorDescription)
+                .test(of(2018, 6, 4, 1, 2)));
+    }
+
+    @Test
+    public void givenTuesdayWhenIsLocalDateTimeDayOfWeekMondayReturnsError() {
+        assertErrorResult(validations.isLocalDateTimeDayOfWeek(DayOfWeek.MONDAY, () -> errorDescription)
+                .test(of(2018, 6, 5, 1, 2)));
+    }
+
+    @Test
+    public void givenTuesdayWhenIsLocalDateTimeDayOfWeekTuesdayReturnsOk() {
+        assertValidResult(validations.isLocalDateTimeDayOfWeek(DayOfWeek.TUESDAY, () -> errorDescription)
+                .test(of(2018, 6, 5, 1, 2)));
+    }
+
+    @Test
+    public void givenMondayWhenIsZonedDateTimeDayOfWeekMondayReturnsOk() {
+        assertValidResult(validations.isZonedDateTimeDayOfWeek(DayOfWeek.MONDAY, () -> errorDescription)
+                .test(ZonedDateTime.of(of(2018, 6, 4, 1, 2), ZoneId.systemDefault())));
+    }
+
+    @Test
+    public void givenTuesdayWhenIsZonedDateTimeDayOfWeekMondayReturnsError() {
+        assertErrorResult(validations.isZonedDateTimeDayOfWeek(DayOfWeek.MONDAY, () -> errorDescription)
+                .test(ZonedDateTime.of(of(2018, 6, 5, 1, 2), ZoneId.systemDefault())));
+    }
+
+    @Test
+    public void givenTuesdayWhenIsZonedDateTimeDayOfWeekTuesdayReturnsOk() {
+        assertValidResult(validations.isZonedDateTimeDayOfWeek(DayOfWeek.TUESDAY, () -> errorDescription)
+                .test(ZonedDateTime.of(of(2018, 6, 5, 1, 2), ZoneId.systemDefault())));
     }
 
 }

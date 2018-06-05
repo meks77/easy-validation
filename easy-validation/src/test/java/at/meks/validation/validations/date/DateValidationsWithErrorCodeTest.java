@@ -23,12 +23,31 @@ import static at.meks.validation.validations.common.CommonValidationsWithErrorCo
 import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateAfter;
 import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateBefore;
 import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateBetween;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateDayOfWeek;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateFirstDayOfMonth;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateFirstDayOfYear;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateLastDayOfMonth;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateLastDayOfYear;
 import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateTimeAfter;
 import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateTimeBefore;
 import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateTimeBetween;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateTimeDayOfWeek;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateTimeFirstDayOfMonth;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateTimeFirstDayOfYear;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateTimeLastDayOfMonth;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateTimeLastDayOfYear;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateTimeStartOfDay;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isLocalDateTimeStartOfHour;
 import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isZonedDateTimeAfter;
 import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isZonedDateTimeBefore;
 import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isZonedDateTimeBetween;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isZonedDateTimeDayOfWeek;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isZonedDateTimeFirstDayOfMonth;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isZonedDateTimeFirstDayOfYear;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isZonedDateTimeLastDayOfMonth;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isZonedDateTimeLastDayOfYear;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isZonedDateTimeStartOfDay;
+import static at.meks.validation.validations.date.DateValidationsWithErrorCode.isZonedDateTimeStartOfHour;
 import static java.time.LocalDateTime.of;
 import static java.time.ZoneId.systemDefault;
 import static org.fest.assertions.api.Assertions.assertThat;
@@ -266,97 +285,96 @@ public class DateValidationsWithErrorCodeTest extends AbstractErrorCodeValidatio
 
     @Test
     public void testIsLocalDateFirstDayOfYear() {
-        testHelper.testIsLocalDateFirstDayOfYear(
-                () -> DateValidationsWithErrorCode.isLocalDateFirstDayOfYear(EXPECTED_CODE));
+        testHelper.testIsLocalDateFirstDayOfYear(() -> isLocalDateFirstDayOfYear(EXPECTED_CODE));
     }
 
     @Test
     public void testIsLocalDateTimeFirstDayOfYear() {
-        testHelper.testIsLocalDateTimeFirstDayOfYear(
-                () -> DateValidationsWithErrorCode.isLocalDateTimeFirstDayOfYear(EXPECTED_CODE));
+        testHelper.testIsLocalDateTimeFirstDayOfYear(() -> isLocalDateTimeFirstDayOfYear(EXPECTED_CODE));
     }
 
     @Test
     public void testIsZonedDateFirstDayOfYear() {
-        testHelper.testIsZonedDateTimeFirstDayOfYear(
-                () -> DateValidationsWithErrorCode.isZonedDateTimeFirstDayOfYear(EXPECTED_CODE));
+        testHelper.testIsZonedDateTimeFirstDayOfYear(() -> isZonedDateTimeFirstDayOfYear(EXPECTED_CODE));
     }
 
     @Test
     public void testIsLocalDateLastDayOfYear() {
-        testHelper.testIsLocalDateLastDayOfYear(
-                () -> DateValidationsWithErrorCode.isLocalDateLastDayOfYear(EXPECTED_CODE));
+        testHelper.testIsLocalDateLastDayOfYear(() -> isLocalDateLastDayOfYear(EXPECTED_CODE));
     }
 
     @Test
     public void testIsLocalDateTimeLastDayOfYear() {
-        testHelper.testIsLocalDateTimeLastDayOfYear(
-                () -> DateValidationsWithErrorCode.isLocalDateTimeLastDayOfYear(EXPECTED_CODE));
+        testHelper.testIsLocalDateTimeLastDayOfYear(() -> isLocalDateTimeLastDayOfYear(EXPECTED_CODE));
     }
 
     @Test
     public void testIsZonedDateLastDayOfYear() {
-        testHelper.testIsZonedDateTimeLastDayOfYear(
-                () -> DateValidationsWithErrorCode.isZonedDateTimeLastDayOfYear(EXPECTED_CODE));
+        testHelper.testIsZonedDateTimeLastDayOfYear(() -> isZonedDateTimeLastDayOfYear(EXPECTED_CODE));
     }
 
     @Test
     public void testIsLocalDateFirstDayOfMonth() {
-        testHelper.testIsLocalDateFirstDayOfMonth(
-                () -> DateValidationsWithErrorCode.isLocalDateFirstDayOfMonth(EXPECTED_CODE));
+        testHelper.testIsLocalDateFirstDayOfMonth(() -> isLocalDateFirstDayOfMonth(EXPECTED_CODE));
     }
 
     @Test
     public void testIsLocalDateTimeFirstDayOfMonth() {
-        testHelper.testIsLocalDateTimeFirstDayOfMonth(
-                () -> DateValidationsWithErrorCode.isLocalDateTimeFirstDayOfMonth(EXPECTED_CODE));
+        testHelper.testIsLocalDateTimeFirstDayOfMonth(() -> isLocalDateTimeFirstDayOfMonth(EXPECTED_CODE));
     }
 
     @Test
     public void testIsZonedDateTimeFirstDayOfMonth() {
-        testHelper.testIsZonedDateTimeFirstDayOfMonth(
-                () -> DateValidationsWithErrorCode.isZonedDateTimeFirstDayOfMonth(EXPECTED_CODE));
+        testHelper.testIsZonedDateTimeFirstDayOfMonth(() -> isZonedDateTimeFirstDayOfMonth(EXPECTED_CODE));
     }
 
     @Test
     public void testIsLocalDateTimeStartOfDay() {
-        testHelper.testIsLocalDateTimeStartOfDay(
-                () -> DateValidationsWithErrorCode.isLocalDateTimeStartOfDay(EXPECTED_CODE));
+        testHelper.testIsLocalDateTimeStartOfDay(() -> isLocalDateTimeStartOfDay(EXPECTED_CODE));
     }
 
     @Test
     public void testIsZonedDateTimeStartOfDay() {
-        testHelper.testIsZonedDateTimeStartOfDay(
-                () -> DateValidationsWithErrorCode.isZonedDateTimeStartOfDay(EXPECTED_CODE));
+        testHelper.testIsZonedDateTimeStartOfDay(() -> isZonedDateTimeStartOfDay(EXPECTED_CODE));
     }
 
     @Test
     public void testIsLocalDateLastDayOfMonth() {
-        testHelper.testIsLocalDateLastDayOfMonth(
-                () -> DateValidationsWithErrorCode.isLocalDateLastDayOfMonth(EXPECTED_CODE));
+        testHelper.testIsLocalDateLastDayOfMonth(() -> isLocalDateLastDayOfMonth(EXPECTED_CODE));
     }
 
     @Test
     public void testIsLocalDateTimeLastDayOfMonth() {
-        testHelper.testIsLocalDateTimeLastDayOfMonth(
-                () -> DateValidationsWithErrorCode.isLocalDateTimeLastDayOfMonth(EXPECTED_CODE));
+        testHelper.testIsLocalDateTimeLastDayOfMonth(() -> isLocalDateTimeLastDayOfMonth(EXPECTED_CODE));
     }
 
     @Test
     public void testIsZonedDateTimeLastDayOfMonth() {
-        testHelper.testIsZonedDateTimeLastDayOfMonth(
-                () -> DateValidationsWithErrorCode.isZonedDateTimeLastDayOfMonth(EXPECTED_CODE));
+        testHelper.testIsZonedDateTimeLastDayOfMonth(() -> isZonedDateTimeLastDayOfMonth(EXPECTED_CODE));
     }
 
     @Test
     public void testLocalDateTimeIsStartOfHour() {
-        testHelper.testIsLocalDateTimeStartOfHour(
-                () -> DateValidationsWithErrorCode.isLocalDateTimeStartOfHour(EXPECTED_CODE));
+        testHelper.testIsLocalDateTimeStartOfHour(() -> isLocalDateTimeStartOfHour(EXPECTED_CODE));
     }
 
     @Test
     public void testZonedDateTimeIsStartOfHour() {
-        testHelper.testIsZonedDateTimeStartOfHour(
-                () -> DateValidationsWithErrorCode.isZonedDateTimeStartOfHour(EXPECTED_CODE));
+        testHelper.testIsZonedDateTimeStartOfHour(() -> isZonedDateTimeStartOfHour(EXPECTED_CODE));
+    }
+
+    @Test
+    public void testLocalDateIsDayOfWeek() {
+        testHelper.testIsLocalDateDayOfWeek(dayOfWeek -> isLocalDateDayOfWeek(dayOfWeek, EXPECTED_CODE));
+    }
+
+    @Test
+    public void testLocalDateTimeIsDayOfWeek() {
+        testHelper.testIsLocalDateTimeDayOfWeek(dayOfWeek -> isLocalDateTimeDayOfWeek(dayOfWeek, EXPECTED_CODE));
+    }
+
+    @Test
+    public void testZonedDateTimeIsDayOfWeek() {
+        testHelper.testIsZonedDateTimeDayOfWeek(dayOfWeek -> isZonedDateTimeDayOfWeek(dayOfWeek, EXPECTED_CODE));
     }
 }

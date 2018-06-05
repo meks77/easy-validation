@@ -324,4 +324,19 @@ public class DateValidationsTest extends AbstractValidationsTest<LocalDateTime> 
         testHelper.testIsZonedDateTimeStartOfHour(DateValidations::isZonedDateTimeStartOfHour);
     }
 
+    @Test
+    public void testLocalDateIsDayOfWeek() {
+        testHelper.testIsLocalDateDayOfWeek(DateValidations::isLocalDateDayOfWeek);
+    }
+
+    @Test
+    public void testLocalTimeIsDayOfWeek() {
+        testHelper.testIsLocalDateTimeDayOfWeek(DateValidations::isLocalDateTimeDayOfWeek);
+    }
+
+    @Test
+    public void testZonedDateIsDayOfWeek() {
+        testHelper.testIsZonedDateTimeDayOfWeek(DateValidations::isZonedDateTimeDayOfWeek);
+    }
+
 }

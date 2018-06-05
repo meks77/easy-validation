@@ -4,12 +4,14 @@ import at.meks.validation.ErrorMessageResolver;
 import at.meks.validation.Validation;
 import at.meks.validation.validations.common.CommonValidationsWithErrorCode;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.function.Supplier;
 
 import static at.meks.validation.result.ErrorDescriptionBuilder.withCode;
+import static at.meks.validation.result.ErrorDescriptionBuilder.withMessage;
 
 /**
  * This class contains validations for dates with the support for an error code.
@@ -364,19 +366,54 @@ public class DateValidationsWithErrorCode {
 
     /**
      * Validates that the validated date has the minutes and seconds set to 0.
+     * @param errorCode in the case the validation violates this code is reported in the result
      * @return  new instance of validation
      */
-    public static Validation<LocalDateTime> isLocalDateTimeStartOfHour(String expectedCode) {
+    public static Validation<LocalDateTime> isLocalDateTimeStartOfHour(String errorCode) {
         return VALIDATIONS.isLocalDateTimeStartOfHour(
-                () -> withCode(MESSAGE_RESOLVER.getIsDateTimeStartOfHourMessage(), expectedCode));
+                () -> withCode(MESSAGE_RESOLVER.getIsDateTimeStartOfHourMessage(), errorCode));
     }
 
     /**
      * Validates that the validated date has the minutes and seconds set to 0.
+     * @param errorCode in the case the validation violates this code is reported in the result
      * @return  new instance of validation
      */
-    public static Validation<ZonedDateTime> isZonedDateTimeStartOfHour(String expectedCode) {
+    public static Validation<ZonedDateTime> isZonedDateTimeStartOfHour(String errorCode) {
         return VALIDATIONS.isZonedDateTimeStartOfHour(
-                () -> withCode(MESSAGE_RESOLVER.getIsDateTimeStartOfHourMessage(), expectedCode));
+                () -> withCode(MESSAGE_RESOLVER.getIsDateTimeStartOfHourMessage(), errorCode));
+    }
+
+    /**
+     * Validates that the validated date is the provided day of the week.
+     * @param dayOfWeek date must match to this day of the week
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @return new instance of validation
+     */
+    public static Validation<LocalDate> isLocalDateDayOfWeek(DayOfWeek dayOfWeek, String errorCode) {
+        return VALIDATIONS.isLocalDateDayOfWeek(dayOfWeek,
+                () -> withCode(MESSAGE_RESOLVER.getIsDateDayOfWeekMessage(dayOfWeek), errorCode));
+    }
+
+    /**
+     * Validates that the validated date is the provided day of the week.
+     * @param dayOfWeek date must match to this day of the week
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @return new instance of validation
+     */
+    public static Validation<LocalDateTime> isLocalDateTimeDayOfWeek(DayOfWeek dayOfWeek, String errorCode) {
+        return VALIDATIONS.isLocalDateTimeDayOfWeek(dayOfWeek,
+                () -> withCode(MESSAGE_RESOLVER.getIsDateDayOfWeekMessage(dayOfWeek), errorCode));
+    }
+
+    /**
+     * Validates that the validated date is the provided day of the week.
+     * @param dayOfWeek date must match to this day of the week
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @return new instance of validation
+     */
+    public static Validation<ZonedDateTime> isZonedDateTimeDayOfWeek(DayOfWeek dayOfWeek, String errorCode) {
+        return VALIDATIONS.isZonedDateTimeDayOfWeek(dayOfWeek,
+                () -> withCode(MESSAGE_RESOLVER.getIsDateDayOfWeekMessage(dayOfWeek), errorCode));
     }
 }

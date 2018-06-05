@@ -1,5 +1,6 @@
 package at.meks.validation;
 
+import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
@@ -161,5 +162,9 @@ public class ErrorMessageResolver {
 
     public String getIsDateTimeStartOfHourMessage() {
         return DATE_MUST_HAVE_MINUTES_AND_SECONDS_SET_TO_0;
+    }
+
+    public String getIsDateDayOfWeekMessage(DayOfWeek dayOfWeek) {
+        return "Date must be weekday " + dayOfWeek;
     }
 }
