@@ -1,11 +1,13 @@
 package at.meks.validation;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Locale;
+import java.util.function.Supplier;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -13,180 +15,233 @@ public class ErrorMessageResolverTest {
 
     private final ErrorMessageResolver resolver = new ErrorMessageResolver();
 
+    @BeforeClass
+    public static void initializeLocale() {
+        ValidationConfiguration.setLocale(Locale.ENGLISH);
+    }
+
+    @Test
+    public void testThatTheDefaultLocaleIsUsed() {
+        ValidationConfiguration.setLocale(null);
+        Locale defaulLocale = Locale.getDefault();
+        String isShortMessage = resolver.getIsShortMessage();
+        if (defaulLocale.getLanguage().equals("de")) {
+            assertThat(isShortMessage).isEqualTo(resolver.getIsShortMessage());
+        } else {
+            assertThat(isShortMessage).isEqualTo(resolver.getIsShortMessage());
+        }
+    }
+
+    @Test
+    public void givenItalianFileIsUsedWhenGetIsShortMessage() {
+        ValidationConfiguration.setLocale(Locale.ITALIAN);
+        assertThat(new ErrorMessageResolver().getIsShortMessage()).isEqualTo("il valore deve essere di tipo breve");
+    }
+
     @Test
     public void getLengthIsMoreThanMessage() {
-        assertThat(resolver.getLengthIsMoreThanMessage(4)).isEqualTo("must have more than 4 chars");
+        assertMessages(() -> resolver.getLengthIsMoreThanMessage(4), "must have more than 4 chars",
+                "muss mehr als 4 Zeichen enthalten");
+    }
+
+    private void assertMessages(Supplier<String> validationInvocation, String english, String german) {
+        ValidationConfiguration.setLocale(Locale.ENGLISH);
+        assertThat(validationInvocation.get()).isEqualTo(english);
+        ValidationConfiguration.setLocale(Locale.GERMAN);
+        assertThat(validationInvocation.get()).isEqualTo(german);
     }
 
     @Test
     public void getLengthIsLessThanMessage() {
-        assertThat(resolver.getLengthIsLessThanMessage(4)).isEqualTo("must have less than 4 chars");
+        assertMessages(() -> resolver.getLengthIsLessThanMessage(4), "must have less than 4 chars",
+                "muss weniger als 4 Zeichen enthalten");
     }
 
     @Test
     public void getHasLengthMessage() {
-        assertThat(resolver.getHasLengthMessage(4)).isEqualTo("length must be 4 chars");
+        assertMessages(() -> resolver.getHasLengthMessage(4), "length must be 4 chars", "Länge muss 4 Zeichen sein");
     }
 
     @Test
     public void getContainsMessage() {
-        assertThat(resolver.getContainsMessage("x")).isEqualTo("must contain x");
+        assertMessages(() -> resolver.getContainsMessage("x"), "must contain x", "Muss x enthalten");
     }
 
     @Test
     public void getIsNotBlankMessage() {
-        assertThat(resolver.getIsNotBlankMessage()).isEqualTo("mustn't be blank");
+        assertMessages(resolver::getIsNotBlankMessage, "mustn't be blank", "Muss befüllt sein");
     }
 
     @Test
     public void getIsInListMessage() {
-        assertThat(resolver.getIsInListMessage(Arrays.asList("a", "b", "c"))).isEqualTo("must be in list: [a, b, c]");
+        assertMessages(() -> resolver.getIsInListMessage(Arrays.asList("a", "b", "c")), "must be in list: [a, b, c]",
+                "Erlaubte Werte: [a, b, c]");
     }
 
     @Test
     public void getIsDateMessage() {
-        assertThat(resolver.getIsDateMessage(DateTimeFormatter.BASIC_ISO_DATE))
-                .isEqualTo("must match to date format ParseCaseSensitive(false)Value(Year,4)Value(MonthOfYear,2)" +
-                        "Value(DayOfMonth,2)[Offset(+HHMMss,'Z')]");
+        assertMessages(() -> resolver.getIsDateMessage(DateTimeFormatter.BASIC_ISO_DATE),
+                "must match to date format ParseCaseSensitive(false)Value(Year,4)Value(MonthOfYear,2)Value" +
+                        "(DayOfMonth,2)[Offset(+HHMMss,'Z')]",
+                "Datumsformat muss ParseCaseSensitive(false)Value(Year,4)Value(MonthOfYear,2)Value(DayOfMonth,2)" +
+                        "[Offset(+HHMMss,'Z')] entsprechen");
     }
 
     @Test
     public void getIsNumericMessage() {
-        assertThat(resolver.getIsNumericMessage()).isEqualTo("value must be numeric");
+        assertMessages(resolver::getIsNumericMessage, "value must be numeric", "Wert muss numerisch sein");
     }
 
     @Test
     public void getContainsNotOnlyMessage() {
-        assertThat(resolver.getContainsNotOnlyMessage("a")).isEqualTo("value mustn't contain only a");
+        assertMessages(() -> resolver.getContainsNotOnlyMessage("a"), "value mustn't contain only a",
+                "Wert darf nicht nur a enthalten");
     }
 
     @Test
     public void getNotNullMessage() {
-        assertThat(resolver.getNotNullMessage()).isEqualTo("must not be null");
+        assertMessages(resolver::getNotNullMessage, "must not be null", "Darf nicht null sein");
     }
 
     @Test
     public void getListContainsOnlyMessage() {
-        assertThat(resolver.getListContainsOnlyMessage("x")).isEqualTo("list must contain only x");
+        assertMessages(() -> resolver.getListContainsOnlyMessage("x"), "list must contain only x",
+                "Liste darf nur x enthalten");
     }
 
     @Test
     public void getListContainsMessage() {
-        assertThat(resolver.getListContainsMessage("x")).isEqualTo("list must contain x");
+        assertMessages(() -> resolver.getListContainsMessage("x"), "list must contain x", "Liste muss x enthalten");
     }
 
     @Test
     public void getListDoesNotContainMessage() {
-        assertThat(resolver.getListDoesNotContainMessage("x")).isEqualTo("list mustn't contain x");
+        assertMessages(() -> resolver.getListDoesNotContainMessage("x"), "list mustn't contain x",
+                "Liste darf nicht x enthalten");
     }
 
     @Test
     public void getListIsNotEmptyMessage() {
-        assertThat(resolver.getListIsNotEmptyMessage()).isEqualTo("list mustn't be empty");
+        assertMessages(resolver::getListIsNotEmptyMessage, "list mustn't be empty", "Liste darf nicht leer sein");
     }
 
     @Test
     public void getListIsEmptyMessage() {
-        assertThat(resolver.getListIsEmptyMessage()).isEqualTo("list must be empty");
+        assertMessages(resolver::getListIsEmptyMessage, "list must be empty", "Liste muss leer sein");
     }
 
     @Test
     public void getListHasSizeMessage() {
-        assertThat(resolver.getListHasSizeMessage(6)).isEqualTo("size of list must be 6");
+        assertMessages(() -> resolver.getListHasSizeMessage(6), "size of list must be 6", "Listengröße muss 6 sein");
     }
 
     @Test
     public void getListHasMinSizeMessage() {
-        assertThat(resolver.getListHasMinSizeMessage(6)).isEqualTo("size of list must be at least 6");
+        assertMessages(() -> resolver.getListHasMinSizeMessage(6), "size of list must be at least 6",
+                "Listengröße muss mindestens 6 sein");
     }
 
     @Test
     public void getListHasMaxSizeMessage() {
-        assertThat(resolver.getListHasMaxSizeMessage(6)).isEqualTo("size of list mustn't be greater than 6");
+        assertMessages(() -> resolver.getListHasMaxSizeMessage(6), "size of list mustn't be greater than 6",
+                "Listengröße darf 6 nicht überschreiten");
     }
 
     @Test
     public void getIsLessThanMessage() {
-        assertThat(resolver.getIsLessThanMessage(6)).isEqualTo("value must be less than 6");
+        assertMessages(() -> resolver.getIsLessThanMessage(6), "value must be less than 6",
+                "Wert muss kleiner als 6 sein");
     }
 
     @Test
     public void getIsGreaterThanMessage() {
-        assertThat(resolver.getIsGreaterThanMessage(6)).isEqualTo("value must be greater than 6");
+        assertMessages(() -> resolver.getIsGreaterThanMessage(6), "value must be greater than 6",
+                "Wert muss größer als 6 sein");
     }
 
     @Test
     public void getIsBetweenMessage() {
-        assertThat(resolver.getIsBetweenMessage(4, 6)).isEqualTo("value must be between 4 and 6");
+        assertMessages(() -> resolver.getIsBetweenMessage(4, 6), "value must be in the range of 4 to 6",
+                "Wert muss 4 bis 6 sein");
     }
 
     @Test
     public void getIsIntMessage() {
-        assertThat(resolver.getIsIntMessage()).isEqualTo("value must be an integer");
+        assertMessages(resolver::getIsIntMessage, "value must be an integer", "Wert muss vom Typ Integer sein");
     }
 
     @Test
     public void getIsByteMessage() {
-        assertThat(resolver.getIsByteMessage()).isEqualTo("value must be a byte");
+        assertMessages(resolver::getIsByteMessage, "value must be a byte", "Wert muss vom Typ Byte sein");
     }
 
     @Test
     public void getIsShortMessage() {
-        assertThat(resolver.getIsShortMessage()).isEqualTo("value must be a short");
+        assertMessages(resolver::getIsShortMessage, "value must be a short", "Wert muss vom Typ Short sein");
     }
 
     @Test
     public void getIsEqualToMessage()  {
-        assertThat(resolver.getIsEqualToMessage("other")).isEqualTo("value must be equal to other");
+        assertMessages(() -> resolver.getIsEqualToMessage("other"), "value must be equal to other",
+                "Wert muss ident zu \"other\" sein");
     }
 
     @Test
     public void getIsNotEqualToMessage()  {
-        assertThat(resolver.getIsNotEqualToMessage("other")).isEqualTo("value must not be equal to other");
+        assertMessages(() -> resolver.getIsNotEqualToMessage("other"), "value must not be equal to other",
+                "Wert darf nicht ident zu \"other\" sein");
     }
 
     @Test
     public void getIsNullMessage() {
-        assertThat(resolver.getIsNullMessage()).isEqualTo("value must be null");
+        assertMessages(resolver::getIsNullMessage, "value must be null", "Wert muss null sein");
     }
 
     @Test
     public void getIsDateFirstDayOfYearMessage() {
-        assertThat(resolver.getIsDateFirstDayOfYearMessage()).isEqualTo("Date must be the first day of the year");
+        assertMessages(resolver::getIsDateFirstDayOfYearMessage, "Date must be the first day of the year",
+                "Datum muss der erste Tag des Jahres sein");
     }
 
     @Test
     public void getIsDateFirstDayOfMonthMessage() {
-        assertThat(resolver.getIsDateFirstDayOfMonthMessage()).isEqualTo("Date must be the first day of the month");
+        assertMessages(resolver::getIsDateFirstDayOfMonthMessage, "Date must be the first day of the month",
+                "Datum muss der erste Tag des Monats sein");
     }
 
     @Test
     public void getIsTimeStartOfDayMessage() {
-        assertThat(resolver.getIsTimeStartOfDayMessage()).isEqualTo("Time must be 00:00:00");
+        assertMessages(resolver::getIsTimeStartOfDayMessage, "Time must be 00:00:00", "Zeit muss 00:00:00 sein");
     }
 
     @Test
     public void getIsLastDayOfMonthMessage() {
-        assertThat(resolver.getIsLastDayOfMonthMessage()).isEqualTo("Date must be the last day of the month");
+        assertMessages(resolver::getIsLastDayOfMonthMessage, "Date must be the last day of the month",
+                "Datum muss der letzte Tag des Monats sein");
     }
 
     @Test
     public void getIsDateLastDayOfYearMessage() {
-        assertThat(resolver.getIsDateLastDayOfYearMessage()).isEqualTo("Date must be the last day of the year");
+        assertMessages(resolver::getIsDateLastDayOfYearMessage, "Date must be the last day of the year",
+                "Datum muss der letzte Tag des Jahres sein");
     }
 
     @Test
     public void getIsDateTimeStartOfHourMessage() {
-        assertThat(resolver.getIsDateTimeStartOfHourMessage()).isEqualTo("Date must have minutes and seconds set to 0");
+        assertMessages(resolver::getIsDateTimeStartOfHourMessage, "Date must have minutes and seconds set to 0",
+                "Zeit muss auf 0 Minuten und 0 Sekunden gesetzt sein");
     }
 
     @Test
     public void givenMondayWhenGetIsDateDayOfWeekMessageReturnsExpected() {
-        assertThat(resolver.getIsDateDayOfWeekMessage(DayOfWeek.MONDAY)).isEqualTo("Date must be weekday MONDAY");
+        assertMessages(() -> resolver.getIsDateDayOfWeekMessage(DayOfWeek.MONDAY), "Date must be weekday MONDAY",
+                "Datum muss der Wochentag MONDAY sein");
     }
 
     @Test
     public void givenTuesdayWhenGetIsDateDayOfWeekMessageReturnsExpected() {
-        assertThat(resolver.getIsDateDayOfWeekMessage(DayOfWeek.TUESDAY)).isEqualTo("Date must be weekday TUESDAY");
+        assertMessages(() -> resolver.getIsDateDayOfWeekMessage(DayOfWeek.TUESDAY), "Date must be weekday TUESDAY",
+                "Datum muss der Wochentag TUESDAY sein");
     }
+
 }
