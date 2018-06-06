@@ -1,9 +1,12 @@
 package at.meks.validation.simple;
 
+import at.meks.validation.ValidationConfiguration;
 import at.meks.validation.result.ValidationException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.Locale;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -56,6 +59,7 @@ public class SimpleValidationExamplesTest {
 
     @Test
     public void testValidateThrowingAnErrorIfViolates() throws Exception {
+        ValidationConfiguration.setLocale(Locale.ENGLISH);
         expectedException.expect(ValidationException.class);
         expectedException.expectMessage("fileSize: value must be greater than 10");
         examples.validateThrowingAnErrorIfViolates();
