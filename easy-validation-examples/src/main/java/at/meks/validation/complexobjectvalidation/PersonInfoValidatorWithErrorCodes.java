@@ -51,7 +51,7 @@ class PersonInfoValidatorWithErrorCodes {
 
     private void setupValidationConfig() {
         nameValidation = isNotBlank("C0001").and(lengthIsMoreThan(1, "C0002"));
-        postalCodeQuickValidation = isNotBlank("C0003").and(lengthIsBetween(4, 8, "C0004", "C0005"));
+        postalCodeQuickValidation = isNotBlank("C0003").and(lengthIsBetween(4, 8, "C0004"));
         postalCodeSlowValidation = isInArray(this::getValidPostalCodes, "C0006");
         birthDayStringValidation = isNotBlank("C0007").and(isDate(DEFAULT_DATE_FORMAT, "C0008"));
         birthDayDateValidation = isLocalDateTimeAfter(LocalDateTime.of(1940, 1, 1, 0, 0, 0), "C0009");
