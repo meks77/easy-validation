@@ -83,7 +83,7 @@ public class ErrorMessageResolver {
     }
 
     public String getNotNullMessage() {
-        return getBundleString("mustNotBeNull");
+        return getBundleString("common.mustNotBeNull");
     }
 
     public String getListContainsOnlyMessage(Object containedValue) {
@@ -119,39 +119,39 @@ public class ErrorMessageResolver {
     }
 
     public String getIsLessThanMessage(Object compareTo) {
-        return format(getBundleString("isLessThan"), compareTo);
+        return format(getBundleString("common.isLessThan"), compareTo);
     }
 
     public String getIsGreaterThanMessage(Object compareTo) {
-        return format(getBundleString("isGreaterThan"), compareTo);
+        return format(getBundleString("common.isGreaterThan"), compareTo);
     }
 
     public String getIsBetweenMessage(Object min, Object max) {
-        return format(getBundleString("isBetween"), min, max);
+        return format(getBundleString("common.isBetween"), min, max);
     }
 
     public String getIsIntMessage() {
-        return getBundleString("isInt");
+        return getBundleString("number.isInt");
     }
 
     public String getIsByteMessage() {
-        return getBundleString("isByte");
+        return getBundleString("number.isByte");
     }
 
     public String getIsShortMessage() {
-        return getBundleString("isShort");
+        return getBundleString("number.isShort");
     }
 
     public String getIsEqualToMessage(Object comparedTo) {
-        return format(getBundleString("isEqualTo"), comparedTo);
+        return format(getBundleString("common.isEqualTo"), comparedTo);
     }
 
     public String getIsNotEqualToMessage(Object compareTo) {
-        return format(getBundleString("isNotEqualTo"), compareTo);
+        return format(getBundleString("common.isNotEqualTo"), compareTo);
     }
 
     public String getIsNullMessage() {
-        return getBundleString("isNull");
+        return getBundleString("common.isNull");
     }
 
     public String getIsDateFirstDayOfYearMessage() {
@@ -179,6 +179,6 @@ public class ErrorMessageResolver {
     }
 
     public String getIsDateDayOfWeekMessage(DayOfWeek dayOfWeek) {
-        return format(getBundleString("isDateDayOfWeek"), dayOfWeek);
+        return format(getBundleString("date.isDateDayOfWeek"), dayOfWeek);
     }
 }
