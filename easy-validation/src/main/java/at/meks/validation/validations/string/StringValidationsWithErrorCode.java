@@ -64,28 +64,24 @@ public class StringValidationsWithErrorCode {
      * creates a validation which validates if a string length is between the provided size arguments.
      * @param minSize   the minimum size of the string
      * @param maxSize   the maximum size of the string
-     * @param minSizeErrorCode in the case the validation violates this code is reported in the result
-     * @param maxSizeErrorCode in the case the validation violates this code is reported in the result
+     * @param errorCode in the case the validation violates this code is reported in the result
      * @return  new validation insstance
      */
-    public static Validation<String> lengthIsBetween(int minSize, int maxSize,
-                                                     String minSizeErrorCode, String maxSizeErrorCode){
-        return lengthIsBetween(() -> minSize, () -> maxSize, minSizeErrorCode, maxSizeErrorCode);
+    public static Validation<String> lengthIsBetween(int minSize, int maxSize, String errorCode){
+        return lengthIsBetween(() -> minSize, () -> maxSize, errorCode);
     }
 
     /**
      * creates a validation which validates if a string length is between the provided size arguments.
      * @param minSize   the minimum size of the string
      * @param maxSize   the maximum size of the string
-     * @param minSizeErrorCode in the case the validation violates this code is reported in the result
-     * @param maxSizeErrorCode in the case the validation violates this code is reported in the result
+     * @param errorCode in the case the validation violates this code is reported in the result
      * @return  new validation insstance
      */
     public static Validation<String> lengthIsBetween(Supplier<Integer> minSize, Supplier<Integer> maxSize,
-                                                     String minSizeErrorCode, String maxSizeErrorCode){
+            String errorCode){
         return VALIDATIONS.lengthIsBetween(minSize, maxSize,
-                () -> withCode(MESSAGE_RESOLVER.getLengthIsLessThanMessage(maxSize.get() + 1), maxSizeErrorCode),
-                () -> withCode(MESSAGE_RESOLVER.getLengthIsMoreThanMessage(minSize.get() - 1), minSizeErrorCode));
+                () -> withCode(MESSAGE_RESOLVER.getLengthIsBetweenMessage(minSize.get(), maxSize.get()), errorCode));
     }
 
     /**

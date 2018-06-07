@@ -36,7 +36,7 @@ public class ErrorMessageResolver {
     }
 
     public String getLengthIsMoreThanMessage(int size) {
-        return format(getBundleString("lengthIsMoreThan"), size);
+        return format(getBundleString("string.lengthIsMoreThan"), size);
     }
 
     private String getBundleString(String lengthIsMoreThan) {
@@ -47,35 +47,39 @@ public class ErrorMessageResolver {
     }
 
     public String getLengthIsLessThanMessage(int size) {
-        return format(getBundleString("lengthIsLessThan"), size);
+        return format(getBundleString("string.lengthIsLessThan"), size);
     }
 
     public String getHasLengthMessage(int length) {
-        return format(getBundleString("hasLength"), length);
+        return format(getBundleString("string.hasLength"), length);
     }
 
     public String getContainsMessage(String contained) {
-        return format(getBundleString("contains"), contained);
+        return format(getBundleString("string.contains"), contained);
     }
 
     public String getIsNotBlankMessage() {
-        return getBundleString("isNotBlank");
+        return getBundleString("string.isNotBlank");
     }
 
     public String getIsInListMessage(Collection<String> validValueSupplier) {
-        return format(getBundleString("isInList"), String.join(", ", validValueSupplier));
+        return format(getBundleString("string.isInList"), String.join(", ", validValueSupplier));
     }
 
     public String getIsDateMessage(DateTimeFormatter formatter) {
-        return format(getBundleString("isDate"), formatter);
+        return format(getBundleString("string.isDate"), formatter);
     }
 
     public String getIsNumericMessage() {
-        return getBundleString("isNumeric");
+        return getBundleString("string.isNumeric");
     }
 
     public String getContainsNotOnlyMessage(String containedValue) {
-        return format(getBundleString("containsNotOnly"), containedValue);
+        return format(getBundleString("string.containsNotOnly"), containedValue);
+    }
+
+    public String getLengthIsBetweenMessage(Integer minSize, Integer maxSize) {
+        return format(getBundleString("string.lengthIsBetween"), minSize, maxSize);
     }
 
     public String getNotNullMessage() {

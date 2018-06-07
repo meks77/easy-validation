@@ -76,8 +76,7 @@ public class StringValidations {
      */
     public static Validation<String> lengthIsBetween(Supplier<Integer> minSize, Supplier<Integer> maxSize){
         return VALIDATIONS.lengthIsBetween(minSize, maxSize,
-                () -> withMessage(MESSAGE_RESOLVER.getLengthIsLessThanMessage(maxSize.get() + 1)),
-                () -> withMessage(MESSAGE_RESOLVER.getLengthIsMoreThanMessage(minSize.get() - 1)));
+                () -> withMessage(MESSAGE_RESOLVER.getLengthIsBetweenMessage(minSize.get(), maxSize.get())));
     }
 
     /**

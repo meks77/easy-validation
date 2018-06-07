@@ -244,4 +244,9 @@ public class ErrorMessageResolverTest {
                 "Datum muss der Wochentag TUESDAY sein");
     }
 
+    @Test
+    public void getLengthIsBetweenMessage() {
+        assertMessages(() -> resolver.getLengthIsBetweenMessage(6, 15), "length must be between 6 and 15",
+                "Länge muss zwischen 6 und 15 sein");
+    }
 }

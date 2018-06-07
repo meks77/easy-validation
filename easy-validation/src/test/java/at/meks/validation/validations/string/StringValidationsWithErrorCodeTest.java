@@ -54,7 +54,7 @@ public class StringValidationsWithErrorCodeTest extends AbstractErrorCodeValidat
     @Test
     public void testLengthIsBetween() {
         testHelper.testLengthIsBetween((min, max) -> StringValidationsWithErrorCode.lengthIsBetween(min, max,
-                EXPECTED_CODE, EXPECTED_CODE));
+                EXPECTED_CODE));
     }
 
     @Test

@@ -60,22 +60,18 @@ class StringValidationsTestHelper {
     void testLengthIsBetween(IsLengthBetween methodInvoker) {
         int minSize = 4;
         int maxSize = 6;
-        String maxSizeMessage = "maxSizeMessage";
-        doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getLengthIsLessThanMessage(maxSize + 1);
-        doReturn(maxSizeMessage).when(test.getMessageResolver()).getLengthIsMoreThanMessage(minSize - 1);
+        doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getLengthIsBetweenMessage(minSize, maxSize);
         doReturn(test.getExpectedValidation()).when(coreValidations)
-                .lengthIsBetween(anySupplier(), anySupplier(), anySupplier(), anySupplier());
+                .lengthIsBetween(anySupplier(), anySupplier(), anySupplier());
         Validation<String> validation = methodInvoker.isLengthBetween(minSize, maxSize);
         ArgumentCaptor<Supplier<Integer>> minValueCaptor = getSupplierCaptor();
         ArgumentCaptor<Supplier<Integer>> maxValueCaptor = getSupplierCaptor();
-        ArgumentCaptor<Supplier<ErrorDescription>> maxErrorDescCaptor = getSupplierCaptor();
         //noinspection unchecked
         test.doAssertionsAndVerificationsWithSupplier(validation,
                 errorDescCaptor -> verify(coreValidations).lengthIsBetween(minValueCaptor.capture(),
-                        maxValueCaptor.capture(), errorDescCaptor.capture(), maxErrorDescCaptor.capture()));
+                        maxValueCaptor.capture(), errorDescCaptor.capture()));
         assertSupplierValue(minSize, minValueCaptor);
         assertSupplierValue(maxSize, maxValueCaptor);
-        assertThat(maxErrorDescCaptor.getValue().get().getErrorMessage()).isEqualTo(maxSizeMessage);
     }
 
     void testHasLength(Function<Integer, Validation<String>> methodInvoker) {

@@ -17,8 +17,6 @@ public class CoreStringValidationsTest extends AbstractCoreValidationsTest {
     private static final String THREE_LETTER_WORD = "age";
     private static final String SIX_LETTER_WORD = "aspect";
     private static final String SEVEN_LETTER_WORD = "arrival";
-    private static final String ERROR_IS_DATE = "must match to date format Value(YearOfEra,4,19,EXCEEDS_PAD)Value" +
-            "(MonthOfYear,2)Value(DayOfMonth,2)";
 
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
@@ -46,31 +44,31 @@ public class CoreStringValidationsTest extends AbstractCoreValidationsTest {
 
     @Test
     public void givenStringLength4WhenLengthIsBetween4And6ThenResultIsValid() {
-        assertValidResult(validations.lengthIsBetween(() -> 4,  () -> 6, () -> errorDescription, () -> errorDescription)
+        assertValidResult(validations.lengthIsBetween(() -> 4,  () -> 6, () -> errorDescription)
                 .test(FOUR_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength5WhenLengthIsBetween4And6ThenResultIsValid() {
-        assertValidResult(validations.lengthIsBetween(() -> 4,  () -> 6, () -> errorDescription, () -> errorDescription)
+        assertValidResult(validations.lengthIsBetween(() -> 4,  () -> 6, () -> errorDescription)
                 .test(FIVE_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength6WhenLengthIsBetween4And6ThenResultIsValid() {
-        assertValidResult(validations.lengthIsBetween(() -> 4,  () -> 6, () -> errorDescription, () -> errorDescription)
+        assertValidResult(validations.lengthIsBetween(() -> 4,  () -> 6, () -> errorDescription)
                 .test(SIX_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength3WhenLengthIsBetween4And6ThenResultIsError() {
-        assertErrorResult(validations.lengthIsBetween(() -> 4, () -> 6, () -> errorDescription, () -> errorDescription)
+        assertErrorResult(validations.lengthIsBetween(() -> 4, () -> 6, () -> errorDescription)
                 .test(THREE_LETTER_WORD));
     }
 
     @Test
     public void givenStringLength7WhenLengthIsBetween4And6ThenResultIsError() {
-        assertErrorResult(validations.lengthIsBetween(() -> 4, () -> 6, () -> errorDescription, () -> errorDescription)
+        assertErrorResult(validations.lengthIsBetween(() -> 4, () -> 6, () -> errorDescription)
                 .test(SEVEN_LETTER_WORD));
     }
 

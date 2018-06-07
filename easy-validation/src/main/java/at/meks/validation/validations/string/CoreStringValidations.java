@@ -22,10 +22,9 @@ class CoreStringValidations {
     }
 
     Validation<String> lengthIsBetween(Supplier<Integer> minSize, Supplier<Integer> maxSize,
-                                       Supplier<ErrorDescription> whenMaxSizeExceeds,
-                                       Supplier<ErrorDescription> whenMinSizeExceeds){
-        return lengthIsMoreThan(() -> minSize.get() - 1, whenMinSizeExceeds)
-                .and(lengthIsLessThan(() -> maxSize.get() + 1, whenMaxSizeExceeds));
+                                       Supplier<ErrorDescription> errorDescription){
+        return lengthIsMoreThan(() -> minSize.get() - 1, errorDescription)
+                .and(lengthIsLessThan(() -> maxSize.get() + 1, errorDescription));
     }
 
     Validation<String> hasLength(Supplier<Integer> length, Supplier<ErrorDescription> errorDescription) {
