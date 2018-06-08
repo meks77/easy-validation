@@ -7,7 +7,6 @@ import at.meks.validation.result.ErrorDescriptionBuilder;
 import java.util.function.Supplier;
 
 import static at.meks.validation.result.ErrorDescriptionBuilder.withCode;
-import static at.meks.validation.result.ErrorDescriptionBuilder.withMessage;
 
 @SuppressWarnings("WeakerAccess")
 public class CommonValidationsWithErrorCode {
@@ -163,5 +162,23 @@ public class CommonValidationsWithErrorCode {
     public static <T, C extends Comparable<T>> Validation<C> isBetween(Supplier<T> min, Supplier<T> max, String errorCode) {
         return VALIDATIONS.isBetween(min, max,
                 () -> withCode(MESSAGE_RESOLVER.getIsBetweenMessage(min.get(), max.get()), errorCode));
+    }
+
+    /**
+     * returns a validation which validats that the validated value is true.
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @return  new instance of a validation
+     */
+    public static Validation<Boolean> isTrue(String errorCode) {
+        return VALIDATIONS.isTrue(() -> withCode(MESSAGE_RESOLVER.getIsTrueMessage(), errorCode));
+    }
+
+    /**
+     * returns a validation which validats that the validated value is false.
+     * @param errorCode in the case the validation violates this code is reported in the result
+     * @return  new instance of a validation
+     */
+    public static Validation<Boolean> isFalse(String errorCode) {
+        return VALIDATIONS.isFalse(() -> withCode(MESSAGE_RESOLVER.getIsFalseMessage(), errorCode));
     }
 }

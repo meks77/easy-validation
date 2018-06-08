@@ -181,4 +181,12 @@ public class ErrorMessageResolver {
     public String getIsDateDayOfWeekMessage(DayOfWeek dayOfWeek) {
         return format(getBundleString("date.isDateDayOfWeek"), dayOfWeek);
     }
+
+    public String getIsTrueMessage() {
+        return getBundleString("common.isTrue");
+    }
+
+    public String getIsFalseMessage() {
+        return getBundleString("common.isFalse");
+    }
 }

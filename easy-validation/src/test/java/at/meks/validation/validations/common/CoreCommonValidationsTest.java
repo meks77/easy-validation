@@ -118,4 +118,23 @@ public class CoreCommonValidationsTest extends AbstractCoreValidationsTest {
         assertErrorResult(validations.isNull(errorDescription).test("a"));
     }
 
+    @Test
+    public void givenTrueWhenIsTrueReturnsOk() {
+        assertValidResult(validations.isTrue(() -> errorDescription).test(true));
+    }
+
+    @Test
+    public void givenFalseWhenIsTrueReturnsError() {
+        assertErrorResult(validations.isTrue(() -> errorDescription).test(false));
+    }
+
+    @Test
+    public void givenFalseWhenIsFalseReturnsOk() {
+        assertValidResult(validations.isFalse(() -> errorDescription).test(false));
+    }
+
+    @Test
+    public void givenTrueWhenIsFalseReturnsError() {
+        assertErrorResult(validations.isFalse(() -> errorDescription).test(true));
+    }
 }

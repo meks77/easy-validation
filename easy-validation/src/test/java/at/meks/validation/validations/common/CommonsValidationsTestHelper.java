@@ -117,4 +117,21 @@ class CommonsValidationsTestHelper {
         assertSupplierValue(max, maxCaptor);
     }
 
+    void testIsTrue(Supplier<Validation<Boolean>> methodInvoker) {
+        doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getIsTrueMessage();
+        doReturn(test.getExpectedValidation()).when(coreValidations).isTrue(anySupplier());
+
+        Validation<Boolean> validation = methodInvoker.get();
+        test.doAssertionsAndVerificationsWithSupplier(validation, errorDescCaptor -> verify(coreValidations)
+                .isTrue(errorDescCaptor.capture()));
+    }
+
+    void testIsFalse(Supplier<Validation<Boolean>> methodInvoker) {
+        doReturn(test.getExpectedMessage()).when(test.getMessageResolver()).getIsFalseMessage();
+        doReturn(test.getExpectedValidation()).when(coreValidations).isFalse(anySupplier());
+
+        Validation<Boolean> validation = methodInvoker.get();
+        test.doAssertionsAndVerificationsWithSupplier(validation, errorDescCaptor -> verify(coreValidations)
+                .isFalse(errorDescCaptor.capture()));
+    }
 }

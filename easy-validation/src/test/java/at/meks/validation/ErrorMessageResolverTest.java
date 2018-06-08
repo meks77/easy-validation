@@ -249,4 +249,14 @@ public class ErrorMessageResolverTest {
         assertMessages(() -> resolver.getLengthIsBetweenMessage(6, 15), "length must be between 6 and 15",
                 "Länge muss zwischen 6 und 15 sein");
     }
+
+    @Test
+    public void getIsTrueMessage() {
+        assertMessages(resolver::getIsTrueMessage, "value must be true", "Wert muss wahr sein");
+    }
+
+    @Test
+    public void getIsFalseMessage() {
+        assertMessages(resolver::getIsFalseMessage, "value must be false", "Wert muss unwahr sein");
+    }
 }

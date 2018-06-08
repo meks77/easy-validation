@@ -40,4 +40,12 @@ class CoreCommonValidations {
         return SimpleValidation.from(number -> number.compareTo(min.get()) >= 0 && number.compareTo(max.get()) <= 0,
                 errorDescription);
     }
+
+    Validation<Boolean> isTrue(Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(value -> value, errorDescription);
+    }
+
+    Validation<Boolean> isFalse(Supplier<ErrorDescription> errorDescription) {
+        return SimpleValidation.from(value -> !value, errorDescription);
+    }
 }

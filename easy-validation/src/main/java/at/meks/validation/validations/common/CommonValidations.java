@@ -149,4 +149,20 @@ public class CommonValidations {
         return VALIDATIONS.isBetween(min, max,
                 () -> withMessage(MESSAGE_RESOLVER.getIsBetweenMessage(min.get(), max.get())));
     }
+
+    /**
+     * returns a validation which validats that the validated value is true.
+     * @return  new instance of a validation
+     */
+    public static Validation<Boolean> isTrue() {
+        return VALIDATIONS.isTrue(() -> withMessage(MESSAGE_RESOLVER.getIsTrueMessage()));
+    }
+
+    /**
+     * returns a validation which validats that the validated value is false.
+     * @return  new instance of a validation
+     */
+    public static Validation<Boolean> isFalse() {
+        return VALIDATIONS.isFalse(() -> withMessage(MESSAGE_RESOLVER.getIsFalseMessage()));
+    }
 }

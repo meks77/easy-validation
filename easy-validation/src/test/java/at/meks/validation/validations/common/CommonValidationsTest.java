@@ -70,4 +70,14 @@ public class CommonValidationsTest extends AbstractValidationsTest {
     public void testIsBetween() {
         testHelper.testIsBetween(CommonValidations::isBetween);
     }
+
+    @Test
+    public void testIsTrue() {
+        testHelper.testIsTrue(CommonValidations::isTrue);
+    }
+
+    @Test
+    public void testIsFalse() {
+        testHelper.testIsFalse(CommonValidations::isFalse);
+    }
 }

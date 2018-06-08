@@ -78,4 +78,14 @@ public class CommonValidationsWithErrorCodeTest extends AbstractErrorCodeValidat
     public void testIsBetween() {
         testHelper.testIsBetween((min, max) -> isBetween(min, max, EXPECTED_CODE));
     }
+
+    @Test
+    public void testIsTrue() {
+        testHelper.testIsTrue(() -> CommonValidationsWithErrorCode.isTrue(EXPECTED_CODE));
+    }
+
+    @Test
+    public void testIsFalse() {
+        testHelper.testIsFalse(() -> CommonValidationsWithErrorCode.isFalse(EXPECTED_CODE));
+    }
 }
