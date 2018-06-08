@@ -33,15 +33,15 @@ if (StringUtils.isNumber(ageString)) {
 Just image you have 20+ different input values you have to validate. The code is growing very fast and it will get hard
 to maintain is it grows.
 
-###Some more examples from the Quickstart Wiki section
+### Some more examples from the Quickstart Wiki section
 #### combine more validations
-#####with and
+##### with and
 ````
 isNotBlank().and(contains("e")).and(isInList(this::getValidCities)).test(cityName);
 ````
-#####with or
+##### with or
 isBlank().or(lengthIsMoreThan(12));
-#####with or and and
+##### with or and and
 ````
 isBlank().or(lengthIsMoreThan(12).and(contains("abc")));
 ````
