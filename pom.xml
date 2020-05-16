@@ -34,6 +34,7 @@
     <modules>
         <module>easy-validation</module>
         <module>easy-validation-examples</module>
+        <module>easy-validation-core</module>
     </modules>
 
     <build>
@@ -63,6 +64,11 @@
             <dependency>
                 <groupId>at.meks</groupId>
                 <artifactId>easy-validation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>at.meks</groupId>
+                <artifactId>easy-validation-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

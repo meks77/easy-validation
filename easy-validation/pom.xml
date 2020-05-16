@@ -142,6 +142,11 @@
             <scope>test</scope>
             <version>1.7.4</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>at.meks</groupId>-->
+<!--            <artifactId>easy-validation-core</artifactId>-->
+<!--            <version>${version}</version>-->
+<!--        </dependency>-->
     </dependencies>
 
 </project>
