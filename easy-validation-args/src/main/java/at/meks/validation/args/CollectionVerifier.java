@@ -11,32 +11,32 @@ public class CollectionVerifier<T> extends AbstractVerifier<Collection<T>, Colle
     }
 
     /**
-     * the validated colletion will be asserted to be empty.
+     * asserts that the validated colletion is empty.
      */
-    public void isEmpty() {
+    public void isEmpty() throws IllegalArgumentException {
         assertMatcherReturnsTrue(CollectionMatcher::isEmpty);
     }
 
     /**
-     * the validated colletion will be asserted to be not empty.
+     * asserts that the validated colletion is not empty.
      */
-    public void isNotEmpty() {
+    public void isNotEmpty() throws IllegalArgumentException {
         assertMatcherReturnsTrue(CollectionMatcher::isNotEmpty);
     }
 
     /**
-     * the validated colletion will be asserted to contain only the expected values.
+     * asserts that the validated colletion contain only the expected values.
      */
     @SafeVarargs
-    public final void containsOnly(T firstContained, T... furtherContained) {
+    public final void containsOnly (T firstContained, T... furtherContained) throws IllegalArgumentException {
         assertMatcherReturnsTrue(value -> CollectionMatcher.containsOnly(value, firstContained, furtherContained));
     }
 
     /**
-     * the validated colletion will be asserted to contain the expected values. Other values are also allowed.
+     * asserts that the validated colletion contains the expected values. Other values are also allowed.
      */
     @SafeVarargs
-    public final void contains(T firstContained, T... furtherContained) {
+    public final void contains(T firstContained, T... furtherContained) throws IllegalArgumentException {
         assertMatcherReturnsTrue(value -> CollectionMatcher.contains(value, firstContained, furtherContained));
     }
 

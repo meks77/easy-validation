@@ -9,7 +9,7 @@ import at.meks.validation.matcher.ObjectMatcher;
  *   * needed by the implementing Verifiers
  *   * verification methods, each Verifier needs to have
  *
- * If a verification fails, allways an IllegalArgumentException must be thrown.
+ * If a verification fails, allways an IllegalArgumentException is thrown.
  * @param <T>
  */
 public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
@@ -21,7 +21,7 @@ public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
     }
 
     /**
-     * verification using a custom matcher.
+     * asserts using a custom matcher.
      * @param matcher   is used to verify if the value matches the verification
      */
     public void matches(Matcher<T> matcher) {
@@ -34,25 +34,43 @@ public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
         }
     }
 
-    public X isNotNull() {
+    /**
+     * asserts that the validated value is not null.
+     * @return  the current verifier
+     */
+    public X isNotNull() throws IllegalArgumentException {
         assertMatcherReturnsTrue(ObjectMatcher::isNotNull);
         return (X) this;
     }
 
+    /**
+     * asserts that the validated value is null.
+     * @return  the current verifier
+     */
     @SuppressWarnings("UnusedReturnValue")
-    public X isNull() {
+    public X isNull() throws IllegalArgumentException {
         assertMatcherReturnsTrue(ObjectMatcher::isNull);
         return (X) this;
     }
 
+    /**
+     * asserts that the validated value is equal to the provided argument.
+     * @param otherValue    the validated value is compared to this
+     * @return  the current verifier
+     */
     @SuppressWarnings("UnusedReturnValue")
-    public X isEqualTo(T otherValue) {
+    public X isEqualTo(T otherValue) throws IllegalArgumentException {
         assertMatcherReturnsTrue(value -> ObjectMatcher.isEqual(value, otherValue));
         return (X) this;
     }
 
+    /**
+     * asserts that the validated value is not equal to the provided
+     * @param otherValue the validated value is compared to this arg
+     * @return the current verifier
+     */
     @SuppressWarnings("UnusedReturnValue")
-    public X isNotEqualTo(T otherValue) {
+    public X isNotEqualTo(T otherValue) throws IllegalArgumentException {
         assertMatcherReturnsTrue(value -> ObjectMatcher.isNotEqual(value, otherValue));
         return (X) this;
     }

@@ -50,6 +50,20 @@ public class ArchitectureTest {
     }
 
     @Test
+    void verifyVerifierPublicMethodsThrowIllegalArgumentException() {
+        JavaClasses importedClasses = new ClassFileImporter()
+                .withImportOption(DO_NOT_INCLUDE_TESTS).withImportOption(notAbstractVerifier)
+                .importPackages("at.meks.validation.args")
+                .that(DescribedPredicate.doNot(DescribedPredicate.equalTo(AbstractVerifier.class)));
+
+        ArchRuleDefinition.methods()
+                .that().arePublic()
+                .and().areDeclaredInClassesThat().areAssignableTo(AbstractVerifier.class)
+                .should().declareThrowableOfType(IllegalArgumentException.class)
+                .check(importedClasses);
+    }
+
+    @Test
     void verfyVerifierClassesArePublic() {
         JavaClasses importedClasses = new ClassFileImporter().withImportOption(DO_NOT_INCLUDE_TESTS)
                 .importPackages("at.meks.validation.args");
