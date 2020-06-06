@@ -31,28 +31,32 @@ class StringVerifierTest extends AbstractVerifierTest<String, StringVerifier> {
     @Test
     void isNotBlank() {
         assertAll(
-                () -> assertThrows(IllegalArgumentException.class,
-                            () -> new StringVerifier("  ").isNotBlank()),
+                () -> {
+                    StringVerifier verifier = new StringVerifier("  ");
+                    assertThrows(IllegalArgumentException.class, verifier::isNotBlank);
+                },
                 () -> new StringVerifier(" abc ").isNotBlank()
         );
     }
 
     @Test
     void hasMinLength() {
+        StringVerifier verifier = new StringVerifier("asdf");
         assertAll(
-                () -> assertThrows(IllegalArgumentException.class,
-                            () -> new StringVerifier("asdf").hasMinLength(5)),
-                () -> new StringVerifier("asdf").hasMinLength(4),
-                () -> new StringVerifier("asdf").hasMinLength(3)
+                () -> assertThrows(IllegalArgumentException.class, () -> verifier.hasMinLength(5)),
+                () -> verifier.hasMinLength(4),
+                () -> verifier.hasMinLength(3)
         );
     }
 
     @Test
     void combineWithSuperMethod() {
-        new StringVerifier("asdf")
-                .isNotNull()
-                .isNotBlank()
-                .isNotNull();
+        assertDoesNotThrow(() ->
+            new StringVerifier("asdf")
+                    .isNotNull()
+                    .isNotBlank()
+                    .isNotNull()
+        );
     }
 
 }

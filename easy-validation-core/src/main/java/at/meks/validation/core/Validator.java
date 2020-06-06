@@ -1,7 +1,5 @@
 package at.meks.validation.core;
 
-import java.util.function.Consumer;
-
 public class Validator {
 
     private Validator() {

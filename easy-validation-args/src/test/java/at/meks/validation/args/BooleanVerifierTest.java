@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class BooleanVerifierTest extends AbstractVerifierTest<Boolean, BooleanVerifier> {
 
     private static final boolean VALIDATED_VALUE = true;
+    private final BooleanVerifier verifierWithTrue = new BooleanVerifier(true);
+    private final BooleanVerifier verifierWithFalse = new BooleanVerifier(false);
 
     @Override
     protected BooleanVerifier getVerifierWithValidatedValue() {
@@ -32,18 +34,16 @@ class BooleanVerifierTest extends AbstractVerifierTest<Boolean, BooleanVerifier>
     @Test
     void isTrue() {
         assertAll(
-                () -> new BooleanVerifier(true).isTrue(),
-                () -> assertThrows(IllegalArgumentException.class,
-                        () -> new BooleanVerifier(false).isTrue())
+                verifierWithTrue::isTrue,
+                () -> assertThrows(IllegalArgumentException.class, verifierWithFalse::isTrue)
         );
     }
 
     @Test
     void isFalse() {
         assertAll(
-                () -> new BooleanVerifier(false).isFalse(),
-                () -> assertThrows(IllegalArgumentException.class,
-                        () -> new BooleanVerifier(true).isFalse())
+                verifierWithFalse::isFalse,
+                () -> assertThrows(IllegalArgumentException.class, verifierWithTrue::isFalse)
         );
     }
 

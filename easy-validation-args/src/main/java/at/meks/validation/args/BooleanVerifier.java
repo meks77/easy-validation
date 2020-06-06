@@ -11,14 +11,14 @@ public class BooleanVerifier extends AbstractVerifier<Boolean, BooleanVerifier> 
     /**
      * asserts that the validated value is equal to true.
      */
-    public void isTrue() throws IllegalArgumentException {
+    public void isTrue() {
         assertMatcherReturnsTrue(BooleanMatcher::isTrue);
     }
 
     /**
      * asserts that the validated value is equal to false.
      */
-    public void isFalse() throws IllegalArgumentException {
+    public void isFalse() {
         assertMatcherReturnsTrue(BooleanMatcher::isFalse);
     }
 

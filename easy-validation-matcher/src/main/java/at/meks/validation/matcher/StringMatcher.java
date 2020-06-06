@@ -5,6 +5,10 @@ import static at.meks.validation.matcher.ObjectMatcher.isNull;
 
 public class StringMatcher {
 
+    private StringMatcher() {
+
+    }
+
     public static boolean isNotBlank(String value) {
         return isNotNull(value) &&
                 !value.trim().isEmpty();

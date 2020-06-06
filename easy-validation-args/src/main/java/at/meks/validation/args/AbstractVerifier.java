@@ -28,7 +28,7 @@ public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
         assertMatcherReturnsTrue(matcher);
     }
 
-    void assertMatcherReturnsTrue(Matcher<T> matcher) throws IllegalArgumentException{
+    void assertMatcherReturnsTrue(Matcher<T> matcher) {
         if (!matcher.verify(argumentValue)) {
             throw new IllegalArgumentException();
         }
@@ -38,7 +38,7 @@ public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
      * asserts that the validated value is not null.
      * @return  the current verifier
      */
-    public X isNotNull() throws IllegalArgumentException {
+    public X isNotNull() {
         assertMatcherReturnsTrue(ObjectMatcher::isNotNull);
         return (X) this;
     }
@@ -48,7 +48,7 @@ public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
      * @return  the current verifier
      */
     @SuppressWarnings("UnusedReturnValue")
-    public X isNull() throws IllegalArgumentException {
+    public X isNull() {
         assertMatcherReturnsTrue(ObjectMatcher::isNull);
         return (X) this;
     }
@@ -59,7 +59,7 @@ public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
      * @return  the current verifier
      */
     @SuppressWarnings("UnusedReturnValue")
-    public X isEqualTo(T otherValue) throws IllegalArgumentException {
+    public X isEqualTo(T otherValue) {
         assertMatcherReturnsTrue(value -> ObjectMatcher.isEqual(value, otherValue));
         return (X) this;
     }
@@ -70,7 +70,7 @@ public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
      * @return the current verifier
      */
     @SuppressWarnings("UnusedReturnValue")
-    public X isNotEqualTo(T otherValue) throws IllegalArgumentException {
+    public X isNotEqualTo(T otherValue) {
         assertMatcherReturnsTrue(value -> ObjectMatcher.isNotEqual(value, otherValue));
         return (X) this;
     }

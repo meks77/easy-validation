@@ -6,7 +6,6 @@ import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.domain.JavaModifier;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.core.importer.ImportOption;
-import com.tngtech.archunit.core.importer.Location;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +13,7 @@ import java.util.regex.Pattern;
 
 import static com.tngtech.archunit.core.importer.ImportOption.Predefined.DO_NOT_INCLUDE_TESTS;
 
-public class ArchitectureTest {
+class ArchitectureTest {
 
     /**
      * TODO AbstractVerifier public Methods, except matches, must return extension of AbstractVerifier
@@ -46,20 +45,6 @@ public class ArchitectureTest {
                 .that().arePublic()
                 .and().areDeclaredInClassesThat().areAssignableTo(AbstractVerifier.class)
                 .should().haveRawReturnType(publicMethodsReturnSelf)
-                .check(importedClasses);
-    }
-
-    @Test
-    void verifyVerifierPublicMethodsThrowIllegalArgumentException() {
-        JavaClasses importedClasses = new ClassFileImporter()
-                .withImportOption(DO_NOT_INCLUDE_TESTS).withImportOption(notAbstractVerifier)
-                .importPackages("at.meks.validation.args")
-                .that(DescribedPredicate.doNot(DescribedPredicate.equalTo(AbstractVerifier.class)));
-
-        ArchRuleDefinition.methods()
-                .that().arePublic()
-                .and().areDeclaredInClassesThat().areAssignableTo(AbstractVerifier.class)
-                .should().declareThrowableOfType(IllegalArgumentException.class)
                 .check(importedClasses);
     }
 

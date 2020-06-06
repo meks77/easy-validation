@@ -16,7 +16,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
      * @param otherValue used to compare to
      */
     @SuppressWarnings("UnusedReturnValue")
-    public X isGreater(T otherValue) throws IllegalArgumentException {
+    public X isGreater(T otherValue) {
         assertMatcherReturnsTrue(
                 value -> valuesAreNotNull(value, otherValue) && ComparableMatcher.isGreater(value, otherValue));
         return (X) this;
@@ -34,7 +34,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
      * @param otherValue used to compare to
      */
     @SuppressWarnings("UnusedReturnValue")
-    public X isGreaterOrEqual(T otherValue) throws IllegalArgumentException {
+    public X isGreaterOrEqual(T otherValue) {
         assertMatcherReturnsTrue(
                 value -> valuesAreNotNull(value, otherValue) && ComparableMatcher.isGreaterOrEqual(value, otherValue));
         return (X) this;
@@ -45,7 +45,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
      * @param otherValue used to compare to
      */
     @SuppressWarnings("UnusedReturnValue")
-    public X isLess(T otherValue) throws IllegalArgumentException {
+    public X isLess(T otherValue) {
         assertMatcherReturnsTrue(
                 value -> valuesAreNotNull(value, otherValue) && ComparableMatcher.isLess(value, otherValue));
         return (X) this;
@@ -56,7 +56,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
      * @param otherValue used to compare to
      */
     @SuppressWarnings("UnusedReturnValue")
-    public X isLessOrEqual(T otherValue) throws IllegalArgumentException {
+    public X isLessOrEqual(T otherValue) {
         assertMatcherReturnsTrue(
                 value -> valuesAreNotNull(value, otherValue) && ComparableMatcher.isLessOrEqual(value, otherValue));
         return (X) this;
@@ -68,7 +68,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
      * @param max max value including
      */
     @SuppressWarnings("UnusedReturnValue")
-    public X isBetween(T min, T max) throws IllegalArgumentException {
+    public X isBetween(T min, T max) {
         assertMatcherReturnsTrue(
                 value -> valuesAreNotNull(value, min, max) && ComparableMatcher.isBetween(value, min, max));
         return (X) this;
@@ -80,7 +80,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
      * @param max max value including
      */
     @SuppressWarnings("UnusedReturnValue")
-    public X isNotBetween(T min, T max) throws IllegalArgumentException {
+    public X isNotBetween(T min, T max) {
         assertMatcherReturnsTrue(
                 value -> valuesAreNotNull(min, max) && ComparableMatcher.isNotBetween(value, min, max));
         return (X) this;

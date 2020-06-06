@@ -4,6 +4,10 @@ import java.util.*;
 
 public class CollectionMatcher {
 
+    private CollectionMatcher() {
+
+    }
+
     public static <T> boolean isEmpty(Collection<T> collection) {
         return ObjectMatcher.isNull(collection) ||
                 collection.isEmpty();

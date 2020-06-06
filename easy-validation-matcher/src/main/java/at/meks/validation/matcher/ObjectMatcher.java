@@ -5,6 +5,10 @@ import java.util.Objects;
 
 public class ObjectMatcher {
 
+    private ObjectMatcher() {
+
+    }
+
     @SafeVarargs
     public static <T> boolean isNull(T... furtherValues) {
         return furtherValues == null ||

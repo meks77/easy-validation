@@ -12,6 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class CollectionVerifierTest extends AbstractVerifierTest<Collection<String>, CollectionVerifier<String>> {
 
     private static final Set<String> VALIDATED_VALUE = Collections.singleton("validatedValue");
+    private final CollectionVerifier<String> verifierWithOneEntry = new CollectionVerifier<>(Collections.singleton("adf"));
+    private final CollectionVerifier<String> verifierWithEmptyList = new CollectionVerifier<>(Collections.emptySet());
+    private final CollectionVerifier<String> verifierWithNullList = new CollectionVerifier<>(null);
 
     @Override
     protected CollectionVerifier<String> getVerifierWithValidatedValue() {
@@ -36,21 +39,18 @@ class CollectionVerifierTest extends AbstractVerifierTest<Collection<String>, Co
     @Test
     void isEmpty() {
         assertAll(
-                () -> new CollectionVerifier<String>(null).isEmpty(),
-                () -> new CollectionVerifier<String>(Collections.emptySet()).isEmpty(),
-                () -> assertThrows(IllegalArgumentException.class,
-                        () -> new CollectionVerifier<>(Collections.singleton("adf")).isEmpty())
+                verifierWithNullList::isEmpty,
+                verifierWithEmptyList::isEmpty,
+                () -> assertThrows(IllegalArgumentException.class, verifierWithOneEntry::isEmpty)
         );
     }
 
     @Test
     void isNotEmpty() {
         assertAll(
-                () -> assertThrows(IllegalArgumentException.class,
-                        () -> new CollectionVerifier<String>(null).isNotEmpty()),
-                () -> assertThrows(IllegalArgumentException.class,
-                        () -> new CollectionVerifier<String>(Collections.emptySet()).isNotEmpty()),
-                () -> new CollectionVerifier<>(Collections.singleton("adf")).isNotEmpty()
+                () -> assertThrows(IllegalArgumentException.class, verifierWithNullList::isNotEmpty),
+                () -> assertThrows(IllegalArgumentException.class, verifierWithEmptyList::isNotEmpty),
+                verifierWithOneEntry::isNotEmpty
         );
     }
 
@@ -59,14 +59,18 @@ class CollectionVerifierTest extends AbstractVerifierTest<Collection<String>, Co
         assertAll(
                 () -> new CollectionVerifier<>(Arrays.asList("a", "b", "c"))
                         .containsOnly("a", "b", "c"),
-                () -> assertThrows(IllegalArgumentException.class,
-                        () -> new CollectionVerifier<>(Arrays.asList("a", "b"))
-                                .containsOnly("a", "b", "c")),
+                () -> {
+                    CollectionVerifier<String> verifier = new CollectionVerifier<>(Arrays.asList("a", "b"));
+                    assertThrows(IllegalArgumentException.class,
+                            () -> verifier.containsOnly("a", "b", "c"));
+                },
                 () -> new CollectionVerifier<>(Arrays.asList("a", "b", "c"))
                         .containsOnly("a", "b"),
-                () -> assertThrows(IllegalArgumentException.class,
-                        () -> new CollectionVerifier<>(Arrays.asList("a", null))
-                                .containsOnly("a", "b", null)),
+                () -> {
+                    CollectionVerifier<String> verifier = new CollectionVerifier<>(Arrays.asList("a", null));
+                    assertThrows(IllegalArgumentException.class,
+                        () -> verifier.containsOnly("a", "b", null));
+                },
                 () -> new CollectionVerifier<>(Arrays.asList("a", null, "c"))
                         .containsOnly("a", null)
                 );
@@ -77,14 +81,18 @@ class CollectionVerifierTest extends AbstractVerifierTest<Collection<String>, Co
         assertAll(
                 () -> new CollectionVerifier<>(Arrays.asList("a", "b", "c"))
                         .contains("a", "b", "c"),
-                () -> assertThrows(IllegalArgumentException.class,
-                        () -> new CollectionVerifier<>(Arrays.asList("a", "b", "c"))
-                                .contains("a", "b")),
+                () -> {
+                    CollectionVerifier<String> verifier = new CollectionVerifier<>(Arrays.asList("a", "b", "c"));
+                    assertThrows(IllegalArgumentException.class,
+                        () -> verifier.contains("a", "b"));
+                },
                 () -> new CollectionVerifier<>(Arrays.asList("a", "b"))
                         .contains("a", "b", "c"),
-                () -> assertThrows(IllegalArgumentException.class,
-                        () -> new CollectionVerifier<>(Arrays.asList("a", "b", null))
-                                .contains("a", (String) null)),
+                () -> {
+                    CollectionVerifier<String> verifier = new CollectionVerifier<>(Arrays.asList("a", "b", null));
+                    assertThrows(IllegalArgumentException.class,
+                        () -> verifier.contains("a", (String) null));
+                },
                 () -> new CollectionVerifier<>(Arrays.asList("a", null))
                         .contains("a", null, "c")
         );}
