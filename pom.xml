@@ -29,12 +29,14 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <project.scm.id>github</project.scm.id>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../easy-validation-coverage/target/site/jacoco-aggregate-ut/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <modules>
         <module>easy-validation-core</module>
         <module>easy-validation-args</module>
         <module>easy-validation-matcher</module>
+        <module>easy-validation-coverage</module>
     </modules>
 
     <build>
@@ -119,23 +121,11 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.5</version>
-                <configuration>
-                    <destFile>${project.basedir}/../target/jacoco.exec</destFile>
-                    <append>true</append>
-                </configuration>
                 <executions>
                     <execution>
-                        <id>jacoco-initialize</id>
+                        <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
-                        </goals>
-                        <phase>test-compile</phase>
-                    </execution>
-                    <execution>
-                        <id>jacoco-site</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -146,12 +136,17 @@
         <dependencies>
             <dependency>
                 <groupId>at.meks</groupId>
-                <artifactId>easy-validation</artifactId>
+                <artifactId>easy-validation-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>at.meks</groupId>
-                <artifactId>easy-validation-core</artifactId>
+                <artifactId>easy-validation-matcher</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>at.meks</groupId>
+                <artifactId>easy-validation-args</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

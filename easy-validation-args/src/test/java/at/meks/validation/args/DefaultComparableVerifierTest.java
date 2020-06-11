@@ -12,6 +12,7 @@ class DefaultComparableVerifierTest extends AbstractVerifierTest<ChronoLocalDate
 
     private static final LocalDate VALIDATED_VALUE = LocalDate.now().minusDays(1);
     private final DefaultComparableVerifier<ChronoLocalDate> verifierWithValue = getVerifierWithValidatedValue();
+    private final DefaultComparableVerifier<ChronoLocalDate> verifierWithNullValue = getVerifierWithNullValue();
 
     @Override
     protected DefaultComparableVerifier<ChronoLocalDate> getVerifierWithValidatedValue() {
@@ -39,6 +40,10 @@ class DefaultComparableVerifierTest extends AbstractVerifierTest<ChronoLocalDate
                 () -> verifierWithValue.isGreater(VALIDATED_VALUE.minusDays(1L)),
                 () -> assertThrows(IllegalArgumentException.class,
                         () -> verifierWithValue.isGreater(VALIDATED_VALUE)),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> verifierWithNullValue.isGreater(VALIDATED_VALUE)),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> verifierWithValue.isGreater(null)),
                 () -> {
                     LocalDate otherValue = VALIDATED_VALUE.plusDays(1L);
                     assertThrows(IllegalArgumentException.class, () -> verifierWithValue.isGreater(otherValue));
@@ -51,6 +56,10 @@ class DefaultComparableVerifierTest extends AbstractVerifierTest<ChronoLocalDate
         assertAll(
                 () -> verifierWithValue.isGreaterOrEqual(VALIDATED_VALUE.minusDays(1L)),
                 () -> verifierWithValue.isGreaterOrEqual(VALIDATED_VALUE),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> verifierWithNullValue.isGreaterOrEqual(VALIDATED_VALUE)),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> verifierWithValue.isGreaterOrEqual(null)),
                 () -> {
                     LocalDate otherValue = VALIDATED_VALUE.plusDays(1L);
                     assertThrows(IllegalArgumentException.class, () -> verifierWithValue.isGreaterOrEqual(otherValue));
@@ -64,6 +73,10 @@ class DefaultComparableVerifierTest extends AbstractVerifierTest<ChronoLocalDate
                 () -> verifierWithValue.isLess(VALIDATED_VALUE.plusDays(1L)),
                 () -> assertThrows(IllegalArgumentException.class,
                         () -> verifierWithValue.isLess(VALIDATED_VALUE)),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> verifierWithNullValue.isLess(VALIDATED_VALUE)),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> verifierWithValue.isLess(null)),
                 () -> {
                     LocalDate otherValue = VALIDATED_VALUE.minusDays(1L);
                     assertThrows(IllegalArgumentException.class, () -> verifierWithValue.isLess(otherValue));
@@ -76,6 +89,10 @@ class DefaultComparableVerifierTest extends AbstractVerifierTest<ChronoLocalDate
         assertAll(
                 () -> verifierWithValue.isLessOrEqual(VALIDATED_VALUE.plusDays(1L)),
                 () -> verifierWithValue.isLessOrEqual(VALIDATED_VALUE),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> verifierWithNullValue.isLessOrEqual(VALIDATED_VALUE)),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> verifierWithValue.isLessOrEqual(null)),
                 () -> {
                     LocalDate otherValue = VALIDATED_VALUE.minusDays(1L);
                     assertThrows(IllegalArgumentException.class, () -> verifierWithValue.isLessOrEqual(otherValue));
@@ -90,6 +107,12 @@ class DefaultComparableVerifierTest extends AbstractVerifierTest<ChronoLocalDate
         assertAll(
                 () -> verifierWithValue.isBetween(VALIDATED_VALUE, VALIDATED_VALUE),
                 () -> verifierWithValue.isBetween(min, max),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> verifierWithNullValue.isBetween(min, max)),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> verifierWithValue.isBetween(null, max)),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> verifierWithValue.isBetween(min, null)),
                 () -> assertThrows(IllegalArgumentException.class, () -> verifierWithValue.isBetween(max, max)),
                 () -> assertThrows(IllegalArgumentException.class, () -> verifierWithValue.isBetween(min, min))
         );
@@ -102,6 +125,12 @@ class DefaultComparableVerifierTest extends AbstractVerifierTest<ChronoLocalDate
         assertAll(
                 () -> verifierWithValue.isNotBetween(greater, greater),
                 () -> verifierWithValue.isNotBetween(smaller, smaller),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> verifierWithNullValue.isNotBetween(smaller, greater)),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> verifierWithValue.isNotBetween(null, greater)),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> verifierWithValue.isNotBetween(smaller, null)),
                 () -> assertThrows(IllegalArgumentException.class,
                         () -> verifierWithValue.isNotBetween(VALIDATED_VALUE, VALIDATED_VALUE)),
                 () -> assertThrows(IllegalArgumentException.class,

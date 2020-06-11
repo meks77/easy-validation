@@ -11,4 +11,8 @@ REM    		    </activation>
 REM    	    </profile>
 REM * mvn in path
 REM * JAVA_HOME is set to Java Jdk 1.8+
-mvn -Dmaven.test.failure.ignore=false package org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -f pom.xml
+set JAVA_HOME to jdk 8
+mvn -Dmaven.test.failure.ignore=false test
+
+set JAVA_HOME to jdk 11
+mvn sonar:sonar

@@ -82,7 +82,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
     @SuppressWarnings("UnusedReturnValue")
     public X isNotBetween(T min, T max) {
         assertMatcherReturnsTrue(
-                value -> valuesAreNotNull(min, max) && ComparableMatcher.isNotBetween(value, min, max));
+                value -> valuesAreNotNull(value, min, max) && ComparableMatcher.isNotBetween(value, min, max));
         return (X) this;
     }
 
