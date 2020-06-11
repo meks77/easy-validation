@@ -24,9 +24,10 @@ public class ObjectMatcher {
     }
 
     public static <T> boolean isEqual(T aValue, T otherValue) {
-        return isNull(aValue, otherValue) ||
-                (aValue != null && aValue.equals(otherValue)) ||
-                (otherValue != null && otherValue.equals(aValue));
+        if (isNull(aValue, otherValue)) {
+            return true;
+        }
+        return aValue != null && aValue.equals(otherValue);
     }
 
     public static <T> boolean isNotEqual(T aValue, T otherValue) {

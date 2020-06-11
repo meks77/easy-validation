@@ -74,7 +74,8 @@ class StringMatcherTest {
         assertAll(
                 () -> assertTrue(StringMatcher.hasMinLength("asdf", 3)),
                 () -> assertTrue(StringMatcher.hasMinLength("asdf", 4)),
-                () -> assertFalse(StringMatcher.hasMinLength("asdf", 5))
+                () -> assertFalse(StringMatcher.hasMinLength("asdf", 5)),
+                () -> assertFalse(StringMatcher.hasMinLength(null, 1))
         );
     }
 }

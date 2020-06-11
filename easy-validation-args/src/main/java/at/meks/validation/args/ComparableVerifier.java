@@ -23,10 +23,8 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
     }
 
     @SafeVarargs
-    private final boolean valuesAreNotNull(T firstValue, T... otherValues) {
-        return ObjectMatcher.isNotNull(firstValue) &&
-                (otherValues != null &&
-                        Arrays.stream(otherValues).allMatch(ObjectMatcher::isNotNull));
+    private final boolean valuesAreNotNull(T...otherValues) {
+        return Arrays.stream(otherValues).allMatch(ObjectMatcher::isNotNull);
     }
 
     /**
