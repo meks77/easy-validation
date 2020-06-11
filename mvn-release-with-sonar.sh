@@ -12,8 +12,8 @@
 #    	    </profile>
 # * maven in  in path
 # * JAVA_HOME is set to Java Jdk 1.8+
-set JAVA_HOME to jdk 8
-mvn -Dmaven.test.failure.ignore=false clean org.jacoco:jacoco-maven-plugin:prepare-agent release:prepare release:perform
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+mvn -Dmaven.test.failure.ignore=false clean release:prepare release:perform
 
-set JAVA_HOME to jdk 11
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 mvn sonar:sonar
