@@ -15,5 +15,5 @@
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 mvn -Dmaven.test.failure.ignore=false clean release:prepare release:perform
 
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-mvn sonar:sonar
+#export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+#mvn sonar:sonar
