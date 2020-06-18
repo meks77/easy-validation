@@ -11,47 +11,81 @@
 
 Very easy way to validate simple and complex objects by using an fluent interface.
 
-The main concept of using lambda combined with a fluent interface is from Joel Planes, what can be found [here](https://medium.com/@jplanes/lambda-validations-with-java-8-86aa8143bd9f).
+## Goals
 
-## Compare validation using this library to commonly implemented validation
+ * No 3rd party dependencies
+ * Very small artefact size
+ * clean and natural api
 
-Using this library the code is much smarter, shorter and easier to read:
+## Exmples
+
+### Simply validate a method argument and throw an IllegalArgumentException
+
+If you want to validate just a method argument you can do this by using the module easy-validation-args.
+
 ````
-isNumeric().and(Integer::parseInteger, isBetween(18, 25)).test(ageString).throwIfInvalid("age");
+validate().that(arg1)
+        .isNotBlank()
+        .hasMinLength(30)
+        .matches(value -> value.contains("whatIsExpected"));
 ````
 
 Commonly when you implement a validation the code would look like this:
 
 ````
-if (StringUtils.isNumber(ageString)) {
-    int age = Integer.parseInt(ageString);
-    if (age < 18 || age > 25) {
-        throw new ValidationException("age");
-    }
+if (StringUtils.isBlank(arg1)) {
+    throw new IllegalArgumentException();
+}
+if (arg1.length() <= 30) {
+    throw new IllegalArgumentException();
+}
+if (arg1.contains("whatIsExpected") {
+    throw new IllegalArgumentException();
 }
 ````
 Just image you have 20+ different input values you have to validate. The code is growing very fast and it will get hard
 to maintain is it grows.
 
-### Some more examples from the Quickstart Wiki section
-#### combine more validations
-##### with and
+### Do more validations to report in any way you want
+
+Expect the case you want to validate the input to be not blank and it mustn't contain whitespace, but you want to report
+it with different error messages.
+
 ````
-isNotBlank().and(contains("e")).and(isInList(this::getValidCities)).test(cityName);
+List<String> occuredErrorKeys = new ArrayList<>();
+String validatedValue = " ";
+Validator.reportTo(occuredErrorKeys::add)
+        .verify(validatedValue)
+        .usingKey("notBlank").matches(StringUtils::isNotBlank)
+        .and().usingKey("whitespaces").matches(StringUtils::doesNotContainWhitespace)
+        .and().usingKey("minLength").matches(value -> StringUtils.length(value) > 10);
 ````
-##### with or
-isBlank().or(lengthIsMoreThan(12));
-##### with or and and
+In the list occuredErrorKeys the errors notBlank, whitespaces and minLength will be added. With this information you can report
+the error however you want.
+
+### Throw the Exception you want
+If you have the need to throw your own exception in case of the first violation, e.g. for throwing an error code, just
+go ahead like this:
 ````
-isBlank().or(lengthIsMoreThan(12).and(contains("abc")));
-````
-#### String validation for a number
-````
-isNumeric().test(ageString).throwIfInvalid("age"); 
-````
-#### Combine Validations for different Types
-````
-isNumeric().and(Long::parseLong, isGreaterThan(18L));
+Validator.stopOnFirstError()
+        .throwing(() -> new MyCheckedExceptionWithErrorCode(999))
+        .verify(validatedValue)
+        .matches(StringUtils::isNotBlank)
+        .and(StringUtils::doesNotContainWhitespace)
 ````
 
-For more examples and more information please visit the wiki.
+## Matchers
+First I thought using commons-lang3 is fine. But I realized that commons-lang3 size is about 500 KB.
+Furthermore: How to avoid dependency clashes?
+
+Therefore I decided to use my own matchers. Currently in version 2.0.0-RC2 the size is ~ 6 KB. 
+Furthermore the whole validation has no dependency to any 3rd party library. So you can use allways as long you use at least
+java 8.  
+
+## History 
+While developing the first release I followed the main concept of using lambda combined with a fluent interface is from Joel Planes, what can be found [here](https://medium.com/@jplanes/lambda-validations-with-java-8-86aa8143bd9f).
+
+But I was getting tired to always invoke the method test and afterwards the method throwIfInvalid.
+
+Thanks to Eric Evans input I developed it from scratch with the possibility to decide if I want to throw an exception or not easy, without duplicating so much method signatures.
+I hope you like the result.
