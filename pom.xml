@@ -8,7 +8,7 @@
     <packaging>pom</packaging>
 
     <name>Easy Validation - Parent</name>
-    <description>This project contains the module for the validations and the module with examples</description>
+    <description>Root project for easy-validation</description>
     <url>https://github.com/meks77/easy-validation</url>
 
     <licenses>

@@ -6,8 +6,10 @@
         <version>2.0.0-RC4-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>easy-validation-args</artifactId>
+    <name>Easy Validation for arguments</name>
+    <description>easy and simple validation for method arguments</description>
+    <url>https://github.com/meks77/easy-validation</url>
 
     <dependencies>
         <dependency>

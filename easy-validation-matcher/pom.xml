@@ -6,9 +6,9 @@
         <version>2.0.0-RC4-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>easy-validation-matcher</artifactId>
-
+    <name>Easy Validation matchers</name>
+    <description>Matchers for use with validation core or validation args with a tiny artifact size.</description>
     <dependencies>
         <dependency>
             <groupId>at.meks</groupId>
