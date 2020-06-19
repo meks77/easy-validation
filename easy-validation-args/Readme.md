@@ -28,6 +28,7 @@ public class MyClass {
 
     public void myMethod(String arg1) {
         validate().that(arg1)
+            .withMessage(() -> "Error message for arg1")
             .isNotBlank()
             .hasMinLength(30)
             .matches(value -> value.contains("whatIsExpected"));

@@ -25,6 +25,7 @@ If you want to validate just a method argument you can do this by using the modu
 
 ````
 validate().that(arg1)
+        .withMessage(() -> "arg1")
         .isNotBlank()
         .hasMinLength(30)
         .matches(value -> value.contains("whatIsExpected"));
@@ -34,17 +35,25 @@ Commonly when you implement a validation the code would look like this:
 
 ````
 if (StringUtils.isBlank(arg1)) {
-    throw new IllegalArgumentException();
+    throw new IllegalArgumentException("arg1");
 }
 if (arg1.length() <= 30) {
-    throw new IllegalArgumentException();
+    throw new IllegalArgumentException("arg1");
 }
 if (arg1.contains("whatIsExpected") {
-    throw new IllegalArgumentException();
+    throw new IllegalArgumentException("arg1);
 }
 ````
 Just image you have 20+ different input values you have to validate. The code is growing very fast and it will get hard
 to maintain is it grows.
+
+You also have the possibility to set a seperate message per validation.
+````
+validate().that(arg1)
+        .withMessage(() -> "arg1 mustn't be blank").isNotBlank()
+        .withMessage(() -> "arg1 must have at leat 30 chars").hasMinLength(30)
+        .withMessage(() -> "arg1 must contain \"whatIsExpected\"").matches(value -> value.contains("whatIsExpected"));
+````
 
 ### Do more validations to report in any way you want
 

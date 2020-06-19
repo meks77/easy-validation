@@ -3,6 +3,8 @@ package at.meks.validation.args;
 import at.meks.validation.core.Matcher;
 import at.meks.validation.matcher.ObjectMatcher;
 
+import java.util.function.Supplier;
+
 /**
  * This is the abstract class for all Verifiers.
  * It contains methods
@@ -15,6 +17,7 @@ import at.meks.validation.matcher.ObjectMatcher;
 public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
 
     private final T argumentValue;
+    private Supplier<String> errorMessage;
 
     protected AbstractVerifier(T argumentValue) {
         this.argumentValue = argumentValue;
@@ -30,6 +33,9 @@ public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
 
     void assertMatcherReturnsTrue(Matcher<T> matcher) {
         if (!matcher.verify(argumentValue)) {
+            if (errorMessage != null) {
+                throw new IllegalArgumentException(errorMessage.get());
+            }
             throw new IllegalArgumentException();
         }
     }
@@ -75,4 +81,8 @@ public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
         return (X) this;
     }
 
+    public X withMessage(Supplier<String> errorMessage) {
+        this.errorMessage = errorMessage;
+        return (X) this;
+    }
 }
