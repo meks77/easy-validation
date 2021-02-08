@@ -1,6 +1,5 @@
 package at.meks.validation.args;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import static at.meks.validation.args.ArgValidator.validate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ArgValidatorTest {
 
@@ -38,31 +36,21 @@ class ArgValidatorTest {
 
     @Test
     void testSingleMessage() {
-        assertThatThrownBy(
-                () -> validate().that("")
-                        .withMessage(() -> "My custom error message")
-                        .isNotBlank()
-        ).hasMessage("My custom error message")
-                .isInstanceOf(IllegalArgumentException.class);
-    }
+        StringVerifier stringVerifier = validate().that("")
+                .withMessage(() -> "My custom error message");
 
-    @Test
-    void testMultipleMessagesWhenFirstFails() {
-        assertThatThrownBy(
-                () -> validate().that("")
-                        .withMessage(() -> "notBlank").isNotBlank()
-                        .withMessage(() -> "size").hasMinLength(3)
-        ).hasMessage("notBlank")
+        assertThatThrownBy(stringVerifier::isNotBlank)
+                .hasMessage("My custom error message")
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void testMultipleMessagesWhenSecondFails() {
-        assertThatThrownBy(
-                () -> validate().that("a")
-                        .withMessage(() -> "notBlank").isNotBlank()
-                        .withMessage(() -> "size").hasMinLength(3)
-        ).hasMessage("size")
+        StringVerifier verifier = validate().that("a")
+                .withMessage(() -> "notBlank").isNotBlank()
+                .withMessage(() -> "size");
+        assertThatThrownBy(() -> verifier.hasMinLength(3))
+                .hasMessage("size")
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
