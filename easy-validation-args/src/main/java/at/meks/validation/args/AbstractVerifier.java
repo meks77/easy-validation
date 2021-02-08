@@ -27,8 +27,9 @@ public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
      * asserts using a custom matcher.
      * @param matcher   is used to verify if the value matches the verification
      */
-    public void matches(Matcher<T> matcher) {
+    public X matches(Matcher<T> matcher) {
         assertMatcherReturnsTrue(matcher);
+        return (X) this;
     }
 
     void assertMatcherReturnsTrue(Matcher<T> matcher) {

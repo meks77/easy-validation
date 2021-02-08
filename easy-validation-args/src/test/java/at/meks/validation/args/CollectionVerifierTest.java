@@ -46,12 +46,22 @@ class CollectionVerifierTest extends AbstractVerifierTest<Collection<String>, Co
     }
 
     @Test
+    void isEmptyReturnsItself() {
+        assertSame(verifierWithNullList, verifierWithNullList.isEmpty());
+    }
+
+    @Test
     void isNotEmpty() {
         assertAll(
                 () -> assertThrows(IllegalArgumentException.class, verifierWithNullList::isNotEmpty),
                 () -> assertThrows(IllegalArgumentException.class, verifierWithEmptyList::isNotEmpty),
                 verifierWithOneEntry::isNotEmpty
         );
+    }
+
+    @Test
+    void isNotEmptyReturnsItself() {
+        assertSame(verifierWithOneEntry, verifierWithOneEntry.isNotEmpty());
     }
 
     @Test
@@ -77,6 +87,13 @@ class CollectionVerifierTest extends AbstractVerifierTest<Collection<String>, Co
     }
 
     @Test
+    void containsOnlyReturnsItself() {
+        CollectionVerifier<String> verifier = new CollectionVerifier<>(Collections.singleton("a"));
+        CollectionVerifier<String> returnValue = verifier.containsOnly("a");
+        assertSame(verifier, returnValue);
+    }
+
+    @Test
     void contains() {
         assertAll(
                 () -> new CollectionVerifier<>(Arrays.asList("a", "b", "c"))
@@ -95,5 +112,13 @@ class CollectionVerifierTest extends AbstractVerifierTest<Collection<String>, Co
                 },
                 () -> new CollectionVerifier<>(Arrays.asList("a", null))
                         .contains("a", null, "c")
-        );}
+        );
+    }
+
+    @Test
+    void containsReturnsItself() {
+        CollectionVerifier<String> verifier = new CollectionVerifier<>(Collections.singleton("a"));
+        CollectionVerifier<String> returnValue = verifier.contains("a");
+        assertSame(verifier, returnValue);
+    }
 }
