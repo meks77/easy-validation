@@ -23,6 +23,12 @@ class ArgValidatorTest {
     }
 
     @Test
+    void testObject() {
+        assertThat(validate().that(new PlainObject()))
+                .isInstanceOf(ObjectVerifier.class);
+    }
+
+    @Test
     void testBoolean() {
         assertThat(validate().that(true))
                 .isInstanceOf(BooleanVerifier.class);

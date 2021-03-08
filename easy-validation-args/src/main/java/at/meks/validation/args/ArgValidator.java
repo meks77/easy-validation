@@ -33,6 +33,14 @@ public class ArgValidator {
 
     /**
      * @param argumentValue the value which will be validated
+     * @return  an verifier for plain objects
+     */
+    public ObjectVerifier that(Object argumentValue) {
+        return new ObjectVerifier(argumentValue);
+    }
+
+    /**
+     * @param argumentValue the value which will be validated
      * @return  an verifier for booleans
      */
     public BooleanVerifier that(Boolean argumentValue) {
