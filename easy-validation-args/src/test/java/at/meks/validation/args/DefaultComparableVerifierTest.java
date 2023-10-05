@@ -15,17 +15,17 @@ class DefaultComparableVerifierTest extends AbstractVerifierTest<ChronoLocalDate
     private final DefaultComparableVerifier<ChronoLocalDate> verifierWithNullValue = getVerifierWithNullValue();
 
     @Override
+    protected DefaultComparableVerifier<ChronoLocalDate> getVerifierFor(ChronoLocalDate value) {
+        return new DefaultComparableVerifier<>(value);
+    }
+
+    @Override
     protected DefaultComparableVerifier<ChronoLocalDate> getVerifierWithValidatedValue() {
         return new DefaultComparableVerifier<>(VALIDATED_VALUE);
     }
 
     @Override
-    protected DefaultComparableVerifier<ChronoLocalDate> getVerifierWithNullValue() {
-        return new DefaultComparableVerifier<>(null);
-    }
-
-    @Override
-    protected LocalDate getValidatedValue() {
+    protected LocalDate getValue() {
         return VALIDATED_VALUE;
     }
 

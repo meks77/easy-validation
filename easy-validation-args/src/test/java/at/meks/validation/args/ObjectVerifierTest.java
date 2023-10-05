@@ -3,6 +3,12 @@ package at.meks.validation.args;
 public class ObjectVerifierTest extends AbstractVerifierTest<Object, ObjectVerifier> {
 
     private static final PlainObject VALIDATED_VALUE = new PlainObject();
+    public static final PlainObject OTHER_VALUE = new PlainObject();
+
+    @Override
+    protected ObjectVerifier getVerifierFor(Object value) {
+        return new ObjectVerifier(value);
+    }
 
     @Override
     protected ObjectVerifier getVerifierWithValidatedValue() {
@@ -10,18 +16,13 @@ public class ObjectVerifierTest extends AbstractVerifierTest<Object, ObjectVerif
     }
 
     @Override
-    protected ObjectVerifier getVerifierWithNullValue() {
-        return new ObjectVerifier(null);
-    }
-
-    @Override
-    protected Object getValidatedValue() {
+    protected Object getValue() {
         return VALIDATED_VALUE;
     }
 
     @Override
     protected Object getOtherValue() {
-        return new PlainObject();
+        return OTHER_VALUE;
     }
 
 }

@@ -1,11 +1,15 @@
 package at.meks.validation.args;
 
 import at.meks.validation.core.Matcher;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Locale;
+
+import static java.lang.String.format;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 abstract class AbstractVerifierTest<T, V extends AbstractVerifier<T, V>> {
 
@@ -14,9 +18,13 @@ abstract class AbstractVerifierTest<T, V extends AbstractVerifier<T, V>> {
 
     protected abstract V getVerifierWithValidatedValue();
 
-    protected abstract V getVerifierWithNullValue();
+    protected V getVerifierWithNullValue() {
+        return getVerifierFor(null);
+    }
 
-    protected abstract T getValidatedValue();
+    protected abstract V getVerifierFor(T value);
+
+    protected abstract T getValue();
 
     protected abstract T getOtherValue();
 
@@ -24,57 +32,153 @@ abstract class AbstractVerifierTest<T, V extends AbstractVerifier<T, V>> {
     final void matches() {
         @SuppressWarnings("unchecked")
         Matcher<T> matcher = Mockito.mock(Matcher.class);
-        Mockito.when(matcher.verify(getValidatedValue())).thenReturn(true);
+        Mockito.when(matcher.verify(getValue())).thenReturn(true);
 
         getVerifierWithValidatedValue().matches(matcher);
 
-        Mockito.verify(matcher).verify(getValidatedValue());
+        Mockito.verify(matcher).verify(getValue());
     }
 
     @Test
     final void assertMatcherReturnsTrue() {
         @SuppressWarnings("unchecked")
         Matcher<T> matcher = Mockito.mock(Matcher.class);
-        Mockito.when(matcher.verify(getValidatedValue())).thenReturn(true, false);
+        Mockito.when(matcher.verify(getValue())).thenReturn(true, false);
         assertAll(
                 () -> verifierWithValue.assertMatcherReturnsTrue(matcher),
-                () -> assertThrows(IllegalArgumentException.class,
-                            () -> verifierWithValue.assertMatcherReturnsTrue(matcher))
+                () -> assertExceptionWithoutMessage(() -> verifierWithValue.assertMatcherReturnsTrue(matcher))
         );
     }
 
-    @Test
-    final void isNotNull() {
-        assertAll(
-                () -> assertThrows(IllegalArgumentException.class, verifierWithNullValue::isNotNull),
-                verifierWithValue::isNotNull
-        );
+    private void assertExceptionWithoutMessage(Runnable invokedMethod) {
+        assertThrows(IllegalArgumentException.class, invokedMethod::run);
     }
 
-    @Test
-    final void isNull() {
-        assertAll(
-                verifierWithNullValue::isNull,
-                () -> assertThrows(IllegalArgumentException.class, verifierWithValue::isNull)
-        );
+    @Nested
+    class WhenIsNotNull extends VerificationTests<T, V> {
+
+        @Override
+        protected V getVerifierWithValidValue() {
+            return verifierWithValue;
+        }
+
+        @Override
+        protected void invokeVerificationMethod(V v) {
+            v.isNotNull();
+        }
+
+        @Override
+        protected V getVerifierWithInvalidValue() {
+            return verifierWithNullValue;
+        }
+
+        @Override
+        protected String getExpectedErrorMessage(String argumentName, Locale language) {
+            if (language.equals(Locale.GERMAN)) {
+                return formatErrorMessage(
+                        "Argument \"%s\" darf nicht null sein",
+                        argumentName, getOtherValue());
+            }
+            return formatErrorMessage(
+                    "Argument \"%s\" mustn't be null",
+                    argumentName, getOtherValue());
+        }
+
     }
 
-    @Test
-    final void isEqualTo() {
-        T otherValue = getOtherValue();
-        assertAll(
-                () -> verifierWithValue.isEqualTo(getValidatedValue()),
-                () ->  assertThrows(IllegalArgumentException.class, () -> verifierWithValue.isEqualTo(otherValue))
-        );
+    @Nested
+    class WhenIsNull extends VerificationTests<T, V> {
+
+        @Override
+        protected void invokeVerificationMethod(V verifier) {
+            verifier.isNull();
+        }
+
+        @Override
+        protected V getVerifierWithValidValue() {
+            return getVerifierWithNullValue();
+        }
+
+        @Override
+        protected V getVerifierWithInvalidValue() {
+            return verifierWithValue;
+        }
+
+        @Override
+        protected String getExpectedErrorMessage(String argumentName, Locale language) {
+            if (language.equals(Locale.GERMAN)) {
+                return formatErrorMessage(
+                        "Argument \"%s\" mit dem Wert \"%s\" muss null sein",
+                        argumentName, getValue());
+            }
+            return formatErrorMessage(
+                    "Argument \"%s\" with value \"%s\" must be null",
+                    argumentName, getValue());
+        }
+
     }
 
-    @Test
-    final void isNotEqualTo() {
-        T validatedValue = getValidatedValue();
-        assertAll(
-                () -> verifierWithValue.isNotEqualTo(getOtherValue()),
-                () -> assertThrows(IllegalArgumentException.class, () -> verifierWithValue.isNotEqualTo(validatedValue))
-        );
+    @Nested
+    class WhenIsEqualTo extends VerificationTests<T, V> {
+
+        @Override
+        protected V getVerifierWithValidValue() {
+            return getVerifierFor(getValue());
+        }
+
+        @Override
+        protected void invokeVerificationMethod(V v) {
+            v.isEqualTo(getValue());
+        }
+
+        @Override
+        protected V getVerifierWithInvalidValue() {
+            return getVerifierFor(getOtherValue());
+        }
+
+        @Override
+        protected String getExpectedErrorMessage(String argumentName, Locale language) {
+            if (language.equals(Locale.GERMAN)) {
+                return formatErrorMessage("Argument \"%s\" mit dem Wert \"%s\" muss \"%s\" entsprechen", argumentName, AbstractVerifierTest.this.getOtherValue());
+            }
+            return formatErrorMessage("Argument \"%s\" with value \"%s\" must be equal to \"%s\"", argumentName, AbstractVerifierTest.this.getOtherValue());
+        }
+    }
+
+    @Nested
+    class WhenIsNotEqualTo extends VerificationTests<T, V> {
+
+        @Override
+        protected V getVerifierWithValidValue() {
+            return getVerifierFor(getValue());
+        }
+
+        @Override
+        protected void invokeVerificationMethod(V v) {
+            v.isNotEqualTo(getOtherValue());
+        }
+
+        @Override
+        protected V getVerifierWithInvalidValue() {
+            return getVerifierFor(getOtherValue());
+        }
+
+        @Override
+        protected String getExpectedErrorMessage(String argumentName, Locale language) {
+            if (language.equals(Locale.GERMAN)) {
+                return formatErrorMessage(
+                        "Argument \"%s\" mit dem Wert \"%s\" darf nicht \"%s\" entsprechen",
+                        argumentName, getOtherValue());
+            }
+            return formatErrorMessage(
+                    "Argument \"%s\" with value \"%s\" must not be equal to \"%s\"",
+                    argumentName, getOtherValue());
+        }
+    }
+
+    private String formatErrorMessage(String message, String argumentName, T validatedValue) {
+        return format(message,
+                argumentName, validatedValue, getOtherValue());
     }
 
 }

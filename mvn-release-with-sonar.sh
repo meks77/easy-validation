@@ -12,7 +12,7 @@
 #    	    </profile>
 # * maven in  in path
 # * JAVA_HOME is set to Java Jdk 1.8+
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 mvn -Dmaven.test.failure.ignore=false clean release:prepare release:perform
 
 #export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64

@@ -12,17 +12,17 @@ class BooleanVerifierTest extends AbstractVerifierTest<Boolean, BooleanVerifier>
     private final BooleanVerifier verifierWithFalse = new BooleanVerifier(false);
 
     @Override
+    protected BooleanVerifier getVerifierFor(Boolean value) {
+        return new BooleanVerifier(value);
+    }
+
+    @Override
     protected BooleanVerifier getVerifierWithValidatedValue() {
         return new BooleanVerifier(VALIDATED_VALUE);
     }
 
     @Override
-    protected BooleanVerifier getVerifierWithNullValue() {
-        return new BooleanVerifier(null);
-    }
-
-    @Override
-    protected Boolean getValidatedValue() {
+    protected Boolean getValue() {
         return VALIDATED_VALUE;
     }
 

@@ -22,6 +22,7 @@ public class StringVerifier extends ComparableVerifier<String, StringVerifier> {
      * @throws IllegalArgumentException if the string is blank
      */
     public StringVerifier isNotBlank() {
+        withMessageKey("string.isNotBlank");
         assertMatcherReturnsTrue(StringMatcher::isNotBlank);
         return this;
     }
@@ -33,6 +34,7 @@ public class StringVerifier extends ComparableVerifier<String, StringVerifier> {
      * @throws IllegalArgumentException if the string is violates the minimum length
      */
     public StringVerifier hasMinLength(int minLength) {
+        withMessageKey("string.hasMinLength");
         assertMatcherReturnsTrue(value -> StringMatcher.hasMinLength(value, minLength));
         return this;
     }

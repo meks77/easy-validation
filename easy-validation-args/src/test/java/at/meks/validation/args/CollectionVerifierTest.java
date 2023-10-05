@@ -17,17 +17,17 @@ class CollectionVerifierTest extends AbstractVerifierTest<Collection<String>, Co
     private final CollectionVerifier<String> verifierWithNullList = new CollectionVerifier<>(null);
 
     @Override
+    protected CollectionVerifier<String> getVerifierFor(Collection<String> value) {
+        return new CollectionVerifier<>(value);
+    }
+
+    @Override
     protected CollectionVerifier<String> getVerifierWithValidatedValue() {
         return new CollectionVerifier<>(VALIDATED_VALUE);
     }
 
     @Override
-    protected CollectionVerifier<String> getVerifierWithNullValue() {
-        return new CollectionVerifier<>(null);
-    }
-
-    @Override
-    protected Collection<String> getValidatedValue() {
+    protected Collection<String> getValue() {
         return VALIDATED_VALUE;
     }
 

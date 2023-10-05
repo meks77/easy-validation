@@ -14,12 +14,12 @@ class StringVerifierTest extends AbstractVerifierTest<String, StringVerifier> {
     }
 
     @Override
-    protected StringVerifier getVerifierWithNullValue() {
-        return new StringVerifier(null);
+    protected StringVerifier getVerifierFor(String value) {
+        return new StringVerifier(value);
     }
 
     @Override
-    protected String getValidatedValue() {
+    protected String getValue() {
         return VALIDATED_VALUE;
     }
 

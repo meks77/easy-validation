@@ -17,6 +17,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
      */
     @SuppressWarnings("UnusedReturnValue")
     public X isGreater(T otherValue) {
+        withMessageKey("comparable.isGreater");
         assertMatcherReturnsTrue(
                 value -> valuesAreNotNull(value, otherValue) && ComparableMatcher.isGreater(value, otherValue));
         return (X) this;
@@ -33,6 +34,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
      */
     @SuppressWarnings("UnusedReturnValue")
     public X isGreaterOrEqual(T otherValue) {
+        withMessageKey("comparable.isGreaterOrEqual");
         assertMatcherReturnsTrue(
                 value -> valuesAreNotNull(value, otherValue) && ComparableMatcher.isGreaterOrEqual(value, otherValue));
         return (X) this;
@@ -44,6 +46,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
      */
     @SuppressWarnings("UnusedReturnValue")
     public X isLess(T otherValue) {
+        withMessageKey("comparable.isLess");
         assertMatcherReturnsTrue(
                 value -> valuesAreNotNull(value, otherValue) && ComparableMatcher.isLess(value, otherValue));
         return (X) this;
@@ -55,6 +58,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
      */
     @SuppressWarnings("UnusedReturnValue")
     public X isLessOrEqual(T otherValue) {
+        withMessageKey("comparable.isLessOrEqual");
         assertMatcherReturnsTrue(
                 value -> valuesAreNotNull(value, otherValue) && ComparableMatcher.isLessOrEqual(value, otherValue));
         return (X) this;
@@ -67,6 +71,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
      */
     @SuppressWarnings("UnusedReturnValue")
     public X isBetween(T min, T max) {
+        withMessageKey("comparable.isBetween");
         assertMatcherReturnsTrue(
                 value -> valuesAreNotNull(value, min, max) && ComparableMatcher.isBetween(value, min, max));
         return (X) this;
@@ -79,6 +84,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
      */
     @SuppressWarnings("UnusedReturnValue")
     public X isNotBetween(T min, T max) {
+        withMessageKey("comparable.isNotBetween");
         assertMatcherReturnsTrue(
                 value -> valuesAreNotNull(value, min, max) && ComparableMatcher.isNotBetween(value, min, max));
         return (X) this;

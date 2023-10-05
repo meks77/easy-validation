@@ -88,8 +88,8 @@ First I thought using commons-lang3 is fine. But I realized that commons-lang3 s
 Furthermore: How to avoid dependency clashes?
 
 Therefore I decided to use my own matchers. Currently in version 2.0.0-RC2 the size is ~ 6 KB. 
-Furthermore the whole validation has no dependency to any 3rd party library. So you can use allways as long you use at least
-java 8.  
+Furthermore the whole validation has no dependency to any 3rd party library. So you can use always as long you use at least
+java 11.  
 
 ## History 
 While developing the first release I followed the main concept of using lambda combined with a fluent interface is from Joel Planes, what can be found [here](https://medium.com/@jplanes/lambda-validations-with-java-8-86aa8143bd9f).
