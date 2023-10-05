@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>at.meks</groupId>
-    <artifactId>easy-validation-parent</artifactId>
+    <groupId>at.meks.easyvalidation</groupId>
+    <artifactId>parent</artifactId>
     <version>2.0.0-RC6-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -49,14 +49,14 @@
         <maven.compiler.source>11</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.scm.id>github</project.scm.id>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../easy-validation-coverage/target/site/jacoco-aggregate-ut/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../coverage/target/site/jacoco-aggregate-ut/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <modules>
-        <module>easy-validation-core</module>
-        <module>easy-validation-args</module>
-        <module>easy-validation-matcher</module>
-        <module>easy-validation-coverage</module>
+        <module>core</module>
+        <module>args</module>
+        <module>matcher</module>
+        <module>coverage</module>
     </modules>
 
     <build>
@@ -124,7 +124,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>1.5</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -164,18 +164,18 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>at.meks</groupId>
-                <artifactId>easy-validation-core</artifactId>
+                <groupId>at.meks.easyvalidation</groupId>
+                <artifactId>core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>at.meks</groupId>
-                <artifactId>easy-validation-matcher</artifactId>
+                <groupId>at.meks.easyvalidation</groupId>
+                <artifactId>matcher</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>at.meks</groupId>
-                <artifactId>easy-validation-args</artifactId>
+                <groupId>at.meks.easyvalidation</groupId>
+                <artifactId>args</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
