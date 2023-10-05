@@ -5,7 +5,6 @@ import org.junit.platform.commons.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
 import static org.assertj.core.api.Assertions.assertThat;

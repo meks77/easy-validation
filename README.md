@@ -44,8 +44,8 @@ if (arg1.contains("whatIsExpected") {
     throw new IllegalArgumentException("arg1);
 }
 ````
-Just image you have 20+ different input values you have to validate. The code is growing very fast and it will get hard
-to maintain is it grows.
+Just imagine you have 20+ different input values you have to validate. The code is growing very fast and it will get hard
+to maintain as it grows.
 
 You also have the possibility to set a seperate message per validation.
 ````
