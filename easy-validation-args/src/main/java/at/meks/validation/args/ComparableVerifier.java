@@ -3,7 +3,8 @@ package at.meks.validation.args;
 import at.meks.validation.matcher.ComparableMatcher;
 import at.meks.validation.matcher.ObjectMatcher;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class ComparableVerifier<T extends Comparable<T>, X extends ComparableVerifier<T, X>> extends AbstractVerifier<T, X> {
 
@@ -24,8 +25,12 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
     }
 
     @SafeVarargs
-    private final boolean valuesAreNotNull(T...otherValues) {
-        return Arrays.stream(otherValues).allMatch(ObjectMatcher::isNotNull);
+    private boolean valuesAreNotNull(T value1, T... furthervalues) {
+        var values = new ArrayList<>();
+        values.add(value1);
+        values.addAll(List.of(furthervalues));
+
+        return values.stream().allMatch(ObjectMatcher::isNotNull);
     }
 
     /**

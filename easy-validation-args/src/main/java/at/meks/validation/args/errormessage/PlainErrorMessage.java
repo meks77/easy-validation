@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 public class PlainErrorMessage implements ErrorMessage {
 
-    private Supplier<String> messageSupplier;
+    private final Supplier<String> messageSupplier;
 
     public PlainErrorMessage(Supplier<String> messageSupplier) {
         this.messageSupplier = messageSupplier;

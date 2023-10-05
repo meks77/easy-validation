@@ -25,7 +25,7 @@ public class BehaviorDrivenTesting {
 
     public static class WhenAndAnd<T, X extends AbstractVerifier<T, X>> {
 
-        private X verifier;
+        private final X verifier;
 
         public WhenAndAnd(X verifier) {
             this.verifier = verifier;

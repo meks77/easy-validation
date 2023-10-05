@@ -5,8 +5,8 @@ import java.util.ResourceBundle;
 
 public class ResourceBundleErrorMessage implements ErrorMessage {
 
-    private String messageKey;
-    private Object[] messageArgs;
+    private final String messageKey;
+    private final Object[] messageArgs;
 
     public ResourceBundleErrorMessage(String messageKey, Object...messageArgs) {
         this.messageKey = messageKey;

@@ -12,14 +12,15 @@ import java.util.function.Supplier;
  * It contains methods
  *   * needed by the implementing Verifiers
  *   * verification methods, each Verifier needs to have
- *
+ * <p>
  * If a verification fails, allways an IllegalArgumentException is thrown.
+ * </p>
  * @param <T>
  */
 public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
 
     private final T argumentValue;
-    private ErrorMessageBuilder errorMessageBuilder = new ErrorMessageBuilder();
+    private final ErrorMessageBuilder errorMessageBuilder = new ErrorMessageBuilder();
 
     protected AbstractVerifier(T argumentValue) {
         this.argumentValue = argumentValue;
