@@ -17,7 +17,7 @@ Very easy way to validate simple and complex objects by using an fluent interfac
  * Very small artefact size
  * clean and natural api
 
-## Exmples
+## Examples
 
 ### Simply validate a method argument and throw an IllegalArgumentException
 
@@ -90,6 +90,13 @@ Furthermore: How to avoid dependency clashes?
 Therefore I decided to use my own matchers. Currently in version 2.0.0-RC2 the size is ~ 6 KB. 
 Furthermore the whole validation has no dependency to any 3rd party library. So you can use always as long you use at least
 java 11.  
+
+## Details and Maven Coordinates
+More Details and Maven Coordinates can be found at the modules:
+
+* [Matchers](matcher/Readme.md)
+* [Core](core/Readme.md)
+* [Args](args/Readme.md)
 
 ## History 
 While developing the first release I followed the main concept of using lambda combined with a fluent interface is from Joel Planes, what can be found [here](https://medium.com/@jplanes/lambda-validations-with-java-8-86aa8143bd9f).

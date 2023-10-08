@@ -14,3 +14,13 @@ If you are missing a validation, you can either provide your own matchers. But y
 easy-validation-matchers.
 
 The matchers are currently used in the module easy-validation-args. There you can see how they are used in the validation.
+
+## Maven Coordinates
+
+```xml
+<dependency>
+    <groupId>at.meks.easyvalidation</groupId>
+    <artifactId>matcher</artifactId>
+    <version>2.0.0</version>
+</dependency>
+```

@@ -21,6 +21,7 @@ The first release of the easy validations wasn't bad, but complicated to use for
 Therfor the new API was created.
 
 ## How to use it
+
 ```java
 import static at.meks.validation.args.ArgValidator.validate;
 
@@ -39,10 +40,19 @@ public class MyClass {
 
 ## Features
 * fluent API usage
-* allways throws IllegalArgumentException
+* always throws IllegalArgumentException
 * extendable by custom validations by using the method "matches"
 * no dependencies to 3rd party libs
 * very small artifact size
+
+## Maven Coordinates
+```xml
+<dependency>
+    <groupId>at.meks.easyvalidation</groupId>
+    <artifactId>args</artifactId>
+    <version>2.0.0</version>
+</dependency>
+```
 
 ## Outlook
 Currently there just a hand full verifier like for
@@ -52,6 +62,6 @@ Currently there just a hand full verifier like for
 * String and
 * Collections
 
-I plan to add verifier as soon as I need it. Contributers are very welcome.
+I plan to add verifier as soon as I need it. Contributors are very welcome.
 
 
