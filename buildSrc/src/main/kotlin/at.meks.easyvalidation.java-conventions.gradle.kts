@@ -6,6 +6,7 @@ plugins {
     `java-library`
     `maven-publish`
     `test-report-aggregation`
+    signing
 }
 
 repositories {
@@ -31,6 +32,14 @@ publishing {
     publications.create<MavenPublication>("maven") {
         from(components["java"])
     }
+
+    repositories {
+        mavenLocal()
+    }
+}
+
+signing {
+    sign(publishing.publications["maven"])
 }
 
 tasks.withType<JavaCompile>() {
