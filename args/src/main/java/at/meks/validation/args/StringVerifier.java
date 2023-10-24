@@ -39,4 +39,15 @@ public class StringVerifier extends ComparableVerifier<String, StringVerifier> {
         return this;
     }
 
+    public StringVerifier hasMaxLength(int maxLength) {
+        withMessageKey("string.hasMaxLength");
+        assertMatcherReturnsTrue(value -> StringMatcher.hasMaxLength(value, maxLength));
+        return this;
+    }
+
+    public StringVerifier hasLength(int length) {
+        withMessageKey("string.hasLength");
+        assertMatcherReturnsTrue(value -> StringMatcher.hasLength(value, length));
+        return this;
+    }
 }

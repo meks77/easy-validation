@@ -39,4 +39,12 @@ public class StringMatcher {
     public static boolean hasMinLength(String value, int minLength) {
         return isNotNull(value) && value.length() >= minLength;
     }
+
+    public static boolean hasMaxLength(String value, int maxLength) {
+        return isNotNull(value) && value.length() <= maxLength;
+    }
+
+    public static boolean hasLength(String value, int length) {
+        return isNotNull(value) && value.length() == length;
+    }
 }

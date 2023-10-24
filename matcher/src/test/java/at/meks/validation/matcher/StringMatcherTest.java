@@ -78,4 +78,22 @@ class StringMatcherTest {
                 () -> assertFalse(StringMatcher.hasMinLength(null, 1))
         );
     }
+    @Test
+    void hasMaxLength() {
+        assertAll(
+                () -> assertTrue(StringMatcher.hasMaxLength("asdf", 4)),
+                () -> assertTrue(StringMatcher.hasMaxLength("asdf", 5)),
+                () -> assertFalse(StringMatcher.hasMaxLength("asdf", 3)),
+                () -> assertFalse(StringMatcher.hasMaxLength(null, 1))
+        );
+    }
+    @Test
+    void hasLength() {
+        assertAll(
+                () -> assertTrue(StringMatcher.hasLength("asdf", 4)),
+                () -> assertFalse(StringMatcher.hasLength("asdf", 5)),
+                () -> assertFalse(StringMatcher.hasLength("asdf", 3)),
+                () -> assertFalse(StringMatcher.hasLength(null, 1))
+        );
+    }
 }

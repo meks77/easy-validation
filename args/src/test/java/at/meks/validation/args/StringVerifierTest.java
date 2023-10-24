@@ -50,12 +50,32 @@ class StringVerifierTest extends AbstractVerifierTest<String, StringVerifier> {
     }
 
     @Test
+    void hasMaxLength() {
+        StringVerifier verifier = new StringVerifier("asdf");
+        assertAll(
+                () -> verifier.hasMaxLength(5),
+                () -> verifier.hasMaxLength(4),
+                () -> assertThrows(IllegalArgumentException.class, () -> verifier.hasMaxLength(3))
+        );
+    }
+
+    @Test
+    void hasLength() {
+        StringVerifier verifier = new StringVerifier("asdf");
+        assertAll(
+                () -> verifier.hasLength(4),
+                () -> assertThrows(IllegalArgumentException.class, () -> verifier.hasLength(5)),
+                () -> assertThrows(IllegalArgumentException.class, () -> verifier.hasLength(3))
+        );
+    }
+
+    @Test
     void combineWithSuperMethod() {
         assertDoesNotThrow(() ->
-            new StringVerifier("asdf")
-                    .isNotNull()
-                    .isNotBlank()
-                    .isNotNull()
+                new StringVerifier("asdf")
+                        .isNotNull()
+                        .isNotBlank()
+                        .isNotNull()
         );
     }
 
