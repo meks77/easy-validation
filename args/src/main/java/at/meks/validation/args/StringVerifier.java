@@ -39,12 +39,25 @@ public class StringVerifier extends ComparableVerifier<String, StringVerifier> {
         return this;
     }
 
+
+    /**
+     * Asserts that the validated string has a maximum length provided by the argument.
+     * @param maxLength the maximum length the validated string must have
+     * @return the current instance of the StringVerifier
+     * @throws IllegalArgumentException if the string violates the maximum length
+     */
     public StringVerifier hasMaxLength(int maxLength) {
         withMessageKey("string.hasMaxLength");
         assertMatcherReturnsTrue(value -> StringMatcher.hasMaxLength(value, maxLength));
         return this;
     }
 
+    /**
+     * Asserts that the validated string has the specified length.
+     * @param length the length the validated string must have
+     * @return the current instance of the StringVerifier
+     * @throws IllegalArgumentException if the string length is not equal to the specified length
+     */
     public StringVerifier hasLength(int length) {
         withMessageKey("string.hasLength");
         assertMatcherReturnsTrue(value -> StringMatcher.hasLength(value, length));
