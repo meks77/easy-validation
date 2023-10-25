@@ -35,6 +35,7 @@ public class StringVerifier extends ComparableVerifier<String, StringVerifier> {
      */
     public StringVerifier hasMinLength(int minLength) {
         withMessageKey("string.hasMinLength");
+        withFurtherMessageFormatArg(String.valueOf(minLength));
         assertMatcherReturnsTrue(value -> StringMatcher.hasMinLength(value, minLength));
         return this;
     }
@@ -60,6 +61,7 @@ public class StringVerifier extends ComparableVerifier<String, StringVerifier> {
      */
     public StringVerifier hasLength(int length) {
         withMessageKey("string.hasLength");
+        withFurtherMessageFormatArg(String.valueOf(length));
         assertMatcherReturnsTrue(value -> StringMatcher.hasLength(value, length));
         return this;
     }

@@ -106,11 +106,8 @@ public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
         errorMessageBuilder.withMessageBundleKey(errorMessageKey);
     }
 
-    private void withFurtherMessageFormatArg(T value) {
+    protected void withFurtherMessageFormatArg(T value) {
         errorMessageBuilder.withFurtherMessageFormatArg(value);
     }
 
-    protected void withArgumentValue(Object value) {
-        errorMessageBuilder.withArgumentValue(value);
-    }
 }
