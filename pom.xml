@@ -4,7 +4,7 @@
 
     <groupId>at.meks.easyvalidation</groupId>
     <artifactId>parent</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.0.1</version>
     <packaging>pom</packaging>
 
     <name>Easy Validation - Parent</name>
@@ -41,7 +41,7 @@
         <connection>scm:git:ssh://git@github.com/meks77/easy-validation.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/meks77/easy-validation.git</developerConnection>
         <url>https://github.com/meks77/easy-validation</url>
-      <tag>v2.0.0</tag>
+      <tag>v2.0.1</tag>
   </scm>
 
     <properties>
