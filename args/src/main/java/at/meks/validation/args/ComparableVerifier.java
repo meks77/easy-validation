@@ -17,6 +17,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
     /**
      * asserts that the validated is greater than another value.
      * @param otherValue used to compare to
+     * @return itself for use with the fluent API
      */
     @SuppressWarnings("UnusedReturnValue")
     public X isGreater(T otherValue) {
@@ -40,6 +41,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
     /**
      * asserts that the validated is greater or equal to another value.
      * @param otherValue used to compare to
+     * @return itself for use with the fluent API
      */
     @SuppressWarnings("UnusedReturnValue")
     public X isGreaterOrEqual(T otherValue) {
@@ -52,6 +54,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
     /**
      * asserts that the validated is less than another value.
      * @param otherValue used to compare to
+     * @return itself for use with the fluent API
      */
     @SuppressWarnings("UnusedReturnValue")
     public X isLess(T otherValue) {
@@ -64,6 +67,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
     /**
      * asserts that the validated is less or equal to another value.
      * @param otherValue used to compare to
+     * @return itself for use with the fluent API
      */
     @SuppressWarnings("UnusedReturnValue")
         public X isLessOrEqual(T otherValue) {
@@ -77,6 +81,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
      * asserts that a value is between two other values.
      * @param min min value including
      * @param max max value including
+     * @return itself for use with the fluent API
      */
     @SuppressWarnings("UnusedReturnValue")
     public X isBetween(T min, T max) {
@@ -90,6 +95,7 @@ public abstract class ComparableVerifier<T extends Comparable<T>, X extends Comp
      * asserts that a value is not between two other values.
      * @param min min value including
      * @param max max value including
+     * @return itself for use with the fluent API
      */
     @SuppressWarnings("UnusedReturnValue")
     public X isNotBetween(T min, T max) {

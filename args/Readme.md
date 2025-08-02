@@ -55,7 +55,7 @@ public class MyClass {
 ```
 
 ## Outlook
-Currently there just a hand full verifier like for
+Currently, there are just some verifiers like for
 
 * Booleans
 * Comparables
