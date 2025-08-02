@@ -28,10 +28,10 @@ public class StringVerifier extends ComparableVerifier<String, StringVerifier> {
     }
 
     /**
-     * asserts the the validated string has at least the lenght provided by the argument.
+     * asserts the validated string has at least the length provided by the argument.
      * @param minLength the minimum length the validated string must have
      * @return  the current instance of the verifier
-     * @throws IllegalArgumentException if the string is violates the minimum length
+     * @throws IllegalArgumentException if the string violates the minimum length
      */
     public StringVerifier hasMinLength(int minLength) {
         withMessageKey("string.hasMinLength");

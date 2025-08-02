@@ -9,12 +9,12 @@
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
 # easy-validation 
 
-Very easy way to validate simple and complex objects by using an fluent interface.
+Very easy way to validate simple and complex objects by using a fluent interface.
 
 ## Goals
 
  * No 3rd party dependencies
- * Very small artefact size
+ * Tiny artifact size
  * clean and natural api
 
 ## Examples
@@ -44,7 +44,7 @@ if (arg1.contains("whatIsExpected") {
     throw new IllegalArgumentException("arg1);
 }
 ````
-Just imagine you have 20+ different input values you have to validate. The code is growing very fast and it will get hard
+Just imagine you have 20+ different input values you have to validate. The code is growing very fast, and it will get hard
 to maintain as it grows.
 
 You also have the possibility to set a seperate message per validation.
@@ -57,7 +57,7 @@ validate().that(arg1)
 
 ### Do more validations to report in any way you want
 
-Expect the case you want to validate the input to be not blank and it mustn't contain whitespace, but you want to report
+Expect the case you want to validate the input to be not blank, and it mustn't contain whitespace, but you want to report
 it with different error messages.
 
 ````
@@ -87,7 +87,7 @@ Validator.stopOnFirstError()
 First I thought using commons-lang3 is fine. But I realized that commons-lang3 size is about 500 KB.
 Furthermore: How to avoid dependency clashes?
 
-Therefore I decided to use my own matchers. Currently in version 2.0.0-RC2 the size is ~ 6 KB. 
+Therefore, I decided to use my own matchers. Currently in version 2.0.0-RC2 the size is ~ 6 KB. 
 Furthermore the whole validation has no dependency to any 3rd party library. So you can use always as long you use at least
 java 11.  
 
@@ -101,7 +101,7 @@ More Details and Maven Coordinates can be found at the modules:
 ## History 
 While developing the first release I followed the main concept of using lambda combined with a fluent interface is from Joel Planes, what can be found [here](https://medium.com/@jplanes/lambda-validations-with-java-8-86aa8143bd9f).
 
-But I was getting tired to always invoke the method test and afterwards the method throwIfInvalid.
+But I was getting tired to always invoke the method test and afterward the method throwIfInvalid.
 
-Thanks to Eric Evans input I developed it from scratch with the possibility to decide if I want to throw an exception or not easy, without duplicating so much method signatures.
+Thanks to Eric Evans' input, I developed it from scratch with the possibility to decide if I want to throw an exception or not easy, without duplicating so much method signatures.
 I hope you like the result.

@@ -11,11 +11,11 @@ import java.util.function.Supplier;
  * This is the abstract class for all Verifiers.
  * It contains methods
  *   * needed by the implementing Verifiers
- *   * verification methods, each Verifier needs to have
+ *   * abstract verification methods, each Verifier has to implement
  * <p>
- * If a verification fails, allways an IllegalArgumentException is thrown.
+ * If verification fails, an IllegalArgumentException is thrown.
  * </p>
- * @param <T>
+ * @param <T> the type of the value, the verifier is for
  */
 public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
 
@@ -29,6 +29,7 @@ public abstract class AbstractVerifier<T, X extends AbstractVerifier<T, X>> {
     /**
      * asserts using a custom matcher.
      * @param matcher   is used to verify if the value matches the verification
+     * @return itself for use with the fluent API
      */
     public X matches(Matcher<T> matcher) {
         assertMatcherReturnsTrue(matcher);

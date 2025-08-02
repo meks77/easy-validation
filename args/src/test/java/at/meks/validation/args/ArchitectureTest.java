@@ -19,13 +19,13 @@ class ArchitectureTest {
      * TODO AbstractVerifier public Methods, except matches, must return extension of AbstractVerifier
      */
 
-    DescribedPredicate<JavaClass> publicMethodsReturnSelf = new DescribedPredicate<JavaClass>("may only return itself") {
+    DescribedPredicate<JavaClass> publicMethodsReturnSelf = new DescribedPredicate<>("may only return itself") {
         @Override
-        public boolean apply(JavaClass javaClass) {
+        public boolean test(JavaClass javaClass) {
             return javaClass.getMethods().stream()
                     .filter(javaMethod -> javaMethod.getModifiers().contains(JavaModifier.PUBLIC))
                     .allMatch(javaMethod -> javaMethod.getRawReturnType().isAssignableTo(AbstractVerifier.class)
-                            &&!javaMethod.getRawReturnType().getFullName().equals(AbstractVerifier.class.getName())
+                            && !javaMethod.getRawReturnType().getFullName().equals(AbstractVerifier.class.getName())
                     );
         }
     };

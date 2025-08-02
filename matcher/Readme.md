@@ -1,13 +1,13 @@
 # easy-validation matchers
 
 ## Goal
-The goal of the matchers was provide simple methods which return if a value matches an expectation.
+The goal of the matchers was providing simple methods which return if a value matches an expectation.
 
-As mentioned, the first idea was to use commons-lang3 instead, but this can lead to dependency probleme at projects 
-using the easy-validation. Furthermore the artefact size is realy big. And just for validating some simple arguments, 
+As mentioned, the first idea was to use commons-lang3 instead, but this can lead to dependency problems in projects 
+using the easy-validation. Furthermore, the artefact size is huge. Just for validating some simple arguments, 
 you don't want to import such a dependency.
 
-Therefor I created methods similar to those methods in commons-lang3.
+Therefore I created methods similar to those methods in commons-lang3.
 I just added methods which came in my mind, which can be used often.
 
 If you are missing a validation, you can either provide your own matchers. But you are also welcome to extend the

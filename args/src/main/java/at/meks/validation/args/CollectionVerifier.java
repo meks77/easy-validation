@@ -11,8 +11,8 @@ public class CollectionVerifier<T> extends AbstractVerifier<Collection<T>, Colle
     }
 
     /**
-     * asserts that the validated colletion is empty.
-     * @return following the Fluent-API the instance itself is returned
+     * asserts that the validated collection is empty.
+     * @return following the Fluent-API, the instance itself is returned
      */
     public CollectionVerifier<T> isEmpty() {
         withMessageKey("collection.isEmpty");
@@ -21,8 +21,8 @@ public class CollectionVerifier<T> extends AbstractVerifier<Collection<T>, Colle
     }
 
     /**
-     * asserts that the validated colletion is not empty.
-     * @return following the Fluent-API the instance itself is returned
+     * asserts that the validated collection is not empty.
+     * @return following the Fluent-API, the instance itself is returned
      */
     public CollectionVerifier<T> isNotEmpty() {
         withMessageKey("collection.isNotEmpty");
@@ -32,7 +32,9 @@ public class CollectionVerifier<T> extends AbstractVerifier<Collection<T>, Colle
 
     /**
      * asserts that the validated colletion contain only the expected values.
-     * @return following the Fluent-API the instance itself is returned
+     * @param firstContained the first mandatory value, which is verified to be contained
+     * @param furtherContained further optional values which are verified to be contained
+     * @return following the Fluent-API, the instance itself is returned
      */
     @SafeVarargs
     public final CollectionVerifier<T> containsOnly (T firstContained, T... furtherContained) {
@@ -42,8 +44,11 @@ public class CollectionVerifier<T> extends AbstractVerifier<Collection<T>, Colle
     }
 
     /**
-     * asserts that the validated colletion contains the expected values. Other values are also allowed.
-     * @return following the Fluent-API the instance itself is returned
+     * Asserts that the validated collection contains the expected values. Other values are also allowed.
+     * @param firstContained the first mandatory value, which is verified to be contained
+     * @param furtherContained further optional values which are verified to be contained
+     *
+     * @return following the Fluent-API, the instance itself is returned
      */
     @SafeVarargs
     public final CollectionVerifier<T> contains(T firstContained, T... furtherContained) {
