@@ -35,10 +35,7 @@ class StringVerifierTest extends AbstractVerifierTest<String, StringVerifier> {
     @Test
     void isNotBlank() {
         assertAll(
-                () -> {
-                    StringVerifier verifier = new StringVerifier("  ");
-                    assertThrows(IllegalArgumentException.class, verifier::isNotBlank);
-                },
+                () -> assertThrows(IllegalArgumentException.class, new StringVerifier("  ")::isNotBlank),
                 () -> new StringVerifier(" abc ").isNotBlank()
         );
     }
