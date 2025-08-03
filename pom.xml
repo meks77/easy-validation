@@ -50,6 +50,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.scm.id>github</project.scm.id>
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../coverage/target/site/jacoco-aggregate-ut/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.organization>meks77-github</sonar.organization>
     </properties>
 
     <modules>

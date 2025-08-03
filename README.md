@@ -1,12 +1,12 @@
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=alert_status)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=bugs)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=code_smells)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=coverage)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=sqale_index)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=security_rating)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=at.meks%3Aeasy-validation-parent&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=at.meks%3Aeasy-validation-parent)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=at.meks.easyvalidation%3Aparent&metric=bugs)](https://sonarcloud.io/summary/new_code?id=at.meks.easyvalidation%3Aparent)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=at.meks.easyvalidation%3Aparent&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=at.meks.easyvalidation%3Aparent)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=at.meks.easyvalidation%3Aparent&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=at.meks.easyvalidation%3Aparent)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=at.meks.easyvalidation%3Aparent&metric=coverage)](https://sonarcloud.io/summary/new_code?id=at.meks.easyvalidation%3Aparent)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=at.meks.easyvalidation%3Aparent&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=at.meks.easyvalidation%3Aparent)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=at.meks.easyvalidation%3Aparent&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=at.meks.easyvalidation%3Aparent)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=at.meks.easyvalidation%3Aparent&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=at.meks.easyvalidation%3Aparent)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=at.meks.easyvalidation%3Aparent&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=at.meks.easyvalidation%3Aparent)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=at.meks.easyvalidation%3Aparent&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=at.meks.easyvalidation%3Aparent)
 # easy-validation 
 
 Very easy way to validate simple and complex objects by using a fluent interface.
