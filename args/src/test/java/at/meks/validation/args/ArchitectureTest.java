@@ -3,7 +3,6 @@ package at.meks.validation.args;
 import com.tngtech.archunit.base.DescribedPredicate;
 import com.tngtech.archunit.core.domain.JavaClass;
 import com.tngtech.archunit.core.domain.JavaClasses;
-import com.tngtech.archunit.core.domain.JavaModifier;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
@@ -15,18 +14,11 @@ import static com.tngtech.archunit.core.importer.ImportOption.Predefined.DO_NOT_
 
 class ArchitectureTest {
 
-    /**
-     * TODO AbstractVerifier public Methods, except matches, must return extension of AbstractVerifier
-     */
-
     DescribedPredicate<JavaClass> publicMethodsReturnSelf = new DescribedPredicate<>("may only return itself") {
         @Override
         public boolean test(JavaClass javaClass) {
-            return javaClass.getMethods().stream()
-                    .filter(javaMethod -> javaMethod.getModifiers().contains(JavaModifier.PUBLIC))
-                    .allMatch(javaMethod -> javaMethod.getRawReturnType().isAssignableTo(AbstractVerifier.class)
-                            && !javaMethod.getRawReturnType().getFullName().equals(AbstractVerifier.class.getName())
-                    );
+            return javaClass.isAssignableTo(AbstractVerifier.class)
+                    && !javaClass.getFullName().equals(AbstractVerifier.class.getName());
         }
     };
 
@@ -37,13 +29,14 @@ class ArchitectureTest {
     @Test
     void verifyVerifierPublicMethodsReturnImpl() {
         JavaClasses importedClasses = new ClassFileImporter()
-                .withImportOption(DO_NOT_INCLUDE_TESTS).withImportOption(notAbstractVerifier)
-                .importPackages("at.meks.validation.args")
-                .that(DescribedPredicate.doNot(DescribedPredicate.equalTo(AbstractVerifier.class)));
+                .withImportOption(DO_NOT_INCLUDE_TESTS)
+                .withImportOption(notAbstractVerifier)
+                .importPackages("at.meks.validation.args");
 
         ArchRuleDefinition.methods()
                 .that().arePublic()
                 .and().areDeclaredInClassesThat().areAssignableTo(AbstractVerifier.class)
+                .and().areDeclaredInClassesThat().doNotBelongToAnyOf(BooleanVerifier.class)
                 .should().haveRawReturnType(publicMethodsReturnSelf)
                 .check(importedClasses);
     }
