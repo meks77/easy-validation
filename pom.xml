@@ -92,7 +92,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.2.0</version>
                 <configuration>
                   <releaseProfiles>ossrh,sonar</releaseProfiles>
                     <preparationGoals>clean org.jacoco:jacoco-maven-plugin:prepare-agent install</preparationGoals>
